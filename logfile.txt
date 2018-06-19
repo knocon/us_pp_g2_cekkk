@@ -33,3 +33,18 @@
 [2013-09-11 17:10:49.548] [IP: /192.168.2.108] [LOGOUT] Logging out user "1" succeeded; Session length: < 1  Minutes
 [2013-09-11 17:35:46.724] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
 [2013-09-11 17:35:58.924] [IP: /192.168.2.125] [LOGIN] Logging in user "2" succeeded
+[2018-06-19 16:27:56.541] [IP: /0:0:0:0:0:0:0:1] [REGISTER] Registering user "Kevin" succeeded
+[2018-06-19 16:28:04.009] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 19:25:44.972] [IP: /192.168.2.100] [REGISTER] Registering user "Test" succeeded
+[2018-06-19 19:25:56.242] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-06-19 19:29:55.477] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 19:31:11.164] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 19:32:02.948] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-06-19 23:01:50.092] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 23:43:21.159] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 23:44:14.276] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 23:49:50.447] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 23:50:23.803] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-19 23:54:17.222] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-20 00:06:03.279] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-06-20 00:07:27.24] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
