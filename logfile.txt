@@ -1,0 +1,35 @@
+[2013-09-11 15:32:01.256] [IP: /192.168.2.108] [REGISTER] Registering user "1" succeeded
+[2013-09-11 15:32:05.327] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:34:37.553] [IP: /192.168.2.125] [REGISTER] Registering user "2" succeeded
+[2013-09-11 15:34:40.529] [IP: /192.168.2.125] [LOGIN] Logging in user "2" succeeded
+[2013-09-11 15:35:54.628] [IP: /192.168.2.125] [LOGIN] Logging in user "2" succeeded
+[2013-09-11 15:36:06.872] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:37:09.648] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:39:15.836] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:43:14.02] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:43:34.893] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:44:27.144] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:44:37.641] [IP: /192.168.2.125] [LOGIN] Logging in user "2" succeeded
+[2013-09-11 15:45:42.12] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:46:09.337] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:47:59.245] [IP: /192.168.2.108] [REGISTER] Registering user "4" succeeded
+[2013-09-11 15:48:09.092] [IP: /192.168.2.108] [LOGIN] Logging in user "4" succeeded
+[2013-09-11 15:48:59.306] [IP: /192.168.2.108] [LOGIN] Logging in user "4" succeeded
+[2013-09-11 15:49:05.903] [IP: /192.168.2.108] [LOGOUT] Logging out user "4" succeeded; Session length: < 1  Minutes
+[2013-09-11 15:49:14.511] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:49:15.52] [IP: /192.168.2.108] [LOGOUT] Logging out user "1" succeeded; Session length: < 1  Minutes
+[2013-09-11 15:49:23.579] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:50:54.895] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:50:56.318] [IP: /192.168.2.108] [LOGOUT] Logging out user "1" succeeded; Session length: < 1  Minutes
+[2013-09-11 15:50:59.245] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:52:09.905] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:52:31.918] [IP: /192.168.2.108] [LOGOUT] Logging out user "1" succeeded; Session length: < 1  Minutes
+[2013-09-11 15:52:37.114] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:55:34.642] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 15:56:07.267] [IP: /192.168.2.125] [LOGIN] Logging in user "2" succeeded
+[2013-09-11 15:57:15.593] [IP: /192.168.2.102] [LOGIN] Logging in user "4" succeeded
+[2013-09-11 15:58:39.785] [IP: /192.168.2.102] [LOGOUT] Logging out user "4" succeeded; Session length: 1  Minutes
+[2013-09-11 17:10:26.477] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 17:10:49.548] [IP: /192.168.2.108] [LOGOUT] Logging out user "1" succeeded; Session length: < 1  Minutes
+[2013-09-11 17:35:46.724] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
+[2013-09-11 17:35:58.924] [IP: /192.168.2.125] [LOGIN] Logging in user "2" succeeded
