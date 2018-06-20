@@ -245,7 +245,8 @@ public class Zauberberg extends Game {
 
 	@Override
 	public String getJavaScript() {
-		return "<script src=\"javascript/Zauberberg.js\"></script>";
+		return "<script src=\"javascript/Zauberberg.js\"></script>" +
+				"<script src=\"javascript/Sortable.min.js\"></script>";
 	}
 
 	@Override
