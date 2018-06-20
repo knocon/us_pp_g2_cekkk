@@ -131,11 +131,11 @@ function closeGame() {
 addListener('UPDATEKARTEN', function (event) {
     var stringFromServer = event.data;
     var arr = JSON.parse(stringFromServer);
-    var kartencontainer = document.getElementById("karten");
+    document.getElementById("karten-Legen").innerHTML = "";
+    document.getElementById("karten-Tauschen").innerHTML = "";
+    var kartencontainer = document.getElementById("karten-Hand");
     kartencontainer.innerHTML = "";
-    var kartenHTML = "";
     arr.forEach(function (zahl) {
-        kartenHTML += "<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>" // Der Zahlenwert wird im "alt" gespeichert
+        kartencontainer.append("<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>");// Der Zahlenwert wird im "alt" gespeichert
     });
-    kartencontainer.innerHTML = kartenHTML;
 });

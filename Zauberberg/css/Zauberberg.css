@@ -8,7 +8,7 @@
 }
 
 #TicTacToe {
-    max-width: 800px;
+    max-width: 100px;
     max-height: 600px;
 }
 
@@ -31,18 +31,12 @@
 #restartButton {
     height: 39px;
     width: 90px;
-    position: absolute;
-    left: 413px;
-    top: 538px;
     visibility: hidden;
 }
 
 #closeButton {
     height: 39px;
     width: 90px;
-    position: absolute;
-    left: 513px;
-    top: 538px;
     visibility: hidden;
 }
 
@@ -51,6 +45,15 @@
     margin: 5px;
     width: 100px;
     height: 100px;
+}
+
+.kartenliste {
+    width: 600px;
+    min-width: 110px;
+    min-height: 110px;
+    display: inline-block;
+    line-height: 0;
+    vertical-align: middle;
 }
 
 /* ENDE Style für die Aktionsfläche */
@@ -69,6 +72,7 @@
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .button:hover {

@@ -2,31 +2,64 @@
     <div id="Game ">
         <div id="grid">
         </div>
-        <button id="restartButton" type="button" onclick="restart();">
-            Feld leeren
-        </button>
-        <button id="closeButton" type="button" onclick="closeGame();">
-            Spiel Schließen
-        </button>
     </div>
 
     <!-- START Aktionsfläche -->
-    <div id="aktionsfläche" style="margin: 20px;">
-        <div id="karten">
-            <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte"/>
-            <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte"/>
-            <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte"/>
+    <div id="aktionsfläche" style="margin: 10px;">
+        <div id="karten-Hand" class="kartenliste">
+            <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte" alt="1"/>
+            <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte" alt="2"/>
+            <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte" alt="3"/>
         </div>
-        <button id="kartenLegenBtn" class="button" onclick="kartenLegenBtnAction()">Karten legen</button>
+        <div style="position: relative; width: 1000px; border-top: solid 1px #555555; border-bottom: solid 1px #555555;">
+            <div id="karten-Legen" class="kartenliste">
+                <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte" alt="1"/>
+                <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte" alt="2"/>
+                <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte" alt="3"/>
+            </div>
+            <button id="kartenLegenBtn" class="button" onclick="kartenLegenBtnAction()">
+                Karten legen
+            </button>
+        </div>
+        <div style="position: relative; width: 1000px">
+            <div id="karten-Tauschen" class="kartenliste">
+                <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte" alt="1"/>
+                <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte" alt="2"/>
+                <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte" alt="3"/>
+            </div>
+            <button id="kartenTauschenBtn" class="button" onclick="kartenTauschenBtnAction()">
+                Karten tauschen
+            </button>
+        </div>
     </div>
     <script>    /** Javascript für die Aktionsfläche (Muss nach dem html Code stehen!) */
-    Sortable.create(document.getElementById("karten"), {group: 'photo', animation: 150});
+    Sortable.create(document.getElementById("karten-Hand"), {
+        group: {name: "karten", put: true, pull: true},
+        draggable: 'img',
+        animation: 150
+    });
+    Sortable.create(document.getElementById("karten-Legen"), {
+        group: {name: "karten", put: true, pull: true},
+        draggable: 'img',
+        animation: 150
+    });
+    Sortable.create(document.getElementById("karten-Tauschen"), {
+        group: {name: "karten", put: true, pull: true},
+        draggable: 'img',
+        animation: 150
+    });
 
     function kartenLegenBtnAction() {
-        var kartencontainer = document.getElementById("karten");
-        console.log(kartencontainer);
+        var kartencontainer = document.getElementById("karten-Legen");
         for (var i = 0; i < kartencontainer.childElementCount; i++) {
-            kartencontainer.children[i].alt;
+            console.log(kartencontainer.children[i].alt);
+        }
+    }
+
+    function kartenTauschenBtnAction() {
+        var kartencontainer = document.getElementById("karten-Tauschen");
+        for (var i = 0; i < kartencontainer.childElementCount; i++) {
+            console.log(kartencontainer.children[i].alt);
         }
     }
     </script>
@@ -34,6 +67,12 @@
 
     <div id="PlayerFrame">
         <h2 id="Player">TicTacToe</h2>
+        <button id="restartButton" type="button" onclick="restart();">
+            Feld leeren
+        </button>
+        <button id="closeButton" type="button" onclick="closeGame();">
+            Spiel Schließen
+        </button>
     </div>
 </div>
 
