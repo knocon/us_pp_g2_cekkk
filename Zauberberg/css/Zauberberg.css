@@ -41,3 +41,12 @@
 	top : 538px;
 	visibility:hidden;
 }
+
+/* START Style für die Aktionsfläche */
+.karte{
+	margin: 5px;
+    width: 100px;
+    height: 100px;
+}
+
+/* ENDE Style für die Aktionsfläche */

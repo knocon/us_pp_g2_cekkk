@@ -9,22 +9,20 @@
             Spiel Schließen
         </button>
     </div>
-    <div id="aktionsfläche">
+
+    <!-- START Aktionsfläche -->
+    <div id="aktionsfläche" style="margin: 20px;">
         <div id="karten" class="">
-            <div class=""><img src="/Zauberberg/images/Zahlenkarte1.png" draggable="false" width="100" height="100"/></div>
-            <div class="">It works with Bootstrap...</div>
-            <div class=""><img src="/Zauberberg/images/Zahlenkarte2.png" width="100" height="100"/></div>
-            <div class=""><img src="/Zauberberg/images/Zahlenkarte3.png" width="100" height="100"/></div>
-            <div class="">...out of the box.</div>
-            <div class="">It has support for touch devices.</div>
-            <div class="">Just drag some elements around.</div>
+            <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte"/>
+            <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte"/>
+            <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte"/>
         </div>
-        <!-- Provisorischer Javascript Teil für die Aktionsfläche -->
-        <script>
-            // Simple list
-            Sortable.create(document.getElementById("karten"), {group: 'photo', animation: 150});
+        <script>    <!-- Javascript Teil für die Aktionsfläche (Muss nach der div stehen!) -->
+        Sortable.create(document.getElementById("karten"), {group: 'photo', animation: 150});
         </script>
     </div>
+    <!-- ENDE Aktionsfläche -->
+
     <div id="PlayerFrame">
         <h2 id="Player">TicTacToe</h2>
     </div>
