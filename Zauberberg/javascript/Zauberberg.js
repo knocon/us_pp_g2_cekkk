@@ -5,6 +5,7 @@
  * Java -> JavaScript:
  *      UPDATEKARTEN: Array mit den Karten, die der entsprechende Spieler auf der Hand hat (Integer Array mit den Zahlenwerten)
  *      UPDATESPIELFELD: todo muss hier noch definiert werden
+ *      YOURTURN: Wenn der Inhalt 1 ist, dann ist man dran, sonst nicht
  *
  * JavaScript -> Java:
  *      KARTENLEGEN: Array mit den Zahlenwerten(Integer) der gelegten Karten
@@ -134,7 +135,7 @@ addListener('UPDATEKARTEN', function (event) {
     kartencontainer.innerHTML = "";
     var kartenHTML = "";
     arr.forEach(function (zahl) {
-        kartenHTML += "<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte'/>"
+        kartenHTML += "<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>" // Der Zahlenwert wird im "alt" gespeichert
     });
     kartencontainer.innerHTML = kartenHTML;
 });

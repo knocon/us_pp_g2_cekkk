@@ -18,7 +18,7 @@ import userManagement.User;
  */
 public class Zauberberg extends Game {
 	/** gridStatus contains the gameData
-	 * 
+	 *
 	 */
 	private int[] gridStatus = new int[9];
 	private User playerTurn = null;
@@ -27,7 +27,7 @@ public class Zauberberg extends Game {
 	private int turnCounter = 0;
 	private String playerLeft = null;
 
-	
+
 	@Override
 	public int getMaxPlayerAmount() {
 		return 2;
@@ -58,15 +58,15 @@ public class Zauberberg extends Game {
 
 	@Override
 	public void execute(User user, String gsonString) {
-		
+
 		if(this.gState==GameState.CLOSED) return;
-		
+
 		if(gsonString.equals("CLOSE")){
 			sendGameDataToClients("CLOSE");
 			closeGame();
 			return;
 		}
-		
+
 		if (gsonString.equals("RESTART")) {
 			if (playerList.size() != 2) return;
 			setGridStatus(new int[9]);
@@ -127,9 +127,9 @@ public class Zauberberg extends Game {
 		}
 
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void addSpectator(User user) {
 		this.spectatorList.add(user);
@@ -151,14 +151,14 @@ public class Zauberberg extends Game {
 		if(eventName.equals("CLOSE")){
 			return "CLOSE";
 		}
-		
+
 		int[] grid = getGridStatus();
 
 		for (int i = 0; i < 9; i++) {
 			gameData += String.valueOf(grid[i]);
 			gameData += ',';
 		}
-		
+
 		if(playerList.size()<2){
 			gameData += "Warte Auf 2ten Spieler...";
 			gameData += isHost(user);
@@ -186,7 +186,7 @@ public class Zauberberg extends Game {
 			gameData += " (x)";
 		else
 			gameData += " (o)";
-		
+
 		gameData += isHost(user);
 
 		return gameData;

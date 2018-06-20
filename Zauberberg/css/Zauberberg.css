@@ -1,52 +1,77 @@
-#grid{
-		background-image: url("/Zauberberg/images/grid.png");
-		width:491px;
-		height:499px;
-		border-right : solid;
-		border-bottom : solid;
-		border-color : black;
-	}
-#TicTacToe{
-		max-width: 800px;
-		max-height: 600px;
-	}
-
-#Game{
-		min-height:590px;
-		min-width:800px;
-		width: 100%;
-	}
-#Player{
-		background-color: yellow;
-		margin-top :25px;
-		height : 37px;
-		width : 589px;
-		border-style : solid;
-		border-color : black;
-		color : black;
-	}
-#restartButton{
-	height : 39px;
-	width : 90px;
-	position : absolute;
-	left : 413px;
-	top : 538px;
-	visibility:hidden;
+#grid {
+    background-image: url("/Zauberberg/images/grid.png");
+    width: 491px;
+    height: 499px;
+    border-right: solid;
+    border-bottom: solid;
+    border-color: black;
 }
-#closeButton{
-	height : 39px;
-	width : 90px;
-	position : absolute;
-	left : 513px;
-	top : 538px;
-	visibility:hidden;
+
+#TicTacToe {
+    max-width: 800px;
+    max-height: 600px;
+}
+
+#Game {
+    min-height: 590px;
+    min-width: 800px;
+    width: 100%;
+}
+
+#Player {
+    background-color: yellow;
+    margin-top: 25px;
+    height: 37px;
+    width: 589px;
+    border-style: solid;
+    border-color: black;
+    color: black;
+}
+
+#restartButton {
+    height: 39px;
+    width: 90px;
+    position: absolute;
+    left: 413px;
+    top: 538px;
+    visibility: hidden;
+}
+
+#closeButton {
+    height: 39px;
+    width: 90px;
+    position: absolute;
+    left: 513px;
+    top: 538px;
+    visibility: hidden;
 }
 
 /* START Style für die Aktionsfläche */
-.karte{
-	margin: 5px;
+.karte {
+    margin: 5px;
     width: 100px;
     height: 100px;
 }
 
 /* ENDE Style für die Aktionsfläche */
+
+/* Button styles */
+.button {
+    background-color: #490e2b;
+    border: 2px solid #555555;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #555555;
+    color: white;
+}

@@ -12,18 +12,29 @@
 
     <!-- START Aktionsfläche -->
     <div id="aktionsfläche" style="margin: 20px;">
-        <div id="karten" class="">
+        <div id="karten">
             <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte"/>
             <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte"/>
             <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte"/>
         </div>
-        <script>    <!-- Javascript Teil für die Aktionsfläche (Muss nach der div stehen!) -->
-        Sortable.create(document.getElementById("karten"), {group: 'photo', animation: 150});
-        </script>
+        <button id="kartenLegenBtn" class="button" onclick="kartenLegenBtnAction()">Karten legen</button>
     </div>
+    <script>    /** Javascript für die Aktionsfläche (Muss nach dem html Code stehen!) */
+    Sortable.create(document.getElementById("karten"), {group: 'photo', animation: 150});
+
+    function kartenLegenBtnAction() {
+        var kartencontainer = document.getElementById("karten");
+        console.log(kartencontainer);
+        for (var i = 0; i < kartencontainer.childElementCount; i++) {
+            kartencontainer.children[i].alt;
+        }
+    }
+    </script>
     <!-- ENDE Aktionsfläche -->
 
     <div id="PlayerFrame">
         <h2 id="Player">TicTacToe</h2>
     </div>
 </div>
+
+<script src="javascript/Zauberberg.js"></script>
