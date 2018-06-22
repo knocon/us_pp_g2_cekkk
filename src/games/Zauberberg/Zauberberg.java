@@ -6,6 +6,10 @@ import global.FileHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 //import server.Server;
@@ -13,250 +17,287 @@ import userManagement.User;
 
 /**
  * Test game class extending Game and implementing the GameInterface
- * @author Anton Vetter
  *
+ * @author Anton Vetter
  */
 public class Zauberberg extends Game {
-	/** gridStatus contains the gameData
-	 *
-	 */
-	private int[] gridStatus = new int[9];
-	private User playerTurn = null;
-	private ArrayList<User> playerList = new ArrayList<User>();
-	private ArrayList<User> spectatorList = new ArrayList<User>();
-	private int turnCounter = 0;
-	private String playerLeft = null;
+    /**
+     * gridStatus contains the gameData
+     */
+    private int[] gridStatus = new int[9];
+    private User playerTurn = null;
+    private ArrayList<User> playerList = new ArrayList<User>();
+    private ArrayList<User> spectatorList = new ArrayList<User>();
+    private int turnCounter = 0;
+    private String playerLeft = null;
 
 
-	@Override
-	public int getMaxPlayerAmount() {
-		return 2;
-	}
+    @Override
+    public int getMaxPlayerAmount() {
+        return 2;
+    }
 
-	@Override
-	public int getCurrentPlayerAmount() {
-		return playerList.size();
-	}
+    @Override
+    public int getCurrentPlayerAmount() {
+        return playerList.size();
+    }
 
-	private int[] getGridStatus() {
-		return gridStatus;
-	}
+    private int[] getGridStatus() {
+        return gridStatus;
+    }
 
-	private void setGridStatus(int[] gridStatus) {
-		this.gridStatus = gridStatus;
-	}
+    private void setGridStatus(int[] gridStatus) {
+        this.gridStatus = gridStatus;
+    }
 
-	@Override
-	public String getSite() {
-		try {
-			return FileHelper.getFile("Zauberberg/Zauberberg.html");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    @Override
+    public String getSite() {
+        try {
+            return FileHelper.getFile("Zauberberg/Zauberberg.html");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	@Override
-	public void execute(User user, String gsonString) {
+    @Override
+    public void execute(User user, String gsonString) {
 
-		if(this.gState==GameState.CLOSED) return;
+        if (this.gState == GameState.CLOSED) return;
 
-		if(gsonString.equals("CLOSE")){
-			sendGameDataToClients("CLOSE");
-			closeGame();
-			return;
-		}
+        if (gsonString.equals("CLOSE")) {
+            sendGameDataToClients("CLOSE");
+            closeGame();
+            return;
+        }
 
-		if (gsonString.equals("RESTART")) {
-			if (playerList.size() != 2) return;
-			setGridStatus(new int[9]);
-			turnCounter = 0;
-			this.gState = GameState.RUNNING;
-			sendGameDataToClients("standardEvent");
-			return;
-		}
-		if (gState != GameState.RUNNING)
-			return;
-		if (!user.equals(playerTurn)) {
-			return;
-		}
-		String[] strArray = gsonString.split(","); //todo Das ist die Stelle für den Einsatz von JSON (HashMap) Schnittstellendefinition in Zauberberg.js
-		int[] receivedArray = new int[9];
-		for (int i = 0; i < 9; i++) {
-			receivedArray[i] = Integer.parseInt(strArray[i]);
-		}
-		int[] gridStatus = getGridStatus();
-		boolean changed = false;
-		for (int i = 0; i < 9; i++) {
-			if (gridStatus[i] == 0 && receivedArray[i] != 0) {
-				gridStatus[i] = playerList.indexOf(user) + 1;
-				changed = true;
-				turnCounter++;
-				break;
-			}
-		}
-		if (changed) {
-			for (User u : playerList) {
-				if (!u.equals(playerTurn)) {
-					playerTurn = u;
-					break;
-				}
-			}
-			setGridStatus(gridStatus);
-			if (turnCounter == 9 || (turnCounter > 4 && gameOver())) {
-				this.gState = GameState.FINISHED;
-			}
-			sendGameDataToClients("standardEvent");
-		}
+        if (gsonString.equals("RESTART")) {
+            if (playerList.size() != 2) return;
+            setGridStatus(new int[9]);
+            turnCounter = 0;
+            this.gState = GameState.RUNNING;
+            sendGameDataToClients("standardEvent");
+            return;
+        }
+        if (gState != GameState.RUNNING)
+            return;
+        if (!user.equals(playerTurn)) {
+            return;
+        }
 
-	}
+        Gson gson = new GsonBuilder().create();
+        HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
+        // Schnittstellendefinition in Zauberberg.js
+        switch (dataMap.get("Eventname")) {
+            case "KARTENLEGEN":
+                ArrayList<Integer> kartenZumLegen = gson.fromJson(dataMap.get("Daten"), ArrayList.class);
+                //todo Logik
+                break;
+            case "KARTENTAUSCHEN":
+                ArrayList<Integer> kartenZumTauschen = gson.fromJson(dataMap.get("Daten"), ArrayList.class);
+                //todo Logik
+                break;
+            default:
+                // Fehler!
+        }
 
-	@Override
-	public void addUser(User user) {
-		if (playerList.size() < 2 && !playerList.contains(user)) {
-			playerList.add(user);
+        // Hier ist noch der Kram von TicTacToe
+        String[] strArray = gsonString.split(",");
+        int[] receivedArray = new int[9];
+        for (int i = 0; i < 9; i++) {
+            receivedArray[i] = Integer.parseInt(strArray[i]);
+        }
+        int[] gridStatus = getGridStatus();
+        boolean changed = false;
+        for (int i = 0; i < 9; i++) {
+            if (gridStatus[i] == 0 && receivedArray[i] != 0) {
+                gridStatus[i] = playerList.indexOf(user) + 1;
+                changed = true;
+                turnCounter++;
+                break;
+            }
+        }
+        if (changed) {
+            for (User u : playerList) {
+                if (!u.equals(playerTurn)) {
+                    playerTurn = u;
+                    break;
+                }
+            }
+            setGridStatus(gridStatus);
+            if (turnCounter == 9 || (turnCounter > 4 && gameOver())) {
+                this.gState = GameState.FINISHED;
+            }
+            sendGameDataToClients("standardEvent");
+        }
 
-			if (playerTurn == null) {
-				playerTurn = user;
-			}
-			sendGameDataToClients("START");
-		}
-		if (playerList.size() == 2) {
-			this.gState = GameState.RUNNING;
-			sendGameDataToClients("START");
-		}
+    }
 
-	}
+    @Override
+    public void addUser(User user) {
+        if (playerList.size() < 2 && !playerList.contains(user)) {
+            playerList.add(user);
+
+            if (playerTurn == null) {
+                playerTurn = user;
+            }
+            sendGameDataToClients("START");
+        }
+        if (playerList.size() == 2) {
+            this.gState = GameState.RUNNING;
+            sendGameDataToClients("START");
+        }
+
+    }
 
 
+    @Override
+    public void addSpectator(User user) {
+        this.spectatorList.add(user);
+    }
 
-	@Override
-	public void addSpectator(User user) {
-		this.spectatorList.add(user);
-	}
+    @Override
+    public void playerLeft(User user) {
+        playerList.remove(user);
+        playerLeft = user.getName();
+        sendGameDataToClients("PLAYERLEFT");
+    }
 
-	@Override
-	public void playerLeft(User user) {
-		playerList.remove(user);
-		playerLeft = user.getName();
-		sendGameDataToClients("PLAYERLEFT");
-	}
+    @Override
+    public String getGameData(String eventName, User user) {
+        String gameData = "";
+        if (eventName.equals("PLAYERLEFT")) {
+            return playerLeft + " hat das Spiel verlassen!";
+        }
+        if (eventName.equals("CLOSE")) {
+            return "CLOSE";
+        }
 
-	@Override
-	public String getGameData(String eventName, User user) {
-		String gameData = "";
-		if(eventName.equals("PLAYERLEFT")){
-			return playerLeft + " hat das Spiel verlassen!";
-		}
-		if(eventName.equals("CLOSE")){
-			return "CLOSE";
-		}
+        int[] grid = getGridStatus();
 
-		int[] grid = getGridStatus();
+        for (int i = 0; i < 9; i++) {
+            gameData += String.valueOf(grid[i]);
+            gameData += ',';
+        }
 
-		for (int i = 0; i < 9; i++) {
-			gameData += String.valueOf(grid[i]);
-			gameData += ',';
-		}
+        if (playerList.size() < 2) {
+            gameData += "Warte Auf 2ten Spieler...";
+            gameData += isHost(user);
+            return gameData;
+        }
 
-		if(playerList.size()<2){
-			gameData += "Warte Auf 2ten Spieler...";
-			gameData += isHost(user);
-			return gameData;
-		}
+        if (this.gState == GameState.FINISHED) {
+            if (turnCounter == 9 && !gameOver()) {
+                gameData += "Unentschieden!";
+                gameData += isHost(user);
+                return gameData;
+            }
+            if (playerTurn.equals(user)) {
+                gameData += "Du hast verloren!";
+            } else
+                gameData += "Du hast gewonnen!";
+        } else if (playerTurn.equals(user)) {
+            gameData += "Du bist dran!";
+        } else
+            gameData += playerTurn.getName() + " ist dran!";
 
-		if (this.gState == GameState.FINISHED) {
-			if (turnCounter == 9 && !gameOver()){
-				gameData += "Unentschieden!";
-				gameData += isHost(user);
-				return gameData;
-			}
-			if (playerTurn.equals(user)) {
-				gameData += "Du hast verloren!";
-			} else
-				gameData += "Du hast gewonnen!";
-		}
+        if (playerList.indexOf(user) == 0)
+            gameData += " (x)";
+        else
+            gameData += " (o)";
 
-		else if (playerTurn.equals(user)) {
-			gameData += "Du bist dran!";
-		} else
-			gameData += playerTurn.getName() + " ist dran!";
+        gameData += isHost(user);
 
-		if (playerList.indexOf(user) == 0)
-			gameData += " (x)";
-		else
-			gameData += " (o)";
+        return gameData;
+    }
 
-		gameData += isHost(user);
+    private String isHost(User user) {
+        if (user == creator) return ",HOST";
+        else return ",NOTTHEHOST";
+    }
 
-		return gameData;
-	}
+    @Override
+    public boolean isJoinable() {
+        return playerList.size() < 2;
 
-	private String isHost(User user) {
-		if(user==creator) return ",HOST";
-		else return ",NOTTHEHOST";
-	}
+    }
 
-	@Override
-	public boolean isJoinable() {
-		return playerList.size() < 2;
+    @Override
+    public GameState getGameState() {
+        return this.gState;
+    }
 
-	}
+    public boolean gameOver() {
+        int[] grid = getGridStatus();
+        if (grid[4] != 0) {
+            if (grid[0] == grid[4] && grid[0] == grid[8])
+                return true;
+            if (grid[2] == grid[4] && grid[2] == grid[6])
+                return true;
+        }
+        for (int i = 0; i < 3; i++) {
 
-	@Override
-	public GameState getGameState() {
-		return this.gState;
-	}
+            if (grid[i * 3] != 0 && grid[1 + i * 3] != 0
+                    && grid[2 + i * 3] != 0) {
+                if (grid[0 + i * 3] == grid[1 + i * 3]
+                        && grid[0 + i * 3] == grid[2 + i * 3])
+                    return true;
+            }
+            if (grid[0 + i] != 0 && grid[3 + i] != 0 && grid[6 + i] != 0) {
+                if (grid[0 + i] == grid[3 + i] && grid[0 + i] == grid[6 + i])
+                    return true;
+            }
+        }
+        return false;
+    }
 
-	public boolean gameOver() {
-		int[] grid = getGridStatus();
-		if (grid[4] != 0) {
-			if (grid[0] == grid[4] && grid[0] == grid[8])
-				return true;
-			if (grid[2] == grid[4] && grid[2] == grid[6])
-				return true;
-		}
-		for (int i = 0; i < 3; i++) {
+    @Override
+    public String getCSS() {
+        try {
+            return global.FileHelper.getFile("Zauberberg/css/Zauberberg.css");
+        } catch (IOException e) {
+            System.err
+                    .println("Loading of file Zauberberg/css/Zauberberg.css failed");
+        }
+        return null;
+    }
 
-			if (grid[i * 3] != 0 && grid[1 + i * 3] != 0
-					&& grid[2 + i * 3] != 0) {
-				if (grid[0 + i * 3] == grid[1 + i * 3]
-						&& grid[0 + i * 3] == grid[2 + i * 3])
-					return true;
-			}
-			if (grid[0 + i] != 0 && grid[3 + i] != 0 && grid[6 + i] != 0) {
-				if (grid[0 + i] == grid[3 + i] && grid[0 + i] == grid[6 + i])
-					return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public String getJavaScript() {
+        return "<script src=\"javascript/Zauberberg.js\"></script>" +
+                "<script src=\"javascript/Sortable.min.js\"></script>";
+    }
 
-	@Override
-	public String getCSS() {
-		try {
-			return global.FileHelper.getFile("Zauberberg/css/Zauberberg.css");
-		} catch (IOException e) {
-			System.err
-					.println("Loading of file Zauberberg/css/Zauberberg.css failed");
-		}
-		return null;
-	}
+    @Override
+    public ArrayList<User> getPlayerList() {
+        return this.playerList;
+    }
 
-	@Override
-	public String getJavaScript() {
-		return "<script src=\"javascript/Zauberberg.js\"></script>" +
-				"<script src=\"javascript/Sortable.min.js\"></script>";
-	}
-
-	@Override
-	public ArrayList<User> getPlayerList() {
-		return this.playerList;
-	}
-
-	@Override
-	public ArrayList<User> getSpectatorList() {
-		return this.spectatorList;
-	}
+    @Override
+    public ArrayList<User> getSpectatorList() {
+        return this.spectatorList;
+    }
 
 }
+
+
+/**
+ * import com.google.gson.Gson;
+ * import com.google.gson.GsonBuilder;
+ * <p>
+ * import java.util.HashMap;
+ * <p>
+ * public class Main {
+ * <p>
+ * public static void main(String[] args) {
+ * System.out.println("Alright, let's start:");
+ * <p>
+ * Gson gson = new GsonBuilder().create();
+ * <p>
+ * HashMap data = gson.fromJson("{\"asd\":\"asd\",\"asdf\":32}", HashMap.class);
+ * <p>
+ * System.out.println(data.get("asd"));
+ * System.out.println(data.get("asdf"));
+ * }
+ * }
+ */
