@@ -5,7 +5,14 @@
  * Java -> JavaScript:
  *      UPDATEKARTEN: Array mit den Karten, die der entsprechende Spieler auf der Hand hat (Integer Array mit den Zahlenwerten)
  *      UPDATESPIELFELD: todo muss hier noch definiert werden
- *      UPDATESPIELZUSTAND: JSON Map
+ *      UPDATESPIELZUSTAND: JSON Map<String, String>
+ *         {"Spieler1": "Grün",
+ *          "Spieler2": "Rot",
+ *          "Spieler3": "Gelb",
+ *          "Spieler4": "Null",
+ *          "Spieler5": "Null",
+ *          "AnDerReiheIst": "Rot"
+ *          }
  *
  *
  *

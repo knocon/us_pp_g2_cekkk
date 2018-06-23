@@ -1,21 +1,26 @@
+/* MAIN */
+#Zauberberg {
+}
+
+#Spielfeld {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#Aktionsfläche {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* MAIN END */
+
 #grid {
     background-image: url("/Zauberberg/images/grid.png");
-    width: 491px;
-    height: 499px;
+    width: 800px; /* Die Breite sollte nach möglichkeit unter 1000px bleiben, damit die Aktionsfläche nicht unter das Feld geschoben wird*/
+    height: 800px; /* 800 px ist eine gute Höhe für Bildschirme.*/
     border-right: solid;
     border-bottom: solid;
     border-color: black;
-}
-
-#TicTacToe {
-    max-width: 100px;
-    max-height: 600px;
-}
-
-#Game {
-    min-height: 590px;
-    min-width: 800px;
-    width: 100%;
 }
 
 #Player {
@@ -94,4 +99,5 @@
     background-color: #555555;
     color: white;
 }
+
 /* ENDE Style für die Aktionsfläche */
