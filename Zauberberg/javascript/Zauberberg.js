@@ -3,16 +3,18 @@
  * Alle Eventnamen außer den Vorgegebenen!
  *
  * Java -> JavaScript:
- *      UPDATEKARTEN: Array mit den Karten, die der entsprechende Spieler auf der Hand hat (Integer Array mit den Zahlenwerten)
+ *      UPDATEKARTEN: JSON Array mit den Karten, die der entsprechende Spieler auf der Hand hat (String Zahlenwerte und "Joker" für Joker)
  *      UPDATESPIELFELD: todo muss hier noch definiert werden
- *      UPDATESPIELZUSTAND: JSON Map<String, String>
- *         {"Spieler1": "Grün",
- *          "Spieler2": "Rot",
- *          "Spieler3": "Gelb",
- *          "Spieler4": "Null",
- *          "Spieler5": "Null",
- *          "AnDerReiheIst": "Rot"
- *          }
+ *      UPDATESPIELZUSTAND: JSON Map<String, Map<String, String>>
+ *         {"Rot": {
+ *                  "Aktiv": "1",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
+ *                  "Fokus": "0",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
+ *                  "Steine: "2",      // Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt
+ *                  },
+ *          "Grün": {siehe obige Definition},
+ *          "Gelb": {siehe obige Definition},
+ *          "Blau": {siehe obige Definition},
+ *          "Grau": {siehe obige Definition}}
  *
  *
  *
@@ -161,6 +163,34 @@ function errorMsg(msg) {
 /**
  *  Aktionsfläche Funktionalität
  */
+addListener('UPDATESPIELZUSTAND', function (event) {
+    var stringFromServer = event.data;
+    var data = JSON.parse(stringFromServer);
+    //var kartencontainer = document.getElementById("karten-Hand");
+    for (var colour in data) {
+        if (data[colour]["Aktiv"] === "1") {
+            document.getElementById("Spieler" + colour).style.visibility = "visible";
+            if (data[colour]["Fokus"] === "1") {
+                document.getElementById("Spieler" + colour).children[0].style.textDecoration = "underline solid white";
+            } else {
+                document.getElementById("Spieler" + colour).children[0].style.textDecoration = "";
+            }
+            if (data[colour]["Steine"] === "2") {
+                document.getElementById(colour + "Stein1").style.visibility = "visible";
+                document.getElementById(colour + "Stein2").style.visibility = "visible";
+            } else if (data[colour]["Steine"] === "1") {
+                document.getElementById(colour + "Stein1").style.visibility = "visible";
+                document.getElementById(colour + "Stein2").style.visibility = "hidden";
+            } else {
+                document.getElementById(colour + "Stein1").style.visibility = "hidden";
+                document.getElementById(colour + "Stein2").style.visibility = "hidden";
+            }
+        } else {
+            document.getElementById("Spieler" + colour).style.visibility = "hidden";
+        }
+    }
+});
+
 addListener('UPDATEKARTEN', function (event) {
     var stringFromServer = event.data;
     var arr = JSON.parse(stringFromServer);
@@ -168,7 +198,7 @@ addListener('UPDATEKARTEN', function (event) {
     document.getElementById("karten-Tauschen").innerHTML = "";
     var kartencontainer = document.getElementById("karten-Hand");
     kartencontainer.innerHTML = "";
-    arr.forEach(function (zahl) {
+    arr.forEach(function (zahl) { //todo an neuere html anpassen
         kartencontainer.append("<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>");// Der Zahlenwert wird im "alt" gespeichert
     });
 });

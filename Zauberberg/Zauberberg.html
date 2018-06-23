@@ -6,6 +6,28 @@
 
     <!-- START Aktionsfläche -->
     <div id="Aktionsfläche" style="margin: 10px;">
+        <div id="Spielzustand">
+            <div id="SpielerRot"><span class="spielername" style="color: #EF5350">Rot</span>
+                <img id="RotStein1" src="images/x.jpg" class="spielzustandStein"/>
+                <img id="RotStein2" src="images/x.jpg" class="spielzustandStein"/>
+            </div>
+            <div id="SpielerBlau"><span class="spielername" style="color: #42A5F5">Blau</span>
+                <img id="BlauStein1" src="images/x.jpg" class="spielzustandStein"/>
+                <img id="BlauStein2" src="images/x.jpg" class="spielzustandStein"/>
+            </div>
+            <div id="SpielerGrün"><span class="spielername" style="color: #66BB6A">Grün</span>
+                <img id="GrünStein1" src="images/x.jpg" class="spielzustandStein"/>
+                <img id="GrünStein2" src="images/x.jpg" class="spielzustandStein"/>
+            </div>
+            <div id="SpielerGelb"><span class="spielername" style="color: #FFEE58">Gelb</span>
+                <img id="GelbStein1" src="images/x.jpg" class="spielzustandStein"/>
+                <img id="GelbStein2" src="images/x.jpg" class="spielzustandStein"/>
+            </div>
+            <div id="SpielerGrau"><span class="spielername" style="color: #BDBDBD">Grau</span>
+                <img id="GrauStein1" src="images/x.jpg" class="spielzustandStein"/>
+                <img id="GrauStein2" src="images/x.jpg" class="spielzustandStein"/>
+            </div>
+        </div>
         <div id="karten-Hand" class="kartenliste">
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte1.png" class="karteBild" alt="1"/></div>
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte2.png" class="karteBild" alt="2"/></div>
@@ -36,7 +58,7 @@
                     <img id="joker0_4" src="/Zauberberg/images/Zahlenkarte4.png" class="joker"
                          onclick="jokerSet(0, 4)" style="opacity: 0.2;"/>
                     <img id="joker0_5" src="/Zauberberg/images/Zahlenkarte5.png" class="joker"
-                         onclick="jokerSet(0, 5)" style="opacity: 0.2; margin-bottom: 3px"/>
+                         onclick="jokerSet(0, 5)" style="opacity: 0.2;"/>
                 </div>
             </div>
             <button id="kartenTauschenBtn" class="button" onclick="kartenTauschenBtnAction()">
