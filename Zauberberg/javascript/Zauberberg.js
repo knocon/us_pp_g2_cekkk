@@ -5,16 +5,32 @@
  * Java -> JavaScript:
  *      UPDATEKARTEN: Array mit den Karten, die der entsprechende Spieler auf der Hand hat (Integer Array mit den Zahlenwerten)
  *      UPDATESPIELFELD: todo muss hier noch definiert werden
- *      YOURTURN: Wenn der Inhalt 1 ist, dann ist man dran, sonst nicht
+ *      UPDATESPIELZUSTAND: JSON Map
  *
- * JavaScript -> Java:
- *      KARTENLEGEN: Array mit den Zahlenwerten(Integer) der gelegten Karten
- *      KARTENTAUSCHEN: Array mit den Zahlenwerten(Integer) der Karten, die getauscht werden sollen.
+ *
+ *
+ * JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
+ *      KARTENLEGEN Bsp:
+ *         {"Eventname": "KARTENLEGEN",
+ *          "karte1Typ": "Normal",
+ *          "karte2Typ": "Joker",
+ *          "karte3Typ": "Null",
+ *          "karte1Wert": "2",
+ *          "karte2Wert": "5",
+ *          "karte3Wert": "Null"}
+ *
+ *      KARTENTAUSCHEN Bsp:
+ *          {"Eventname": "KARTENTAUSCHEN",
+ *           "karte1": "1",
+ *           "karte2": "2",
+ *           "karte3": "Joker",
+ *           "karte4": "Null",
+ *           "karte5": "Null"}
  *
  */
 
 
-
+// TicTacToe Beispiel
 addListener('standardEvent', function (event) {
     var stringFromServer = event.data;
     var arr = stringFromServer.split(',');
@@ -30,7 +46,6 @@ addListener('standardEvent', function (event) {
             console.log(arr[10]);
             setVisible();
         }
-
 
         sentFields = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         document.getElementById("Player").innerHTML = playerMessage;
@@ -123,6 +138,17 @@ function setVisible() {
 function closeGame() {
     sendDataToServer("CLOSE");
 }
+
+/**
+ * Generell
+ */
+function errorMsg(msg) {
+    //todo create Error Message
+}
+
+/**
+ * Spielfeld
+ */
 
 
 /**

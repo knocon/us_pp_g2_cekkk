@@ -7,15 +7,15 @@
     <!-- START Aktionsfläche -->
     <div id="aktionsfläche" style="margin: 10px;">
         <div id="karten-Hand" class="kartenliste">
-            <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte" alt="1"/>
-            <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte" alt="2"/>
-            <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte" alt="3"/>
+            <div class="karte"><img src="/Zauberberg/images/Zahlenkarte1.png" class="karteBild" alt="1"/></div>
+            <div class="karte"><img src="/Zauberberg/images/Zahlenkarte2.png" class="karteBild" alt="2"/></div>
+            <div class="karte"><img src="/Zauberberg/images/Zahlenkarte3.png" class="karteBild" alt="3"/></div>
         </div>
         <div style="position: relative; width: 1000px; border-top: solid 1px #555555; border-bottom: solid 1px #555555;">
             <div id="karten-Legen" class="kartenliste">
-                <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte" alt="1"/>
-                <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte" alt="2"/>
-                <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte" alt="3"/>
+                <div class="karte"><img src="/Zauberberg/images/Zahlenkarte1.png" class="karteBild" alt="1"/></div>
+                <div class="karte"><img src="/Zauberberg/images/Zahlenkarte2.png" class="karteBild" alt="2"/></div>
+                <div class="karte"><img src="/Zauberberg/images/Zahlenkarte3.png" class="karteBild" alt="3"/></div>
             </div>
             <button id="kartenLegenBtn" class="button" onclick="kartenLegenBtnAction()">
                 Karten legen
@@ -23,44 +23,115 @@
         </div>
         <div style="position: relative; width: 1000px">
             <div id="karten-Tauschen" class="kartenliste">
-                <img src="/Zauberberg/images/Zahlenkarte1.png" class="karte" alt="1"/>
-                <img src="/Zauberberg/images/Zahlenkarte2.png" class="karte" alt="2"/>
-                <img src="/Zauberberg/images/Zahlenkarte3.png" class="karte" alt="3"/>
+                <div class="karte"><img src="/Zauberberg/images/Zahlenkarte1.png" class="karteBild" alt="1"/></div>
+                <div class="karte"><img src="/Zauberberg/images/Zahlenkarte2.png" class="karteBild" alt="2"/></div>
+                <div class="karte"><img src="/Zauberberg/images/Zahlenkarte3.png" class="karteBild" alt="3"/></div>
+                <div id="joker0" class="karte jokerkarte" data-jokervalue="1">
+                    <img id="joker0_1" src="/Zauberberg/images/Zahlenkarte1.png" class="joker"
+                         onclick="jokerSet(0, 1)" style="opacity: 1;"/>
+                    <img id="joker0_2" src="/Zauberberg/images/Zahlenkarte2.png" class="joker"
+                         onclick="jokerSet(0, 2)" style="opacity: 0.2;"/>
+                    <img id="joker0_3" src="/Zauberberg/images/Zahlenkarte3.png" class="joker"
+                         onclick="jokerSet(0, 3)" style="opacity: 0.2;"/>
+                    <img id="joker0_4" src="/Zauberberg/images/Zahlenkarte4.png" class="joker"
+                         onclick="jokerSet(0, 4)" style="opacity: 0.2;"/>
+                    <img id="joker0_5" src="/Zauberberg/images/Zahlenkarte5.png" class="joker"
+                         onclick="jokerSet(0, 5)" style="opacity: 0.2; margin-bottom: 3px"/>
+                </div>
             </div>
             <button id="kartenTauschenBtn" class="button" onclick="kartenTauschenBtnAction()">
                 Karten tauschen
             </button>
         </div>
     </div>
-    <script>    /** Javascript für die Aktionsfläche (Muss nach dem html Code stehen!) */
+    <script>    /** Javascript für die Aktionsfläche (Muss nach dem html Code stehen und Zauberberg.js wird davor geladen!) */
     Sortable.create(document.getElementById("karten-Hand"), {
         group: {name: "karten", put: true, pull: true},
-        draggable: 'img',
+        draggable: 'div',
         animation: 150
     });
     Sortable.create(document.getElementById("karten-Legen"), {
-        group: {name: "karten", put: true, pull: true},
-        draggable: 'img',
+        group: {
+            name: "karten",
+            put: function () {
+                return document.getElementById("karten-Legen").childElementCount < 3;
+            },
+            pull: function () {
+                return document.getElementById("karten-Legen").childElementCount > 2;
+            }
+        },
+        draggable: 'div',
         animation: 150
     });
     Sortable.create(document.getElementById("karten-Tauschen"), {
         group: {name: "karten", put: true, pull: true},
-        draggable: 'img',
+        draggable: 'div',
         animation: 150
     });
 
     function kartenLegenBtnAction() {
+        var output = {
+            "Eventname": "KARTENLEGEN",
+            "karte1Typ": "Null",
+            "karte2Typ": "Null",
+            "karte3Typ": "Null",
+            "karte1Wert": "Null",
+            "karte2Wert": "Null",
+            "karte3Wert": "Null"
+        };
         var kartencontainer = document.getElementById("karten-Legen");
+        //console.log(kartencontainer); // LOG
         for (var i = 0; i < kartencontainer.childElementCount; i++) {
-            console.log(kartencontainer.children[i].alt);
+            if (kartencontainer.children[i].classList.contains("jokerkarte")) { // Ist ein Joker
+                output["karte" + (i + 1) + "Typ"] = "Joker";
+                output["karte" + (i + 1) + "Wert"] = kartencontainer.children[i].getAttribute("data-jokervalue");
+            } else { // Ist normale Karte
+                output["karte" + (i + 1) + "Typ"] = "Normal";
+                output["karte" + (i + 1) + "Wert"] = kartencontainer.children[i].children[0].alt;
+            }
         }
+        console.log(output);
+        sendDataToServer(JSON.stringify(output));
     }
 
     function kartenTauschenBtnAction() {
+        var output = {
+            "Eventname": "KARTENTAUSCHEN",
+            "karte1": "Null",
+            "karte2": "Null",
+            "karte3": "Null",
+            "karte4": "Null",
+            "karte5": "Null"
+        };
         var kartencontainer = document.getElementById("karten-Tauschen");
+        //console.log(kartencontainer); // LOG
         for (var i = 0; i < kartencontainer.childElementCount; i++) {
-            console.log(kartencontainer.children[i].alt);
+            if (kartencontainer.children[i].classList.contains("jokerkarte")) { // Ist ein Joker
+                output["karte" + (i + 1)] = "Joker";
+            } else { // Ist normale Karte
+                output["karte" + (i + 1)] = kartencontainer.children[i].children[0].alt;
+            }
         }
+        console.log(output);
+        sendDataToServer(JSON.stringify(output));
+    }
+
+    function jokerSet(jokerID, value) {
+        document.getElementById("joker" + jokerID + "_" + 1).style.opacity = "0.2";
+        document.getElementById("joker" + jokerID + "_" + 2).style.opacity = "0.2";
+        document.getElementById("joker" + jokerID + "_" + 3).style.opacity = "0.2";
+        document.getElementById("joker" + jokerID + "_" + 4).style.opacity = "0.2";
+        document.getElementById("joker" + jokerID + "_" + 5).style.opacity = "0.2";
+        document.getElementById("joker" + jokerID + "_" + value).style.opacity = "1";
+
+        document.getElementById("joker" + jokerID).setAttribute("data-jokervalue", value.toString());
+
+        // document.getElementById("joker" + jokerID + "_" + 1).classList.remove("chosenJoker");
+        // document.getElementById("joker" + jokerID + "_" + 3).classList.remove("chosenJoker"); todo remove old when alternative works
+        // document.getElementById("joker" + jokerID + "_" + 2).classList.remove("chosenJoker");
+        // document.getElementById("joker" + jokerID + "_" + 4).classList.remove("chosenJoker");
+        // document.getElementById("joker" + jokerID + "_" + 5).classList.remove("chosenJoker");
+        // document.getElementById("joker" + jokerID + "_" + value).classList.add("chosenJoker");
     }
     </script>
     <!-- ENDE Aktionsfläche -->

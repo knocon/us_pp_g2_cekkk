@@ -63,6 +63,10 @@ public class Zauberberg extends Game {
     @Override
     public void execute(User user, String gsonString) {
 
+        /**
+         * Eventnamen für Spielsteuerung abfangen
+         */
+
         if (this.gState == GameState.CLOSED) return;
 
         if (gsonString.equals("CLOSE")) {
@@ -84,6 +88,10 @@ public class Zauberberg extends Game {
         if (!user.equals(playerTurn)) {
             return;
         }
+
+        /**
+         * Eventnamen für das eigentliche Spiel
+         */
 
         Gson gson = new GsonBuilder().create();
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
@@ -279,25 +287,3 @@ public class Zauberberg extends Game {
     }
 
 }
-
-
-/**
- * import com.google.gson.Gson;
- * import com.google.gson.GsonBuilder;
- * <p>
- * import java.util.HashMap;
- * <p>
- * public class Main {
- * <p>
- * public static void main(String[] args) {
- * System.out.println("Alright, let's start:");
- * <p>
- * Gson gson = new GsonBuilder().create();
- * <p>
- * HashMap data = gson.fromJson("{\"asd\":\"asd\",\"asdf\":32}", HashMap.class);
- * <p>
- * System.out.println(data.get("asd"));
- * System.out.println(data.get("asdf"));
- * }
- * }
- */
