@@ -198,7 +198,19 @@ addListener('UPDATEKARTEN', function (event) {
     document.getElementById("karten-Tauschen").innerHTML = "";
     var kartencontainer = document.getElementById("karten-Hand");
     kartencontainer.innerHTML = "";
-    arr.forEach(function (zahl) { //todo an neuere html anpassen
-        kartencontainer.append("<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>");// Der Zahlenwert wird im "alt" gespeichert
+    var jokercount = 0;
+    arr.forEach(function (kartenWert) {
+        if (kartenWert === "Joker") {
+            var jokerkarte = "<div id=\"joker" + jokercount + "\" class=\"karte jokerkarte\" data-jokervalue=\"1\">"
+            for (var i = 1; i <= 5; i++) {
+                jokerkarte += "<img id=\"joker" + jokercount + "_" + i + "\" src=\"/Zauberberg/images/Zahlenkarte" + i + ".png\" class=\"joker\"" +
+                    " onclick=\"jokerSet(" + jokercount + ", " + i + ")\" style=\"opacity: " + (i === 1 ? "1" : "0.2") + ";\"/>"
+            }
+            jokerkarte += "</div>";
+            kartencontainer.append(jokerkarte);
+            jokercount++;
+        } else {
+            kartencontainer.append("<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>");// Der Zahlenwert wird im "alt" gespeichert
+        }
     });
 });
