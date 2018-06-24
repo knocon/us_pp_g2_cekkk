@@ -16,10 +16,46 @@ import com.google.gson.GsonBuilder;
 import userManagement.User;
 
 /**
- * Test game class extending Game and implementing the GameInterface
+ * Schnittstellendefinition für die Kommunikation zwischen Java Server und Javascript Client:
+ * Alle Eventnamen außer den Vorgegebenen!
  *
- * @author Anton Vetter
+ * Java -> JavaScript:
+ *      UPDATEKARTEN: JSON Array mit den Karten, die der entsprechende Spieler auf der Hand hat (String Zahlenwerte und "Joker" für Joker)
+ *      UPDATESPIELFELD: todo muss hier noch definiert werden
+ *      UPDATESPIELZUSTAND: JSON Map<String, Map<String, String>>
+ *         {"Rot": {
+ *                  "Aktiv": "1",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
+ *                  "Fokus": "0",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
+ *                  "BistDu": "0",      // Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
+ *                  "Steine: "2",      // Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt
+ *                  },
+ *          "Grün": {siehe obige Definition},
+ *          "Gelb": {siehe obige Definition},
+ *          "Blau": {siehe obige Definition},
+ *          "Grau": {siehe obige Definition}}
+ *
+ *
+ *
+ * JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
+ *      KARTENLEGEN Bsp:
+ *         {"Eventname": "KARTENLEGEN",
+ *          "karte1Typ": "Normal",
+ *          "karte2Typ": "Joker",
+ *          "karte3Typ": "Null",
+ *          "karte1Wert": "2",
+ *          "karte2Wert": "5",
+ *          "karte3Wert": "Null"}
+ *
+ *      KARTENTAUSCHEN Bsp:
+ *          {"Eventname": "KARTENTAUSCHEN",
+ *           "karte1": "1",
+ *           "karte2": "2",
+ *           "karte3": "Joker",
+ *           "karte4": "Null",
+ *           "karte5": "Null"}
+ *
  */
+
 public class Zauberberg extends Game {
     /**
      * gridStatus contains the gameData
@@ -62,6 +98,11 @@ public class Zauberberg extends Game {
 
     @Override
     public void execute(User user, String gsonString) {
+        //Vorverarbeitung
+        System.out.println("Empfangen: " + gsonString);
+        gsonString = gsonString.replaceAll("§", "{");
+        gsonString = gsonString.replaceAll("~", "}");
+        System.out.println("JSON Daten: " + gsonString);
 
         /**
          * Eventnamen für Spielsteuerung abfangen
@@ -72,15 +113,6 @@ public class Zauberberg extends Game {
         if (gsonString.equals("CLOSE")) {
             sendGameDataToClients("CLOSE");
             closeGame();
-            return;
-        }
-
-        if (gsonString.equals("RESTART")) {
-            if (playerList.size() != 2) return;
-            setGridStatus(new int[9]);
-            turnCounter = 0;
-            this.gState = GameState.RUNNING;
-            sendGameDataToClients("standardEvent");
             return;
         }
         if (gState != GameState.RUNNING)
@@ -95,7 +127,6 @@ public class Zauberberg extends Game {
 
         Gson gson = new GsonBuilder().create();
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
-        // Schnittstellendefinition in Zauberberg.js
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
                 ArrayList<Integer> kartenZumLegen = gson.fromJson(dataMap.get("Daten"), ArrayList.class);
@@ -264,16 +295,15 @@ public class Zauberberg extends Game {
         try {
             return global.FileHelper.getFile("Zauberberg/css/Zauberberg.css");
         } catch (IOException e) {
-            System.err
-                    .println("Loading of file Zauberberg/css/Zauberberg.css failed");
+            System.err.println("Loading of file Zauberberg/css/Zauberberg.css failed");
         }
         return null;
     }
 
     @Override
     public String getJavaScript() {
-        return "<script src=\"javascript/Zauberberg.js\"></script>" +
-                "<script src=\"javascript/Sortable.min.js\"></script>";
+        return "<script src=\"javascript/Sortable.min.js\"></script>";
+        //"<script src=\"javascript/Zauberberg.js\"></script>" // Wird durch einen Fehler nicht geladen. Javascript jetzt im HTML Code
     }
 
     @Override

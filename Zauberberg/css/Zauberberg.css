@@ -1,4 +1,5 @@
-/* MAIN */
+/* START Generell */
+
 body {
     font-family: Roboto, serif;
     background-color: #2a2a2a;
@@ -17,7 +18,23 @@ body {
     vertical-align: top;
 }
 
-/* MAIN END */
+#overlayMsg {
+    position: absolute;
+    z-index: 999999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #828282;
+    padding: 50px;
+    font-size: 30px;
+    line-height: 300px;
+}
+
+/* END Generell */
+
+/* START GRID */
 
 #grid {
     background-image: url("/Zauberberg/images/grid.png");
@@ -28,29 +45,10 @@ body {
     border-color: black;
 }
 
-#Player {
-    background-color: yellow;
-    margin-top: 25px;
-    height: 37px;
-    width: 589px;
-    border-style: solid;
-    border-color: black;
-    color: black;
-}
+/* END GRID */
 
-#restartButton {
-    height: 39px;
-    width: 90px;
-    visibility: hidden;
-}
+/* START AKTIONSFLÄCHE */
 
-#closeButton {
-    height: 39px;
-    width: 90px;
-    visibility: hidden;
-}
-
-/* START Style für die Aktionsfläche */
 #Spielzustand {
     margin: 10px;
     padding: 10px;
@@ -103,7 +101,7 @@ body {
 
 /* Button styles */
 .button {
-    background-color: #490e2b;
+    background-color: #311B92;
     border: 2px solid #555555;
     color: white;
     padding: 16px 32px;
@@ -123,4 +121,4 @@ body {
     color: white;
 }
 
-/* ENDE Style für die Aktionsfläche */
+/* END AKTIONSFLÄCHE */
