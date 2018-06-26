@@ -9,7 +9,7 @@ Java -> JavaScript:
                  "Aktiv": "1",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
                  "Fokus": "0",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
                  "BistDu": "0",      // Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
-                 "Steine: "2",      // Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt
+                 "Steine: "2",      // Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt (bei Raben auch negative Zahlen bis zu -3!)
                  },
          "Grün": {siehe obige Definition},
          "Gelb": {siehe obige Definition},

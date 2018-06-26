@@ -98,28 +98,48 @@
         <div id="GameControl">
             <button id="closeButton" class="button" onclick="closeGame()" style="visibility: hidden">Beenden</button>
         </div>
-        <div id="Spielzustand">
-            <div id="SpielerRot"><span class="spielername" style="color: #EF5350">Rot</span>
-                <img id="RotStein1" src="images/x.jpg" class="spielzustandStein"/>
-                <img id="RotStein2" src="images/x.jpg" class="spielzustandStein"/>
-            </div>
-            <div id="SpielerBlau"><span class="spielername" style="color: #42A5F5">Blau</span>
-                <img id="BlauStein1" src="images/x.jpg" class="spielzustandStein"/>
-                <img id="BlauStein2" src="images/x.jpg" class="spielzustandStein"/>
-            </div>
-            <div id="SpielerGrün"><span class="spielername" style="color: #66BB6A">Grün</span>
-                <img id="GrünStein1" src="images/x.jpg" class="spielzustandStein"/>
-                <img id="GrünStein2" src="images/x.jpg" class="spielzustandStein"/>
-            </div>
-            <div id="SpielerGelb"><span class="spielername" style="color: #FFEE58">Gelb</span>
-                <img id="GelbStein1" src="images/x.jpg" class="spielzustandStein"/>
-                <img id="GelbStein2" src="images/x.jpg" class="spielzustandStein"/>
-            </div>
-            <div id="SpielerGrau"><span class="spielername" style="color: #BDBDBD">Grau</span>
-                <img id="GrauStein1" src="images/x.jpg" class="spielzustandStein"/>
-                <img id="GrauStein2" src="images/x.jpg" class="spielzustandStein"/>
-            </div>
-        </div>
+        <table id="Spielzustand">
+            <tr id="SpielerRot">
+                <td><span class="spielername" style="color: #EF5350">Rot</span></td>
+                <td><img id="RotStein1" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="RotStein2" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="RotRabe1" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="RotRabe2" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="RotRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+            </tr>
+            <tr id="SpielerBlau">
+                <td><span class="spielername" style="color: #42A5F5">Blau </span></td>
+                <td><img id="BlauStein1" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="BlauStein2" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="BlauRabe1" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="BlauRabe2" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="BlauRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+            </tr>
+            <tr id="SpielerGrün">
+                <td><span class="spielername" style="color: #66BB6A">Grün</span></td>
+                <td><img id="GrünStein1" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="GrünStein2" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="GrünRabe1" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GrünRabe2" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GrünRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+            </tr>
+            <tr id="SpielerGelb">
+                <td><span class="spielername" style="color: #FFEE58">Gelb</span></td>
+                <td><img id="GelbStein1" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="GelbStein2" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="GelbRabe1" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GelbRabe2" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GelbRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+            </tr>
+            <tr id="SpielerGrau">
+                <td><span class="spielername" style="color: #BDBDBD">Grau</span></td>
+                <td><img id="GrauStein1" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="GrauStein2" src="images/x.jpg" class="spielzustandStein"/></td>
+                <td><img id="GrauRabe1" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GrauRabe2" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GrauRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+            </tr>
+        </table>
         <div id="karten-Hand" class="kartenliste">
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte1.png" class="karteBild" alt="1"/></div>
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte2.png" class="karteBild" alt="2"/></div>
@@ -266,14 +286,40 @@
                 if (data[colour]["Steine"] === "2") {
                     document.getElementById(colour + "Stein1").style.visibility = "visible";
                     document.getElementById(colour + "Stein2").style.visibility = "visible";
+                    document.getElementById(colour + "Rabe1").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe3").style.visibility = "hidden";
                 } else if (data[colour]["Steine"] === "1") {
                     document.getElementById(colour + "Stein1").style.visibility = "visible";
                     document.getElementById(colour + "Stein2").style.visibility = "hidden";
-                } else {
+                    document.getElementById(colour + "Rabe1").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe3").style.visibility = "hidden";
+                } else if (data[colour]["Steine"] === "0") {
                     document.getElementById(colour + "Stein1").style.visibility = "hidden";
                     document.getElementById(colour + "Stein2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe1").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe3").style.visibility = "hidden";
+                } else if (data[colour]["Steine"] === "-1") {
+                    document.getElementById(colour + "Stein1").style.visibility = "hidden";
+                    document.getElementById(colour + "Stein2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe1").style.visibility = "visible";
+                    document.getElementById(colour + "Rabe2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe3").style.visibility = "hidden";
+                } else if (data[colour]["Steine"] === "-2") {
+                    document.getElementById(colour + "Stein1").style.visibility = "hidden";
+                    document.getElementById(colour + "Stein2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe1").style.visibility = "visible";
+                    document.getElementById(colour + "Rabe2").style.visibility = "visible";
+                    document.getElementById(colour + "Rabe3").style.visibility = "hidden";
+                } else if (data[colour]["Steine"] === "-3") {
+                    document.getElementById(colour + "Stein1").style.visibility = "hidden";
+                    document.getElementById(colour + "Stein2").style.visibility = "hidden";
+                    document.getElementById(colour + "Rabe1").style.visibility = "visible";
+                    document.getElementById(colour + "Rabe2").style.visibility = "visible";
+                    document.getElementById(colour + "Rabe3").style.visibility = "visible";
                 }
-
                 if (data[colour]["BistDu"] === "1") {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "bold";
                 } else {
