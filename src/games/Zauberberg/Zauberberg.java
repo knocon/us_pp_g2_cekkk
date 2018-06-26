@@ -15,47 +15,6 @@ import com.google.gson.GsonBuilder;
 //import server.Server;
 import userManagement.User;
 
-/**
- * Schnittstellendefinition für die Kommunikation zwischen Java Server und Javascript Client:
- * Alle Eventnamen außer den Vorgegebenen!
- *
- * Java -> JavaScript:
- *      UPDATEKARTEN: JSON Array mit den Karten, die der entsprechende Spieler auf der Hand hat (String Zahlenwerte und "Joker" für Joker)
- *      UPDATESPIELFELD: todo muss hier noch definiert werden
- *      UPDATESPIELZUSTAND: JSON Map<String, Map<String, String>>
- *         {"Rot": {
- *                  "Aktiv": "1",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
- *                  "Fokus": "0",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
- *                  "BistDu": "0",      // Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
- *                  "Steine: "2",      // Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt
- *                  },
- *          "Grün": {siehe obige Definition},
- *          "Gelb": {siehe obige Definition},
- *          "Blau": {siehe obige Definition},
- *          "Grau": {siehe obige Definition}}
- *
- *
- *
- * JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
- *      KARTENLEGEN Bsp:
- *         {"Eventname": "KARTENLEGEN",
- *          "karte1Typ": "Normal",
- *          "karte2Typ": "Joker",
- *          "karte3Typ": "Null",
- *          "karte1Wert": "2",
- *          "karte2Wert": "5",
- *          "karte3Wert": "Null"}
- *
- *      KARTENTAUSCHEN Bsp:
- *          {"Eventname": "KARTENTAUSCHEN",
- *           "karte1": "1",
- *           "karte2": "2",
- *           "karte3": "Joker",
- *           "karte4": "Null",
- *           "karte5": "Null"}
- *
- */
-
 public class Zauberberg extends Game {
     /**
      * gridStatus contains the gameData
@@ -129,11 +88,10 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
-                ArrayList<Integer> kartenZumLegen = gson.fromJson(dataMap.get("Daten"), ArrayList.class);
+                System.out.println(dataMap.get("karte1Typ")); // Beispiel: gibr den Typ der ersten Karte aus
                 //todo Logik
                 break;
             case "KARTENTAUSCHEN":
-                ArrayList<Integer> kartenZumTauschen = gson.fromJson(dataMap.get("Daten"), ArrayList.class);
                 //todo Logik
                 break;
             default:
