@@ -11,6 +11,7 @@ public class Fallgrube {
 	case 0: 
 	    kobold.setLayer(-1);
 	    //TODO random Dorf (1,2,3,4)
+	    break;
 	case 1: 
 	    if(kobold.getPos()>0 && kobold.getPos()<7) {
 		kobold.setLayer(0);
@@ -28,6 +29,7 @@ public class Fallgrube {
 		kobold.setLayer(0);
 		kobold.setPos(kobold.getPos()+7);
 	    }
+	    break; 
 	case 2: 
 	    if(kobold.getPos()>0 && kobold.getPos()<5) {
 		kobold.setLayer(1);
@@ -45,6 +47,7 @@ public class Fallgrube {
 		kobold.setLayer(1);
 		kobold.setPos(kobold.getPos()+7);
 	    }
+	    break; 
 	case 3: 
 	    if(kobold.getPos()>0 && kobold.getPos()<3) {
 		kobold.setLayer(2);
@@ -62,6 +65,7 @@ public class Fallgrube {
 		kobold.setLayer(2);
 		kobold.setPos(kobold.getPos()+7);
 	    }
+	    break; 
 	}
 	
 	
