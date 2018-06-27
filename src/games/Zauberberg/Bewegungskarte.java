@@ -1,10 +1,14 @@
 package games.Zauberberg;
 
-public class Bewegungskarten {
+public class Bewegungskarte {
 	private int bewegungsZahl;
 	//If Joker == true, dann kann Zahl selbst gewaehlt werden
 	private Boolean joker;
 	
+	public Bewegungskarte(int value, boolean joker) {
+	    this.bewegungsZahl = value; 
+	    this.joker = joker; 
+	}
 	
 	public int getBewegungsZahl() {
 		return bewegungsZahl;

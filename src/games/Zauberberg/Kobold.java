@@ -3,7 +3,9 @@ package games.Zauberberg;
 public class Kobold {
 	private int nummer;
 	private String farbe;
-	
+	//private int [] position = new int [2];  //[layer, position]
+	private int layer; 
+	private int pos; 
 	//TODO Ereignisplaettchen von Feld erben Lassen
 	//TODO Feldklasse mit Positionsarray, Array mit moeglichen Kobolden, Ereignisplaettchen mit richtigem Ereignis, Zauberstein
 	//TODO Spieler wegen Steinen, Karten, Kobolden + Farbe
@@ -14,15 +16,31 @@ public class Kobold {
 	//Methoden bewegen
 	//TODO Position im Grid
 	
-	
-	
-	
-	
+		
 	public int getNummer() {
 		return nummer;
 	}
+	/*public int[] getPosition() {
+	    return position;
+	}
+	public void setPosition(int[] position) {
+	    this.position = position;
+	}*/
 	public void setNummer(int nummer) {
 		this.nummer = nummer;
+	}
+	
+	public int getLayer() {
+	    return layer;
+	}
+	public void setLayer(int layer) {
+	    this.layer = layer;
+	}
+	public int getPos() {
+	    return pos;
+	}
+	public void setPos(int pos) {
+	    this.pos = pos;
 	}
 	public String getFarbe() {
 		return farbe;
