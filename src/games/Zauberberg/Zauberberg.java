@@ -29,7 +29,7 @@ public class Zauberberg extends Game {
 
     @Override
     public int getMaxPlayerAmount() {
-        return 2;
+        return 5;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
-                System.out.println(dataMap.get("karte1Typ")); // Beispiel: gibr den Typ der ersten Karte aus
+                System.out.println(dataMap.get("karte1Typ")); // Beispiel: gibt den Typ der ersten Karte aus
                 //todo Logik
                 break;
             case "KARTENTAUSCHEN":
@@ -160,6 +160,9 @@ public class Zauberberg extends Game {
         sendGameDataToClients("PLAYERLEFT");
     }
 
+    /**
+     * sendGameDataToClients holt sich praktisch die Daten anhand des Eventnamen aus dieser Methode
+     */
     @Override
     public String getGameData(String eventName, User user) {
         String gameData = "";
@@ -170,6 +173,15 @@ public class Zauberberg extends Game {
             return "CLOSE";
         }
 
+        /**
+         * Eigentliche Spielevents
+         */
+        if (eventName.equals("UPDATEKARTEN")) {
+            return ""; //todo Array erstellen und über JSON als String zurückgeben (LOGIK)
+        }
+        //todo hier kommen weitere events hin!
+
+        // TICTACTOE Kram
         int[] grid = getGridStatus();
 
         for (int i = 0; i < 9; i++) {
