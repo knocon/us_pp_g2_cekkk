@@ -15,7 +15,7 @@ Java -> JavaScript:
          "Gelb": {siehe obige Definition},
          "Blau": {siehe obige Definition},
          "Grau": {siehe obige Definition}}
-     PUSHINFOTXT: Einfacher String, der dann im Infofeld angezeigt wird. (Informiert z.B. Mitspieler über Aktionen eines Spielers)
+     PUSHINFOTXT: Einfacher String, der dann im Infofeld angezeigt wird. (Informiert z.B. Mitspieler über Aktionen eines Spielers (Ereigniskarten etc.))
                     AUßERDEM Ausgabe für Errors(aufgetretene Exceptions)!
 
 
