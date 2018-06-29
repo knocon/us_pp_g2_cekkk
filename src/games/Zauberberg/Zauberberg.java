@@ -74,6 +74,10 @@ public class Zauberberg extends Game {
             closeGame();
             return;
         }
+        if (gsonString.equals("START")) { // Start Button wurde vom Host gedrückt
+            sendGameDataToClients("STARTGAME");
+            // todo Logik für den Start z.B. Aufsetzen der Spieler und verteilen von Karten etc. gefolgt von ersten Nachrichten an die Clients bezüglich des Spiels
+        }
         if (gState != GameState.RUNNING)
             return;
         if (!user.equals(playerTurn)) {
@@ -132,7 +136,7 @@ public class Zauberberg extends Game {
 
     @Override
     public void addUser(User user) {
-        if (playerList.size() < 2 && !playerList.contains(user)) {
+        if (playerList.size() < 5 && !playerList.contains(user)) {
             playerList.add(user);
 
             if (playerTurn == null) {
@@ -169,6 +173,13 @@ public class Zauberberg extends Game {
         if (eventName.equals("CLOSE")) {
             return "CLOSE";
         }
+        if (eventName.equals("START")) {
+            return (user == creator) ? "HOST" : "NOTTHEHOST";
+        }
+        if (eventName.equals("STARTGAME")) {
+            return "STARTGAME";
+        }
+
 
         /**
          * Eigentliche Spielevents
@@ -191,14 +202,14 @@ public class Zauberberg extends Game {
 
         if (playerList.size() < 2) {
             gameData += "Warte Auf 2ten Spieler...";
-            gameData += isHost(user);
+            //gameData += isHost(user);
             return gameData;
         }
 
         if (this.gState == GameState.FINISHED) {
             if (turnCounter == 9 && !gameOver()) {
                 gameData += "Unentschieden!";
-                gameData += isHost(user);
+                //gameData += isHost(user);
                 return gameData;
             }
             if (playerTurn.equals(user)) {
@@ -215,15 +226,11 @@ public class Zauberberg extends Game {
         else
             gameData += " (o)";
 
-        gameData += isHost(user);
+        //gameData += isHost(user);
 
         return gameData;
     }
 
-    private String isHost(User user) {
-        if (user == creator) return ",HOST";
-        else return ",NOTTHEHOST";
-    }
 
     @Override
     public boolean isJoinable() {

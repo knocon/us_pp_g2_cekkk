@@ -22,3 +22,5 @@
 [2018-06-28 21:44:52.805] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
 [2018-06-28 22:27:12.373] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
 [2018-06-29 19:38:49.681] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-29 20:40:26.546] [IP: /192.168.2.112] [LOGIN] Logging in user "Test" succeeded
+[2018-06-29 20:50:46.877] [IP: /192.168.2.112] [LOGIN] Logging in user "Test" succeeded

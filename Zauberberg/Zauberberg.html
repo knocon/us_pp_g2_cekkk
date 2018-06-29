@@ -8,12 +8,23 @@
             var stringFromServer = event.data;
             if (stringFromServer === "HOST") {
                 document.getElementById("closeButton").style.visibility = "visible";
+                document.getElementById("overlayMsg").style.visibility = "visible";
+                document.getElementById("overlayMsg").innerHTML = "<p>Du bist der Host. Wenn alle Spieler bereit sind, musst du das Spiel starten.</p>" +
+                    "<button id=\"startButton\" class=\"button\" onclick=\"startGame()\">Spiel starten</button>";
+            } else {
+                document.getElementById("closeButton").style.visibility = "hidden";
+                document.getElementById("overlayMsg").style.visibility = "visible";
+                document.getElementById("overlayMsg").innerHTML = "Warte auf das Startsignal vom Host";
             }
+        });
+
+        addListener('STARTGAME', function (event) {
             document.getElementById("overlayMsg").style.visibility = "hidden";
         });
 
         addListener('CLOSE', function (event) {
-            document.getElementById("Player").innerHTML = "Spiel wurde vom Host beendet!";
+            document.getElementById("overlayMsg").innerHTML = "Spiel wurde vom Host beendet!";
+            document.getElementById("overlayMsg").style.visibility = "visible";
         });
 
         function startGame() {
@@ -22,10 +33,6 @@
 
         function closeGame() {
             sendDataToServer("CLOSE");
-        }
-
-        function errorMsg(msg) {
-            //todo create Error Message
         }
     </script>
     <div id="Spielfeld">
@@ -364,7 +371,7 @@
             <p id="textInfo4">___________________________________________________________________________</p>
             <p id="textInfo5">___________________________________________________________________________</p>
         </div>
-        <div id="karten-Hand" class="kartenliste">
+        <div id="karten-Hand" class="kartenliste" style="display: block">
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte1.png" class="karteBild" alt="1"/></div>
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte2.png" class="karteBild" alt="2"/></div>
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte3.png" class="karteBild" alt="3"/></div>

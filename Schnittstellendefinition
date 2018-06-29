@@ -16,7 +16,7 @@ Java -> JavaScript:
          "Blau": {siehe obige Definition},
          "Grau": {siehe obige Definition}}
      PUSHINFOTXT: Einfacher String, der dann im Infofeld angezeigt wird. (Informiert z.B. Mitspieler über Aktionen eines Spielers)
-
+                    AUßERDEM Ausgabe für Errors(aufgetretene Exceptions)!
 
 
 JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
