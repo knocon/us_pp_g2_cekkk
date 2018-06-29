@@ -18,3 +18,7 @@
 [2018-06-24 15:09:19.273] [IP: /192.168.2.112] [LOGIN] Logging in user "Test" succeeded
 [2018-06-26 11:22:34.435] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
 [2018-06-26 18:52:55.219] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-27 19:49:57.456] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-28 21:44:52.805] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-28 22:27:12.373] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
+[2018-06-29 19:38:49.681] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded

@@ -24,7 +24,7 @@ public class Zauberberg extends Game {
     private ArrayList<User> playerList = new ArrayList<User>();
     private ArrayList<User> spectatorList = new ArrayList<User>();
     private int turnCounter = 0;
-    private String playerLeft = null;
+    private String recentInfoText = "";
 
 
     @Override
@@ -156,8 +156,8 @@ public class Zauberberg extends Game {
     @Override
     public void playerLeft(User user) {
         playerList.remove(user);
-        playerLeft = user.getName();
-        sendGameDataToClients("PLAYERLEFT");
+        recentInfoText = user.getName() + " hat das Spiel verlassen";
+        sendGameDataToClients("PUSHINFOTXT");
     }
 
     /**
@@ -166,9 +166,6 @@ public class Zauberberg extends Game {
     @Override
     public String getGameData(String eventName, User user) {
         String gameData = "";
-        if (eventName.equals("PLAYERLEFT")) {
-            return playerLeft + " hat das Spiel verlassen!";
-        }
         if (eventName.equals("CLOSE")) {
             return "CLOSE";
         }
@@ -178,6 +175,9 @@ public class Zauberberg extends Game {
          */
         if (eventName.equals("UPDATEKARTEN")) {
             return ""; //todo Array erstellen und über JSON als String zurückgeben (LOGIK)
+        }
+        if (eventName.equals("PUSHINFOTXT")) {
+            return recentInfoText;
         }
         //todo hier kommen weitere events hin!
 

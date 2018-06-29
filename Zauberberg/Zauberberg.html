@@ -12,11 +12,6 @@
             document.getElementById("overlayMsg").style.visibility = "hidden";
         });
 
-        addListener('PLAYERLEFT', function (event) {
-            document.getElementById("overlayMsg").innerHTML = "Ein Spieler hat das Spiel verlassen!";
-            document.getElementById("overlayMsg").style.visibility = "visible";
-        });
-
         addListener('CLOSE', function (event) {
             document.getElementById("Player").innerHTML = "Spiel wurde vom Host beendet!";
         });
@@ -316,7 +311,7 @@
     </script>
 
     <!-- START Aktionsfläche -->
-    <div id="Aktionsfläche" style="margin: 10px;">
+    <div id="Aktionsfläche">
         <div id="GameControl">
             <button id="closeButton" class="button" onclick="closeGame()" style="visibility: hidden">Beenden</button>
         </div>
@@ -362,6 +357,13 @@
                 <td><img id="GrauRabe3" src="images/o2.png" class="spielzustandStein"/></td>
             </tr>
         </table>
+        <div id="textInfo">
+            <p id="textInfo1">___________________________________________________________________________</p>
+            <p id="textInfo2">___________________________________________________________________________</p>
+            <p id="textInfo3">___________________________________________________________________________</p>
+            <p id="textInfo4">___________________________________________________________________________</p>
+            <p id="textInfo5">___________________________________________________________________________</p>
+        </div>
         <div id="karten-Hand" class="kartenliste">
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte1.png" class="karteBild" alt="1"/></div>
             <div class="karte"><img src="/Zauberberg/images/Zahlenkarte2.png" class="karteBild" alt="2"/></div>
@@ -575,6 +577,20 @@
                 kartencontainer.append("<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>");// Der Zahlenwert wird im "alt" gespeichert
             }
         });
+    });
+
+    addListener("PUSHINFOTXT", function (event) {
+        var stringFromServer = event.data;
+        var text1 = document.getElementById("textInfo1");
+        var text2 = document.getElementById("textInfo2");
+        var text3 = document.getElementById("textInfo3");
+        var text4 = document.getElementById("textInfo4");
+        var text5 = document.getElementById("textInfo5");
+        text1.innerText = text2.innerText;
+        text2.innerText = text3.innerText;
+        text3.innerText = text4.innerText;
+        text4.innerText = text5.innerText;
+        text5.innerText = stringFromServer;
     });
     </script>
     <!-- ENDE Aktionsfläche -->
