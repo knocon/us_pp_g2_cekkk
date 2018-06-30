@@ -48,7 +48,7 @@ JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist im
           "karte5": "Null"}
 
      EREIGNISANTWORT: JSON Map<String, String> Im folgenden alle möglichen Zusammensetzungen der Map:
-         {"Eventname": "EREIGNISANTWORT", "Ereignis": "Kristallkugek", todo  @Kevin Nocon schnittstelle muss definiert werden}
+         {"Eventname": "EREIGNISANTWORT", "Ereignis": "Kristallkugel", todo  @Kevin Nocon schnittstelle muss definiert werden}
          {"Eventname": "EREIGNISANTWORT", "Ereignis": "Fliegende Karte",
           "karte1Typ": "Null",
           "karte2Typ": "Null",        (siehe Kartenlegen)

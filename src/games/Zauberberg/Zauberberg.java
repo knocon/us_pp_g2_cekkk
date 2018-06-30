@@ -98,6 +98,19 @@ public class Zauberberg extends Game {
             case "KARTENTAUSCHEN":
                 //todo Logik
                 break;
+            case "EREIGNISANTWORT":
+                switch (dataMap.get("Ereignis")) {
+                    case "Kristallkugel":
+                        //todo Logik
+                        break;
+                    case "Fliegende Karte":
+                        //todo Logik
+                        break;
+                    case "Rabe":
+                        //todo Logik
+                        break;
+                }
+                break;
             default:
                 // Fehler!
         }
@@ -187,10 +200,19 @@ public class Zauberberg extends Game {
         if (eventName.equals("UPDATEKARTEN")) {
             return ""; //todo Array erstellen und über JSON als String zurückgeben (LOGIK)
         }
+        if (eventName.equals("UPDATESPIELFELD")) {
+            return ""; //todo Logik
+        }
+        if (eventName.equals("UPDATESPIELZUSTAND")) {
+            return ""; //todo Logik
+        }
         if (eventName.equals("PUSHINFOTXT")) {
             return recentInfoText;
         }
-        //todo hier kommen weitere events hin!
+        if (eventName.equals("EREIGNISANFRAGE")) {
+            return ""; //todo Logik
+        }
+        //todo hier kommen weitere events hin, falls nötig
 
         // TICTACTOE Kram
         int[] grid = getGridStatus();
@@ -234,7 +256,7 @@ public class Zauberberg extends Game {
 
     @Override
     public boolean isJoinable() {
-        return playerList.size() < 2;
+        return playerList.size() < 5;
 
     }
 
