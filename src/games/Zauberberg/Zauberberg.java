@@ -25,6 +25,7 @@ public class Zauberberg extends Game {
     private ArrayList<User> spectatorList = new ArrayList<User>();
     private int turnCounter = 0;
     private String recentInfoText = "";
+    private String closeMsg = "Spiel wurde vom Host beendet!";
 
 
     @Override
@@ -54,6 +55,8 @@ public class Zauberberg extends Game {
         }
         return null;
     }
+
+    //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
 
     @Override
     public void execute(User user, String gsonString) {
@@ -184,7 +187,7 @@ public class Zauberberg extends Game {
     public String getGameData(String eventName, User user) {
         String gameData = "";
         if (eventName.equals("CLOSE")) {
-            return "CLOSE";
+            return closeMsg;
         }
         if (eventName.equals("START")) {
             return (user == creator) ? "HOST" : "NOTTHEHOST";

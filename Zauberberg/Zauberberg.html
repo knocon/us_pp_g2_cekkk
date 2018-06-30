@@ -23,7 +23,7 @@
         });
 
         addListener('CLOSE', function (event) {
-            document.getElementById("overlayMsg").innerHTML = "Spiel wurde vom Host beendet!";
+            document.getElementById("overlayMsg").innerHTML = event.data;
             document.getElementById("overlayMsg").style.visibility = "visible";
         });
 
@@ -678,6 +678,7 @@
             btns[i].style.visibility = "hidden";
         }
         var output = {
+            "Eventname": "EREIGNISANTWORT",
             "Ereignis": "Rabe",
             "Spieler": colour
         };
