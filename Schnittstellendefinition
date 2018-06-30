@@ -3,7 +3,9 @@ Alle Eventnamen außer den Vorgegebenen!
 
 Java -> JavaScript:
      UPDATEKARTEN: JSON Array mit den Karten, die der entsprechende Spieler auf der Hand hat (String Zahlenwerte und "Joker" für Joker)
+
      UPDATESPIELFELD: todo muss hier noch definiert werden
+
      UPDATESPIELZUSTAND: JSON Map<String, Map<String, String>>
         {"Rot": {
                  "Aktiv": "1",      // Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
@@ -15,8 +17,16 @@ Java -> JavaScript:
          "Gelb": {siehe obige Definition},
          "Blau": {siehe obige Definition},
          "Grau": {siehe obige Definition}}
+
      PUSHINFOTXT: Einfacher String, der dann im Infofeld angezeigt wird. (Informiert z.B. Mitspieler über Aktionen eines Spielers (Ereigniskarten etc.))
                     AUßERDEM Ausgabe für Errors(aufgetretene Exceptions)!
+
+     EREIGNISANFRAGE: JSON Map<String, String> Im folgenden alle möglichen Zusammensetzungen der Map:
+        {"Ereignis": "Kristallkugel"}
+        {"Ereignis": "Fliegende Karte", "RestlicheZuege": "2"} Restliche Züge ist 1, wenn man mit der 3. Karte auf das Ereignis kommt, sonst mit der 2. Karte, also 2 Restliche Züge
+            (WICHTIG, unmittelbar hiernach muss Updatekarten gesendet werden, enthalten sind alle Karten, die noch nicht gelegt wurden und alle die noch nicht ausgeführt wurden,
+             bevor das Ereignis eintrat. Natürlich auch inklusive der neuen Karte)
+        {"Ereignis": "Rabe"}
 
 
 JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
@@ -37,3 +47,22 @@ JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist im
           "karte4": "Null",
           "karte5": "Null"}
 
+     EREIGNISANTWORT: JSON Map<String, String> Im folgenden alle möglichen Zusammensetzungen der Map:
+         {"Eventname": "EREIGNISANTWORT", "Ereignis": "Kristallkugek", todo  @Kevin Nocon schnittstelle muss definiert werden}
+         {"Eventname": "EREIGNISANTWORT", "Ereignis": "Fliegende Karte",
+          "karte1Typ": "Null",
+          "karte2Typ": "Null",        (siehe Kartenlegen)
+          "karte1Wert": "Null",
+          "karte2Wert": "Null"}
+         {"Eventname": "EREIGNISANTWORT", "Ereignis": "Rabe", "Spieler": "Rot"} Farbe das Spielers, auf den der Rabe angewendet werden soll.
+
+
+
+Ereigniskarten INFO:
+    Kristallkugel: Ausführung im Spielfeld. (Klickbare Ereignisplättchen)               @Kevin Nocon
+    Unwetter: Ausführung in der Logik, effekt dann im Spielfeld sichtbar.               @Logik
+    Fliegende Karte: Ausführung im Aktionsfeld                                          @Kevin Kreps
+    Rabe: Ausführung im Aktionsfeld                                                     @Kevin Kreps
+    Geheimgang: Ausführung in der Logik (Achtung sofort, also sobald Feld frei wird)    @Logik
+    Fallgrube: Analog zu Geheimgang                                                     @Logik
+    Schreckgespenst: Ausführun in der Logik                                             @Logik

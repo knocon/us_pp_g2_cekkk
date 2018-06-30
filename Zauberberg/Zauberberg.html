@@ -335,7 +335,7 @@
                 <td><img id="RotRabe1" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="RotRabe2" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="RotRabe3" src="images/o2.png" class="spielzustandStein"/></td>
-                <td><img id="RotRabeAktion" src="images/layout.png" class="spielzustandStein"/></td><!--todo Rabe Aktion noch nicht fertig-->
+                <td><img id="RotRabeAktion" src="images/x.jpg" onclick="selectRabeAction('Rot')" class="rabeBtn"/></td>
             </tr>
             <tr id="SpielerBlau">
                 <td><span class="spielername" style="color: #42A5F5">Blau </span></td>
@@ -344,6 +344,8 @@
                 <td><img id="BlauRabe1" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="BlauRabe2" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="BlauRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="BlauRabeAktion" src="images/x.jpg" onclick="selectRabeAction('Blau')" class="rabeBtn"/>
+                </td>
             </tr>
             <tr id="SpielerGrün">
                 <td><span class="spielername" style="color: #66BB6A">Grün</span></td>
@@ -352,6 +354,8 @@
                 <td><img id="GrünRabe1" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="GrünRabe2" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="GrünRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GrünRabeAktion" src="images/x.jpg" onclick="selectRabeAction('Grün')" class="rabeBtn"/>
+                </td>
             </tr>
             <tr id="SpielerGelb">
                 <td><span class="spielername" style="color: #FFEE58">Gelb</span></td>
@@ -360,6 +364,8 @@
                 <td><img id="GelbRabe1" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="GelbRabe2" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="GelbRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GelbRabeAktion" src="images/x.jpg" onclick="selectRabeAction('Gelb')" class="rabeBtn"/>
+                </td>
             </tr>
             <tr id="SpielerGrau">
                 <td><span class="spielername" style="color: #BDBDBD">Grau</span></td>
@@ -368,6 +374,8 @@
                 <td><img id="GrauRabe1" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="GrauRabe2" src="images/o2.png" class="spielzustandStein"/></td>
                 <td><img id="GrauRabe3" src="images/o2.png" class="spielzustandStein"/></td>
+                <td><img id="GrauRabeAktion" src="images/x.jpg" onclick="selectRabeAction('Grau')" class="rabeBtn"/>
+                </td>
             </tr>
         </table>
         <div id="textInfo">
@@ -425,10 +433,11 @@
         group: {
             name: "karten",
             put: function () {
-                return document.getElementById("karten-Legen").childElementCount < 3;
+                return (!ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < 3)) ||
+                    (ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < ereignisFliegendeKarteRestlicheZuege));
             },
             pull: function () {
-                return document.getElementById("karten-Legen").childElementCount > 2;
+                return (document.getElementById("karten-Legen").childElementCount > 2) || ereignisFliegendeKarte;
             }
         },
         draggable: 'div',
@@ -441,15 +450,30 @@
     });
 
     function kartenLegenBtnAction() {
-        var output = {
-            "Eventname": "KARTENLEGEN",
-            "karte1Typ": "Null",
-            "karte2Typ": "Null",
-            "karte3Typ": "Null",
-            "karte1Wert": "Null",
-            "karte2Wert": "Null",
-            "karte3Wert": "Null"
-        };
+        disableKartenLegen(true);
+        disableKartenTauschen(true);
+        var output = {};
+        if (ereignisFliegendeKarte) {
+            output = {
+                "Eventname": "EREIGNISANTWORT",
+                "Ereignis": "Fliegende Karte",
+                "karte1Typ": "Null",
+                "karte2Typ": "Null",
+                "karte1Wert": "Null",
+                "karte2Wert": "Null"
+            };
+            ereignisFliegendeKarte = false;
+        } else {
+            output = {
+                "Eventname": "KARTENLEGEN",
+                "karte1Typ": "Null",
+                "karte2Typ": "Null",
+                "karte3Typ": "Null",
+                "karte1Wert": "Null",
+                "karte2Wert": "Null",
+                "karte3Wert": "Null"
+            };
+        }
         var kartencontainer = document.getElementById("karten-Legen");
         //console.log(kartencontainer); // LOG
         for (var i = 0; i < kartencontainer.childElementCount; i++) {
@@ -466,6 +490,8 @@
     }
 
     function kartenTauschenBtnAction() {
+        disableKartenLegen(true);
+        disableKartenTauschen(true);
         var output = {
             "Eventname": "KARTENTAUSCHEN",
             "karte1": "Null",
@@ -486,6 +512,22 @@
         console.log(output);
         console.log(JSON.stringify(output));
         sendDataToServer(JSON.stringify(output));
+    }
+
+    function disableKartenLegen(disable) {
+        if (disable) {
+            document.getElementById("kartenLegenBtn").classList.add("buttondisabled");
+        } else {
+            document.getElementById("kartenLegenBtn").classList.remove("buttondisabled");
+        }
+    }
+
+    function disableKartenTauschen(disable) {
+        if (disable) {
+            document.getElementById("kartenTauschenBtn").classList.add("buttondisabled");
+        } else {
+            document.getElementById("kartenTauschenBtn").classList.remove("buttondisabled");
+        }
     }
 
     function jokerSet(jokerID, value) {
@@ -569,6 +611,11 @@
     });
 
     addListener('UPDATEKARTEN', function (event) {
+        disableKartenLegen(false);
+        disableKartenTauschen(false);
+        if (ereignisFliegendeKarte) {
+            disableKartenTauschen(true);
+        }
         var stringFromServer = event.data;
         var arr = JSON.parse(stringFromServer);
         document.getElementById("karten-Legen").innerHTML = "";
@@ -578,10 +625,10 @@
         var jokercount = 0;
         arr.forEach(function (kartenWert) {
             if (kartenWert === "Joker") {
-                var jokerkarte = "<div id=\"joker" + jokercount + "\" class=\"karte jokerkarte\" data-jokervalue=\"1\">"
+                var jokerkarte = "<div id=\"joker" + jokercount + "\" class=\"karte jokerkarte\" data-jokervalue=\"1\">";
                 for (var i = 1; i <= 5; i++) {
                     jokerkarte += "<img id=\"joker" + jokercount + "_" + i + "\" src=\"/Zauberberg/images/Zahlenkarte" + i + ".png\" class=\"joker\"" +
-                        " onclick=\"jokerSet(" + jokercount + ", " + i + ")\" style=\"opacity: " + (i === 1 ? "1" : "0.2") + ";\"/>"
+                        " onclick=\"jokerSet(" + jokercount + ", " + i + ")\" style=\"opacity: " + (i === 1 ? "1" : "0.2") + ";\"/>";
                 }
                 jokerkarte += "</div>";
                 kartencontainer.append(jokerkarte);
@@ -605,6 +652,37 @@
         text4.innerText = text5.innerText;
         text5.innerText = stringFromServer;
     });
+
+    var ereignisFliegendeKarte = false;
+    var ereignisFliegendeKarteRestlicheZuege = 1;
+
+    addListener("EREIGNISANFRAGE", function (event) {
+        var stringFromServer = event.data;
+        var data = JSON.parse(stringFromServer);
+        if (data["Ereignis"] === "Kristallkugel") {
+            kristallkugel();
+        } else if (data["Ereignis"] === "Fliegende Karte") {
+            ereignisFliegendeKarte = true;
+            ereignisFliegendeKarteRestlicheZuege = parseInt(data["RestlicheZuege"]);
+        } else if (data["Ereignis"] === "Rabe") {
+            var btns = document.getElementsByClassName("rabeBtn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].style.visibility = "visible";
+            }
+        }
+    });
+
+    function selectRabeAction(colour) {
+        var btns = document.getElementsByClassName("rabeBtn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].style.visibility = "hidden";
+        }
+        var output = {
+            "Ereignis": "Rabe",
+            "Spieler": colour
+        };
+        sendDataToServer(JSON.stringify(output));
+    }
     </script>
     <!-- ENDE Aktionsfläche -->
 </div>

@@ -70,6 +70,14 @@ body {
     vertical-align: middle;
 }
 
+.rabeBtn {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    visibility: hidden;
+}
+
 #textInfo {
     display: inline-block;
     vertical-align: top;
@@ -128,6 +136,16 @@ body {
 .button:hover {
     background-color: #555555;
     color: white;
+}
+
+.buttondisabled {
+    cursor: not-allowed;
+    pointer-events: none;
+
+    /*Button disabled - CSS color class*/
+    color: #c0c0c0;
+    background-color: #ffffff;
+
 }
 
 /* END AKTIONSFLÄCHE */
