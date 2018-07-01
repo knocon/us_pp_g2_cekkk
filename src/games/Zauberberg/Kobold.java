@@ -5,7 +5,7 @@ public class Kobold {
 	private Farbe farbe;
 	//private int [] position = new int [2];  //[layer, position]
 	private int layer; 
-	private int pos; 
+	private int feldNr; 
 	private Spieler spieler; 
 	
 	//TODO Ereignisplaettchen von Feld erben Lassen
@@ -25,7 +25,7 @@ public class Kobold {
 	    }
 	
 	public void move(int value) {
-	    this.pos += value; 
+	    this.feldNr += value; 
 	}
 	
 		
@@ -49,10 +49,10 @@ public class Kobold {
 	    this.layer = layer;
 	}
 	public int getPos() {
-	    return pos;
+	    return feldNr;
 	}
 	public void setPos(int pos) {
-	    this.pos = pos;
+	    this.feldNr = pos;
 	}
 	
 }
