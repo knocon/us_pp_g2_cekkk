@@ -39,16 +39,19 @@
 
 		<script language="javascript">
 			var imageTracker = 'verdeckt';
-		function swapIcon(){
+		
+			
+			function Schreckgespenst(){
 			var image = document.getElementById('1');
 			if(imageTracker=='verdeckt'){
-				image.src = 'ereignisfelder_images/kobold.png';
+				image.src = 'ereignisfelder_images/Schreckgespenst.png';
 				imageTracker = 'kobold'
 			}else{
-				image.src = 'ereignisfelder_images/verdeckt.png';
+				image.src = 'ereignisfelder_images/Verdeckt.png';
 				imageTracker = 'verdeckt';
 			}
-		}
+		
+			}
 		</script>
 		
 		
@@ -58,7 +61,7 @@
                     <td>
                         <img id="0" src="layout_images/layoutnew_01.gif" width="77" height="77" alt=""></td>
                     <td>
-                        <img id="1" src="ereignisfelder_images/verdeckt.png" width="77" height="77" alt ="" onClick="swapIcon()"></td>
+                        <img id="1" src="ereignisfelder_images/verdeckt.png" width="77" height="77" alt ="" onClick="Schreckgespenst()"></td>
                     <td>
                         <img id="2" src="layout_images/layoutnew_03.gif" width="77" height="77" alt=""></td>
                     <td>
