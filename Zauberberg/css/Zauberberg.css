@@ -38,12 +38,8 @@ body {
 /* START GRID */
 
 #grid {
-    background-image: url("/Zauberberg/images/grid.png");
-    width: 800px; /* Die Breite sollte nach möglichkeit unter 1000px bleiben, damit die Aktionsfläche nicht unter das Feld geschoben wird*/
-    height: 800px; /* 800 px ist eine gute Höhe für Bildschirme.*/
-    border-right: solid;
-    border-bottom: solid;
-    border-color: black;
+    width: 800px; 
+    height: 800px; 
 }
 
 /* END GRID */
