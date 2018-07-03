@@ -1,10 +1,15 @@
 package games.Ereignisplaettchen;
 
+import java.util.ArrayList;
+
 import games.Zauberberg.Feld;
 import games.Zauberberg.Kobold;
 
-public class Fallgrube {
-	//TODO Logik des Ereignisses
+public class Fallgrube extends Feld {
+    
+    public Fallgrube(int layer, int feldNr, ArrayList<Kobold> list) {
+	super(layer,feldNr,list); 
+    }
 	
     public static void execute (Kobold kobold) {
 	switch(kobold.getLayer()) {

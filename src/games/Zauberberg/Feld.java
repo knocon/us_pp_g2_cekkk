@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Feld {
     private int layer; 
-    private int position; 
+    private int feldNr; 
     private ArrayList<Kobold> kobolde; 
-    private boolean zauberstein;
-    private boolean ereignisplaettchen;
+    //private boolean zauberstein;
+    //private boolean ereignisplaettchen;
    
     
-    public Feld(int layer, int pos, ArrayList<Kobold> kobolde, boolean zauberstein) {
+    public Feld(int layer, int feldNr, ArrayList<Kobold> kobolde) {
 	this.layer =layer; 
-	this.position = pos;
+	this.feldNr = feldNr;
 	this.kobolde = kobolde; 
-	this.zauberstein = zauberstein; 
+	//this.zauberstein = zauberstein; 
     }    
     
     
@@ -37,23 +37,23 @@ public class Feld {
     public void setKobolde(ArrayList<Kobold> kobolde) {
         this.kobolde = kobolde;
     }    
-    public boolean isZauberstein() {
+    /*public boolean isZauberstein() {
         return zauberstein;
     }
     public void setZauberstein(boolean zauberstein) {
         this.zauberstein = zauberstein;
-    }
+    }*/
     public int getLayer() {
         return layer;
     }
     public void setLayer(int layer) {
         this.layer = layer;
     }
-    public int getPosition() {
-        return position;
+    public int getFeldNr() {
+        return feldNr;
     }
-    public void setPosition(int position) {
-        this.position = position;
+    public void setFeldNr(int position) {
+        this.feldNr = position;
     }
       
 

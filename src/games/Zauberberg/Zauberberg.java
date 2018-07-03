@@ -28,12 +28,10 @@ public class Zauberberg extends Game {
     private String closeMsg = "Spiel wurde vom Host beendet!";
 
 
-    @Override
     public int getMaxPlayerAmount() {
         return 5;
     }
 
-    @Override
     public int getCurrentPlayerAmount() {
         return playerList.size();
     }
@@ -46,7 +44,6 @@ public class Zauberberg extends Game {
         this.gridStatus = gridStatus;
     }
 
-    @Override
     public String getSite() {
         try {
             return FileHelper.getFile("Zauberberg/Zauberberg.html");
@@ -58,7 +55,6 @@ public class Zauberberg extends Game {
 
     //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
 
-    @Override
     public void execute(User user, String gsonString) {
         //Vorverarbeitung
         System.out.println("Empfangen: " + gsonString);
@@ -150,7 +146,6 @@ public class Zauberberg extends Game {
 
     }
 
-    @Override
     public void addUser(User user) {
         if (playerList.size() < 5 && !playerList.contains(user)) {
             playerList.add(user);
@@ -168,12 +163,10 @@ public class Zauberberg extends Game {
     }
 
 
-    @Override
     public void addSpectator(User user) {
         this.spectatorList.add(user);
     }
 
-    @Override
     public void playerLeft(User user) {
         playerList.remove(user);
         recentInfoText = user.getName() + " hat das Spiel verlassen";
@@ -183,7 +176,6 @@ public class Zauberberg extends Game {
     /**
      * sendGameDataToClients holt sich praktisch die Daten anhand des Eventnamen aus dieser Methode
      */
-    @Override
     public String getGameData(String eventName, User user) {
         String gameData = "";
         if (eventName.equals("CLOSE")) {
@@ -257,13 +249,11 @@ public class Zauberberg extends Game {
     }
 
 
-    @Override
     public boolean isJoinable() {
         return playerList.size() < 5;
 
     }
 
-    @Override
     public GameState getGameState() {
         return this.gState;
     }
@@ -292,7 +282,6 @@ public class Zauberberg extends Game {
         return false;
     }
 
-    @Override
     public String getCSS() {
         try {
             return global.FileHelper.getFile("Zauberberg/css/Zauberberg.css");
@@ -302,18 +291,15 @@ public class Zauberberg extends Game {
         return null;
     }
 
-    @Override
     public String getJavaScript() {
         return "<script src=\"javascript/Sortable.min.js\"></script>";
         //"<script src=\"javascript/Zauberberg.js\"></script>" // Wird durch einen Fehler nicht geladen. Javascript jetzt im HTML Code
     }
 
-    @Override
     public ArrayList<User> getPlayerList() {
         return this.playerList;
     }
 
-    @Override
     public ArrayList<User> getSpectatorList() {
         return this.spectatorList;
     }

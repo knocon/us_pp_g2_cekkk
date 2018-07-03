@@ -3,11 +3,14 @@ package games.Zauberberg;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Spieler {
+import userManagement.User;
+
+public class Spieler extends  User {
     private int anzahlZaubersteine; 
     private ArrayList<Bewegungskarte> hand;  
     
-    public Spieler(ArrayList<Bewegungskarte> hand) {
+    public Spieler(String name, String pw, ArrayList<Bewegungskarte> hand) {
+	super(name, pw); 
 	this.anzahlZaubersteine = 0;
 	this.hand = hand;	
     }

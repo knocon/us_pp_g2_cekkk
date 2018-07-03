@@ -1,8 +1,13 @@
 package games.Ereignisplaettchen;
 
-import games.Zauberberg.Kobold;
+import java.util.ArrayList;
 
-public class Geheimgang {
+import games.Zauberberg.*;
+
+public class Geheimgang extends Feld { 
+    public Geheimgang(int layer, int feldNr,ArrayList<Kobold> list) {
+	super(layer,feldNr,list); 
+    }
 	
 
 public static void aufsteigen (Kobold kobold) {
