@@ -40,3 +40,4 @@
 [2018-07-02 13:14:37.091] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
 [2018-07-02 13:35:33.228] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
 [2018-07-02 20:32:29.296] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-03 10:05:53.526] [IP: /127.0.0.1] [LOGIN] Logging in user "Kevin" succeeded
