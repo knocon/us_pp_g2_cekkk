@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import games.Zauberberg.*;
 
-public class Geheimgang extends Feld { 
+public class Geheimgang extends Feld {  
     public Geheimgang(int layer, int feldNr,ArrayList<Kobold> list) {
 	super(layer,feldNr,list); 
     }

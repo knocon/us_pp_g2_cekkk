@@ -7,7 +7,7 @@ import games.Zauberberg.*;
 public class Schreckgespenst extends Feld{ 
     
     public Schreckgespenst(int layer, int feldNr, ArrayList<Kobold> list) {
-	super(layer,feldNr,list); 
+	super(layer,feldNr,list);  
     }
 	//TODO Logik des Ereignisses
     public static void execute (Kobold kobold) {

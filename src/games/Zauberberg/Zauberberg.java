@@ -18,7 +18,7 @@ import userManagement.User;
 public class Zauberberg extends Game {
     /**
      * gridStatus contains the gameData
-     */
+     */ 
     private int[] gridStatus = new int[9];
     private User playerTurn = null;
     private ArrayList<User> playerList = new ArrayList<User>();

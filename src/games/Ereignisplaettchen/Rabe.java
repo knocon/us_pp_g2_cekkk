@@ -6,7 +6,7 @@ import games.Zauberberg.*;
 public class Rabe extends Feld { 
     
     public Rabe(int layer, int feldNr, ArrayList<Kobold> list) {
-	super(layer,feldNr,list); 
+	super(layer,feldNr,list);  
     }
     
 

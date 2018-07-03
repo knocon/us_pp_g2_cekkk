@@ -9,7 +9,7 @@ public class Spiel {
     private ArrayList<Feld> felder = new ArrayList<Feld>(); 
     
     public Spiel() {
-	kartenstapel = new Kartenstapel(); 
+	kartenstapel = new Kartenstapel();  
 	
 	//layer 1
 	for(int i=0; i<=35;i++ ) {

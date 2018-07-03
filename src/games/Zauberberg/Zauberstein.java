@@ -9,7 +9,7 @@ public class Zauberstein extends Feld {
 	private Boolean aufFeld;
 	
 	public Zauberstein(int layer, int feldNr) {
-		super(layer,feldNr,null);
+		super(layer,feldNr,null); 
 		aufFeld = true; 
 	}
 	

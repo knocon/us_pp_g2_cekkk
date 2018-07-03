@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Feld {
     private int layer; 
     private int feldNr; 
-    private ArrayList<Kobold> kobolde; 
+    private ArrayList<Kobold> kobolde;  
     //private boolean zauberstein;
     //private boolean ereignisplaettchen;
    

@@ -7,7 +7,7 @@ import games.Zauberberg.*;
 public class Unwetter extends Feld {
     
     public Unwetter(int layer, int feldNr, ArrayList<Kobold> list) {
-	super(layer,feldNr,list); 
+	super(layer,feldNr,list);  
     }
 	//TODO Logik des Ereignisses
 }

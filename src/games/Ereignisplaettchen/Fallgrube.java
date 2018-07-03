@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import games.Zauberberg.Feld;
 import games.Zauberberg.Kobold;
 
-public class Fallgrube extends Feld {
+public class Fallgrube extends Feld { 
     
     public Fallgrube(int layer, int feldNr, ArrayList<Kobold> list) {
 	super(layer,feldNr,list); 
