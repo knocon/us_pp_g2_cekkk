@@ -7,6 +7,7 @@ import global.FileHelper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,7 +56,7 @@ public class Zauberberg extends Game {
 
     //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
 
-    public void execute(User user, String gsonString) {
+    public void execute(Spieler user, String gsonString) {
         //Vorverarbeitung
         System.out.println("Empfangen: " + gsonString);
         gsonString = gsonString.replaceAll("§", "{");
@@ -75,6 +76,19 @@ public class Zauberberg extends Game {
         }
         if (gsonString.equals("START")) { // Start Button wurde vom Host gedrückt
             sendGameDataToClients("STARTGAME");
+            //////
+            Spiel s = new Spiel(); 
+            user.setHand(getRandomCards(3, s.getKartenstapel().getStapel()));
+            for(int i = 0; i<user.getHand().size(); i++) {
+        	s.getKartenstapel().getStapel().remove(user.getHand().get(i)); 
+            }
+            //s.getKartenstapel().getStapel().remove(user.getHand()); 
+            
+            
+            
+            
+            
+            /////
             // todo Logik für den Start z.B. Aufsetzen der Spieler und verteilen von Karten etc. gefolgt von ersten Nachrichten an die Clients bezüglich des Spiels
         }
         if (gState != GameState.RUNNING)
@@ -144,6 +158,21 @@ public class Zauberberg extends Game {
             sendGameDataToClients("standardEvent");
         }
 
+    }
+
+  
+
+    private ArrayList<Bewegungskarte> getRandomCards(int anzahlKarte, ArrayList<Bewegungskarte> stapel) {
+	// TODO Auto-generated method stub
+	Random r = new Random(); 
+	ArrayList<Bewegungskarte> returnList = new ArrayList<Bewegungskarte>(); 
+	
+	for(int x = 0; x<anzahlKarte; x++) {
+	    int random = r.nextInt(stapel.size()); 
+	    returnList.add(stapel.get(random)); 
+	    stapel.remove(random); 	    
+	}
+	return returnList;
     }
 
     public void addUser(User user) {
@@ -302,6 +331,12 @@ public class Zauberberg extends Game {
 
     public ArrayList<User> getSpectatorList() {
         return this.spectatorList;
+    }
+
+    @Override
+    public void execute(User user, String s) {
+	// TODO Auto-generated method stub
+	
     }
 
 }

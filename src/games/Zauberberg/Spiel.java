@@ -85,10 +85,26 @@ public class Spiel {
 	    } else 
 		felder.add(new Feld(3,i,null));     
 	}
-
-	
        
    }
+
+    public Kartenstapel getKartenstapel() {
+        return kartenstapel;
+    }
+
+    public void setKartenstapel(Kartenstapel kartenstapel) {
+        this.kartenstapel = kartenstapel;
+    }
+
+    public ArrayList<Feld> getFelder() {
+        return felder;
+    }
+
+    public void setFelder(ArrayList<Feld> felder) {
+        this.felder = felder;
+    }
+    
+    
    
    
 
