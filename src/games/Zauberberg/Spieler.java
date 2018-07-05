@@ -9,11 +9,11 @@ public class Spieler {
     private String name;
     private int anzahlZaubersteine;
     private ArrayList<Bewegungskarte> hand;
-    
+
     public Spieler() {
         this.name = "Rot"; // todo automatisch generieren
-	this.anzahlZaubersteine = 0;
-	this.hand = new ArrayList<>();
+        this.anzahlZaubersteine = 0;
+        this.hand = new ArrayList<>();
     }
 
     public int getAnzahlZaubersteine() {
@@ -30,21 +30,22 @@ public class Spieler {
 
     public void setHand(ArrayList<Bewegungskarte> hand) {
         this.hand = hand;
-    }   
-    
-    public void karteZiehen() {
-	//nur ne Idee
-	//Kartenstapel muss am Anfang irgendwo erzeugt werden
-	Random random = new Random(); 
-	Kartenstapel k = new Kartenstapel();
-	int randomIndex = random.nextInt(k.getStapel().size()); 
-	hand.add(k.getStapel().get(randomIndex)); 
     }
+
+    public void karteZiehen() {
+        //nur ne Idee
+        //Kartenstapel muss am Anfang irgendwo erzeugt werden
+        Random random = new Random();
+        Kartenstapel k = new Kartenstapel();
+        int randomIndex = random.nextInt(k.getStapel().size());
+        hand.add(k.getStapel().get(randomIndex));
+    }
+
     public void karteAblegen(Bewegungskarte bk) {
-	hand.remove(bk);
-	//Kartenstapel wird nur einmal im Projekt erzeugt, s.o.
-	//Kartenstapel k = new Kartenstapel(); 
-	//k.getStapel().add(bk); 
+        hand.remove(bk);
+        //Kartenstapel wird nur einmal im Projekt erzeugt, s.o.
+        //Kartenstapel k = new Kartenstapel();
+        //k.getStapel().add(bk);
     }
 
     public String getName() {
