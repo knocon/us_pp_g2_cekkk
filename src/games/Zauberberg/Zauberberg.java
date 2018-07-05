@@ -14,17 +14,17 @@ import com.google.gson.GsonBuilder;
 
 
 //import server.Server;
+import sun.security.provider.ConfigFile;
 import userManagement.User;
 
 public class Zauberberg extends Game {
     /**
      * gridStatus contains the gameData
-     */ 
-    private int[] gridStatus = new int[9];
-    private User playerTurn = null;
+     */
+    private Spieler playerTurn = null;
     private ArrayList<User> playerList = new ArrayList<User>();
+    private ArrayList<Spieler> spielerList = new ArrayList<Spieler>();
     private ArrayList<User> spectatorList = new ArrayList<User>();
-    private int turnCounter = 0;
     private String recentInfoText = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
 
@@ -37,14 +37,6 @@ public class Zauberberg extends Game {
         return playerList.size();
     }
 
-    private int[] getGridStatus() {
-        return gridStatus;
-    }
-
-    private void setGridStatus(int[] gridStatus) {
-        this.gridStatus = gridStatus;
-    }
-
     public String getSite() {
         try {
             return FileHelper.getFile("Zauberberg/Zauberberg.html");
@@ -54,9 +46,9 @@ public class Zauberberg extends Game {
         return null;
     }
 
-    //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
-
-    public void execute(Spieler user, String gsonString) {
+    @Override
+    public void execute(User user, String gsonString) {
+        Spieler spieler = spielerList.get(playerList.indexOf(user));
         //Vorverarbeitung
         System.out.println("Empfangen: " + gsonString);
         gsonString = gsonString.replaceAll("§", "{");
@@ -76,18 +68,16 @@ public class Zauberberg extends Game {
         }
         if (gsonString.equals("START")) { // Start Button wurde vom Host gedrückt
             sendGameDataToClients("STARTGAME");
+            this.gState = GameState.RUNNING;
             //////
-            Spiel s = new Spiel(); 
-            user.setHand(getRandomCards(3, s.getKartenstapel().getStapel()));
-            for(int i = 0; i<user.getHand().size(); i++) {
-        	s.getKartenstapel().getStapel().remove(user.getHand().get(i)); 
+            Spiel s = new Spiel();
+            spieler.setHand(getRandomCards(3, s.getKartenstapel().getStapel()));
+            for (int i = 0; i < spieler.getHand().size(); i++) {
+                s.getKartenstapel().getStapel().remove(spieler.getHand().get(i));
             }
             //s.getKartenstapel().getStapel().remove(user.getHand()); 
-            
-            
-            
-            
-            
+
+
             /////
             // todo Logik für den Start z.B. Aufsetzen der Spieler und verteilen von Karten etc. gefolgt von ersten Nachrichten an die Clients bezüglich des Spiels
         }
@@ -127,68 +117,34 @@ public class Zauberberg extends Game {
             default:
                 // Fehler!
         }
-
-        // Hier ist noch der Kram von TicTacToe
-        String[] strArray = gsonString.split(",");
-        int[] receivedArray = new int[9];
-        for (int i = 0; i < 9; i++) {
-            receivedArray[i] = Integer.parseInt(strArray[i]);
-        }
-        int[] gridStatus = getGridStatus();
-        boolean changed = false;
-        for (int i = 0; i < 9; i++) {
-            if (gridStatus[i] == 0 && receivedArray[i] != 0) {
-                gridStatus[i] = playerList.indexOf(user) + 1;
-                changed = true;
-                turnCounter++;
-                break;
-            }
-        }
-        if (changed) {
-            for (User u : playerList) {
-                if (!u.equals(playerTurn)) {
-                    playerTurn = u;
-                    break;
-                }
-            }
-            setGridStatus(gridStatus);
-            if (turnCounter == 9 || (turnCounter > 4 && gameOver())) {
-                this.gState = GameState.FINISHED;
-            }
-            sendGameDataToClients("standardEvent");
-        }
-
+        //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
     }
 
-  
 
     private ArrayList<Bewegungskarte> getRandomCards(int anzahlKarte, ArrayList<Bewegungskarte> stapel) {
-	// TODO Auto-generated method stub
-	Random r = new Random(); 
-	ArrayList<Bewegungskarte> returnList = new ArrayList<Bewegungskarte>(); 
-	
-	for(int x = 0; x<anzahlKarte; x++) {
-	    int random = r.nextInt(stapel.size()); 
-	    returnList.add(stapel.get(random)); 
-	    stapel.remove(random); 	    
-	}
-	return returnList;
+        // TODO Auto-generated method stub
+        Random r = new Random();
+        ArrayList<Bewegungskarte> returnList = new ArrayList<Bewegungskarte>();
+
+        for (int x = 0; x < anzahlKarte; x++) {
+            int random = r.nextInt(stapel.size());
+            returnList.add(stapel.get(random));
+            stapel.remove(random);
+        }
+        return returnList;
     }
 
     public void addUser(User user) {
         if (playerList.size() < 5 && !playerList.contains(user)) {
             playerList.add(user);
+            Spieler spieler = new Spieler();
+            spielerList.add(spieler);
 
             if (playerTurn == null) {
-                playerTurn = user;
+                playerTurn = spieler;
             }
             sendGameDataToClients("START");
         }
-        if (playerList.size() == 2) {
-            this.gState = GameState.RUNNING;
-            sendGameDataToClients("START");
-        }
-
     }
 
 
@@ -197,8 +153,9 @@ public class Zauberberg extends Game {
     }
 
     public void playerLeft(User user) {
+        recentInfoText = spielerList.get(playerList.indexOf(user)).getName() + " hat das Spiel verlassen";
+        spielerList.remove(playerList.indexOf(user));
         playerList.remove(user);
-        recentInfoText = user.getName() + " hat das Spiel verlassen";
         sendGameDataToClients("PUSHINFOTXT");
     }
 
@@ -206,7 +163,7 @@ public class Zauberberg extends Game {
      * sendGameDataToClients holt sich praktisch die Daten anhand des Eventnamen aus dieser Methode
      */
     public String getGameData(String eventName, User user) {
-        String gameData = "";
+        Spieler spieler = spielerList.get(playerList.indexOf(user));
         if (eventName.equals("CLOSE")) {
             return closeMsg;
         }
@@ -237,78 +194,16 @@ public class Zauberberg extends Game {
             return ""; //todo Logik
         }
         //todo hier kommen weitere events hin, falls nötig
-
-        // TICTACTOE Kram
-        int[] grid = getGridStatus();
-
-        for (int i = 0; i < 9; i++) {
-            gameData += String.valueOf(grid[i]);
-            gameData += ',';
-        }
-
-        if (playerList.size() < 2) {
-            gameData += "Warte Auf 2ten Spieler...";
-            //gameData += isHost(user);
-            return gameData;
-        }
-
-        if (this.gState == GameState.FINISHED) {
-            if (turnCounter == 9 && !gameOver()) {
-                gameData += "Unentschieden!";
-                //gameData += isHost(user);
-                return gameData;
-            }
-            if (playerTurn.equals(user)) {
-                gameData += "Du hast verloren!";
-            } else
-                gameData += "Du hast gewonnen!";
-        } else if (playerTurn.equals(user)) {
-            gameData += "Du bist dran!";
-        } else
-            gameData += playerTurn.getName() + " ist dran!";
-
-        if (playerList.indexOf(user) == 0)
-            gameData += " (x)";
-        else
-            gameData += " (o)";
-
-        //gameData += isHost(user);
-
-        return gameData;
+        return "";
     }
 
 
     public boolean isJoinable() {
-        return playerList.size() < 5;
-
+        return (playerList.size() < 5) && this.gState != GameState.RUNNING;
     }
 
     public GameState getGameState() {
         return this.gState;
-    }
-
-    public boolean gameOver() {
-        int[] grid = getGridStatus();
-        if (grid[4] != 0) {
-            if (grid[0] == grid[4] && grid[0] == grid[8])
-                return true;
-            if (grid[2] == grid[4] && grid[2] == grid[6])
-                return true;
-        }
-        for (int i = 0; i < 3; i++) {
-
-            if (grid[i * 3] != 0 && grid[1 + i * 3] != 0
-                    && grid[2 + i * 3] != 0) {
-                if (grid[0 + i * 3] == grid[1 + i * 3]
-                        && grid[0 + i * 3] == grid[2 + i * 3])
-                    return true;
-            }
-            if (grid[0 + i] != 0 && grid[3 + i] != 0 && grid[6 + i] != 0) {
-                if (grid[0 + i] == grid[3 + i] && grid[0 + i] == grid[6 + i])
-                    return true;
-            }
-        }
-        return false;
     }
 
     public String getCSS() {
@@ -322,7 +217,6 @@ public class Zauberberg extends Game {
 
     public String getJavaScript() {
         return "<script src=\"javascript/Sortable.min.js\"></script>";
-        //"<script src=\"javascript/Zauberberg.js\"></script>" // Wird durch einen Fehler nicht geladen. Javascript jetzt im HTML Code
     }
 
     public ArrayList<User> getPlayerList() {
@@ -332,11 +226,4 @@ public class Zauberberg extends Game {
     public ArrayList<User> getSpectatorList() {
         return this.spectatorList;
     }
-
-    @Override
-    public void execute(User user, String s) {
-	// TODO Auto-generated method stub
-	
-    }
-
 }

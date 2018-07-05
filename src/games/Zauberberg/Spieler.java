@@ -5,14 +5,15 @@ import java.util.Random;
 
 import userManagement.User;
 
-public class Spieler extends  User {
-    private int anzahlZaubersteine; 
-    private ArrayList<Bewegungskarte> hand;  
+public class Spieler {
+    private String name;
+    private int anzahlZaubersteine;
+    private ArrayList<Bewegungskarte> hand;
     
-    public Spieler(String name, String pw, ArrayList<Bewegungskarte> hand) {
-	super(name, pw); 
+    public Spieler() {
+        this.name = "Rot"; // todo automatisch generieren
 	this.anzahlZaubersteine = 0;
-	this.hand = hand;	
+	this.hand = new ArrayList<>();
     }
 
     public int getAnzahlZaubersteine() {
@@ -45,5 +46,8 @@ public class Spieler extends  User {
 	//Kartenstapel k = new Kartenstapel(); 
 	//k.getStapel().add(bk); 
     }
-    
+
+    public String getName() {
+        return name;
+    }
 }
