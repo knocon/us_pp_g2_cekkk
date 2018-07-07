@@ -1,19 +1,36 @@
 package games.Zauberberg;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 
 import userManagement.User;
 
 public class Spieler {
-    private String name;
+    private Name name;
     private int anzahlZaubersteine;
     private ArrayList<Bewegungskarte> hand;
+    private static int anz =0; 
 
     public Spieler() {
-        this.name = "Rot"; // todo automatisch generieren
+	switch(anz) {
+	case 0: this.name = Name.ROT;
+		break;
+	case 1: this.name = Name.BLAU; 
+		break; 
+	case 2: this.name = Name.GRÜN; 
+		break; 
+	case 3: this.name = Name.GELB; 
+		break; 
+	case 4: this.name = Name.GRAU; 
+		break; 
+	}        
         this.anzahlZaubersteine = 0;
         this.hand = new ArrayList<>();
+        this.anz++; 
+    }
+    public enum Name {
+	ROT, BLAU, GRÜN, GELB, GRAU; 
     }
 
     public int getAnzahlZaubersteine() {
@@ -48,7 +65,7 @@ public class Spieler {
         //k.getStapel().add(bk);
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 }

@@ -17,12 +17,16 @@ public class Kobold {
 	
 	//Methoden bewegen
 	//TODO Position im Grid
-	public Kobold() {
-	    //TODO
+	
+	public Kobold(int nummer, Spieler spieler) {
+	    this.layer = -1; 
+	    this.spieler = spieler; 
+	    this.nummer = nummer; 
 	}
+	
 	public enum Farbe {
 		Schwarz, Rot, Gold, Blau, Gruen
-	    }
+	}
 	
 	public void move(int value) {
 	    this.feldNr += value; 
@@ -53,6 +57,26 @@ public class Kobold {
 	}
 	public void setPos(int pos) {
 	    this.feldNr = pos;
+	}
+
+
+	public int getFeldNr() {
+	    return feldNr;
+	}
+
+
+	public void setFeldNr(int feldNr) {
+	    this.feldNr = feldNr;
+	}
+
+
+	public Spieler getSpieler() {
+	    return spieler;
+	}
+
+
+	public void setSpieler(Spieler spieler) {
+	    this.spieler = spieler;
 	}
 	
 }

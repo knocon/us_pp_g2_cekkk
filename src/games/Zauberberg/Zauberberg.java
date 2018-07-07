@@ -25,6 +25,7 @@ public class Zauberberg extends Game {
     private ArrayList<User> playerList = new ArrayList<User>();
     private ArrayList<Spieler> spielerList = new ArrayList<Spieler>();
     private ArrayList<User> spectatorList = new ArrayList<User>();
+    private ArrayList<Kobold> koboldList = new ArrayList<Kobold>(); 
     private String recentInfoText = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
 
@@ -70,14 +71,15 @@ public class Zauberberg extends Game {
             sendGameDataToClients("STARTGAME");
             this.gState = GameState.RUNNING;
             //////
+            //Karten vom Stapel auf die Hand des Spielers
             Spiel s = new Spiel();
             spieler.setHand(getRandomCards(3, s.getKartenstapel().getStapel()));
-            for (int i = 0; i < spieler.getHand().size(); i++) {
-                s.getKartenstapel().getStapel().remove(spieler.getHand().get(i));
+            s.getKartenstapel().getStapel().remove(spieler.getHand()); 
+            
+            //zum Teste der Farbe und Kobolde
+            for(int i = 0; i<koboldList.size(); i++) {
+        	System.out.println(koboldList.get(i).getNummer() + "\n"+ koboldList.get(i).getSpieler().getName());
             }
-            //s.getKartenstapel().getStapel().remove(user.getHand()); 
-
-
             /////
             // todo Logik für den Start z.B. Aufsetzen der Spieler und verteilen von Karten etc. gefolgt von ersten Nachrichten an die Clients bezüglich des Spiels
         }
@@ -120,26 +122,30 @@ public class Zauberberg extends Game {
         //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
     }
 
-
-    private ArrayList<Bewegungskarte> getRandomCards(int anzahlKarte, ArrayList<Bewegungskarte> stapel) {
-        // TODO Auto-generated method stub
+    
+    private ArrayList<Bewegungskarte> getRandomCards(int anzahlKarten, ArrayList<Bewegungskarte> stapel) {
         Random r = new Random();
         ArrayList<Bewegungskarte> returnList = new ArrayList<Bewegungskarte>();
 
-        for (int x = 0; x < anzahlKarte; x++) {
+        for (int x = 0; x < anzahlKarten; x++) {
             int random = r.nextInt(stapel.size());
             returnList.add(stapel.get(random));
             stapel.remove(random);
         }
         return returnList;
     }
+    	
 
     public void addUser(User user) {
         if (playerList.size() < 5 && !playerList.contains(user)) {
             playerList.add(user);
             Spieler spieler = new Spieler();
-            spielerList.add(spieler);
-
+            spielerList.add(spieler);        
+            
+            for(int i = 1; i<=5;i++) {
+        	koboldList.add(new Kobold(i,spieler)); 
+            }
+            
             if (playerTurn == null) {
                 playerTurn = spieler;
             }
