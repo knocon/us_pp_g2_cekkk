@@ -99,8 +99,77 @@ public class Zauberberg extends Game {
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
                 //System.out.println(dataMap.get("karte1Typ")); // Beispiel: gibt den Typ der ersten Karte aus
-        	ArrayList<Bewegungskarte> checkList = new ArrayList<Bewegungskarte>(); 
-                checkList = spieler.getHand();
+        	//ArrayList<Bewegungskarte> checkList = new ArrayList<Bewegungskarte>(); 
+                //checkList = spieler.getHand();
+        	int sizeOfHand = spieler.getHand().size(); 
+                switch(dataMap.get("karte1Typ")) {
+                    case "Normal": 
+                        for(int i =0; i<spieler.getHand().size(); i++) {
+                    		if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
+                    		    s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+                    		    spieler.getHand().remove(i); 
+                    		    break; 
+                    		}
+                        }
+                        break; 
+                    case "Joker": 
+                        for(int i =0; i<spieler.getHand().size(); i++) {
+                    		if(spieler.getHand().get(i).getJoker() == true) {
+                    		    s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+                    		    spieler.getHand().remove(i); 
+                    		    break; 
+                    		}
+                        }
+                        break; 
+                    default: //null nicht möglich bei erster karte 
+                }
+                
+                switch(dataMap.get("karte2Typ")) {
+                    case "Normal": 
+                        for(int i =0; i<spieler.getHand().size(); i++) {
+                    		if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
+                    		    s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+                    		    spieler.getHand().remove(i); 
+                    		    break; 
+                    		}
+                        }
+                        break; 
+                    case "Joker": 
+                        for(int i =0; i<spieler.getHand().size(); i++) {
+                    		if(spieler.getHand().get(i).getJoker() == true) {
+                    		    s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+                    		    spieler.getHand().remove(i); 
+                    		    break; 
+                    		}
+                        }
+                        break; 
+                    default: //null nicht möglich bei zweiter karte 
+                }
+                switch(dataMap.get("karte3Typ")) {
+                    case "Normal": 
+                        for(int i =0; i<spieler.getHand().size(); i++) {
+                    		if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
+                    		    s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+                    		    spieler.getHand().remove(i); 
+                    		    break; 
+                    		}
+                        }
+                        break; 
+                    case "Joker": 
+                        for(int i =0; i<spieler.getHand().size(); i++) {
+                    		if(spieler.getHand().get(i).getJoker() == true) {
+                    		    s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+                    		    spieler.getHand().remove(i); 
+                    		    break; 
+                    		}
+                        }
+                        break;                     
+                }
+                //neue Karten ziehen
+                spieler.getHand().addAll(getRandomCards(sizeOfHand-spieler.getHand().size(), s.getKartenstapel().getStapel()));
+                break;
+        
+                /*
                 for(int i = 0; i<checkList.size(); i++) {
                     
                     if((dataMap.get("karte1Typ")=="Normal" && checkList.get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) || 
@@ -123,11 +192,111 @@ public class Zauberberg extends Game {
                 }
                 
                 break;
-            case "KARTENTAUSCHEN":
-        	ArrayList<Bewegungskarte> handList = new ArrayList<Bewegungskarte>(); 
-        	handList = spieler.getHand(); 
-               
-                
+                */
+                 
+            case "KARTENTAUSCHEN":    
+        	int sizeOfHand2 = spieler.getHand().size(); 
+        	if(dataMap.get("karte1")!="Null") {
+        	    if(dataMap.get("karte1")!= "Joker") {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1"))) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break; 
+        		    }        		    
+        		}
+        	    } else {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getJoker() == true) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break;
+        		    }        		    
+        		}
+        	    }        	     
+        	}
+        	//karte2
+        	if(dataMap.get("karte2")!="Null") {
+        	    if(dataMap.get("karte2")!= "Joker") {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2"))) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break; 
+        		    }        		    
+        		}
+        	    } else {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getJoker() == true) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break;
+        		    }        		    
+        		}
+        	    }        	     
+        	}
+        	//karte 3 
+        	if(dataMap.get("karte3")!="Null") {
+        	    if(dataMap.get("karte3")!= "Joker") {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3"))) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break; 
+        		    }        		    
+        		}
+        	    } else {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getJoker() == true) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break;
+        		    }        		    
+        		}
+        	    }        	     
+        	}
+        	//karte 4
+        	if(dataMap.get("karte4")!="Null") {
+        	    if(dataMap.get("karte4")!= "Joker") {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte4"))) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break; 
+        		    }        		    
+        		}
+        	    } else {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getJoker() == true) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break;
+        		    }        		    
+        		}
+        	    }        	     
+        	}
+        	//karte 5
+        	if(dataMap.get("karte5")!="Null") {
+        	    if(dataMap.get("karte5")!= "Joker") {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte5"))) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break; 
+        		    }        		    
+        		}
+        	    } else {
+        		for(int i = 0; i<spieler.getHand().size();i++) {
+        		    if(spieler.getHand().get(i).getJoker() == true) {
+        			s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+        			spieler.getHand().remove(i); 
+        			break;
+        		    }        		    
+        		}
+        	    }        	     
+        	}
+        	//neue Karten ziehen
+                spieler.getHand().addAll(getRandomCards(sizeOfHand2-spieler.getHand().size(), s.getKartenstapel().getStapel())); 
                 break;
             case "EREIGNISANTWORT":
                 switch (dataMap.get("Ereignis")) {
