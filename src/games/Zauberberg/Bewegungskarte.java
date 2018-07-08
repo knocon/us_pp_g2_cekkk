@@ -22,7 +22,7 @@ public class Bewegungskarte {
 				
 				
 			}else {
-				// Hier der Teil wo nicht. 
+				 
 			}
 			
 			
