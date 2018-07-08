@@ -50,6 +50,7 @@ public class Zauberberg extends Game {
     @Override
     public void execute(User user, String gsonString) {
         Spieler spieler = spielerList.get(playerList.indexOf(user));
+        Spiel s = new Spiel();
         //Vorverarbeitung
         System.out.println("Empfangen: " + gsonString);
         gsonString = gsonString.replaceAll("§", "{");
@@ -72,7 +73,7 @@ public class Zauberberg extends Game {
             this.gState = GameState.RUNNING;
             //////
             //Karten vom Stapel auf die Hand des Spielers
-            Spiel s = new Spiel();
+            
             spieler.setHand(getRandomCards(3, s.getKartenstapel().getStapel()));
             s.getKartenstapel().getStapel().remove(spieler.getHand()); 
             
@@ -97,8 +98,27 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
-                System.out.println(dataMap.get("karte1Typ")); // Beispiel: gibt den Typ der ersten Karte aus
-                //todo Logik
+                //System.out.println(dataMap.get("karte1Typ")); // Beispiel: gibt den Typ der ersten Karte aus
+        	ArrayList<Bewegungskarte> checkList = new ArrayList<Bewegungskarte>(); 
+                checkList = spieler.getHand();
+                for(int i = 0; i<checkList.size(); i++) {
+                    
+                    if((dataMap.get("karte1Typ")=="Normal" && checkList.get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) || 
+                    		(dataMap.get("karte1Typ")=="Joker" && checkList.get(i).getJoker() == true)) {
+                	s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+                	spieler.getHand().remove(i);                 	
+                    } else if ((dataMap.get("karte2Typ")=="Normal" && checkList.get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) ||
+                	    	(dataMap.get("karte2Typ")=="Joker" && checkList.get(i).getJoker() == true)) {
+                	s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+            		spieler.getHand().remove(i);                 	
+                    } else if((dataMap.get("karte3Typ")=="Normal" && checkList.get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) || 
+                        	(dataMap.get("karte3Typ")=="Joker" && checkList.get(i).getJoker() == true)) {
+                	s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
+            		spieler.getHand().remove(i);
+                    }
+                     
+                }
+                
                 break;
             case "KARTENTAUSCHEN":
                 //todo Logik
