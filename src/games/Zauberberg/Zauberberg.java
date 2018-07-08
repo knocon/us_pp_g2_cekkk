@@ -106,22 +106,28 @@ public class Zauberberg extends Game {
                     if((dataMap.get("karte1Typ")=="Normal" && checkList.get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) || 
                     		(dataMap.get("karte1Typ")=="Joker" && checkList.get(i).getJoker() == true)) {
                 	s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
-                	spieler.getHand().remove(i);                 	
+                	spieler.getHand().remove(i);       
+                	spieler.getHand().addAll(getRandomCards(1,s.getKartenstapel().getStapel())); 
                     } else if ((dataMap.get("karte2Typ")=="Normal" && checkList.get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) ||
                 	    	(dataMap.get("karte2Typ")=="Joker" && checkList.get(i).getJoker() == true)) {
                 	s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
-            		spieler.getHand().remove(i);                 	
+            		spieler.getHand().remove(i);
+            		spieler.getHand().addAll(getRandomCards(1,s.getKartenstapel().getStapel())); 
                     } else if((dataMap.get("karte3Typ")=="Normal" && checkList.get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) || 
                         	(dataMap.get("karte3Typ")=="Joker" && checkList.get(i).getJoker() == true)) {
                 	s.getKartenstapel().getStapel().add(spieler.getHand().get(i)); 
             		spieler.getHand().remove(i);
+            		spieler.getHand().addAll(getRandomCards(1,s.getKartenstapel().getStapel())); 
                     }
                      
                 }
                 
                 break;
             case "KARTENTAUSCHEN":
-                //todo Logik
+        	ArrayList<Bewegungskarte> handList = new ArrayList<Bewegungskarte>(); 
+        	handList = spieler.getHand(); 
+               
+                
                 break;
             case "EREIGNISANTWORT":
                 switch (dataMap.get("Ereignis")) {
