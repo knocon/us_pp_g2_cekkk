@@ -1,7 +1,38 @@
 package games.Zauberberg;
 
+import java.util.Iterator;
+
 public class Bewegungskarte {
 	private int bewegungsZahl;
+	
+	
+	
+	public static void checkJoker(Spieler s, int zahl) {
+		Iterator<Bewegungskarte> it = s.getHand().iterator(); 
+		
+		while (it.hasNext()) {
+			
+			
+			Bewegungskarte tmp = it.next(); 
+			
+			if(tmp.joker == true) {
+				
+				// Hier der Teil mit der Zahl. 
+				
+				
+				
+			}else {
+				// Hier der Teil wo nicht. 
+			}
+			
+			
+			
+		}
+		
+		
+		
+	}
+	
 	//If Joker == true, dann kann Zahl selbst gewaehlt werden
 	private Boolean joker;
 	
