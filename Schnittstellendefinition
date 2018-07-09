@@ -29,6 +29,9 @@ Java -> JavaScript:
 
      EREIGNISKARTEFLIP: //todo
 
+     FELDERANBIETEN: 2Dimensionales Array mit Koordinaten
+        [[layer, position][layer, position][layer, position][layer, position]...]
+
 
 JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
      KARTENLEGEN Bsp:
@@ -49,13 +52,17 @@ JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist im
           "karte5": "Null"}
 
      EREIGNISANTWORT: JSON Map<String, String> Im folgenden alle möglichen Zusammensetzungen der Map:
-         {"Eventname": "EREIGNISANTWORT", "Ereignis": "Kristallkugel", todo  @Kevin Nocon schnittstelle muss definiert werden}
          {"Eventname": "EREIGNISANTWORT", "Ereignis": "Fliegende Karte",
           "karte1Typ": "Null",
           "karte2Typ": "Null",        (siehe Kartenlegen)
           "karte1Wert": "Null",
           "karte2Wert": "Null"}
          {"Eventname": "EREIGNISANTWORT", "Ereignis": "Rabe", "Spieler": "Rot"} Farbe das Spielers, auf den der Rabe angewendet werden soll.
+
+     FELDAUSWAEHLEN: JSON Map<String, String>
+         {"Eventname": "FELDAUSWAEHLEN",
+          "layer": "2"],
+          "position": "30"]}
 
 
 

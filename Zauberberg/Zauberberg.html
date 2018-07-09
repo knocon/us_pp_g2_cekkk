@@ -775,6 +775,8 @@
         var kartencontainer = document.getElementById("karten-Legen");
         //console.log(kartencontainer); // LOG
         for (var i = 0; i < kartencontainer.childElementCount; i++) {
+            //todo catch mindestens 2 Karten
+            //todo push info text
             if (kartencontainer.children[i].classList.contains("jokerkarte")) { // Ist ein Joker
                 output["karte" + (i + 1) + "Typ"] = "Joker";
                 output["karte" + (i + 1) + "Wert"] = kartencontainer.children[i].getAttribute("data-jokervalue");
@@ -929,11 +931,12 @@
                         " onclick=\"jokerSet(" + jokercount + ", " + i + ")\" style=\"opacity: " + (i === 1 ? "1" : "0.2") + ";\"/>";
                 }
                 jokerkarte += "</div>";
-                kartencontainer.append(jokerkarte);
+                kartencontainer.insertAdjacentHTML("beforeend", jokerkarte);
                 jokercount++;
             } else {
-                kartencontainer.append("<img src='/Zauberberg/images/Zahlenkarte" + zahl + ".png' class='karte' alt='" + zahl + "'/>");// Der Zahlenwert wird im "alt" gespeichert
+                kartencontainer.insertAdjacentHTML("beforeend", "<img src='/Zauberberg/images/Zahlenkarte" + kartenWert + ".png' class='karte' alt='" + kartenWert + "'/>");// Der Zahlenwert wird im "alt" gespeichert
             }
+            //todo sortable und einfügen klappt nicht
         });
     });
 
