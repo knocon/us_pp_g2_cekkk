@@ -18,11 +18,11 @@ public class Spieler {
 		break;
 	case 1: this.name = Name.BLAU; 
 		break; 
-	case 2: this.name = Name.GRÜN; 
+	case 2: this.name = Name.GRUEN; 
 		break; 
 	case 3: this.name = Name.GELB; 
 		break; 
-	case 4: this.name = Name.GRAU; 
+	case 4: this.name = Name.PINK; 
 		break; 
 	}        
         this.anzahlZaubersteine = 0;
@@ -30,7 +30,7 @@ public class Spieler {
         this.anz++; 
     }
     public enum Name {
-	ROT, BLAU, GRÜN, GELB, GRAU; 
+	ROT, BLAU, GRUEN, GELB, PINK; 
     }
 
     public int getAnzahlZaubersteine() {

@@ -2,7 +2,7 @@ package games.Zauberberg;
 
 import java.util.ArrayList;
 
-import games.Zauberberg.Kobold.Farbe;
+//import games.Zauberberg.Kobold.Farbe;
 
 public class Zauberstein extends Feld {
     		

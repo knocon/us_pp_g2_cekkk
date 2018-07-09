@@ -2,10 +2,11 @@ package games.Zauberberg;
 
 public class Kobold {
 	private int nummer;
-	private Farbe farbe;
+	//private Farbe farbe;
 	//private int [] position = new int [2];  //[layer, position]
 	private int layer; 
 	private int feldNr; 
+	private int dorf; 
 	private Spieler spieler; 
 	
 	//TODO Ereignisplaettchen von Feld erben Lassen
@@ -19,14 +20,12 @@ public class Kobold {
 	//TODO Position im Grid
 	
 	public Kobold(int nummer, Spieler spieler) {
+	    dorf = (int)(Math.random() * 4+1); //generate random dorf between in a range 1..4
 	    this.layer = -1; 
 	    this.spieler = spieler; 
 	    this.nummer = nummer; 
 	}
 	
-	public enum Farbe {
-		Schwarz, Rot, Gold, Blau, Gruen
-	}
 	
 	public void move(int value) {
 	    this.feldNr += value; 
@@ -52,12 +51,12 @@ public class Kobold {
 	public void setLayer(int layer) {
 	    this.layer = layer;
 	}
-	public int getPos() {
+	/*public int getPos() {
 	    return feldNr;
 	}
 	public void setPos(int pos) {
 	    this.feldNr = pos;
-	}
+	}*/
 
 
 	public int getFeldNr() {
@@ -77,6 +76,14 @@ public class Kobold {
 
 	public void setSpieler(Spieler spieler) {
 	    this.spieler = spieler;
+	}
+	public int getDorf() {
+	    return dorf;
+	}
+
+
+	public void setDorf(int dorf) {
+	    this.dorf = dorf;
 	}
 	
 }

@@ -14,75 +14,75 @@ public static void aufsteigen (Kobold kobold) {
 	switch(kobold.getLayer()) {
 	
 	case 0: 
-	    if(kobold.getPos()>0 && kobold.getPos()<9) {
+	    if(kobold.getFeldNr()>0 && kobold.getFeldNr()<9) {
 		kobold.setLayer(1);
-		kobold.setPos(kobold.getPos()-1);
+		kobold.setFeldNr(kobold.getFeldNr()-1);
 	    }
-	    if(kobold.getPos()>9 && kobold.getPos()<18) {
+	    if(kobold.getFeldNr()>9 && kobold.getFeldNr()<18) {
 		kobold.setLayer(1);
-		kobold.setPos(kobold.getPos()-3);
+		kobold.setFeldNr(kobold.getFeldNr()-3);
 	    }
-	    if(kobold.getPos()>18 && kobold.getPos()<27) {
+	    if(kobold.getFeldNr()>18 && kobold.getFeldNr()<27) {
 		kobold.setLayer(1);
-		kobold.setPos(kobold.getPos()-5);
+		kobold.setFeldNr(kobold.getFeldNr()-5);
 	    }
-	    if(kobold.getPos()>27 && kobold.getPos()<36) {
+	    if(kobold.getFeldNr()>27 && kobold.getFeldNr()<36) {
 		kobold.setLayer(1);
-		kobold.setPos(kobold.getPos()-7);
+		kobold.setFeldNr(kobold.getFeldNr()-7);
 	    }
 	    break;
 	case 1: 
-	    if(kobold.getPos()>0 && kobold.getPos()<7) {
+	    if(kobold.getFeldNr()>0 && kobold.getFeldNr()<7) {
 		kobold.setLayer(2);
-		kobold.setPos(kobold.getPos()-1);
+		kobold.setFeldNr(kobold.getFeldNr()-1);
 	    }
-	    if(kobold.getPos()>7 && kobold.getPos()<14) {
+	    if(kobold.getFeldNr()>7 && kobold.getFeldNr()<14) {
 		kobold.setLayer(2);
-		kobold.setPos(kobold.getPos()-3);
+		kobold.setFeldNr(kobold.getFeldNr()-3);
 	    }
-	    if(kobold.getPos()>14 && kobold.getPos()<21) {
+	    if(kobold.getFeldNr()>14 && kobold.getFeldNr()<21) {
 		kobold.setLayer(2);
-		kobold.setPos(kobold.getPos()-5);
+		kobold.setFeldNr(kobold.getFeldNr()-5);
 	    }
-	    if(kobold.getPos()>21 && kobold.getPos()<28) {
+	    if(kobold.getFeldNr()>21 && kobold.getFeldNr()<28) {
 		kobold.setLayer(2);
-		kobold.setPos(kobold.getPos()-7);
+		kobold.setFeldNr(kobold.getFeldNr()-7);
 	    }
 	    break;
 	case 2: 
-	    if(kobold.getPos()>0 && kobold.getPos()<5) {
+	    if(kobold.getFeldNr()>0 && kobold.getFeldNr()<5) {
 		kobold.setLayer(3);
-		kobold.setPos(kobold.getPos()-1);
+		kobold.setFeldNr(kobold.getFeldNr()-1);
 	    }
-	    if(kobold.getPos()>5 && kobold.getPos()<10) {
+	    if(kobold.getFeldNr()>5 && kobold.getFeldNr()<10) {
 		kobold.setLayer(3);
-		kobold.setPos(kobold.getPos()-3);
+		kobold.setFeldNr(kobold.getFeldNr()-3);
 	    }
-	    if(kobold.getPos()>10 && kobold.getPos()<15) {
+	    if(kobold.getFeldNr()>10 && kobold.getFeldNr()<15) {
 		kobold.setLayer(3);
-		kobold.setPos(kobold.getPos()-5);
+		kobold.setFeldNr(kobold.getFeldNr()-5);
 	    }
-	    if(kobold.getPos()>15 && kobold.getPos()<20) {
+	    if(kobold.getFeldNr()>15 && kobold.getFeldNr()<20) {
 		kobold.setLayer(3);
-		kobold.setPos(kobold.getPos()-7);
+		kobold.setFeldNr(kobold.getFeldNr()-7);
 	    }
 	    break;
 	case 3: 
-	    if(kobold.getPos()>0 && kobold.getPos()<3) {
+	    if(kobold.getFeldNr()>0 && kobold.getFeldNr()<3) {
 		kobold.setLayer(4);
-		kobold.setPos(kobold.getPos()-1);
+		kobold.setFeldNr(kobold.getFeldNr()-1);
 	    }
-	    if(kobold.getPos()>3 && kobold.getPos()<6) {
+	    if(kobold.getFeldNr()>3 && kobold.getFeldNr()<6) {
 		kobold.setLayer(4);
-		kobold.setPos(kobold.getPos()-3);
+		kobold.setFeldNr(kobold.getFeldNr()-3);
 	    }
-	    if(kobold.getPos()>6 && kobold.getPos()<9) {
+	    if(kobold.getFeldNr()>6 && kobold.getFeldNr()<9) {
 		kobold.setLayer(4);
-		kobold.setPos(kobold.getPos()-5);
+		kobold.setFeldNr(kobold.getFeldNr()-5);
 	    }
-	    if(kobold.getPos()>9 && kobold.getPos()<12) {
+	    if(kobold.getFeldNr()>9 && kobold.getFeldNr()<12) {
 		kobold.setLayer(4);
-		kobold.setPos(kobold.getPos()-7); 
+		kobold.setFeldNr(kobold.getFeldNr()-7); 
 	    }
 	    break;
 	
