@@ -2,6 +2,13 @@ package games.Zauberberg;
 
 import gameClasses.Game;
 import gameClasses.GameState;
+import games.Ereignisplaettchen.Fallgrube;
+import games.Ereignisplaettchen.FliegendeKarte;
+import games.Ereignisplaettchen.Geheimgang;
+import games.Ereignisplaettchen.Kristallkugel;
+import games.Ereignisplaettchen.Rabe;
+import games.Ereignisplaettchen.Schreckgespenst;
+import games.Ereignisplaettchen.Unwetter;
 import global.FileHelper;
 
 import java.io.IOException;
@@ -30,9 +37,63 @@ public class Zauberberg extends Game {
     private String felderWaehlen = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
 
-
+    public void EreignisseErstellen() {
+    	
+    	Fallgrube fallgrube0 = new Fallgrube(2, 19, koboldList);
+    	Fallgrube fallgrube1 = new Fallgrube(3, 7, koboldList);
+    	spiel.getFallgrube()[0] = fallgrube0;
+    	spiel.getFallgrube()[1] = fallgrube1;
+    	
+    	
+    	FliegendeKarte fliegendeKarte0 = new FliegendeKarte(2, 8, koboldList);
+    	FliegendeKarte fliegendeKarte1 = new FliegendeKarte(2, 14, koboldList);
+    	spiel.getFliegendeKarte()[0] = fliegendeKarte0;
+    	spiel.getFliegendeKarte()[1] = fliegendeKarte1;
+    	
+    	
+    	Geheimgang geheimgang0 = new Geheimgang(0, 15, koboldList);
+    	Geheimgang geheimgang1 = new Geheimgang(1, 3, koboldList);
+    	Geheimgang geheimgang2 = new Geheimgang(1, 22, koboldList);
+    	Geheimgang geheimgang3 = new Geheimgang(3, 10, koboldList);
+    	spiel.getGeheimgang()[0] = geheimgang0;
+    	spiel.getGeheimgang()[1] = geheimgang1;
+    	spiel.getGeheimgang()[2] = geheimgang2;
+    	spiel.getGeheimgang()[3] = geheimgang3;
+    	
+    	
+    	Kristallkugel kristallkugel0 = new Kristallkugel(0, 7, koboldList);
+    	Kristallkugel kristallkugel1 = new Kristallkugel(0, 25, koboldList);
+    	Kristallkugel kristallkugel2 = new Kristallkugel(1, 10, koboldList);
+    	spiel.getKristallkugel()[0] = kristallkugel0;
+    	spiel.getKristallkugel()[1] = kristallkugel1;
+    	spiel.getKristallkugel()[2] = kristallkugel2;
+    	
+    	
+    	Rabe rabe0 = new Rabe(0, 30, koboldList);
+    	Rabe rabe1 = new Rabe(1, 17, koboldList);
+    	Rabe rabe2 = new Rabe(2, 4, koboldList);
+    	spiel.getRabe()[0] = rabe0;
+    	spiel.getRabe()[1] = rabe1;
+    	spiel.getRabe()[2] = rabe2;
+    	
+    	Schreckgespenst schreckgespenst0 = new Schreckgespenst(0, 1, koboldList);
+    	Schreckgespenst schreckgespenst1 = new Schreckgespenst(1, 4, koboldList);
+    	Schreckgespenst schreckgespenst2 = new Schreckgespenst(3, 1, koboldList);
+    	spiel.getSchreckgespenst()[0] = schreckgespenst0;
+    	spiel.getSchreckgespenst()[1] = schreckgespenst1;
+    	spiel.getSchreckgespenst()[2] = schreckgespenst2;
+    	
+    	Unwetter unwetter0 = new Unwetter(0, 12, koboldList);
+    	Unwetter unwetter1 = new Unwetter(0, 19, koboldList);
+    	Unwetter unwetter2 = new Unwetter(0, 32, koboldList);
+    	spiel.getUnwetter()[0] = unwetter0;
+    	spiel.getUnwetter()[1] = unwetter1;
+    	spiel.getUnwetter()[2] = unwetter2;
+    }
+    	
     public int getMaxPlayerAmount() {
         return 5;
+        
     }
 
     public int getCurrentPlayerAmount() {
