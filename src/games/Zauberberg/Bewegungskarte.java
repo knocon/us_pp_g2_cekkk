@@ -4,37 +4,26 @@ import java.util.Iterator;
 
 public class Bewegungskarte {
 	private int bewegungsZahl;
-	
+	private Boolean joker;
 	
 	
 	public static void checkJoker(Spieler s, int zahl) {
 		Iterator<Bewegungskarte> it = s.getHand().iterator(); 
 		
 		while (it.hasNext()) {
-			
-			
 			Bewegungskarte tmp = it.next(); 
-			
 			if(tmp.joker == true) {
 				
-				// Hier der Teil mit der Zahl. 
+			// Hier der Teil mit der Zahl. 
 				
-				
-				
+				it.next();
 			}else {
-				 
+				it.next(); 
 			}
-			
-			
-			
+	
 		}
 		
-		
-		
 	}
-	
-	//If Joker == true, dann kann Zahl selbst gewaehlt werden
-	private Boolean joker;
 	
 	public Bewegungskarte(int value, boolean joker) {
 	    this.bewegungsZahl = value; 
