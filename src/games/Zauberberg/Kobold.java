@@ -6,6 +6,7 @@ public class Kobold {
 	//private int [] position = new int [2];  //[layer, position]
 	private int layer; 
 	private int feldNr; 
+	private int dorf; 
 	private Spieler spieler; 
 	
 	//TODO Ereignisplaettchen von Feld erben Lassen
@@ -18,11 +19,13 @@ public class Kobold {
 	//Methoden bewegen
 	//TODO Position im Grid
 	public Kobold(int nummer, Spieler spieler) {
+	    dorf = (int)(Math.random() * 4+1); //generate random dorf between in a range 1..4
 	    this.layer = -1; 
 	    this.spieler = spieler; 
 	    this.nummer = nummer; 
 	}
 	
+
 	
 	public enum Farbe {
 		Schwarz, Rot, Gold, Blau, Gruen
@@ -80,6 +83,7 @@ public class Kobold {
 	}
 
 
+
 	public Farbe getFarbe() {
 		return farbe;
 	}
@@ -87,6 +91,16 @@ public class Kobold {
 
 	public void setFarbe(Farbe farbe) {
 		this.farbe = farbe;
+	}
+	
+	public int getDorf() {
+	    return dorf;
+	}
+
+
+	public void setDorf(int dorf) {
+	    this.dorf = dorf;
+
 	}
 	
 }
