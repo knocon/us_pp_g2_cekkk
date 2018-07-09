@@ -20,14 +20,7 @@ public class Feld {
     
     //TODO Ereignisplättchen 
     public void ereignis() {
-    	//TODO Alle Ereignissplaettchen nach Erstellung in Array packen, Array uebergeben und Random 1 Ereignis herausnehmen
-   
-    	//Implementierungsfrage:
-    	//Eigene Klasse Ereignisplaettchenstapel nach Vorbild Kartenstapel?
-    	//Sollen Ereignisplaettchen bei Start verteilt werden oder wird quasi ein Ereignis erst beim Ausloesen 
-    	//(Kobold trifft auf Feld mit ereignisplaettchen==true)
-    	// ''herausgenommen'' und an das Feld gebunden ? 
-
+  
     }
     
     
