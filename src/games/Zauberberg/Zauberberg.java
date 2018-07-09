@@ -231,17 +231,13 @@ public class Zauberberg extends Game {
         if (gsonString.equals("START")) { // Start Button wurde vom Host gedrÃ¼ckt
             this.gState = GameState.RUNNING;
             //////
+            
             //Karten vom Stapel auf die Hand des Spielers
-
             spieler.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
             spiel.getKartenstapel().getStapel().remove(spieler.getHand());
 
             sendGameDataToClients("STARTGAME");
 
-            //zum Teste der Farbe und Kobolde
-            for (int i = 0; i < koboldList.size(); i++) {
-                System.out.println(koboldList.get(i).getNummer() + "\n" + koboldList.get(i).getSpieler().getName());
-            }
             /////
             // todo Logik fÃ¼r den Start z.B. Aufsetzen der Spieler und verteilen von Karten etc. gefolgt von ersten Nachrichten an die Clients bezÃ¼glich des Spiels
             sendGameDataToClients("UPDATEKARTEN");
@@ -331,14 +327,49 @@ public class Zauberberg extends Game {
 
                 //todo Kobold ist karte 1
                 //todo für jede weitere Karte muss einmal KARTENANBIETEN gesendet werden
-
-                ArrayList<ArrayList<Integer>> array = new ArrayList<>();
-                //todo Array füllen
-                this.felderWaehlen = gson.toJson(array, ArrayList.class);
-                sendGameDataToClients("KARTENANBIETEN");
+                
+                ArrayList<ArrayList<Integer>> arrayFelderAnbieten = new ArrayList<ArrayList<Integer>>();
+                ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>(); 
+                //hier werden die möglichen Fedlder berechnet, Karte1 bestimmt Kobold, Karte2&3 schritte vor und zurück
+                for(Kobold kobold: koboldList) {
+                    if(kobold.getSpieler() == spieler && kobold.getNummer() == Integer.parseInt(dataMap.get("karte1Wert"))) {
+                	if(kobold.getLayer()==-1) {
+                	    //Schritt raus aus dem Dorf 
+                	    if(kobold.getDorf()==1) {
+                		arrayLayerFeld.add(1); //layer 
+                		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
+                		arrayLayerFeld.add(1); //layer 
+                		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
+                		//arrayLayerFeld.add(1); 
+                		//arrayLayerFeld.add(Integer.parseInt(dataMap.get("karte2Wert"))-1 % 36); 
+                		//Fragen wie in dieser Form < <layer, feld>,<layer, feld>,<layer, feld>,....> glaub nicht möglich ohne vorher anzahl von inneren arrays zu kennen
+                	    } else if (kobold.getDorf()==2) {
+                		arrayLayerFeld.add(1); //layer 
+                		arrayLayerFeld.add((9+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
+                		arrayLayerFeld.add(1); //layer 
+                		arrayLayerFeld.add((9-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
+                	    } else if (kobold.getDorf() ==3) {
+                		arrayLayerFeld.add(1); //layer 
+                		arrayLayerFeld.add((18+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
+                		arrayLayerFeld.add(1); //layer 
+                		arrayLayerFeld.add((18-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
+                	    } else if(kobold.getDorf()==4) {
+                	    	arrayLayerFeld.add(1); //layer 
+            			arrayLayerFeld.add((27+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
+            			arrayLayerFeld.add(1); //layer 
+            			arrayLayerFeld.add((27-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
+                	    }                	    
+                	} else if(kobold.getLayer()>=0) { //TODO für jeden layer gibt es andere berechnung zb MOD 36 (layer 0), mod 28 (layer 1), mod 20 (layer2), mod 12 (layer 3)
+                	  //selbe prinzip wie oben, array abwechselnd mit layer und feldnr füllen für vorwärts schritte und rückwärts schritte
+                	}
+                    }                    
+                }
+                this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
+                sendGameDataToClients("KARTENANBIETEN"); //FELDERANBIETEN IST HIER GLAUB GEMEINT 
 
                 //neue Karten ziehen
                 spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
+                sendGameDataToUser(user,"UPDATEKARTEN");
                 break;
 
             case "KARTENTAUSCHEN":
@@ -442,7 +473,7 @@ public class Zauberberg extends Game {
                         }
                     }
                 }
-                //neue Karten ziehen
+                //neue Karten ziehen bei KARTENTAUSCH
                 spieler.getHand().addAll(getRandomCards(sizeOfHand2 - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user, "UPDATEKARTEN");
                 break;
@@ -452,7 +483,8 @@ public class Zauberberg extends Game {
                         //todo Logik
                         break;
                     case "Rabe":
-                        //todo Logik
+                        //ausgewählter Spieler.setAnzahlZaubersteine(ausgewählterSpieler.getAnzahlZaubersteine()-1);  
+                	
                         break;
                 }
                 break;
