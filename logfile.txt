@@ -60,3 +60,4 @@
 [2018-07-09 15:35:35.227] [IP: /192.168.43.77] [LOGIN] Logging in user "1" succeeded
 [2018-07-09 15:38:07.379] [IP: /192.168.43.77] [LOGIN] Logging in user "1" succeeded
 [2018-07-09 15:38:49.14] [IP: /192.168.43.77] [LOGIN] Logging in user "4" succeeded
+[2018-07-09 20:05:07.542] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded

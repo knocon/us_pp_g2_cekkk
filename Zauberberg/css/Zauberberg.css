@@ -42,6 +42,11 @@ body {
     height: 800px;
 }
 
+#villages {
+	width: 100px;
+	height: 800px;
+}
+
 /* END GRID */
 
 /* START AKTIONSFLÄCHE */
