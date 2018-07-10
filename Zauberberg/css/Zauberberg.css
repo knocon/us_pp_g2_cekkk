@@ -19,6 +19,11 @@ body {
     margin: 10px;
 }
 
+#villages{
+    display: inline-block;
+    vertical-align: top;
+}
+
 #overlayMsg {
     position: absolute;
     z-index: 999999999;
