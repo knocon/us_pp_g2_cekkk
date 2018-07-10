@@ -27,8 +27,6 @@ Java -> JavaScript:
              bevor das Ereignis eintrat. Natürlich auch inklusive der neuen Karte)
         {"Ereignis": "Rabe"}
 
-     EREIGNISKARTEFLIP: //todo
-
      FELDERANBIETEN: 2Dimensionales Array mit Koordinaten
         [[layer, position][layer, position][layer, position][layer, position]...]
 
@@ -61,6 +59,11 @@ JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist im
 
      FELDAUSWAEHLEN: JSON Map<String, String>
          {"Eventname": "FELDAUSWAEHLEN",
+          "layer": "2"],
+          "position": "30"]}
+
+     EREIGNISKARTEFLIP: JSON Map<String, String>
+         {"Eventname": "EREIGNISKARTEFLIP",
           "layer": "2"],
           "position": "30"]}
 
