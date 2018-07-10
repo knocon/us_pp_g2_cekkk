@@ -27,8 +27,8 @@ Java -> JavaScript:
              bevor das Ereignis eintrat. Natürlich auch inklusive der neuen Karte)
         {"Ereignis": "Rabe"}
 
-     FELDERANBIETEN: 2Dimensionales Array mit Koordinaten
-        [[layer, position][layer, position][layer, position][layer, position]...]
+     FELDERANBIETEN: Array mit Koordinaten
+        [layer, position, layer, position, layer, position, layer, position...]
 
 
 JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
