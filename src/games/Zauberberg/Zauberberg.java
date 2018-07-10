@@ -217,7 +217,37 @@ public class Zauberberg extends Game {
                 	} else if(kobold.getLayer()>=0) { //TODO f�r jeden layer gibt es andere berechnung zb MOD 36 (layer 0), mod 28 (layer 1), mod 20 (layer2), mod 12 (layer 3)
                 	  //selbe prinzip wie oben, array abwechselnd mit layer und feldnr f�llen f�r vorw�rts schritte und r�ckw�rts schritte
                 	}
-                    }                    
+                	
+                    }   
+                   
+                 if(kobold.getLayer()==0) {  
+                	 
+                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 36); //vorwärts
+             		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 36); // rückwärts
+             		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorwärts
+             		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // rückwärts
+                 }
+                 if(kobold.getLayer()==1) {   
+                	 
+                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 28); //vorwärts
+              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 28); // rückwärts
+              		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorwärts
+              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // rückwärts
+                 }
+                 if(kobold.getLayer()==2) {  
+                	 
+                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 20); //vorwärts
+              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 20); // rückwärts
+              		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorwärts
+              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); // rückwärts
+                 }
+                 if(kobold.getLayer()==3) {  
+                	 
+                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 12); //vorwärts
+              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 12); // rückwärts
+              		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); //vorwärts
+              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); // rückwärts
+                 }
                 }
                 this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
                 sendGameDataToClients("KARTENANBIETEN"); //FELDERANBIETEN IST HIER GLAUB GEMEINT 
