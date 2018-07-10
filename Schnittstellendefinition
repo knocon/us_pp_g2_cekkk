@@ -22,7 +22,7 @@ Java -> JavaScript:
                     AUßERDEM Ausgabe für Errors(aufgetretene Exceptions)!
 
      EREIGNISANFRAGE: JSON Map<String, String> Im folgenden alle möglichen Zusammensetzungen der Map:
-        {"Ereignis": "Fliegende Karte", "RestlicheZuege": "2"} Restliche Züge ist 1, wenn man mit der 3. Karte auf das Ereignis kommt, sonst mit der 2. Karte, also 2 Restliche Züge
+        {"Ereignis": "Fliegende Karte"}
             (WICHTIG, unmittelbar hiernach muss Updatekarten gesendet werden, enthalten sind alle Karten, die noch nicht gelegt wurden und alle die noch nicht ausgeführt wurden,
              bevor das Ereignis eintrat. Natürlich auch inklusive der neuen Karte)
         {"Ereignis": "Rabe"}
@@ -51,10 +51,8 @@ JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist im
 
      EREIGNISANTWORT: JSON Map<String, String> Im folgenden alle möglichen Zusammensetzungen der Map:
          {"Eventname": "EREIGNISANTWORT", "Ereignis": "Fliegende Karte",
-          "karte1Typ": "Null",
-          "karte2Typ": "Null",        (siehe Kartenlegen)
-          "karte1Wert": "Null",
-          "karte2Wert": "Null"}
+          "karteTyp": "Null",
+          "karteWert": "Null"} todo aktualiesere code
          {"Eventname": "EREIGNISANTWORT", "Ereignis": "Rabe", "Spieler": "Rot"} Farbe das Spielers, auf den der Rabe angewendet werden soll.
 
      FELDAUSWAEHLEN: JSON Map<String, String>
