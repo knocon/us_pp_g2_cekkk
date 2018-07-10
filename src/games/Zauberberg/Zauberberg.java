@@ -64,7 +64,7 @@ public class Zauberberg extends Game {
         
         //Vorverarbeitung
         System.out.println("Empfangen: " + gsonString);
-        gsonString = gsonString.replaceAll("§", "{");
+        gsonString = gsonString.replaceAll("\u00a7", "{");
         gsonString = gsonString.replaceAll("~", "}");
         System.out.println("JSON Daten: " + gsonString);
 
