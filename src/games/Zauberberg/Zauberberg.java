@@ -233,6 +233,7 @@ public class Zauberberg extends Game {
                 sendGameDataToUser(user,"UPDATEKARTEN");
                 break;
 
+            //dieser case sollte bereits laufen 
             case "KARTENTAUSCHEN":
         	int sizeOfHand2 = spieler.getHand().size();
                 if (dataMap.get("karte1") != "Null") {
@@ -352,7 +353,8 @@ public class Zauberberg extends Game {
             case "FELDAUSWAEHLEN":
                 dataMap.get("layer");
                 dataMap.get("position");
-                // todo Kobold entsprechend bewegen
+                //kobold.setLayer(Integer.parseInt(dataMap.get("layer")); 
+                //kobold.setFeldNr(Integer.parseInt(dataMap.get("position")); 
                 break;
             default:
                 // Fehler!
