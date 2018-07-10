@@ -60,8 +60,7 @@ public class Zauberberg extends Game {
     public void execute(User user, String gsonString) {
         Spieler spieler = spielerList.get(playerList.indexOf(user));
         //TODO Spieler Farbe geben
-        
-        
+                
         //Vorverarbeitung
         System.out.println("Empfangen: " + gsonString);
         gsonString = gsonString.replaceAll("\u00a7", "{");
@@ -349,12 +348,25 @@ public class Zauberberg extends Game {
                 	
                         break;
                 }
-                break;
+                break; 
             case "FELDAUSWAEHLEN":
-                dataMap.get("layer");
-                dataMap.get("position");
-                //kobold.setLayer(Integer.parseInt(dataMap.get("layer")); 
-                //kobold.setFeldNr(Integer.parseInt(dataMap.get("position")); 
+        	 dataMap.get("layer");
+                 dataMap.get("position");
+                 for(Feld feld : spiel.getFelder()) {
+                     if(feld.getLayer()== Integer.parseInt(dataMap.get("layer")) && feld.getFeldNr()== Integer.parseInt(dataMap.get("position"))){
+                 	if(feld.getKobolde().size()<2) {
+                 	    //feld.getKobolde().add(/*kobold*/);  
+                 	} 
+                 	if(feld.getKobolde().size()==2) {
+                 	    //falsch, da man die richtung kennen muss von 
+                 	    feld.getKobolde().get(1).setFeldNr(feld.getKobolde().get(1).getFeldNr()+1);
+                 	    //feld.getKobolde().add(/*kobold*/);     
+                 	    //kobold.setLayer(Integer.parseInt(dataMap.get("layer")); 
+                             //kobold.setFeldNr(Integer.parseInt(dataMap.get("position"));
+                 	}
+                 	
+                     }
+                 }
                 break;
             default:
                 // Fehler!
