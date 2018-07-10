@@ -11,8 +11,10 @@ public class Schreckgespenst extends Feld{
     }
 	//TODO Logik des Ereignisses
     public static void execute (Kobold kobold) {
-	kobold.setLayer(-1);
-	//kobold.setPos(//random Dorf 1..4);
+    	//Verteilung auf Doerfer random, da einfacher
+    	int random = (int )(Math.random() * 4 + 0);
+    	kobold.setLayer(-1);
+	    kobold.setPos(random);
 	
     }
 }

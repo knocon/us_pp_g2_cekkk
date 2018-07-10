@@ -37,13 +37,13 @@ public class Zauberberg extends Game {
     private String felderWaehlen = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
 
-    public void EreignisseErstellen() {
+    public void ereignisseErzeugen() {
     	
     	Fallgrube fallgrube0 = new Fallgrube(2, 19, koboldList);
     	Fallgrube fallgrube1 = new Fallgrube(3, 7, koboldList);
     	spiel.getFallgrube()[0] = fallgrube0;
     	spiel.getFallgrube()[1] = fallgrube1;
-    	
+    		
     	
     	FliegendeKarte fliegendeKarte0 = new FliegendeKarte(2, 8, koboldList);
     	FliegendeKarte fliegendeKarte1 = new FliegendeKarte(2, 14, koboldList);
@@ -76,12 +76,14 @@ public class Zauberberg extends Game {
     	spiel.getRabe()[1] = rabe1;
     	spiel.getRabe()[2] = rabe2;
     	
+    	
     	Schreckgespenst schreckgespenst0 = new Schreckgespenst(0, 1, koboldList);
     	Schreckgespenst schreckgespenst1 = new Schreckgespenst(1, 4, koboldList);
     	Schreckgespenst schreckgespenst2 = new Schreckgespenst(3, 1, koboldList);
     	spiel.getSchreckgespenst()[0] = schreckgespenst0;
     	spiel.getSchreckgespenst()[1] = schreckgespenst1;
     	spiel.getSchreckgespenst()[2] = schreckgespenst2;
+
     	
     	Unwetter unwetter0 = new Unwetter(0, 12, koboldList);
     	Unwetter unwetter1 = new Unwetter(0, 19, koboldList);
@@ -90,7 +92,101 @@ public class Zauberberg extends Game {
     	spiel.getUnwetter()[1] = unwetter1;
     	spiel.getUnwetter()[2] = unwetter2;
     }
+    public void steineErzeugen() {
+    	Zauberstein zStein0 = new Zauberstein(1, 0);
+    	zStein0.setAufFeld(true);
+    	Zauberstein zStein1 = new Zauberstein(1, 19);
+    	zStein1.setAufFeld(true);
+    	Zauberstein zStein2 = new Zauberstein(1, 8);
+    	zStein2.setAufFeld(true);
+    	Zauberstein zStein3 = new Zauberstein(2, 3);
+    	zStein3.setAufFeld(true);
+    	Zauberstein zStein4 = new Zauberstein(2, 10);
+    	zStein4.setAufFeld(true);
+    	Zauberstein zStein5 = new Zauberstein(2, 19);
+    	zStein5.setAufFeld(true);
+    	Zauberstein zStein6 = new Zauberstein(3, 0);
+    	zStein6.setAufFeld(true);
+    	Zauberstein zStein7 = new Zauberstein(3, 4);
+    	zStein7.setAufFeld(true);
+    	Zauberstein zStein8 = new Zauberstein(3, 8);
+    	zStein8.setAufFeld(true);
     	
+    }
+    public void doerferErzeugen() {
+    	Dorf blau = new Dorf();
+    	blau.setLayer(-1);
+    	blau.setFeldNr(0);
+    	Dorf gruen = new Dorf();
+    	gruen.setLayer(-1);
+    	gruen.setFeldNr(1);
+    	Dorf rot = new Dorf();
+    	rot.setLayer(-1);
+    	rot.setFeldNr(2);
+    	Dorf gelb = new Dorf();
+    	gelb.setLayer(-1);
+    	gelb.setFeldNr(3);
+    }
+    public void koboldeErzeugen() {
+    	//Hardcoded in Dorf 0
+    	Kobold blau1 = new Kobold(0, playerTurn);
+    	Kobold blau2 = new Kobold(0, playerTurn);
+    	Kobold blau3 = new Kobold(0, playerTurn);
+    	Kobold blau4 = new Kobold(0, playerTurn);
+    	Kobold blau5 = new Kobold(0, playerTurn);
+    	blau1.setFarbe(Kobold.Farbe.Blau);
+    	blau2.setFarbe(Kobold.Farbe.Blau);
+    	blau3.setFarbe(Kobold.Farbe.Blau);
+    	blau4.setFarbe(Kobold.Farbe.Blau);
+    	blau5.setFarbe(Kobold.Farbe.Blau);
+    	
+    	Kobold rot1 = new Kobold(0, playerTurn);
+    	Kobold rot2 = new Kobold(0, playerTurn);
+    	Kobold rot3 = new Kobold(0, playerTurn);
+    	Kobold rot4 = new Kobold(0, playerTurn);
+    	Kobold rot5 = new Kobold(0, playerTurn);
+    	rot1.setFarbe(Kobold.Farbe.Rot);
+    	rot2.setFarbe(Kobold.Farbe.Rot);
+    	rot3.setFarbe(Kobold.Farbe.Rot);
+    	rot4.setFarbe(Kobold.Farbe.Rot);
+    	rot5.setFarbe(Kobold.Farbe.Rot);
+    	
+    	Kobold gold1 = new Kobold(0, playerTurn);
+    	Kobold gold2 = new Kobold(0, playerTurn);
+    	Kobold gold3 = new Kobold(0, playerTurn);
+    	Kobold gold4 = new Kobold(0, playerTurn);
+    	Kobold gold5 = new Kobold(0, playerTurn);
+    	gold1.setFarbe(Kobold.Farbe.Gold);
+    	gold2.setFarbe(Kobold.Farbe.Gold);
+    	gold3.setFarbe(Kobold.Farbe.Gold);
+    	gold4.setFarbe(Kobold.Farbe.Gold);
+    	gold5.setFarbe(Kobold.Farbe.Gold);
+    	
+    	Kobold schwarz1 = new Kobold(0, playerTurn);
+    	Kobold schwarz2 = new Kobold(0, playerTurn);
+    	Kobold schwarz3 = new Kobold(0, playerTurn);
+    	Kobold schwarz4 = new Kobold(0, playerTurn);
+    	Kobold schwarz5 = new Kobold(0, playerTurn);
+    	schwarz1.setFarbe(Kobold.Farbe.Schwarz);
+    	schwarz2.setFarbe(Kobold.Farbe.Schwarz);
+    	schwarz3.setFarbe(Kobold.Farbe.Schwarz);
+    	schwarz4.setFarbe(Kobold.Farbe.Schwarz);
+    	schwarz5.setFarbe(Kobold.Farbe.Schwarz);
+    	
+    	Kobold gruen1 = new Kobold(0, playerTurn);
+    	Kobold gruen2 = new Kobold(0, playerTurn);
+    	Kobold gruen3 = new Kobold(0, playerTurn);
+    	Kobold gruen4 = new Kobold(0, playerTurn);
+    	Kobold gruen5 = new Kobold(0, playerTurn);
+    	gruen1.setFarbe(Kobold.Farbe.Gruen);
+    	gruen2.setFarbe(Kobold.Farbe.Gruen);
+    	gruen3.setFarbe(Kobold.Farbe.Gruen);
+    	gruen4.setFarbe(Kobold.Farbe.Gruen);
+    	gruen5.setFarbe(Kobold.Farbe.Gruen);
+    }
+    
+    
+    
     public int getMaxPlayerAmount() {
         return 5;
         
@@ -112,6 +208,9 @@ public class Zauberberg extends Game {
     @Override
     public void execute(User user, String gsonString) {
         Spieler spieler = spielerList.get(playerList.indexOf(user));
+        //TODO Spieler Farbe geben
+        
+        
         //Vorverarbeitung
         System.out.println("Empfangen: " + gsonString);
         gsonString = gsonString.replaceAll("§", "{");

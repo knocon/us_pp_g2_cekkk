@@ -14,8 +14,9 @@ public class Fallgrube extends Feld {
     public static void execute (Kobold kobold) {
 	switch(kobold.getLayer()) {
 	case 0: 
+		int random = (int )(Math.random() * 4 + 0);
 	    kobold.setLayer(-1);
-	    //TODO random Dorf (1,2,3,4)
+	    kobold.setPos(random);
 	    break;
 	case 1: 
 	    if(kobold.getFeldNr()>0 && kobold.getFeldNr()<7) {
