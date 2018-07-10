@@ -81,42 +81,29 @@ public class Zauberberg extends Game {
         }
         if (gsonString.equals("START")) { // Start Button wurde vom Host gedrÃ¼ckt
             this.gState = GameState.RUNNING;
-            //////
-            
-            
-            //Karten vom Stapel auf die Hand des Spielers
+            //jeder Spieler bekommnt 3 zufällige Karten vom Stapel
             for(Spieler s : spielerList) {
         	s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
                 spiel.getKartenstapel().getStapel().remove(s.getHand());
             }
-            
-
-            sendGameDataToClients("STARTGAME");
-
-            /////
-            // todo Logik fÃ¼r den Start z.B. Aufsetzen der Spieler und verteilen von Karten etc. gefolgt von ersten Nachrichten an die Clients bezÃ¼glich des Spiels
-            sendGameDataToClients("UPDATEKARTEN");
-
+            sendGameDataToClients("STARTGAME");           
+            sendGameDataToClients("UPDATEKARTEN"); 
         }
         if (gState != GameState.RUNNING)
             return;
         if (!user.equals(playerTurn)) {
             return;
         }
-
         /**
          * Eventnamen fÃ¼r das eigentliche Spiel
          */
-
         Gson gson = new GsonBuilder().create();
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
-                //System.out.println(dataMap.get("karte1Typ")); // Beispiel: gibt den Typ der ersten Karte aus
-                //ArrayList<Bewegungskarte> checkList = new ArrayList<Bewegungskarte>();
-                //checkList = spieler.getHand();
                 int sizeOfHand = spieler.getHand().size();
                 switch (dataMap.get("karte1Typ")) {
+                    //Karten werden von Hand entfernt und auf Stapel wieder gelegt 
                     case "Normal":
                         for (int i = 0; i < spieler.getHand().size(); i++) {
                             if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
@@ -137,7 +124,6 @@ public class Zauberberg extends Game {
                         break;
                     default: //null nicht mï¿½glich bei erster karte 
                 }
-
                 switch (dataMap.get("karte2Typ")) {
                     case "Normal":
                         for (int i = 0; i < spieler.getHand().size(); i++) {
@@ -179,11 +165,9 @@ public class Zauberberg extends Game {
                         }
                         break;
                 }
-
                 //todo Kobold ist karte 1
                 //todo fï¿½r jede weitere Karte muss einmal KARTENANBIETEN gesendet werden
-                
-                ArrayList<ArrayList<Integer>> arrayFelderAnbieten = new ArrayList<ArrayList<Integer>>();
+                                
                 ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>(); 
                 //hier werden die mï¿½glichen Fedlder berechnet, Karte1 bestimmt Kobold, Karte2&3 schritte vor und zurï¿½ck
                 for(Kobold kobold: koboldList) {
@@ -197,7 +181,7 @@ public class Zauberberg extends Game {
                 		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
                 		//arrayLayerFeld.add(1); 
                 		//arrayLayerFeld.add(Integer.parseInt(dataMap.get("karte2Wert"))-1 % 36); 
-                		//Fragen wie in dieser Form < <layer, feld>,<layer, feld>,<layer, feld>,....> glaub nicht mï¿½glich ohne vorher anzahl von inneren arrays zu kennen
+                		//Fragen wie in dieser Form < <layer, feld>,<layer, feld>,<layer, feld>,....> glaub nicht m?glich ohne vorher anzahl von inneren arrays zu kennen
                 	    } else if (kobold.getDorf()==2) {
                 		arrayLayerFeld.add(1); //layer 
                 		arrayLayerFeld.add((9+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
@@ -214,51 +198,43 @@ public class Zauberberg extends Game {
             			arrayLayerFeld.add(1); //layer 
             			arrayLayerFeld.add((27-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
                 	    }                	    
-                	} else if(kobold.getLayer()>=0) { //TODO fï¿½r jeden layer gibt es andere berechnung zb MOD 36 (layer 0), mod 28 (layer 1), mod 20 (layer2), mod 12 (layer 3)
-                	  //selbe prinzip wie oben, array abwechselnd mit layer und feldnr fï¿½llen fï¿½r vorwï¿½rts schritte und rï¿½ckwï¿½rts schritte
+                	}                  
+                	if(kobold.getLayer()==0) {    
+                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %36); 
+                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %36);  //vorwärts
+                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %36); // rückwärts
+                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorwärts
+                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // rückwärts
                 	}
-                	
-                    }   
-                   
-                 if(kobold.getLayer()==0) {  
-                	 
-                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 36); //vorwÃ¤rts
-             		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 36); // rÃ¼ckwÃ¤rts
-             		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorwÃ¤rts
-             		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // rÃ¼ckwÃ¤rts
-                 }
-                 if(kobold.getLayer()==1) {   
-                	 
-                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 28); //vorwÃ¤rts
-              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 28); // rÃ¼ckwÃ¤rts
-              		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorwÃ¤rts
-              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // rÃ¼ckwÃ¤rts
-                 }
-                 if(kobold.getLayer()==2) {  
-                	 
-                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 20); //vorwÃ¤rts
-              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 20); // rÃ¼ckwÃ¤rts
-              		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorwÃ¤rts
-              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); // rÃ¼ckwÃ¤rts
-                 }
-                 if(kobold.getLayer()==3) {  
-                	 
-                    arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert"))))) % 12); //vorwÃ¤rts
-              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert"))))) % 12); // rÃ¼ckwÃ¤rts
-              		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); //vorwÃ¤rts
-              		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); // rÃ¼ckwÃ¤rts
-                 }
+                	if(kobold.getLayer()==1) {                	 
+                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %28); //vorwärts
+                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %28);  // rückwärts
+                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorwärts
+                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // rückwärts
+                	}
+                	if(kobold.getLayer()==2) {                	 
+                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %20);  //vorwärts
+                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %20); // rückwärts
+                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorwärts
+                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); // rückwärts
+                	}
+                	if(kobold.getLayer()==3) {                  	 
+                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %12);  //vorwärts
+                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %36);  // rückwärts
+                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); //vorwärts
+                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); // rückwärts
+                	}    
+                    }
                 }
                 this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
-                sendGameDataToClients("KARTENANBIETEN"); //FELDERANBIETEN IST HIER GLAUB GEMEINT 
-
+                sendGameDataToUser(user,"FELDERANBIETEN");  
                 //neue Karten ziehen
                 spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user,"UPDATEKARTEN");
                 break;
 
             case "KARTENTAUSCHEN":
-                int sizeOfHand2 = spieler.getHand().size();
+        	int sizeOfHand2 = spieler.getHand().size();
                 if (dataMap.get("karte1") != "Null") {
                     if (dataMap.get("karte1") != "Joker") {
                         for (int i = 0; i < spieler.getHand().size(); i++) {
