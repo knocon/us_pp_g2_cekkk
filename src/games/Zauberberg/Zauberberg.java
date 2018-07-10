@@ -232,9 +232,13 @@ public class Zauberberg extends Game {
             this.gState = GameState.RUNNING;
             //////
             
+            
             //Karten vom Stapel auf die Hand des Spielers
-            spieler.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
-            spiel.getKartenstapel().getStapel().remove(spieler.getHand());
+            for(Spieler s : spielerList) {
+        	s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
+                spiel.getKartenstapel().getStapel().remove(s.getHand());
+            }
+            
 
             sendGameDataToClients("STARTGAME");
 
