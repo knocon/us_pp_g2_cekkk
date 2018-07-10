@@ -36,156 +36,7 @@ public class Zauberberg extends Game {
     private String recentInfoText = "";
     private String felderWaehlen = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
-
-    public void ereignisseErzeugen() {
-    	
-    	Fallgrube fallgrube0 = new Fallgrube(2, 19, koboldList);
-    	Fallgrube fallgrube1 = new Fallgrube(3, 7, koboldList);
-    	spiel.getFallgrube()[0] = fallgrube0;
-    	spiel.getFallgrube()[1] = fallgrube1;
-    		
-    	
-    	FliegendeKarte fliegendeKarte0 = new FliegendeKarte(2, 8, koboldList);
-    	FliegendeKarte fliegendeKarte1 = new FliegendeKarte(2, 14, koboldList);
-    	spiel.getFliegendeKarte()[0] = fliegendeKarte0;
-    	spiel.getFliegendeKarte()[1] = fliegendeKarte1;
-    	
-    	
-    	Geheimgang geheimgang0 = new Geheimgang(0, 15, koboldList);
-    	Geheimgang geheimgang1 = new Geheimgang(1, 3, koboldList);
-    	Geheimgang geheimgang2 = new Geheimgang(1, 22, koboldList);
-    	Geheimgang geheimgang3 = new Geheimgang(3, 10, koboldList);
-    	spiel.getGeheimgang()[0] = geheimgang0;
-    	spiel.getGeheimgang()[1] = geheimgang1;
-    	spiel.getGeheimgang()[2] = geheimgang2;
-    	spiel.getGeheimgang()[3] = geheimgang3;
-    	
-    	
-    	Kristallkugel kristallkugel0 = new Kristallkugel(0, 7, koboldList);
-    	Kristallkugel kristallkugel1 = new Kristallkugel(0, 25, koboldList);
-    	Kristallkugel kristallkugel2 = new Kristallkugel(1, 10, koboldList);
-    	spiel.getKristallkugel()[0] = kristallkugel0;
-    	spiel.getKristallkugel()[1] = kristallkugel1;
-    	spiel.getKristallkugel()[2] = kristallkugel2;
-    	
-    	
-    	Rabe rabe0 = new Rabe(0, 30, koboldList);
-    	Rabe rabe1 = new Rabe(1, 17, koboldList);
-    	Rabe rabe2 = new Rabe(2, 4, koboldList);
-    	spiel.getRabe()[0] = rabe0;
-    	spiel.getRabe()[1] = rabe1;
-    	spiel.getRabe()[2] = rabe2;
-    	
-    	
-    	Schreckgespenst schreckgespenst0 = new Schreckgespenst(0, 1, koboldList);
-    	Schreckgespenst schreckgespenst1 = new Schreckgespenst(1, 4, koboldList);
-    	Schreckgespenst schreckgespenst2 = new Schreckgespenst(3, 1, koboldList);
-    	spiel.getSchreckgespenst()[0] = schreckgespenst0;
-    	spiel.getSchreckgespenst()[1] = schreckgespenst1;
-    	spiel.getSchreckgespenst()[2] = schreckgespenst2;
-
-    	
-    	Unwetter unwetter0 = new Unwetter(0, 12, koboldList);
-    	Unwetter unwetter1 = new Unwetter(0, 19, koboldList);
-    	Unwetter unwetter2 = new Unwetter(0, 32, koboldList);
-    	spiel.getUnwetter()[0] = unwetter0;
-    	spiel.getUnwetter()[1] = unwetter1;
-    	spiel.getUnwetter()[2] = unwetter2;
-    }
-    public void steineErzeugen() {
-    	Zauberstein zStein0 = new Zauberstein(1, 0);
-    	zStein0.setAufFeld(true);
-    	Zauberstein zStein1 = new Zauberstein(1, 19);
-    	zStein1.setAufFeld(true);
-    	Zauberstein zStein2 = new Zauberstein(1, 8);
-    	zStein2.setAufFeld(true);
-    	Zauberstein zStein3 = new Zauberstein(2, 3);
-    	zStein3.setAufFeld(true);
-    	Zauberstein zStein4 = new Zauberstein(2, 10);
-    	zStein4.setAufFeld(true);
-    	Zauberstein zStein5 = new Zauberstein(2, 19);
-    	zStein5.setAufFeld(true);
-    	Zauberstein zStein6 = new Zauberstein(3, 0);
-    	zStein6.setAufFeld(true);
-    	Zauberstein zStein7 = new Zauberstein(3, 4);
-    	zStein7.setAufFeld(true);
-    	Zauberstein zStein8 = new Zauberstein(3, 8);
-    	zStein8.setAufFeld(true);
-    	
-    }
-    public void doerferErzeugen() {
-    	Dorf blau = new Dorf();
-    	blau.setLayer(-1);
-    	blau.setFeldNr(0);
-    	Dorf gruen = new Dorf();
-    	gruen.setLayer(-1);
-    	gruen.setFeldNr(1);
-    	Dorf rot = new Dorf();
-    	rot.setLayer(-1);
-    	rot.setFeldNr(2);
-    	Dorf gelb = new Dorf();
-    	gelb.setLayer(-1);
-    	gelb.setFeldNr(3);
-    }
-    public void koboldeErzeugen() {
-    	//Hardcoded in Dorf 0
-    	Kobold blau1 = new Kobold(0, playerTurn);
-    	Kobold blau2 = new Kobold(0, playerTurn);
-    	Kobold blau3 = new Kobold(0, playerTurn);
-    	Kobold blau4 = new Kobold(0, playerTurn);
-    	Kobold blau5 = new Kobold(0, playerTurn);
-    	blau1.setFarbe(Kobold.Farbe.Blau);
-    	blau2.setFarbe(Kobold.Farbe.Blau);
-    	blau3.setFarbe(Kobold.Farbe.Blau);
-    	blau4.setFarbe(Kobold.Farbe.Blau);
-    	blau5.setFarbe(Kobold.Farbe.Blau);
-    	
-    	Kobold rot1 = new Kobold(0, playerTurn);
-    	Kobold rot2 = new Kobold(0, playerTurn);
-    	Kobold rot3 = new Kobold(0, playerTurn);
-    	Kobold rot4 = new Kobold(0, playerTurn);
-    	Kobold rot5 = new Kobold(0, playerTurn);
-    	rot1.setFarbe(Kobold.Farbe.Rot);
-    	rot2.setFarbe(Kobold.Farbe.Rot);
-    	rot3.setFarbe(Kobold.Farbe.Rot);
-    	rot4.setFarbe(Kobold.Farbe.Rot);
-    	rot5.setFarbe(Kobold.Farbe.Rot);
-    	
-    	Kobold gold1 = new Kobold(0, playerTurn);
-    	Kobold gold2 = new Kobold(0, playerTurn);
-    	Kobold gold3 = new Kobold(0, playerTurn);
-    	Kobold gold4 = new Kobold(0, playerTurn);
-    	Kobold gold5 = new Kobold(0, playerTurn);
-    	gold1.setFarbe(Kobold.Farbe.Gold);
-    	gold2.setFarbe(Kobold.Farbe.Gold);
-    	gold3.setFarbe(Kobold.Farbe.Gold);
-    	gold4.setFarbe(Kobold.Farbe.Gold);
-    	gold5.setFarbe(Kobold.Farbe.Gold);
-    	
-    	Kobold schwarz1 = new Kobold(0, playerTurn);
-    	Kobold schwarz2 = new Kobold(0, playerTurn);
-    	Kobold schwarz3 = new Kobold(0, playerTurn);
-    	Kobold schwarz4 = new Kobold(0, playerTurn);
-    	Kobold schwarz5 = new Kobold(0, playerTurn);
-    	schwarz1.setFarbe(Kobold.Farbe.Schwarz);
-    	schwarz2.setFarbe(Kobold.Farbe.Schwarz);
-    	schwarz3.setFarbe(Kobold.Farbe.Schwarz);
-    	schwarz4.setFarbe(Kobold.Farbe.Schwarz);
-    	schwarz5.setFarbe(Kobold.Farbe.Schwarz);
-    	
-    	Kobold gruen1 = new Kobold(0, playerTurn);
-    	Kobold gruen2 = new Kobold(0, playerTurn);
-    	Kobold gruen3 = new Kobold(0, playerTurn);
-    	Kobold gruen4 = new Kobold(0, playerTurn);
-    	Kobold gruen5 = new Kobold(0, playerTurn);
-    	gruen1.setFarbe(Kobold.Farbe.Gruen);
-    	gruen2.setFarbe(Kobold.Farbe.Gruen);
-    	gruen3.setFarbe(Kobold.Farbe.Gruen);
-    	gruen4.setFarbe(Kobold.Farbe.Gruen);
-    	gruen5.setFarbe(Kobold.Farbe.Gruen);
-    }
-    
-    
+   
     
     public int getMaxPlayerAmount() {
         return 5;
@@ -284,7 +135,7 @@ public class Zauberberg extends Game {
                             }
                         }
                         break;
-                    default: //null nicht möglich bei erster karte 
+                    default: //null nicht mï¿½glich bei erster karte 
                 }
 
                 switch (dataMap.get("karte2Typ")) {
@@ -306,7 +157,7 @@ public class Zauberberg extends Game {
                             }
                         }
                         break;
-                    default: //null nicht möglich bei zweiter karte 
+                    default: //null nicht mï¿½glich bei zweiter karte 
                 }
                 switch (dataMap.get("karte3Typ")) {
                     case "Normal":
@@ -330,11 +181,11 @@ public class Zauberberg extends Game {
                 }
 
                 //todo Kobold ist karte 1
-                //todo für jede weitere Karte muss einmal KARTENANBIETEN gesendet werden
+                //todo fï¿½r jede weitere Karte muss einmal KARTENANBIETEN gesendet werden
                 
                 ArrayList<ArrayList<Integer>> arrayFelderAnbieten = new ArrayList<ArrayList<Integer>>();
                 ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>(); 
-                //hier werden die möglichen Fedlder berechnet, Karte1 bestimmt Kobold, Karte2&3 schritte vor und zurück
+                //hier werden die mï¿½glichen Fedlder berechnet, Karte1 bestimmt Kobold, Karte2&3 schritte vor und zurï¿½ck
                 for(Kobold kobold: koboldList) {
                     if(kobold.getSpieler() == spieler && kobold.getNummer() == Integer.parseInt(dataMap.get("karte1Wert"))) {
                 	if(kobold.getLayer()==-1) {
@@ -346,7 +197,7 @@ public class Zauberberg extends Game {
                 		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
                 		//arrayLayerFeld.add(1); 
                 		//arrayLayerFeld.add(Integer.parseInt(dataMap.get("karte2Wert"))-1 % 36); 
-                		//Fragen wie in dieser Form < <layer, feld>,<layer, feld>,<layer, feld>,....> glaub nicht möglich ohne vorher anzahl von inneren arrays zu kennen
+                		//Fragen wie in dieser Form < <layer, feld>,<layer, feld>,<layer, feld>,....> glaub nicht mï¿½glich ohne vorher anzahl von inneren arrays zu kennen
                 	    } else if (kobold.getDorf()==2) {
                 		arrayLayerFeld.add(1); //layer 
                 		arrayLayerFeld.add((9+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
@@ -363,8 +214,8 @@ public class Zauberberg extends Game {
             			arrayLayerFeld.add(1); //layer 
             			arrayLayerFeld.add((27-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
                 	    }                	    
-                	} else if(kobold.getLayer()>=0) { //TODO für jeden layer gibt es andere berechnung zb MOD 36 (layer 0), mod 28 (layer 1), mod 20 (layer2), mod 12 (layer 3)
-                	  //selbe prinzip wie oben, array abwechselnd mit layer und feldnr füllen für vorwärts schritte und rückwärts schritte
+                	} else if(kobold.getLayer()>=0) { //TODO fï¿½r jeden layer gibt es andere berechnung zb MOD 36 (layer 0), mod 28 (layer 1), mod 20 (layer2), mod 12 (layer 3)
+                	  //selbe prinzip wie oben, array abwechselnd mit layer und feldnr fï¿½llen fï¿½r vorwï¿½rts schritte und rï¿½ckwï¿½rts schritte
                 	}
                     }                    
                 }
@@ -487,7 +338,7 @@ public class Zauberberg extends Game {
                         //todo Logik
                         break;
                     case "Rabe":
-                        //ausgewählter Spieler.setAnzahlZaubersteine(ausgewählterSpieler.getAnzahlZaubersteine()-1);  
+                        //ausgewï¿½hlter Spieler.setAnzahlZaubersteine(ausgewï¿½hlterSpieler.getAnzahlZaubersteine()-1);  
                 	
                         break;
                 }
