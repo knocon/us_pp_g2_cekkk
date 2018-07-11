@@ -8,6 +8,7 @@ import userManagement.User;
 
 public class Spieler {
     private Name farbName;
+    private ArrayList<Kobold> koboldList = new ArrayList<Kobold>();
     private int anzahlZaubersteine;
     private ArrayList<Bewegungskarte> hand;
     private static int anz =0; 
@@ -52,6 +53,30 @@ public class Spieler {
     public Name getName() {
         return farbName;
     }
+
+	public Name getFarbName() {
+		return farbName;
+	}
+
+	public void setFarbName(Name farbName) {
+		this.farbName = farbName;
+	}
+
+	public static int getAnz() {
+		return anz;
+	}
+
+	public static void setAnz(int anz) {
+		Spieler.anz = anz;
+	}
+
+	public ArrayList<Kobold> getKoboldList() {
+		return koboldList;
+	}
+
+	public void setKoboldList(ArrayList<Kobold> koboldList) {
+		this.koboldList = koboldList;
+	}
     
     /*
     public void karteZiehen() {
