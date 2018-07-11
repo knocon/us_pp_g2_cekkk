@@ -28,11 +28,12 @@ public class Zauberberg extends Game {
      * gridStatus contains the gameData
      */
     private Spiel spiel = new Spiel();
+    private Kobold aktuellerKobold;
     private Spieler playerTurn = null;
     private ArrayList<User> playerList = new ArrayList<User>();
     private ArrayList<Spieler> spielerList = new ArrayList<Spieler>();
     private ArrayList<User> spectatorList = new ArrayList<User>();
-    private ArrayList<Kobold> koboldList = new ArrayList<Kobold>();
+    ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>(); 
     private String recentInfoText = "";
     private String felderWaehlen = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
@@ -108,6 +109,8 @@ public class Zauberberg extends Game {
                             if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
                                 spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                                 spieler.getHand().remove(i);
+                                //Zwischenspeichern des Kobolds, der mit der ersten Karte gewaehlt wurde
+                                aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
                                 break;
                             }
                         }
@@ -115,6 +118,7 @@ public class Zauberberg extends Game {
                     case "Joker":
                         for (int i = 0; i < spieler.getHand().size(); i++) {
                             if (spieler.getHand().get(i).getJoker() == true) {
+                            	aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
                                 spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                                 spieler.getHand().remove(i);
                                 break;
@@ -129,6 +133,18 @@ public class Zauberberg extends Game {
                             if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
                                 spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                                 spieler.getHand().remove(i);
+                                
+                                //CHECKEN, OB KOBOLD SICH BEWEGEN DARF
+                                
+                                if(aktuellerKobold.darfBewegen(aktuellerKobold, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()))==true) {
+                                	//JA
+                                	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
+                                }else{
+                                	//NEIN
+                                	//TODO HOCHGEBEN, DAS DER KOBOLD SICH NICHT BEWEGEN DARF                                	
+                                }
+                                
+                               
                                 break;
                             }
                         }
@@ -166,10 +182,13 @@ public class Zauberberg extends Game {
                 }
                 //todo Kobold ist karte 1
                 //todo f�r jede weitere Karte muss einmal KARTENANBIETEN gesendet werden
-                                
+               
+                
+                // AUSGELAGERT IN METHODE moeglFelder IN KOBOLD KLASSE
+                /*
                 ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>(); 
                 //hier werden die m�glichen Fedlder berechnet, Karte1 bestimmt Kobold, Karte2&3 schritte vor und zur�ck
-                for(Kobold kobold: koboldList) {
+                for(Kobold kobold: spieler.getKoboldList()) {
                     if(kobold.getSpieler() == spieler && kobold.getNummer() == Integer.parseInt(dataMap.get("karte1Wert"))) {
                 	if(kobold.getLayer()==-1) {
                 	    //Schritt raus aus dem Dorf 
@@ -225,8 +244,10 @@ public class Zauberberg extends Game {
                 	}    
                     }
                 }
+                */
                 this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
-                sendGameDataToUser(user,"FELDERANBIETEN");  
+                sendGameDataToUser(user,"FELDERANBIETEN");
+                System.out.println(felderWaehlen);
                 //neue Karten ziehen
                 spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user,"UPDATEKARTEN");
@@ -240,6 +261,7 @@ public class Zauberberg extends Game {
                         for (int i = 0; i < spieler.getHand().size(); i++) {
                             if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1"))) {
                                 spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                
                                 spieler.getHand().remove(i);
                                 break;
                             }
@@ -351,7 +373,10 @@ public class Zauberberg extends Game {
                 break; 
             case "FELDAUSWAEHLEN":
         	 dataMap.get("layer");
-                 dataMap.get("position");
+        	 //move
+        	 //check ereigniskarte
+        	 //check rest zu verarbeitende karten
+        	 dataMap.get("position");
                  for(Feld feld : spiel.getFelder()) {
                      if(feld.getLayer()== Integer.parseInt(dataMap.get("layer")) && feld.getFeldNr()== Integer.parseInt(dataMap.get("position"))){
                  	if(feld.getKobolde().size()<2) {
@@ -395,7 +420,7 @@ public class Zauberberg extends Game {
             spielerList.add(spieler);
 
             for (int i = 1; i <= 5; i++) {
-                koboldList.add(new Kobold(i, spieler));
+                spieler.getKoboldList().add(new Kobold(i, spieler));
             }
 
             if (playerTurn == null) {
@@ -462,6 +487,7 @@ public class Zauberberg extends Game {
         }
         if (eventName.equals("FELDERANBIETEN")) {
             return this.felderWaehlen;
+            //return gson.toJson(kobold.felderwohinkannarray , Arraylist.class
         }
         //todo hier kommen weitere events hin, falls nötig
         return "";
