@@ -99,11 +99,16 @@ public class Zauberberg extends Game {
         
         
         
-        //HIER NICHT USER UND SPIELER OBJEKTE VERGLEICHEN SONDERN DIE NAMEN, DA DIE NAMEN VON SERVERSEITE UNIQUE SIND!!
+      //HIER NICHT USER UND SPIELER OBJEKTE VERGLEICHEN SONDERN DIE NAMEN, DA DIE NAMEN VON SERVERSEITE UNIQUE SIND!!
         if(!user.getName().equals(spieler.getSpielerName())){
         	return;
         }
-       
+        
+        /*
+        if (!user.equals(playerTurn)) {
+            return;
+        }
+        */
         
         
        
