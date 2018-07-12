@@ -7,6 +7,7 @@ import java.util.Random;
 import userManagement.User;
 
 public class Spieler {
+	private String spielerName;
     private Name farbName;
     private ArrayList<Kobold> koboldList = new ArrayList<Kobold>();
     private int anzahlZaubersteine;
@@ -76,6 +77,14 @@ public class Spieler {
 
 	public void setKoboldList(ArrayList<Kobold> koboldList) {
 		this.koboldList = koboldList;
+	}
+
+	public String getSpielerName() {
+		return spielerName;
+	}
+
+	public void setSpielerName(String spielerName) {
+		this.spielerName = spielerName;
 	}
     
     /*
