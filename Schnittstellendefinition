@@ -4,7 +4,18 @@ Alle Eventnamen außer den Vorgegebenen!
 Java -> JavaScript:
      UPDATEKARTEN: JSON Array mit den Karten, die der entsprechende Spieler auf der Hand hat (String Zahlenwerte und "Joker" für Joker)
 
-     UPDATESPIELFELD: todo muss hier noch definiert werden
+     UPDATESPIELFELD: JSON Map<String, Map<String, String>>
+     	{"1_0": {
+                 "EreigniskarteSteinOffen": "1",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
+                 "Kobold1-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist todo Eingabefelder deaktivieren
+                 "Kobold1-Nummer": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
+                 "Kobold2-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist todo Eingabefelder deaktivieren
+                 "Kobold2-Nummer": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
+                 },
+         "dorf1": {siehe obige Definition},
+         "Gelb": {siehe obige Definition},
+         "Blau": {siehe obige Definition},
+         "Grau": {siehe obige Definition}}
 
      UPDATESPIELZUSTAND: JSON Map<String, Map<String, String>>
         {"Rot": {

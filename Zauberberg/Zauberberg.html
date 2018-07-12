@@ -481,6 +481,29 @@
                 }
                 sendDatatoServer();
             }
+			
+			addListener('UPDATESPIELFELD', function (event) {
+				var stringFromServer = event.data;
+				var data = JSON.parse(stringFromServer);
+				for (var pos in data) {
+					document.getElementById("base_" + pos).style.visibility = "hidden";
+					document.getElementById("baseOffen_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot_" + pos).style.visibility = "hidden";
+					// hier alles unsichtbar machen
+					
+					if(data[pos]["EreigniskarteSteinOffen"] == "1"){
+					   document.getElementById("baseOffen_" + pos).style.visibility = "visible";
+					}else{
+					   document.getElementById("base_" + pos).style.visibility = "visible";
+					}
+					if(data[pos]["Kobold-Farbe"] != "Null"){
+						document.getElementById("kobold" + data[pos]["Kobold-Farbe"] + data[pos]["Kobold-Nummer"] + "_" + pos).style.visibility = "visible";
+				    }
+					if(data[pos]["Kobold2-Farbe"] != "Null"){
+						document.getElementById("kobold" + data[pos]["Kobold2-Farbe"] + "k" + data[pos]["Kobold2-Nummer"] + "_" + pos).style.visibility = "visible";
+				    }
+				}
+			});
 
 
         </script>
@@ -490,8 +513,23 @@
                 <!-- id Format = erste Ziffer steht für die Ebene, nach dem Untersrich die Feldzahl.
                         Beispiel : Ebene 0 Feld 5 = 0_5 -->
                 <tr>
-                    <td>
-                        <img id="0_0" src="layout_images/layoutnew_01.gif" width="77" height="77" alt=""></td>
+					<td>
+                       <div class="newContainer">
+						<img id="base_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="baseOffen_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldRot1_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldGelb1_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldGrau2_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt=""> // mehr kobolde
+						<img id="koboldRot_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldGruen_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldRotk_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldGelbk1_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldGrauk_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldRotk_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						<img id="koboldGruenk_0_0" src="layout_images/layoutnew_01.gif" class="feldImg" alt="">
+						</div>
+							</td>
+					
                     <td>
                         <img id="0_1" src="ereignisfelder_images/Verdeckt.png" width="77" height="77" alt=""
                              onClick="Schreckgespenst1()"></td>
@@ -517,7 +555,12 @@
                     <td>
                         <img id="0_35" src="layout_images/layoutnew_11.gif" width="77" height="77" alt=""></td>
                     <td>
-                        <img id="1_0" src="ereignisfelder_images/Murmel.png" width="77" height="77" onClick="Murmel1()">
+						<div class="newContainer">
+                        <img id="1_0" src="ereignisfelder_images/Murmel.png" class="feldImg" onClick="Murmel1()">
+						<img id="1_0_t" src="ereignisfelder_images/Murmel.png" class="feldImg" onClick="">
+						<img id="1_0_67" src="ereignisfelder_images/Murmel.png" class="feldImg" onClick="">
+						<img id="1_0_jh" src="ereignisfelder_images/Murmel.png" class="feldImg" onClick="">
+						</div>
                     </td>
                     <td>
                         <img id="1_1" src="layout_images/layoutnew_13.gif" width="77" height="77" alt=""></td>

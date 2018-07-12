@@ -47,6 +47,18 @@ body {
     height: 800px;
 }
 
+.newContainer{
+	position: relative;
+}
+
+.feldImg{
+	position: absolute;
+	top: -40.5px;
+	width: 77px;
+	height: 77px;
+	visibility: visible;
+}
+
 #villages {
 	width: 100px;
 	height: 800px;
