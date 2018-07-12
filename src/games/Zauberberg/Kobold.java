@@ -15,7 +15,7 @@ public class Kobold {
 	//Methoden bewegen
 	//TODO Position im Grid
 	public Kobold(int nummer, Spieler spieler) {
-	    this.dorf = (int)(Math.random() * 4+1); //generate random dorf between in a range 1..4
+	    this.dorf = (int)(Math.random() * 4); //generate random dorf between in a range 0...3
 	    this.layer = -1; 
 	    this.feldNr = -1;
 	    this.spieler = spieler; 

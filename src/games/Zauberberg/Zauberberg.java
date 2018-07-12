@@ -114,167 +114,88 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
-            	System.out.println("moin");
                 int sizeOfHand = spieler.getHand().size();
-                switch (dataMap.get("karte1Typ")) {
-                    //Karten werden von Hand entfernt und auf Stapel wieder gelegt 
-                    case "Normal":
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                //Zwischenspeichern des Kobolds, der mit der ersten Karte gewaehlt wurde
-                                aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
-                                break;
-                            }
-                        }
-                        break;
-                    case "Joker":
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                            	aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                        break;
-                    default: //null nicht m�glich bei erster karte 
-                }
-                switch (dataMap.get("karte2Typ")) {
-                    case "Normal":
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                
-                                //CHECKEN, OB KOBOLD SICH BEWEGEN DARF
-                                if(aktuellerKobold.getLayer()==-1){
-                                	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
-                                	//DAS ARRAY HOCHGEBEN UND ANTWORT DER ART LAYER, FELDNR ZURUECKBEKOMMEN
-                                	
-                                	
-                                	// ( AKTUELLER KOBOLD, INT TEMPLAYER, INT TEMPFELD, INT FELDNUMMER WO DER KOBOLD DRAUFSTEHT IM ALLGEMEINEN FELDERARRAY
-                                	//TEMPLAYER, TEMPFELD IST DAS FELD, WO DER SPIELER HINMOECHTE 
-                                	//TODO 1,1 ERSETZEN
-                                	aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
-                                }else{
-                                	 if(aktuellerKobold.darfBewegen(aktuellerKobold, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()))==true) {
-                                     	//JA
-                                     	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
-                                     }else{
-                                     	//NEIN
-                                     	//TODO HOCHGEBEN, DAS DER KOBOLD SICH NICHT BEWEGEN DARF                                	
-                                     }
-                                }
-                               
-                                
-                               
-                                break;
-                            }
-                        }
-                        break;
-                    case "Joker":
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                        break;
-                    default: //null nicht m�glich bei zweiter karte 
-                }
-                //BEI KARTE 3 NICHTMEHR CHECKEN, OB ER SICH BEWEGEN DARF, DA ES VORHER ABGEFANGEN WURDE
-                switch (dataMap.get("karte3Typ")) {
-                    case "Normal":
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte3Wert")));
-                                
-                                //TODO 1,1 ERSETZEN DURCH WERTE DIE VON SERVER KOMMEN
-                                aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
-                                break;
-                            }
-                        }
-                        break;
-                    case "Joker":
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                        break;
-                }
-                //todo Kobold ist karte 1
-                //todo f�r jede weitere Karte muss einmal KARTENANBIETEN gesendet werden
-               
-                
-                // AUSGELAGERT IN METHODE moeglFelder IN KOBOLD KLASSE
-                /*
-                ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>(); 
-                //hier werden die m�glichen Fedlder berechnet, Karte1 bestimmt Kobold, Karte2&3 schritte vor und zur�ck
-                for(Kobold kobold: spieler.getKoboldList()) {
-                    if(kobold.getSpieler() == spieler && kobold.getNummer() == Integer.parseInt(dataMap.get("karte1Wert"))) {
-                	if(kobold.getLayer()==-1) {
-                	    //Schritt raus aus dem Dorf 
-                	    if(kobold.getDorf()==1) {
-                		arrayLayerFeld.add(1); //layer 
-                		arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
-                		arrayLayerFeld.add(1); //layer 
-                		arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
-                		//arrayLayerFeld.add(1); 
-                		//arrayLayerFeld.add(Integer.parseInt(dataMap.get("karte2Wert"))-1 % 36); 
-                		//Fragen wie in dieser Form < <layer, feld>,<layer, feld>,<layer, feld>,....> glaub nicht m?glich ohne vorher anzahl von inneren arrays zu kennen
-                	    } else if (kobold.getDorf()==2) {
-                		arrayLayerFeld.add(1); //layer 
-                		arrayLayerFeld.add((9+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
-                		arrayLayerFeld.add(1); //layer 
-                		arrayLayerFeld.add((9-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
-                	    } else if (kobold.getDorf() ==3) {
-                		arrayLayerFeld.add(1); //layer 
-                		arrayLayerFeld.add((18+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
-                		arrayLayerFeld.add(1); //layer 
-                		arrayLayerFeld.add((18-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
-                	    } else if(kobold.getDorf()==4) {
-                	    	arrayLayerFeld.add(1); //layer 
-            			arrayLayerFeld.add((27+((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); //schritte nach "vorne"
-            			arrayLayerFeld.add(1); //layer 
-            			arrayLayerFeld.add((27-((Integer.parseInt(dataMap.get("karte2Wert")))-1)) % 36); // schritte nach "hinten"
-                	    }                	    
-                	}                  
-                	if(kobold.getLayer()==0) {    
-                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %36); 
-                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %36);  //vorw�rts
-                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %36); // r�ckw�rts
-                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorw�rts
-                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // r�ckw�rts
-                	}
-                	if(kobold.getLayer()==1) {                	 
-                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %28); //vorw�rts
-                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %28);  // r�ckw�rts
-                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorw�rts
-                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // r�ckw�rts
-                	}
-                	if(kobold.getLayer()==2) {                	 
-                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %20);  //vorw�rts
-                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %20); // r�ckw�rts
-                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorw�rts
-                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); // r�ckw�rts
-                	}
-                	if(kobold.getLayer()==3) {                  	 
-                	    arrayLayerFeld.add((kobold.getFeldNr()+Integer.parseInt(dataMap.get("karte2Wert"))) %12);  //vorw�rts
-                	    arrayLayerFeld.add((kobold.getFeldNr()-Integer.parseInt(dataMap.get("karte2Wert"))) %36);  // r�ckw�rts
-                	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); //vorw�rts
-                	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); // r�ckw�rts
-                	}    
+                if(dataMap.get("karte1Typ").equals("Normal")) {
+                    for (int i = 0; i < spieler.getHand().size(); i++) {
+                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spieler.getHand().remove(i);
+                            //Zwischenspeichern des Kobolds, der mit der ersten Karte gewaehlt wurde
+                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
+                            break;
+                        }                    
                     }
                 }
-                */
+                if(dataMap.get("karte1Typ").equals("Joker")) {
+                    for (int i = 0; i < spieler.getHand().size(); i++) {
+                        if (spieler.getHand().get(i).getJoker()) {
+                        	aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spieler.getHand().remove(i);
+                            break;
+                        }
+                    }                    
+                }
+                if(dataMap.get("karte2Typ").equals("Normal")) {
+                    for (int i = 0; i < spieler.getHand().size(); i++) {
+                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spieler.getHand().remove(i);                            
+                            //CHECKEN, OB KOBOLD SICH BEWEGEN DARF
+                            if(aktuellerKobold.getLayer()==-1){
+                            	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
+                            	//DAS ARRAY HOCHGEBEN UND ANTWORT DER ART LAYER, FELDNR ZURUECKBEKOMMEN
+                            	
+                            	
+                            	// ( AKTUELLER KOBOLD, INT TEMPLAYER, INT TEMPFELD, INT FELDNUMMER WO DER KOBOLD DRAUFSTEHT IM ALLGEMEINEN FELDERARRAY
+                            	//TEMPLAYER, TEMPFELD IST DAS FELD, WO DER SPIELER HINMOECHTE 
+                            	//TODO 1,1 ERSETZEN
+                            	aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
+                            }else{
+                            	 if(aktuellerKobold.darfBewegen(aktuellerKobold, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()))==true) {
+                                 	//JA
+                                 	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
+                                 }else{
+                                 	//NEIN
+                                 	//TODO HOCHGEBEN, DAS DER KOBOLD SICH NICHT BEWEGEN DARF                                	
+                                 }
+                            }     
+                        }
+                    }
+                }
+                if(dataMap.get("karte2Typ").equals("Joker")) {
+                    for (int i = 0; i < spieler.getHand().size(); i++) {
+                        if (spieler.getHand().get(i).getJoker()) {
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spieler.getHand().remove(i);
+                            break;
+                        }
+                    }
+                }
+                if(dataMap.get("karte3Typ").equals("Normal")) {
+                  //BEI KARTE 3 NICHTMEHR CHECKEN, OB ER SICH BEWEGEN DARF, DA ES VORHER ABGEFANGEN WURDE
+                    for (int i = 0; i < spieler.getHand().size(); i++) {
+                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spieler.getHand().remove(i);
+                            aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte3Wert")));
+                            
+                            //TODO 1,1 ERSETZEN DURCH WERTE DIE VON SERVER KOMMEN
+                            aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
+                            break;
+                        }
+                    }               
+                }
+               if(dataMap.get("karte3Typ").equals("Joker")) {
+        	   for (int i = 0; i < spieler.getHand().size(); i++) {
+                       if (spieler.getHand().get(i).getJoker()) {
+                           spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                           spieler.getHand().remove(i);
+                           break;
+                       }
+                   }        	   
+               }
+                            
                 this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
                 sendGameDataToUser(user,"FELDERANBIETEN");
                 System.out.println(felderWaehlen);
@@ -283,7 +204,7 @@ public class Zauberberg extends Game {
                 sendGameDataToUser(user,"UPDATEKARTEN");
                 break;
 
-            //dieser case läuft 
+            //dieser case läuft!
             case "KARTENTAUSCHEN":
         	int sizeOfHand2 = spieler.getHand().size();
                 if (!dataMap.get("karte1").equals("Null")) {
@@ -396,8 +317,7 @@ public class Zauberberg extends Game {
                         break;
                     case "Rabe":
                         //ausgew�hlter Spieler.setAnzahlZaubersteine(ausgewählterspielr.getAnzahlZaubersteine()-1);  
-                	
-                        break;
+                	break;
                 }
                 break; 
             case "FELDAUSWAEHLEN":
@@ -452,7 +372,6 @@ public class Zauberberg extends Game {
             for (int i = 1; i <= 5; i++) {
                 spieler.getKoboldList().add(new Kobold(i, spieler));
             }
-
             if (playerTurn == null) {
                 playerTurn = spieler;
             }
