@@ -7,7 +7,7 @@ import java.util.Random;
 import userManagement.User;
 
 public class Spieler {
-	private String spielerName;
+    private String spielerName;
     private Name farbName;
     private ArrayList<Kobold> koboldList = new ArrayList<Kobold>();
     private int anzahlZaubersteine;

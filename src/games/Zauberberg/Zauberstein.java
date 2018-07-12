@@ -13,14 +13,6 @@ public class Zauberstein extends Feld {
 		aufFeld = true; 
 	}
 	
-	/*//TODO Richtiges Positionsarray einfuegen
-	 * 
-	 * 
-	
-	
-	
-	
-	*/
 	public Boolean getAufFeld() {
 	    return aufFeld;
 	}

@@ -12,17 +12,10 @@ public class Kobold {
 	private Spieler spieler; 
 	private Zauberberg zauberberg;
 	
-	//TODO Ereignisplaettchen von Feld erben Lassen
-	//TODO Feldklasse mit Positionsarray, Array mit moeglichen Kobolden, Ereignisplaettchen mit richtigem Ereignis, Zauberstein
-	//TODO Spieler wegen Steinen, Karten, Kobolden + Farbe
-	//TODO Position jeder Ereigniskarte per Oberklasse Ereignisplaettchenstapel mit Shuffle Methode
-	//TODO Attribut Aufgedeckt jede Kartenklasse
-	//TODO Position auf Layer per Array
-	
 	//Methoden bewegen
 	//TODO Position im Grid
 	public Kobold(int nummer, Spieler spieler) {
-	    dorf = (int)(Math.random() * 4+1); //generate random dorf between in a range 1..4
+	    this.dorf = (int)(Math.random() * 4+1); //generate random dorf between in a range 1..4
 	    this.layer = -1; 
 	    this.feldNr = -1;
 	    this.spieler = spieler; 
@@ -61,25 +54,25 @@ public class Kobold {
 	    	    	arrayLayerFeld.add((27-((laufweg)-1)) % 36); // schritte nach "hinten"
 	    	    }                	    
 		    }else if(kobold.getLayer()==0) {    
-		    	arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %36);  //vorwärts
-		    	arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %36); // rückwärts
-		    	//arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorwärts
-		    	//arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // rückwärts
+		    	arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %36);  //vorwï¿½rts
+		    	arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %36); // rï¿½ckwï¿½rts
+		    	//arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorwï¿½rts
+		    	//arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // rï¿½ckwï¿½rts
 		    }else if(kobold.getLayer()==1) {                	 
-		    	arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %28); //vorwärts
-		    	arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %28);  // rückwärts
-		    	//arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorwärts
-		    	//arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // rückwärts
+		    	arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %28); //vorwï¿½rts
+		    	arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %28);  // rï¿½ckwï¿½rts
+		    	//arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorwï¿½rts
+		    	//arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // rï¿½ckwï¿½rts
 		   	} else if(kobold.getLayer()==2) {                	 
-	       	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %20);  //vorwärts
-	            arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %20); // rückwärts
-	       	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorwärts
-	       	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); // rückwärts
+	       	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %20);  //vorwï¿½rts
+	            arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %20); // rï¿½ckwï¿½rts
+	       	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorwï¿½rts
+	       	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); // rï¿½ckwï¿½rts
 	       	} else if(kobold.getLayer()==3) {                  	 
-	       	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %12);  //vorwärts
-	       	    arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %12);  // rückwärts
-	       	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); //vorwärts
-	       	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); // rückwärts
+	       	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %12);  //vorwï¿½rts
+	       	    arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %12);  // rï¿½ckwï¿½rts
+	       	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); //vorwï¿½rts
+	       	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); // rï¿½ckwï¿½rts
 	       	}  
 		return arrayLayerFeld;                  
 	}
