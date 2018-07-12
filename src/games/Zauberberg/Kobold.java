@@ -27,43 +27,40 @@ public class Kobold {
 	//FORM -> (layer,feld,layer,feld..) 
 	public ArrayList<Integer> moeglFelder(Kobold kobold, int laufweg) {
 		ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
-			if(kobold.getLayer()==-1) {
+		if(kobold.getLayer()==-1) {
 	    	    //Schritt raus aus dem Dorf 
-	    	    if(kobold.getDorf()==1) {
+	    	    if(kobold.getDorf()==0) {
 	    	    	arrayLayerFeld.add(0); //layer 
 	    	    	arrayLayerFeld.add((laufweg-1) % 36); //schritte nach "vorne"
 	    	    	arrayLayerFeld.add(0); //layer 
-	    	    	arrayLayerFeld.add(((-(laufweg))-1) % 36); // schritte nach "hinten"
-	    		//arrayLayerFeld.add(1); 
-	    		//arrayLayerFeld.add(Integer.parseInt(dataMap.get("karte2Wert"))-1 % 36); 
-	    		//Fragen wie in dieser Form < <layer, feld>,<layer, feld>,<layer, feld>,....> glaub nicht m?glich ohne vorher anzahl von inneren arrays zu kennen
-	    	    } else if (kobold.getDorf()==2) {
+	    	    	arrayLayerFeld.add(((-(laufweg))-1) % 36); // schritte nach "hinten"	    		
+	    	    } else if (kobold.getDorf()==1) {
 	    	    	arrayLayerFeld.add(0); //layer 
 	    	    	arrayLayerFeld.add((9+(laufweg)-1) % 36); //schritte nach "vorne"
 	    	    	arrayLayerFeld.add(0); //layer 
 	    	    	arrayLayerFeld.add((9-((laufweg)-1)) % 36); // schritte nach "hinten"
-	    	    } else if (kobold.getDorf() ==3) {
+	    	    } else if (kobold.getDorf() ==2) {
 	    	    	arrayLayerFeld.add(0); //layer 
 	    	    	arrayLayerFeld.add((18+((laufweg)-1)) % 36); //schritte nach "vorne"
 	    	    	arrayLayerFeld.add(0); //layer 
 	    	    	arrayLayerFeld.add((18-((laufweg)-1)) % 36); // schritte nach "hinten"
-	    	    } else if(kobold.getDorf()==4) {
+	    	    } else if(kobold.getDorf()==3) {
 	    	    	arrayLayerFeld.add(0); //layer 
 	    	    	arrayLayerFeld.add((27+((laufweg)-1)) % 36); //schritte nach "vorne"
 	    	    	arrayLayerFeld.add(0); //layer 
 	    	    	arrayLayerFeld.add((27-((laufweg)-1)) % 36); // schritte nach "hinten"
-	    	    }                	    
-		    }else if(kobold.getLayer()==0) {    
-		    	arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %36);  //vorw�rts
-		    	arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %36); // r�ckw�rts
-		    	//arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorw�rts
-		    	//arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // r�ckw�rts
-		    }else if(kobold.getLayer()==1) {                	 
-		    	arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %28); //vorw�rts
-		    	arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %28);  // r�ckw�rts
-		    	//arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorw�rts
-		    	//arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // r�ckw�rts
-		   	} else if(kobold.getLayer()==2) {                	 
+	    	    }
+		}else if(kobold.getLayer()==0) {
+		    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %36);  //vorw�rts
+		    arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %36); // r�ckw�rts
+		    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorw�rts
+		    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // r�ckw�rts
+		}else if(kobold.getLayer()==1) {                	 
+		    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %28); //vorw�rts
+		    arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %28);  // r�ckw�rts
+		    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorw�rts
+		    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // r�ckw�rts
+		} else if(kobold.getLayer()==2) {                	 
 	       	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %20);  //vorw�rts
 	            arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %20); // r�ckw�rts
 	       	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorw�rts
