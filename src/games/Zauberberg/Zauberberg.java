@@ -136,24 +136,26 @@ public class Zauberberg extends Game {
                         }
                     }                    
                 }
+                
                 if(dataMap.get("karte2Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                            spieler.getHand().remove(i);                            
+                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {            
                             //CHECKEN, OB KOBOLD SICH BEWEGEN DARF
                             if(aktuellerKobold.getLayer()==-1){
-                            	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
                             	//DAS ARRAY HOCHGEBEN UND ANTWORT DER ART LAYER, FELDNR ZURUECKBEKOMMEN
+                            	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
                             	
                             	
-                            	// ( AKTUELLER KOBOLD, INT TEMPLAYER, INT TEMPFELD, INT FELDNUMMER WO DER KOBOLD DRAUFSTEHT IM ALLGEMEINEN FELDERARRAY
+                            	
+                            	//  AKTUELLER KOBOLD, INT TEMPLAYER, INT TEMPFELD, INT FELDNUMMER WO DER KOBOLD DRAUFSTEHT IM ALLGEMEINEN FELDERARRAY
                             	//TEMPLAYER, TEMPFELD IST DAS FELD, WO DER SPIELER HINMOECHTE 
                             	//TODO 1,1 ERSETZEN
                             	aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
                             }else{
                             	 if(aktuellerKobold.darfBewegen(aktuellerKobold, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()))==true) {
                                  	//JA
+                            		spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);           
                                  	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
                                  }else{
                                  	//NEIN
@@ -166,12 +168,25 @@ public class Zauberberg extends Game {
                 if(dataMap.get("karte2Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                        	if (aktuellerKobold.getLayer() == -1) {
+                        		arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
+                        	}else {
+                        		if(aktuellerKobold.darfBewegen(aktuellerKobold, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()))==true) {
+                                 	//JA
+                                 	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
+                                 }else{
+                                 	//NEIN
+                                 	//TODO HOCHGEBEN, DAS DER KOBOLD SICH NICHT BEWEGEN DARF                                	
+                                 }                  		
+                        		                      		
+                        	}
+                        	spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
                             break;
                         }
                     }
                 }
+                
                 if(dataMap.get("karte3Typ").equals("Normal")) {
                   //BEI KARTE 3 NICHTMEHR CHECKEN, OB ER SICH BEWEGEN DARF, DA ES VORHER ABGEFANGEN WURDE
                     for (int i = 0; i < spieler.getHand().size(); i++) {
@@ -191,23 +206,27 @@ public class Zauberberg extends Game {
                        if (spieler.getHand().get(i).getJoker()) {
                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                            spieler.getHand().remove(i);
+                           aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte3Wert")));
+                           
+                           //TODO 1,1 ERSETZEN DURCH WERTE DIE VON SERVER KOMMEN
+                           aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
                            break;
                        }
                    }        	   
                }
                             
-                this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
-                sendGameDataToUser(user,"FELDERANBIETEN");
-                System.out.println(felderWaehlen);
-                //neue Karten ziehen
-                spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
-                sendGameDataToUser(user,"UPDATEKARTEN");
-                break;
+               this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
+               sendGameDataToUser(user,"FELDERANBIETEN");
+               System.out.println(felderWaehlen + "ja ?");
+               //neue Karten ziehen
+               spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
+               sendGameDataToUser(user,"UPDATEKARTEN");
+               break;
 
             //dieser case läuft!
             case "KARTENTAUSCHEN":
         	int sizeOfHand2 = spieler.getHand().size();
-                if (!dataMap.get("karte1").equals("Null")) {
+        		if (!dataMap.get("karte1").equals("Null")) {
                     if (!dataMap.get("karte1").equals("Joker")) {
                         for (int i = 0; i < spieler.getHand().size(); i++) {
                             if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1"))) {
