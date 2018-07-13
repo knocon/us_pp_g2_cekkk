@@ -7,9 +7,9 @@ Java -> JavaScript:
      UPDATESPIELFELD: JSON Map<String, Map<String, String>>
      	{"1_0": {
                  "EreigniskarteSteinOffen": "1",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
-                 "Kobold1-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist todo Eingabefelder deaktivieren
+                 "Kobold1-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
                  "Kobold1-Nummer": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
-                 "Kobold2-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist todo Eingabefelder deaktivieren
+                 "Kobold2-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
                  "Kobold2-Nummer": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
                  },
          "dorf1": {siehe obige Definition},
@@ -19,7 +19,7 @@ Java -> JavaScript:
 
      UPDATESPIELZUSTAND: JSON Map<String, Map<String, String>>
         {"RotAktiv": "1",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
-         "RotFokus": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist todo Eingabefelder deaktivieren
+         "RotFokus": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
          "RotBistDu": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
          "RotSteine: "2",       Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt (bei Raben auch negative Zahlen bis zu -3!
          "GrünAktiv": "", ...

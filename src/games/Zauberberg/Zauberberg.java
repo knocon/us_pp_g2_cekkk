@@ -403,7 +403,6 @@ public class Zauberberg extends Game {
         if (eventName.equals("FELDERANBIETEN")) {
             return this.felderWaehlen;
         }
-        //todo hier kommen weitere events hin, falls nötig
         return "";
     }
 
@@ -470,5 +469,9 @@ public class Zauberberg extends Game {
         this.recentInfoText = recentInfoText;
     }
 
+    public void setPlayerTurn(Spieler playerTurn) {
+        this.playerTurn = playerTurn;
+        sendGameDataToClients("UPDATESPIELZUSTAND");
+    }
 
 }

@@ -12952,6 +12952,10 @@
                 }
                 if (data[colour + "BistDu"] === "1") {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "bold";
+                    if (data[colour + "Fokus"] === "0") { //Man ist nicht dran
+                        disableKartenLegen(true);
+                        disableKartenTauschen(true);
+                    }
                 } else {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "inherit";
                 }
