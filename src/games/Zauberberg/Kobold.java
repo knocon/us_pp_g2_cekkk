@@ -63,8 +63,8 @@ public class Kobold {
 	}else if(this.getLayer()==0) {	
 	    //prüft ob Kobold auf einem Kobold sitzt, wenn ja nächste Ebene möglich 
 	    for(Feld f : zauberberg.getSpiel().getFelder()) {
-		if(f.getLayer() == 0 & f.getFeldNr()==this.getFeldNr()){
-		    if(f.getKobolde().size()>1 & f.getKobolde().get(1).equals(this)) {
+		if(f.getLayer() == 0 && f.getFeldNr()==this.getFeldNr()){
+		    if(f.getKobolde().size()>1 && f.getKobolde().get(1).equals(this)) {
 			arrayLayerFeld.add(1); 
 			arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.feldNr)); 			
 		    }
@@ -75,8 +75,8 @@ public class Kobold {
 	    arrayLayerFeld.add((((this.getFeldNr()-laufweg)%36)+36)%36); // r�ckw�rts	    
 	}else if(this.getLayer()==1) {   
 	    for(Feld f : zauberberg.getSpiel().getFelder()) {
-		if(f.getLayer() == 1 & f.getFeldNr()==this.getFeldNr()){
-		    if(f.getKobolde().size()>1 & f.getKobolde().get(1).equals(this)) {
+		if(f.getLayer() == 1 && f.getFeldNr()==this.getFeldNr()){
+		    if(f.getKobolde().size()>1 && f.getKobolde().get(1).equals(this)) {
 			arrayLayerFeld.add(2); 
 			arrayLayerFeld.add(this.getFeldNrNextLayer(1, this.feldNr)); 			
 		    }
@@ -87,8 +87,8 @@ public class Kobold {
 	    arrayLayerFeld.add((((this.getFeldNr()-laufweg)%28)+28)%28);  // r�ckw�rts
 	} else if(this.getLayer()==2) {  
 	    for(Feld f : zauberberg.getSpiel().getFelder()) {
-		if(f.getLayer() == 2 & f.getFeldNr()==this.getFeldNr()){
-		    if(f.getKobolde().size()>1 & f.getKobolde().get(1).equals(this)) {
+		if(f.getLayer() == 2 && f.getFeldNr()==this.getFeldNr()){
+		    if(f.getKobolde().size()>1 && f.getKobolde().get(1).equals(this)) {
 			arrayLayerFeld.add(3); 
 			arrayLayerFeld.add(this.getFeldNrNextLayer(2, this.feldNr)); 			
 		    }
@@ -99,8 +99,8 @@ public class Kobold {
             arrayLayerFeld.add((((this.getFeldNr()-laufweg)%20)+20)%20); // r�ckw�rts
        	} else if(this.getLayer()==3) {   
        	for(Feld f : zauberberg.getSpiel().getFelder()) {
-		if(f.getLayer() == 3 & f.getFeldNr()==this.getFeldNr()){
-		    if(f.getKobolde().size()>1 & f.getKobolde().get(1).equals(this)) {
+		if(f.getLayer() == 3 && f.getFeldNr()==this.getFeldNr()){
+		    if(f.getKobolde().size()>1 && f.getKobolde().get(1).equals(this)) {
 			arrayLayerFeld.add(4); 
 			arrayLayerFeld.add(this.getFeldNrNextLayer(3, this.feldNr)); 			
 		    }
@@ -124,7 +124,7 @@ public class Kobold {
 	this.setFeldNr(feldNr);
 	this.setLayer(layer);
 	for(Feld f : zauberberg.getSpiel().getFelder()) {
-	    if(f.getLayer()==layer & f.getFeldNr()==feldNr) {
+	    if(f.getLayer()==layer && f.getFeldNr()==feldNr) {
 		f.getKobolde().add(this);
 		break;
 	    }
@@ -137,56 +137,56 @@ public class Kobold {
     public int getFeldNrNextLayer(int layer, int feldNr) {
 	switch(layer) {
 	case 0: 
-	    if(feldNr>0 & feldNr<9) {
+	    if(feldNr>0 && feldNr<9) {
 		return feldNr-1; 
 	    }
-	    if(feldNr>9 & feldNr<18) {
+	    if(feldNr>9 && feldNr<18) {
 		return feldNr-3; 
 	    }
-	    if(feldNr>18 & feldNr<27) {
+	    if(feldNr>18 && feldNr<27) {
 		return feldNr-5; 
 	    }
-	    if(feldNr>27 & feldNr<36) {
+	    if(feldNr>27 && feldNr<36) {
 		return feldNr-1; 
 	    }
 	    break; 
 	case 1: 
-	    if(feldNr>0 & feldNr<7) {
+	    if(feldNr>0 && feldNr<7) {
 		return feldNr-1; 
 	    }
-	    if(feldNr>7 & feldNr<14) {
+	    if(feldNr>7 && feldNr<14) {
 		return feldNr-3; 
 	    }
-	    if(feldNr>14 & feldNr<21) {
+	    if(feldNr>14 && feldNr<21) {
 		return feldNr-5; 
 	    }
-	    if(feldNr>21 & feldNr<28) {
+	    if(feldNr>21 && feldNr<28) {
 		return feldNr-7; 
 	    }
 	    break; 
 	case 2: 
-	    if(feldNr>0 & feldNr<5) {
+	    if(feldNr>0 && feldNr<5) {
 		return feldNr-1; 
 	    }
-	    if(feldNr>5 & feldNr<10) {
+	    if(feldNr>5 && feldNr<10) {
 		return feldNr-3; 
 	    }
-	    if(feldNr>10 & feldNr<15) {
+	    if(feldNr>10 && feldNr<15) {
 		return feldNr-5; 
 	    }
-	    if(feldNr>15 & feldNr<20) {
+	    if(feldNr>15 && feldNr<20) {
 		return feldNr-7; 
 	    }
 	    break;
 	case 3: 
-	    if(feldNr>0 & feldNr <3) {
+	    if(feldNr>0 && feldNr <3) {
 		return feldNr-1;
 	    }
-	    if(feldNr>3 & feldNr <6) {
+	    if(feldNr>3 && feldNr <6) {
 		return feldNr-3;
-	    }if(feldNr>6 & feldNr <9) {
+	    }if(feldNr>6 && feldNr <9) {
 		return feldNr-5;
-	    }if(feldNr>9 & feldNr <12) {
+	    }if(feldNr>9 && feldNr <12) {
 		return feldNr-7;
 	    }
 	    break;
