@@ -19,7 +19,10 @@ public class Spiel {
    
     
     public Spiel() {
-	kartenstapel = new Kartenstapel();  
+	kartenstapel = new Kartenstapel();   
+	for(int i =1; i<=4; i++) {
+	    felder.add(new Feld(-1,i,null)); 
+	}
 	
 	//layer 1
 	for(int i=0; i<=35;i++ ) {

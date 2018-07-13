@@ -41,8 +41,7 @@ public class Zauberberg extends Game {
    
     
     public int getMaxPlayerAmount() {
-        return 5;
-        
+        return 5;        
     }
 
     public int getCurrentPlayerAmount() {
@@ -181,8 +180,7 @@ public class Zauberberg extends Game {
                        }
                    }        	   
                }
-               //Karten verarbeiten
-               aktuellerKobold.setZauberberg(this);
+               //Karten verarbeiten               
                tempUser = user; 
                aktuellerKobold.kartenLegen(value2Karte,value3Karte); 
                System.out.println(felderWaehlen);
@@ -340,6 +338,9 @@ public class Zauberberg extends Game {
             for (int i = 1; i <= 5; i++) {
                 spieler.getKoboldList().add(new Kobold(i, spieler));
             }
+            for(Kobold k : spieler.getKoboldList()) {
+        	k.setZauberberg(this);
+            }
             if (playerTurn == null) {
                 playerTurn = spieler;
             }
@@ -459,6 +460,15 @@ public class Zauberberg extends Game {
     public void sendGameDataToUserPublic(String event) {
 	sendGameDataToUser(tempUser,event); 
     }
+
+    public String getRecentInfoText() {
+        return recentInfoText;
+    }
+
+    public void setRecentInfoText(String recentInfoText) {
+        this.recentInfoText = recentInfoText;
+    }
+    
     
     
 }
