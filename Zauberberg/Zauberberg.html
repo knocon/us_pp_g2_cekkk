@@ -12807,9 +12807,7 @@
                 "Eventname": "EREIGNISANTWORT",
                 "Ereignis": "Fliegende Karte",
                 "karte1Typ": "Null",
-                "karte2Typ": "Null",
-                "karte1Wert": "Null",
-                "karte2Wert": "Null"
+                "karte1Wert": "Null"
             };
             ereignisFliegendeKarte = false;
         } else {
@@ -12825,7 +12823,8 @@
         }
         var kartencontainer = document.getElementById("karten-Legen");
         //console.log(kartencontainer); // LOG
-        for (var i = 0; i < kartencontainer.childElementCount; i++) {
+        var i = 0;
+        for (; i < kartencontainer.childElementCount; i++) {
             //todo catch mindestens 2 Karten
             //todo push info text
             if (kartencontainer.children[i].classList.contains("jokerkarte")) { // Ist ein Joker
@@ -12834,6 +12833,17 @@
             } else { // Ist normale Karte
                 output["karte" + (i + 1) + "Typ"] = "Normal";
                 output["karte" + (i + 1) + "Wert"] = kartencontainer.children[i].children[0].alt;
+            }
+        }
+        if (ereignisFliegendeKarte){
+            if (i !== 1){
+                pushInfoTxt("Ereignis Fliegende Karte: Du muss genau eine Karte legen!");
+                return;
+            }
+        } else {
+            if (i < 2){
+                pushInfoTxt("Karten legen: Du musst mindestens 2 Karten legen, maximal 3");
+                return;
             }
         }
         console.log(output);
@@ -12999,6 +13009,10 @@
 
     addListener("PUSHINFOTXT", function (event) {
         var stringFromServer = event.data;
+        pushInfoTxt(stringFromServer);
+    });
+
+    function pushInfoTxt(text) {
         var text1 = document.getElementById("textInfo1");
         var text2 = document.getElementById("textInfo2");
         var text3 = document.getElementById("textInfo3");
@@ -13008,8 +13022,8 @@
         text2.innerText = text3.innerText;
         text3.innerText = text4.innerText;
         text4.innerText = text5.innerText;
-        text5.innerText = stringFromServer;
-    });
+        text5.innerText = text;
+    }
 
     var ereignisFliegendeKarte = false;
 

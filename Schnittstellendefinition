@@ -60,8 +60,8 @@ JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist im
 
      EREIGNISANTWORT: JSON Map<String, String> Im folgenden alle möglichen Zusammensetzungen der Map:
          {"Eventname": "EREIGNISANTWORT", "Ereignis": "Fliegende Karte",
-          "karteTyp": "Null",
-          "karteWert": "Null"} todo aktualiesere code
+          "karte1Typ": "Null",
+          "karte1Wert": "Null"}
          {"Eventname": "EREIGNISANTWORT", "Ereignis": "Rabe", "Spieler": "Rot"} Farbe das Spielers, auf den der Rabe angewendet werden soll.
 
      FELDAUSWAEHLEN: JSON Map<String, String>
