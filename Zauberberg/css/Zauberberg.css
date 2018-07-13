@@ -19,7 +19,7 @@ body {
     margin: 10px;
 }
 
-#villages{
+#villages {
     display: inline-block;
     vertical-align: top;
 }
@@ -47,22 +47,21 @@ body {
     height: 800px;
 }
 
-.StyleContainer{
-	position: relative;
+.StyleContainer {
+    position: relative;
 }
 
-
-.feldImg{
-	position: absolute;
-	top: -40.5px;
-	width: 77px;
-	height: 77px;
-	visibility: visible;
+.feldImg {
+    position: absolute;
+    top: -40.5px;
+    width: 77px;
+    height: 77px;
+    visibility: visible;
 }
 
 #villages {
-	width: 100px;
-	height: 800px;
+    width: 100px;
+    height: 800px;
 }
 
 /* END GRID */

@@ -71,8 +71,8 @@ public class Zauberberg extends Game {
          * Eventnamen für Spielsteuerung abfangen
          */
 
-        if (this.gState == GameState.CLOSED || gState != GameState.RUNNING){
-        	return;
+        if (this.gState == GameState.CLOSED || gState != GameState.RUNNING) {
+            return;
         }
 
         if (gsonString.equals("CLOSE")) {
@@ -84,8 +84,8 @@ public class Zauberberg extends Game {
         if (gsonString.equals("START")) { // Start Button wurde vom Host gedrückt
             this.gState = GameState.RUNNING;
             //jeder Spieler bekommnt 3 zuf�llige Karten vom Stapel
-            for(Spieler s : spielerList) {
-        	s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
+            for (Spieler s : spielerList) {
+                s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
                 spiel.getKartenstapel().getStapel().remove(s.getHand());
             }
             sendGameDataToClients("STARTGAME");
@@ -104,31 +104,31 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
-        	int value2Karte = 0;
-        	int value3Karte =0;
+                int value2Karte = 0;
+                int value3Karte = 0;
                 int sizeOfHand = spieler.getHand().size();
 
-                if(dataMap.get("karte1Typ").equals("Normal")) {
+                if (dataMap.get("karte1Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
-                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
+                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
                             break;
                         }
                     }
                 }
-                if(dataMap.get("karte1Typ").equals("Joker")) {
+                if (dataMap.get("karte1Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
-                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
+                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
                             break;
                         }
                     }
                 }
-                if(dataMap.get("karte2Typ").equals("Normal")) {
+                if (dataMap.get("karte2Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
@@ -138,19 +138,19 @@ public class Zauberberg extends Game {
                         }
                     }
                 }
-                if(dataMap.get("karte2Typ").equals("Joker")) {
+                if (dataMap.get("karte2Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
                             value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
                             break;
-                      	}
+                        }
                     }
                 }
 
 
-                if(dataMap.get("karte3Typ").equals("Normal")) {
+                if (dataMap.get("karte3Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
@@ -160,29 +160,29 @@ public class Zauberberg extends Game {
                         }
                     }
                 }
-               if(dataMap.get("karte3Typ").equals("Joker")) {
-        	   for (int i = 0; i < spieler.getHand().size(); i++) {
-                       if (spieler.getHand().get(i).getJoker()) {
-                           spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                           spieler.getHand().remove(i);
-                           value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
-                           break;
-                       }
-                   }
-               }
-               //Karten verarbeiten
-               tempUser = user;
-               aktuellerKobold.kartenLegen(value2Karte,value3Karte);
-               System.out.println(felderWaehlen);
-               //neue Karten ziehen
-               spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
-               sendGameDataToUser(user,"UPDATEKARTEN");
-               break;
+                if (dataMap.get("karte3Typ").equals("Joker")) {
+                    for (int i = 0; i < spieler.getHand().size(); i++) {
+                        if (spieler.getHand().get(i).getJoker()) {
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spieler.getHand().remove(i);
+                            value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
+                            break;
+                        }
+                    }
+                }
+                //Karten verarbeiten
+                tempUser = user;
+                aktuellerKobold.kartenLegen(value2Karte, value3Karte);
+                System.out.println(felderWaehlen);
+                //neue Karten ziehen
+                spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
+                sendGameDataToUser(user, "UPDATEKARTEN");
+                break;
 
             //dieser case läuft!
             case "KARTENTAUSCHEN":
-        	int sizeOfHand2 = spieler.getHand().size();
-        		if (!dataMap.get("karte1").equals("Null")) {
+                int sizeOfHand2 = spieler.getHand().size();
+                if (!dataMap.get("karte1").equals("Null")) {
                     if (!dataMap.get("karte1").equals("Joker")) {
                         for (int i = 0; i < spieler.getHand().size(); i++) {
                             if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1"))) {
@@ -282,7 +282,7 @@ public class Zauberberg extends Game {
                     }
                 }
                 //neue Karten ziehen bei KARTENTAUSCH
-                spieler.getHand().addAll(getRandomCards(sizeOfHand2-spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
+                spieler.getHand().addAll(getRandomCards(sizeOfHand2 - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user, "UPDATEKARTEN");
                 break;
             case "EREIGNISANTWORT":
@@ -292,11 +292,11 @@ public class Zauberberg extends Game {
                         break;
                     case "Rabe":
                         //ausgew�hlter Spieler.setAnzahlZaubersteine(ausgewählterspielr.getAnzahlZaubersteine()-1);  
-                	break;
+                        break;
                 }
                 break;
             case "FELDAUSWAEHLEN":
-        	aktuellerKobold.bewegen(Integer.parseInt(dataMap.get("layer")), Integer.parseInt(dataMap.get("position")));
+                aktuellerKobold.bewegen(Integer.parseInt(dataMap.get("layer")), Integer.parseInt(dataMap.get("position")));
                 break;
             default:
                 // Fehler!
@@ -328,8 +328,8 @@ public class Zauberberg extends Game {
             for (int i = 1; i <= 5; i++) {
                 spieler.getKoboldList().add(new Kobold(i, spieler));
             }
-            for(Kobold k : spieler.getKoboldList()) {
-        	k.setZauberberg(this);
+            for (Kobold k : spieler.getKoboldList()) {
+                k.setZauberberg(this);
             }
             if (playerTurn == null) {
                 playerTurn = spieler;
@@ -386,7 +386,7 @@ public class Zauberberg extends Game {
         }
         if (eventName.equals("UPDATESPIELZUSTAND")) {
             HashMap<String, String> output = new HashMap<>();
-            for (Spieler sp: spielerList ) {
+            for (Spieler sp : spielerList) {
                 output.put(sp.getSpielerName() + "-Aktiv", "1"); // todo immer Aktiv wegen KI ?
                 output.put(sp.getSpielerName() + "-Fokus", sp.equals(this.playerTurn) ? "1" : "0");
                 output.put(sp.getSpielerName() + "-BistDu", sp.equals(spieler) ? "1" : "0");
@@ -452,12 +452,14 @@ public class Zauberberg extends Game {
     public void setFelderWaehlen(String felderWaehlen) {
         this.felderWaehlen = felderWaehlen;
     }
+
     //Emre
     public void sendGameDataToUserPublic(String event) {
-	sendGameDataToUser(tempUser,event);
+        sendGameDataToUser(tempUser, event);
     }
+
     public void sendGameDataToClientsPublic(String event) {
-	    sendGameDataToClients(event);
+        sendGameDataToClients(event);
     }
 
     public String getRecentInfoText() {
@@ -467,7 +469,6 @@ public class Zauberberg extends Game {
     public void setRecentInfoText(String recentInfoText) {
         this.recentInfoText = recentInfoText;
     }
-
 
 
 }
