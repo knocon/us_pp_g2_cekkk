@@ -68,3 +68,4 @@
 [2018-07-10 19:50:47.881] [IP: /192.168.2.106] [LOGIN] Logging in user "Test" succeeded
 [2018-07-10 20:43:21.257] [IP: /192.168.2.106] [LOGIN] Logging in user "Test" succeeded
 [2018-07-12 19:08:40.239] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-13 15:24:29.024] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
