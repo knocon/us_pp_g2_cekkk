@@ -12825,8 +12825,6 @@
         //console.log(kartencontainer); // LOG
         var i = 0;
         for (; i < kartencontainer.childElementCount; i++) {
-            //todo catch mindestens 2 Karten
-            //todo push info text
             if (kartencontainer.children[i].classList.contains("jokerkarte")) { // Ist ein Joker
                 output["karte" + (i + 1) + "Typ"] = "Joker";
                 output["karte" + (i + 1) + "Wert"] = kartencontainer.children[i].getAttribute("data-jokervalue");
