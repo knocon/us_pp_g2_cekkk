@@ -18,16 +18,14 @@ Java -> JavaScript:
          "Grau": {siehe obige Definition}}
 
      UPDATESPIELZUSTAND: JSON Map<String, Map<String, String>>
-        {"Rot": {
-                 "Aktiv": "1",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
-                 "Fokus": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist todo Eingabefelder deaktivieren
-                 "BistDu": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
-                 "Steine: "2",       Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt (bei Raben auch negative Zahlen bis zu -3!)
-                 },
-         "Grün": {siehe obige Definition},
-         "Gelb": {siehe obige Definition},
-         "Blau": {siehe obige Definition},
-         "Grau": {siehe obige Definition}}
+        {"RotAktiv": "1",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
+         "RotFokus": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist todo Eingabefelder deaktivieren
+         "RotBistDu": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
+         "RotSteine: "2",       Flag ist 0, 1 oder 2 und hält die Anzahl der Steine, die der Spieler besitzt (bei Raben auch negative Zahlen bis zu -3!
+         "GrünAktiv": "", ...
+         "GelbAktiv": "", ...
+         "BlauAktiv": "", ...
+         "GrauAktiv": "" ...}
 
      PUSHINFOTXT: Einfacher String, der dann im Infofeld angezeigt wird. (Informiert z.B. Mitspieler über Aktionen eines Spielers (Ereigniskarten etc.))
                     AUßERDEM Ausgabe für Errors(aufgetretene Exceptions)!

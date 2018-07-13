@@ -7458,66 +7458,6 @@
         </table>
 
     </div>
-    <script>
-        /**
-         * Spielfeld
-         */
-
-        function kristallkugel() {
-            //todo wird aufgerufen, wenn das Ereignis auftritt und der Spieler die Karten zum Aufdecken wählt
-        }
-
-        /* BEISPIEL TICTACTOE
-        var emptyImg = "/Zauberberg/images/empty.png";
-        var xImg = "/Zauberberg/images/x.jpg";
-        var oImg = "/Zauberberg/images/o2.png";
-        var statusWait = true;
-
-        var arrFields = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        var sentFields = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-        function setField(x) {
-            sentFields[x] = 1;
-        }
-
-        function getImg(x) {
-            if (x == 1) return xImg;
-            else if (x == 2) return oImg;
-            return emptyImg
-        }
-
-        function initFields() {
-            var parent = document.getElementById("grid");
-            for (var i = 0; i < 9; i++) {
-                var img = document.createElement("img");
-                img.id = "img" + i;
-                img.src = emptyImg;
-                img.width = "148";
-                img.height = "153";
-                img.style.position = "absolute";
-                img.style.top = (Math.floor((i / 3)) * 172 + 11) + "px";
-                img.style.left = ((i % 3) * 170 + 11) + "px";
-                img.onclick = function () {
-                    if (arrFields[this.id[3]] == 0 && statusWait == false) {
-                        setField(this.id[3]);
-                        updateGameState();
-                    }
-                };
-                parent.appendChild(img);
-            }
-        }
-
-        window.onload = initFields;
-
-        function redraw() {
-            for (var i = 0; i < 9; i++) {
-                var img = document.getElementById('img' + i);
-                img.src = getImg(arrFields[i]);
-            }
-        }
-
-        */
-    </script>
 
     <!-- START Aktionsfläche -->
     <div id="Aktionsfläche">
@@ -7634,7 +7574,7 @@
                     disableKartenLegen(false);
                 }
                 return (!ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < 3)) ||
-                    (ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < ereignisFliegendeKarteRestlicheZuege));
+                    (ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount === 0));
             },
             pull: function () {
                 if (!ereignisFliegendeKarte && document.getElementById("karten-Legen").childElementCount === 2) {
@@ -7756,55 +7696,55 @@
     addListener('UPDATESPIELZUSTAND', function (event) {
         var stringFromServer = event.data;
         var data = JSON.parse(stringFromServer);
-        //var kartencontainer = document.getElementById("karten-Hand");
-        for (var colour in data) {
-            if (data[colour]["Aktiv"] === "1") {
+        var colours = ["Rot", "Grün", "Gelb", "Blau", "Grau"];
+        for (var colour in colours) {
+            if (data[colour + "Aktiv"] === "1") {
                 document.getElementById("Spieler" + colour).style.visibility = "visible";
 
-                if (data[colour]["Fokus"] === "1") {
+                if (data[colour + "Fokus"] === "1") {
                     document.getElementById("Spieler" + colour).children[0].style.textDecoration = "underline solid white";
                 } else {
                     document.getElementById("Spieler" + colour).children[0].style.textDecoration = "";
                 }
 
-                if (data[colour]["Steine"] === "2") {
+                if (data[colour + "Steine"] === "2") {
                     document.getElementById(colour + "Stein1").style.visibility = "visible";
                     document.getElementById(colour + "Stein2").style.visibility = "visible";
                     document.getElementById(colour + "Rabe1").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe3").style.visibility = "hidden";
-                } else if (data[colour]["Steine"] === "1") {
+                } else if (data[colour + "Steine"] === "1") {
                     document.getElementById(colour + "Stein1").style.visibility = "visible";
                     document.getElementById(colour + "Stein2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe1").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe3").style.visibility = "hidden";
-                } else if (data[colour]["Steine"] === "0") {
+                } else if (data[colour + "Steine"] === "0") {
                     document.getElementById(colour + "Stein1").style.visibility = "hidden";
                     document.getElementById(colour + "Stein2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe1").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe3").style.visibility = "hidden";
-                } else if (data[colour]["Steine"] === "-1") {
+                } else if (data[colour + "Steine"] === "-1") {
                     document.getElementById(colour + "Stein1").style.visibility = "hidden";
                     document.getElementById(colour + "Stein2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe1").style.visibility = "visible";
                     document.getElementById(colour + "Rabe2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe3").style.visibility = "hidden";
-                } else if (data[colour]["Steine"] === "-2") {
+                } else if (data[colour + "Steine"] === "-2") {
                     document.getElementById(colour + "Stein1").style.visibility = "hidden";
                     document.getElementById(colour + "Stein2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe1").style.visibility = "visible";
                     document.getElementById(colour + "Rabe2").style.visibility = "visible";
                     document.getElementById(colour + "Rabe3").style.visibility = "hidden";
-                } else if (data[colour]["Steine"] === "-3") {
+                } else if (data[colour + "Steine"] === "-3") {
                     document.getElementById(colour + "Stein1").style.visibility = "hidden";
                     document.getElementById(colour + "Stein2").style.visibility = "hidden";
                     document.getElementById(colour + "Rabe1").style.visibility = "visible";
                     document.getElementById(colour + "Rabe2").style.visibility = "visible";
                     document.getElementById(colour + "Rabe3").style.visibility = "visible";
                 }
-                if (data[colour]["BistDu"] === "1") {
+                if (data[colour + "BistDu"] === "1") {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "bold";
                 } else {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "inherit";
@@ -7862,14 +7802,12 @@
     });
 
     var ereignisFliegendeKarte = false;
-    var ereignisFliegendeKarteRestlicheZuege = 1;
 
     addListener("EREIGNISANFRAGE", function (event) {
         var stringFromServer = event.data;
         var data = JSON.parse(stringFromServer);
         if (data["Ereignis"] === "Fliegende Karte") {
             ereignisFliegendeKarte = true;
-            ereignisFliegendeKarteRestlicheZuege = parseInt(data["RestlicheZuege"]);
         } else if (data["Ereignis"] === "Rabe") {
             var btns = document.getElementsByClassName("rabeBtn");
             for (var i = 0; i < btns.length; i++) {

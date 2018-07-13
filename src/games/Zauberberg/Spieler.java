@@ -12,9 +12,11 @@ public class Spieler {
     private ArrayList<Kobold> koboldList = new ArrayList<Kobold>();
     private int anzahlZaubersteine;
     private ArrayList<Bewegungskarte> hand;
-    private static int anz =0; 
+    private static int anz =0;
+    private Zauberberg zauberberg;
 
-    public Spieler() {
+    public Spieler(Zauberberg zauberberg) {
+        this.zauberberg = zauberberg;
 	switch(anz) {
 	case 0: this.farbName = Name.ROT;
 		break;
@@ -41,6 +43,7 @@ public class Spieler {
 
     public void setAnzahlZaubersteine(int anzahlZaubersteine) {
         this.anzahlZaubersteine = anzahlZaubersteine;
+        zauberberg.sendGameDataToClientsPublic("UPDATESPIELZUSTAND");
     }
 
     public ArrayList<Bewegungskarte> getHand() {
