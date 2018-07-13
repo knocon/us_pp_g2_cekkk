@@ -37,6 +37,7 @@ public class Zauberberg extends Game {
     private String recentInfoText = "";
     private String felderWaehlen = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
+    private User tempUser; 
    
     
     public int getMaxPlayerAmount() {
@@ -114,13 +115,15 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
+        	int value2Karte = 0;
+        	int value3Karte =0; 
                 int sizeOfHand = spieler.getHand().size();
+                
                 if(dataMap.get("karte1Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
-                            //Zwischenspeichern des Kobolds, der mit der ersten Karte gewaehlt wurde
                             aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
                             break;
                         }                    
@@ -129,74 +132,41 @@ public class Zauberberg extends Game {
                 if(dataMap.get("karte1Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
-                        	aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
+                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert"))-1);
                             break;
                         }
                     }                    
-                }
-                
+                }                
                 if(dataMap.get("karte2Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {            
-                            //CHECKEN, OB KOBOLD SICH BEWEGEN DARF
-                            if(aktuellerKobold.getLayer()==-1){
-                            	//DAS ARRAY HOCHGEBEN UND ANTWORT DER ART LAYER, FELDNR ZURUECKBEKOMMEN
-                            	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
-                            	
-                            	
-                            	
-                            	//  AKTUELLER KOBOLD, INT TEMPLAYER, INT TEMPFELD, INT FELDNUMMER WO DER KOBOLD DRAUFSTEHT IM ALLGEMEINEN FELDERARRAY
-                            	//TEMPLAYER, TEMPFELD IST DAS FELD, WO DER SPIELER HINMOECHTE 
-                            	//TODO 1,1 ERSETZEN
-                            	aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
-                            }else{
-                            	 if(aktuellerKobold.darfBewegen(aktuellerKobold, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()))==true) {
-                                 	//JA
-                            		spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                    spieler.getHand().remove(i);           
-                                 	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
-                                 }else{
-                                 	//NEIN
-                                 	//TODO HOCHGEBEN, DAS DER KOBOLD SICH NICHT BEWEGEN DARF                                	
-                                 }
-                            }     
+                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) { 
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spieler.getHand().remove(i);
+                            value2Karte = Integer.parseInt(dataMap.get("karte2Wert")); 
+                            break; 
                         }
                     }
                 }
                 if(dataMap.get("karte2Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
-                        	if (aktuellerKobold.getLayer() == -1) {
-                        		arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
-                        	}else {
-                        		if(aktuellerKobold.darfBewegen(aktuellerKobold, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()))==true) {
-                                 	//JA
-                                 	arrayLayerFeld = aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte2Wert")));
-                                 }else{
-                                 	//NEIN
-                                 	//TODO HOCHGEBEN, DAS DER KOBOLD SICH NICHT BEWEGEN DARF                                	
-                                 }                  		
-                        		                      		
-                        	}
-                        	spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
-                            break;
-                        }
+                            value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
+                            break;                          
+                      	}                  	
                     }
                 }
+
                 
                 if(dataMap.get("karte3Typ").equals("Normal")) {
-                  //BEI KARTE 3 NICHTMEHR CHECKEN, OB ER SICH BEWEGEN DARF, DA ES VORHER ABGEFANGEN WURDE
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
                             spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                             spieler.getHand().remove(i);
-                            aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte3Wert")));
-                            
-                            //TODO 1,1 ERSETZEN DURCH WERTE DIE VON SERVER KOMMEN
-                            aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
+                            value3Karte = Integer.parseInt(dataMap.get("karte3Wert")); 
                             break;
                         }
                     }               
@@ -206,23 +176,21 @@ public class Zauberberg extends Game {
                        if (spieler.getHand().get(i).getJoker()) {
                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
                            spieler.getHand().remove(i);
-                           aktuellerKobold.moeglFelder(aktuellerKobold, Integer.parseInt(dataMap.get("karte3Wert")));
-                           
-                           //TODO 1,1 ERSETZEN DURCH WERTE DIE VON SERVER KOMMEN
-                           aktuellerKobold.bewegen(aktuellerKobold, 1, 1, spiel.getFelder().get(aktuellerKobold.getGlobalFeld()));
-                           break;
+                           value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));                            
+                           break; 
                        }
                    }        	   
                }
-                            
-               this.felderWaehlen = gson.toJson(arrayLayerFeld, ArrayList.class);
-               sendGameDataToUser(user,"FELDERANBIETEN");
-               System.out.println(felderWaehlen + "ja ?");
-               //neue Karten ziehen
+               //Karten verarbeiten
+               aktuellerKobold.setZauberberg(this);
+               tempUser = user; 
+               aktuellerKobold.kartenLegen(value2Karte,value3Karte); 
+               System.out.println(felderWaehlen);
+               //neue Karten ziehen 
                spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
                sendGameDataToUser(user,"UPDATEKARTEN");
                break;
-
+        
             //dieser case läuft!
             case "KARTENTAUSCHEN":
         	int sizeOfHand2 = spieler.getHand().size();
@@ -340,26 +308,7 @@ public class Zauberberg extends Game {
                 }
                 break; 
             case "FELDAUSWAEHLEN":
-        	 dataMap.get("layer");
-        	 //move
-        	 //check ereigniskarte
-        	 //check rest zu verarbeitende karten
-        	 dataMap.get("position");
-                 for(Feld feld : spiel.getFelder()) {
-                     if(feld.getLayer()== Integer.parseInt(dataMap.get("layer")) && feld.getFeldNr()== Integer.parseInt(dataMap.get("position"))){
-                 	if(feld.getKobolde().size()<2) {
-                 	    //feld.getKobolde().add(/*kobold*/);  
-                 	} 
-                 	if(feld.getKobolde().size()==2) {
-                 	    //falsch, da man die richtung kennen muss von 
-                 	    feld.getKobolde().get(1).setFeldNr(feld.getKobolde().get(1).getFeldNr()+1);
-                 	    //feld.getKobolde().add(/*kobold*/);     
-                 	    //kobold.setLayer(Integer.parseInt(dataMap.get("layer")); 
-                             //kobold.setFeldNr(Integer.parseInt(dataMap.get("position"));
-                 	}
-                 	
-                     }
-                 }
+        	aktuellerKobold.bewegen(Integer.parseInt(dataMap.get("layer")), Integer.parseInt(dataMap.get("position")));
                 break;
             default:
                 // Fehler!
@@ -445,6 +394,7 @@ public class Zauberberg extends Game {
             return ""; //todo Logik
         }
         if (eventName.equals("UPDATESPIELZUSTAND")) {
+            
             return ""; //todo Logik
         }
         if (eventName.equals("PUSHINFOTXT")) {
@@ -454,8 +404,7 @@ public class Zauberberg extends Game {
             return ""; //todo Logik
         }
         if (eventName.equals("FELDERANBIETEN")) {
-            return this.felderWaehlen;
-            //return gson.toJson(kobold.felderwohinkannarray , Arraylist.class
+            return this.felderWaehlen;            
         }
         //todo hier kommen weitere events hin, falls nötig
         return "";
@@ -490,4 +439,26 @@ public class Zauberberg extends Game {
     public ArrayList<User> getSpectatorList() {
         return this.spectatorList;
     }
+
+    public Spiel getSpiel() {
+        return spiel;
+    }
+
+    public void setSpiel(Spiel spiel) {
+        this.spiel = spiel;
+    }
+
+    public String getFelderWaehlen() {
+        return felderWaehlen;
+    }
+
+    public void setFelderWaehlen(String felderWaehlen) {
+        this.felderWaehlen = felderWaehlen;
+    }
+    //Emre
+    public void sendGameDataToUserPublic(String event) {
+	sendGameDataToUser(tempUser,event); 
+    }
+    
+    
 }

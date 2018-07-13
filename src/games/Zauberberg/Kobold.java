@@ -2,6 +2,11 @@ package games.Zauberberg;
 
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+
+
 public class Kobold {
     private int nummer;
     private Spieler.Name farbe;
@@ -11,6 +16,8 @@ public class Kobold {
     private int dorf; 
     private Spieler spieler; 
     private Zauberberg zauberberg;
+    private ArrayList<Integer> kartenWerte = new ArrayList<Integer>(); 
+    Gson gson = new GsonBuilder().create();
 	
     //Methoden bewegen
     //TODO Position im Grid
@@ -21,88 +28,63 @@ public class Kobold {
 	this.spieler = spieler; 
 	this.nummer = nummer; 
     }
-	
-	
-    //GIBT EIN ARRAY MIT INTWERTEN ZURUECK, WO DER KOBOLD SICH HINBEWEGEN DARF
-    //FORM -> (layer,feld,layer,feld..) 
-    public ArrayList<Integer> moeglFelder(Kobold kobold, int laufweg) {
-	ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
-	if(kobold.getLayer()==-1) {    	    //Schritt raus aus dem Dorf 
-    	    if(kobold.getDorf()==0) {
-    	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add((laufweg-1) % 36); //schritte nach "vorne"
-    	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add(((-(laufweg))-1) % 36); // schritte nach "hinten"	    		
-    	    } else if (kobold.getDorf()==1) {
-    	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add((9+(laufweg)-1) % 36); //schritte nach "vorne"
-    	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add((9-((laufweg)-1)) % 36); // schritte nach "hinten"
-    	    } else if (kobold.getDorf() ==2) {
-    	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add((18+((laufweg)-1)) % 36); //schritte nach "vorne"
-   	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add((18-((laufweg)-1)) % 36); // schritte nach "hinten"
-    	    } else if(kobold.getDorf()==3) {
-    	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add((27+((laufweg)-1)) % 36); //schritte nach "vorne"
-    	    	arrayLayerFeld.add(0); //layer 
-    	    	arrayLayerFeld.add((27-((laufweg)-1)) % 36); // schritte nach "hinten"
-    	    }
-	}else if(kobold.getLayer()==0) {
-	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %36);  //vorw�rts
-	    arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %36); // r�ckw�rts
-	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); //vorw�rts
-	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 36); // r�ckw�rts
-	}else if(kobold.getLayer()==1) {                	 
-	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %28); //vorw�rts
-	    arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %28);  // r�ckw�rts
-	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); //vorw�rts
-	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 28); // r�ckw�rts
-	} else if(kobold.getLayer()==2) {                	 
-       	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %20);  //vorw�rts
-            arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %20); // r�ckw�rts
-       	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); //vorw�rts
-       	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 20); // r�ckw�rts
-       	} else if(kobold.getLayer()==3) {                  	 
-       	    arrayLayerFeld.add((kobold.getFeldNr()+laufweg) %12);  //vorw�rts
-       	    arrayLayerFeld.add((kobold.getFeldNr()-laufweg) %12);  // r�ckw�rts
-       	    //arrayLayerFeld.add((((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); //vorw�rts
-       	    //arrayLayerFeld.add((-((Integer.parseInt(dataMap.get("karte3Wert"))))) % 12); // r�ckw�rts
-       	}  
-	return arrayLayerFeld;                  
-    }
     
-    //Idee ist, dass die Methode aufgerufen wird nachdem man weiss, auf welches Feld man will.
-    public void bewegen(Kobold kobold, int tempLayer, int tempFeldNr, Feld feld) {
-	//Bewegung nicht moeglich da einer auf dem Kobold steht	
-	if(feld.getKobolde().get(0)==kobold && feld.getKobolde().size()>1) {
-	//sollte nicht auftreten, da nur Felder 
-	//Bewegung moeglich aber kein Layerwechsel
-	} else if(feld.getKobolde().size()==1) {
-	   kobold.setLayer(tempLayer);
-	   kobold.setFeldNr(tempFeldNr);
-	   //Bewegung moeglich MIT LAYERWECHSEL
-	} else if(feld.getKobolde().size()>1 && feld.getKobolde().get(1) == kobold) {
-	    kobold.setLayer(tempLayer);
-	    kobold.setFeldNr(tempFeldNr);			
-	}			
+    public void kartenLegen(int kartenWert1, int kartenWert2) {
+	this.kartenWerte.add(kartenWert1);
+	this.kartenWerte.add(kartenWert2);
+	this.karteSpielen(); 
     }
+    public void karteSpielen() {
+	int laufweg = this.kartenWerte.get(0); 
+	ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
+	if(this.getLayer()==-1) {    	    //Schritt raus aus dem Dorf 
+    	    if(this.getDorf()==0) {
+    	    	arrayLayerFeld.add(0); //layer 
+    	    	arrayLayerFeld.add( ((0+(laufweg-1) % 36)+36)%36); //schritte nach "vorne"
+    	    	arrayLayerFeld.add(0); //layer 
+    	    	arrayLayerFeld.add(((0-(laufweg-1)%36)+36)%36); // schritte nach "hinten"	    		
+    	    } else if (this.getDorf()==1) {
+    	    	arrayLayerFeld.add(0); //layer     	    	
+    	    	arrayLayerFeld.add((((9+(laufweg-1))%36)+36)%36); //schritte nach "vorne"
+    	    	arrayLayerFeld.add(0); //layer 
+    	    	arrayLayerFeld.add((((9-(laufweg-1))%36)+36)%36); // schritte nach "hinten"
+    	    } else if (this.getDorf() ==2) {
+    	    	arrayLayerFeld.add(0); //layer    	    	
+    	    	arrayLayerFeld.add((((18+(laufweg-1))%36)+36)%36); //schritte nach "vorne"
+   	    	arrayLayerFeld.add(0); //layer 
+    	    	arrayLayerFeld.add((((18-(laufweg-1))%36)+36)%36); // schritte nach "hinten"
+    	    } else if(this.getDorf()==3) {
+    	    	arrayLayerFeld.add(0); //layer 
+    	    	arrayLayerFeld.add((((27+(laufweg-1))%36)+36)%36); //schritte nach "vorne"
+    	    	arrayLayerFeld.add(0); //layer 
+    	    	arrayLayerFeld.add((((27-(laufweg-1))%36)+36)%36); // schritte nach "hinten"
+    	    }
+	}else if(this.getLayer()==0) {	    
+	    arrayLayerFeld.add((((this.getFeldNr()+laufweg)%36)+36)%36);  //vorw�rts
+	    arrayLayerFeld.add((((this.getFeldNr()-laufweg)%36)+36)%36); // r�ckw�rts	    
+	}else if(this.getLayer()==1) {                	 
+	    arrayLayerFeld.add((((this.getFeldNr()+laufweg)%28)+28)%28); //vorw�rts
+	    arrayLayerFeld.add((((this.getFeldNr()-laufweg)%28)+28)%28);  // r�ckw�rts
+	} else if(this.getLayer()==2) {                	 
+       	    arrayLayerFeld.add((((this.getFeldNr()+laufweg)%20)+20)%20);  //vorw�rts
+            arrayLayerFeld.add((this.getFeldNr()-laufweg) %20); // r�ckw�rts
+       	} else if(this.getLayer()==3) {                  	 
+       	    arrayLayerFeld.add((((this.getFeldNr()+laufweg)%12)+12)%12);  //vorw�rts
+       	    arrayLayerFeld.add((((this.getFeldNr()-laufweg)%12)+12)%12);  // r�ckw�rts
+       	}  
+	this.zauberberg.setFelderWaehlen(gson.toJson(arrayLayerFeld, ArrayList.class));
+	this.zauberberg.sendGameDataToUserPublic("FELDERANBIETEN");
+	kartenWerte.remove(0); 	
+    }
+    public void bewegen(int layer, int feldNr) {
+	//prüfe ob Zauberstein oder so ein Kram
+	this.setFeldNr(feldNr);
+	this.setLayer(layer);
 	
-    public boolean darfBewegen(Kobold kobold, Feld tempFeld) {
-	if(tempFeld.getKobolde().get(0)==kobold && tempFeld.getKobolde().size()>1) {
-	    //	TODO ANWEISUNG WAS PASSIEREN SOLL, WENN DER KOBOLD SICH NICHT BEWEGEN DARF
-	    return false;
-	} else {
-	    return true;
+	if(this.kartenWerte.size()!=0) {
+	    this.karteSpielen();
 	}
     }
-    
-    public void move(int value) {
-	this.feldNr += value; 
-    }
-	
-		
     public int getNummer() {
 	return nummer;
     }
@@ -158,4 +140,12 @@ public class Kobold {
     public void setGlobalFeld(int globalFeld) {
 	this.globalFeld = globalFeld;
     }
+
+    public ArrayList<Integer> getKarten() {
+        return kartenWerte;
+    }
+    public void setKarten(ArrayList<Integer> karten) {
+        this.kartenWerte = karten;
+    }
+    
 }
