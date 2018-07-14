@@ -486,10 +486,70 @@
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
                 for (var pos in data) {
+					// base unsichtbar
                     document.getElementById("base_" + pos).style.visibility = "hidden";
                     document.getElementById("baseOffen_" + pos).style.visibility = "hidden";
-                    document.getElementById("koboldRot_" + pos).style.visibility = "hidden";
-                    // hier alles unsichtbar machen
+					
+					//Kobolde Rot unsichtbar
+                    document.getElementById("koboldRot1_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot2_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot3_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot4_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot5_" + pos).style.visibility = "hidden";
+                    document.getElementById("koboldRot1k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot2k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot3k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot4k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldRot5k_" + pos).style.visibility = "hidden";
+					
+					//Kobolde Blau unsichtbar
+                    document.getElementById("koboldBlau1_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau2_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau3_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau4_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau5_" + pos).style.visibility = "hidden";
+                    document.getElementById("koboldBlau1k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau2k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau3k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau4k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldBlau5k_" + pos).style.visibility = "hidden";
+					
+					//Kobolde Gruen unsichtbar
+                    document.getElementById("koboldGruen1_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen2_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen3_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen4_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen5_" + pos).style.visibility = "hidden";
+                    document.getElementById("koboldGruen1k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen2k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen3k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen4k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGruen5k_" + pos).style.visibility = "hidden";
+					
+					//Kobolde Grau unsichtbar
+                    document.getElementById("koboldGrau1_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau2_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau3_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau4_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau5_" + pos).style.visibility = "hidden";
+                    document.getElementById("koboldGrau1k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau2k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau3k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau4k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGrau5k_" + pos).style.visibility = "hidden";
+					
+					//Kobolde Gelb unsichtbar
+                    document.getElementById("koboldGelb1_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb2_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb3_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb4_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb5_" + pos).style.visibility = "hidden";
+                    document.getElementById("koboldGelb1k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb2k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb3k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb4k_" + pos).style.visibility = "hidden";
+					document.getElementById("koboldGelb5k_" + pos).style.visibility = "hidden";
+					
 
                     if (data[pos]["EreigniskarteSteinOffen"] == "1") {
                         document.getElementById("baseOffen_" + pos).style.visibility = "visible";
