@@ -19,15 +19,18 @@ public class Kobold {
     private ArrayList<Integer> kartenWerte = new ArrayList<Integer>(); 
     Feld tempFeld; 
     Gson gson = new GsonBuilder().create();
+    private static int anz; 
 	
     //Methoden bewegen
     //TODO Position im Grid
     public Kobold(int nummer, Spieler spieler) {
-	this.dorf = (int)(Math.random() * 4); //generate random dorf between in a range 0...3
+	this.dorf = anz % 4; //gleichmäßiges Verteilen der Kobolde (im Uhrzeigersinn)
 	this.layer = -1; 
 	this.feldNr = this.dorf;
 	this.spieler = spieler; 
 	this.nummer = nummer;	
+	this.farbe = spieler.getFarbName();
+	anz++; 
     }
     
     public void kartenLegen(int kartenWert1, int kartenWert2) {
