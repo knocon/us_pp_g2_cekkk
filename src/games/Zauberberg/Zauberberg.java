@@ -341,7 +341,7 @@ public class Zauberberg extends Game {
             if (playerTurn == null) {
                 playerTurn = spieler;
             }
-            sendGameDataToUser(user, "START");
+            sendGameDataToClients("START");
         }
     }
 

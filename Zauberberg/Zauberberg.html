@@ -3,20 +3,29 @@
         /**
          * Generell
          */
+        var userTyp = "UNDEFINED"; // zb. HOST
 
         addListener('START', function (event) {
-            var stringFromServer = event.data;
-            if (stringFromServer === "HOST") {
-                document.getElementById("closeButton").style.visibility = "visible";
-                document.getElementById("overlayMsg").style.visibility = "visible";
-                document.getElementById("overlayMsg").innerHTML = "<p>Du bist der Host. Wenn alle Spieler bereit sind, musst du das Spiel starten.</p>" +
-                    "<button id=\"startButton\" class=\"button\" onclick=\"startGame()\">Spiel starten</button>";
-            } else {
-                document.getElementById("closeButton").style.visibility = "hidden";
-                document.getElementById("overlayMsg").style.visibility = "visible";
-                document.getElementById("overlayMsg").innerHTML = "Warte auf das Startsignal vom Host";
-            }
+            userTyp = event.data;
+            startOverlay();
         });
+
+        function startOverlay(){
+            try{
+                if (userTyp === "HOST") {
+                    document.getElementById("closeButton").style.visibility = "visible";
+                    document.getElementById("overlayMsg").style.visibility = "visible";
+                    document.getElementById("overlayMsg").innerHTML = "<p>Du bist der Host. Wenn alle Spieler bereit sind, musst du das Spiel starten.</p>" +
+                        "<button id=\"startButton\" class=\"button\" onclick=\"startGame()\">Spiel starten</button>";
+                } else {
+                    document.getElementById("closeButton").style.visibility = "hidden";
+                    document.getElementById("overlayMsg").style.visibility = "visible";
+                    document.getElementById("overlayMsg").innerHTML = "Warte auf das Startsignal vom Host";
+                }
+            } catch (e) {
+                setTimeout(startOverlay, 500);
+            }
+        }
 
         addListener('STARTGAME', function (event) {
             document.getElementById("overlayMsg").style.visibility = "hidden";
@@ -489,7 +498,7 @@
 					// base unsichtbar
                     document.getElementById("base_" + pos).style.visibility = "hidden";
                     document.getElementById("baseOffen_" + pos).style.visibility = "hidden";
-					
+
 					//Kobolde Rot unsichtbar
                     document.getElementById("koboldRot1_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldRot2_" + pos).style.visibility = "hidden";
@@ -501,7 +510,7 @@
 					document.getElementById("koboldRot3k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldRot4k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldRot5k_" + pos).style.visibility = "hidden";
-					
+
 					//Kobolde Blau unsichtbar
                     document.getElementById("koboldBlau1_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldBlau2_" + pos).style.visibility = "hidden";
@@ -513,7 +522,7 @@
 					document.getElementById("koboldBlau3k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldBlau4k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldBlau5k_" + pos).style.visibility = "hidden";
-					
+
 					//Kobolde Gruen unsichtbar
                     document.getElementById("koboldGruen1_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGruen2_" + pos).style.visibility = "hidden";
@@ -525,7 +534,7 @@
 					document.getElementById("koboldGruen3k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGruen4k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGruen5k_" + pos).style.visibility = "hidden";
-					
+
 					//Kobolde Grau unsichtbar
                     document.getElementById("koboldGrau1_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGrau2_" + pos).style.visibility = "hidden";
@@ -537,7 +546,7 @@
 					document.getElementById("koboldGrau3k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGrau4k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGrau5k_" + pos).style.visibility = "hidden";
-					
+
 					//Kobolde Gelb unsichtbar
                     document.getElementById("koboldGelb1_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGelb2_" + pos).style.visibility = "hidden";
@@ -549,7 +558,7 @@
 					document.getElementById("koboldGelb3k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGelb4k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGelb5k_" + pos).style.visibility = "hidden";
-					
+
 
                     if (data[pos]["EreigniskarteSteinOffen"] == "1") {
                         document.getElementById("baseOffen_" + pos).style.visibility = "visible";
@@ -12820,7 +12829,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-				
+
 				</td>
 		<td>
 			<div class="StyleContainer">
@@ -12941,7 +12950,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-				
+
 				</td>
 	</tr>
 	<tr>
@@ -13064,7 +13073,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -13185,7 +13194,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -13308,7 +13317,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -13429,7 +13438,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -13552,7 +13561,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -13673,7 +13682,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -13796,7 +13805,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -13917,7 +13926,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -14040,7 +14049,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -14161,7 +14170,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -14284,7 +14293,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -14405,7 +14414,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -14528,7 +14537,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -14649,7 +14658,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -14772,7 +14781,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -14893,7 +14902,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -15016,7 +15025,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -15137,7 +15146,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -15260,7 +15269,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -15381,7 +15390,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -15504,7 +15513,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -15625,7 +15634,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -15748,7 +15757,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -15869,7 +15878,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -15992,7 +16001,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -16113,7 +16122,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -16236,7 +16245,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -16357,7 +16366,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
 	<tr>
@@ -16480,7 +16489,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 		<td>
 			<div class="StyleContainer">
@@ -16601,7 +16610,7 @@
                             <!-- Kobold 5 Klein-->
 
                         </div>
-		
+
 		</td>
 	</tr>
         </table>
