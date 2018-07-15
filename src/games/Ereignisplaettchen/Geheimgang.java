@@ -10,10 +10,9 @@ public class Geheimgang extends Feld {
     }
 	
 
-public static void aufsteigen (Kobold kobold) {
+    public static void execute (Kobold kobold) {
 	switch(kobold.getLayer()) {
-	 
-	case 0: 
+    	case 0: 
 	    if(kobold.getFeldNr()>0 && kobold.getFeldNr()<9) {
 		kobold.setLayer(1);
 		kobold.setFeldNr(kobold.getFeldNr()-1);
@@ -85,10 +84,10 @@ public static void aufsteigen (Kobold kobold) {
 		kobold.setFeldNr(kobold.getFeldNr()-7); 
 	    }
 	    break;
-	
-
-	
-	
+	}	
     }
-}
+    
+    public String getClassName() {
+	return "Geheimgang"; 
+    }
 }
