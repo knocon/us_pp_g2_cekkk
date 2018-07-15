@@ -39,6 +39,8 @@ Java -> JavaScript:
      FELDERANBIETEN: Array mit Koordinaten
         [layer, position, layer, position, layer, position, layer, position...]
 
+     FELDDREHEN: Keine weiteren Daten. Feld muss gedreht werden.
+
 
 JavaScript -> Java: (Immer eine Map<String, String> als JSON; "Eventname" ist immer der Key zum Eventnamen. Andere Keys beinhalten Daten.)
      KARTENLEGEN Bsp:

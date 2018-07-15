@@ -1,27 +1,27 @@
 package games.Ereignisplaettchen;
+
 import java.util.ArrayList;
+
 import games.Zauberberg.*;
 
 public class Kristallkugel extends Feld {
-    
-    private boolean aufgedeckt;
-    
-    //Keine Logik n�tig, ausser das sobald aufgedeckt auf true wird, die Karte vom Spielfeld verschwinden muss
-        
-    public Kristallkugel(int layer, int feldNr, ArrayList<Kobold> list) {
-	super(layer, feldNr, list); 
+    private boolean karteAufgedeckt;
+
+    public Kristallkugel(int layer, int feldNr, ArrayList<Kobold> list, Zauberberg zauberberg) {
+        super(layer, feldNr, list, zauberberg);
+        this.karteAufgedeckt = false;
     }
-    
-    public boolean isAufgedeckt() {
-		return aufgedeckt;
-    }
-    
-    public void setAufgedeckt(boolean aufgedeckt) {
-	this.aufgedeckt = aufgedeckt;
-    }
-    
+
     public String getClassName() {
-	return "Kristallkugel"; 
+        return "Kristallkugel";
     }
-    
+
+    public boolean isKarteAufgedeckt() {
+        return karteAufgedeckt;
+    }
+
+    public void setKarteAufgedeckt(boolean karteAufgedeckt) {
+        this.karteAufgedeckt = karteAufgedeckt;
+        this.zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
+    }
 }

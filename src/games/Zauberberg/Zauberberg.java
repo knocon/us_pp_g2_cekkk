@@ -87,7 +87,7 @@ public class Zauberberg extends Game {
             for (Spieler s : spielerList) {
                 s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
                 spiel.getKartenstapel().getStapel().remove(s.getHand());
-            }            
+            }
             sendGameDataToClients("STARTGAME");
             sendGameDataToClients("UPDATEKARTEN");
             sendGameDataToClients("UPDATESPIELZUSTAND");
@@ -304,7 +304,17 @@ public class Zauberberg extends Game {
                 aktuellerKobold.bewegen(Integer.parseInt(dataMap.get("layer")), Integer.parseInt(dataMap.get("position")));
                 break;
             case "EREIGNISKARTEFLIP":
-                //todo Logik
+                for (Feld feld : this.spiel.getFelder()) {
+                    if (feld.getLayer() == Integer.parseInt(dataMap.get("layer")) && feld.getFeldNr() == Integer.parseInt(dataMap.get("position"))) {
+                        if (!feld.getClassName().equals("Feld")) {
+                            feld.setKarteAufgedeckt(!feld.isKarteAufgedeckt());
+                        } else {
+                            this.recentInfoText = "Du kannst nur Ereigniskarten umdrehen.";
+                            sendGameDataToUser(user, "PUSHINFOTXT");
+                        }
+                        break;
+                    }
+                }
                 break;
             default:
                 // Fehler!
