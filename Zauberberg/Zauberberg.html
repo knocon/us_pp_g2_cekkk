@@ -497,7 +497,7 @@
                 for (var key of data) {
 					var pos = key.split("#")[0];
 					var info = key.split("#")[1];
-					
+
 					// base unsichtbar
                     document.getElementById("base_" + pos).style.visibility = "hidden";
                     document.getElementById("baseOffen_" + pos).style.visibility = "hidden";
@@ -583,7 +583,7 @@
 					}
                 }
             });
-			
+
 			//addListener('FELDERANBIETEN', function (event) {
             //    var stringFromServer = event.data;
             //    var data = JSON.parse(stringFromServer);
@@ -12598,7 +12598,7 @@
                     <td>
                         <div class="StyleContainer">
                             <!-- Base Layouts -->
-							
+
                             <img id="base_0_18" src="layout_images/layoutnew_100.png" class="feldImg" alt="">
                             <!-- Base Layout-->
                             <img id="baseOffen_0_18" src="layout_images/layoutnew_100.png" class="feldImg" alt="">
@@ -16650,7 +16650,7 @@
                          class="rabeBtn"/></td>
             </tr>
             <tr id="SpielerBLAU">
-                <td><span class="spielername" style="color: #42A5F5">Blau </span></td>
+                <td><span class="spielername" style="color: #42A5F5">Blau</span></td>
                 <td><img id="BLAUStein1" src="ereignisfelder_images/Murmel.png" class="spielzustandStein"/></td>
                 <td><img id="BLAUStein2" src="ereignisfelder_images/Murmel.png" class="spielzustandStein"/></td>
                 <td><img id="BLAURabe1" src="ereignisfelder_images/Rabe.png" class="spielzustandStein"/></td>
@@ -16740,7 +16740,7 @@
         </div>
     </div>
     <script>    /** Javascript für die Aktionsfläche (Zauberberg.js wird durch Serverfehler nicht geladen!) */
-    var disableAllInput = true;
+    var disableAllInput = false;
     Sortable.create(document.getElementById("karten-Hand"), {
         group: {name: "karten", put: true, pull: true},
         draggable: 'div',
@@ -16937,8 +16937,12 @@
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "bold";
                     if (data[colour + "Fokus"] === "0") { //Man ist nicht dran
                         disableAllInput = true;
+                        disableKartenTauschen(true);
+                        disableKartenLegen(true);
                     } else{
                         disableAllInput = false;
+                        disableKartenLegen(true);
+                        disableKartenTauschen(false);
                     }
                 } else {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "inherit";
@@ -16951,8 +16955,6 @@
     });
 
     addListener('UPDATEKARTEN', function (event) {
-        disableKartenLegen(true);
-        disableKartenTauschen(ereignisFliegendeKarte);
         if (ereignisFliegendeKarte) {
             disableKartenTauschen(true);
         }

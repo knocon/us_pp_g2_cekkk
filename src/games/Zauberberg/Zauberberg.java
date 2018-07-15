@@ -289,6 +289,8 @@ public class Zauberberg extends Game {
                 //neue Karten ziehen bei KARTENTAUSCH
                 spieler.getHand().addAll(getRandomCards(sizeOfHand2 - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user, "UPDATEKARTEN");
+                //Zug beenden
+                this.zugBeenden();
                 break;
             case "EREIGNISANTWORT":
                 switch (dataMap.get("Ereignis")) {
@@ -488,10 +490,6 @@ public class Zauberberg extends Game {
         this.spiel = spiel;
     }
 
-    public String getFelderWaehlen() {
-        return felderWaehlen;
-    }
-
     public void setFelderWaehlen(String felderWaehlen) {
         this.felderWaehlen = felderWaehlen;
     }
@@ -505,10 +503,6 @@ public class Zauberberg extends Game {
         sendGameDataToClients(event);
     }
 
-    public String getRecentInfoText() {
-        return recentInfoText;
-    }
-
     public void setRecentInfoText(String recentInfoText) {
         this.recentInfoText = recentInfoText;
     }
@@ -516,6 +510,14 @@ public class Zauberberg extends Game {
     public void setPlayerTurn(Spieler playerTurn) {
         this.playerTurn = playerTurn;
         sendGameDataToClients("UPDATESPIELZUSTAND");
+    }
+
+    public void zugBeenden() {
+        if (this.spielerList.indexOf(this.playerTurn) + 1 == this.spielerList.size()) {
+            this.setPlayerTurn(this.spielerList.get(0));
+        } else {
+            this.setPlayerTurn(this.spielerList.get(this.spielerList.indexOf(this.playerTurn) + 1));
+        }
     }
 
 }
