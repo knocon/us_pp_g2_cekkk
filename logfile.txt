@@ -73,3 +73,14 @@
 [2018-07-13 21:33:12.069] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
 [2018-07-13 23:26:41.458] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
 [2018-07-14 19:16:28.562] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-15 11:38:01.892] [IP: /192.168.2.112] [LOGIN] Logging in user "Test" succeeded
+[2018-07-15 11:40:40.717] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-15 11:40:48.519] [IP: /192.168.2.100] [LOGOUT] Logging out user "Test" succeeded; Session length: < 1  Minutes
+[2018-07-15 11:41:25.732] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
+[2018-07-15 11:41:36.928] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-15 11:43:00.558] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
+[2018-07-15 11:43:05.657] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-15 12:04:37.873] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-15 12:04:39.173] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
+[2018-07-15 12:09:40.637] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
+[2018-07-15 12:09:43.601] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded

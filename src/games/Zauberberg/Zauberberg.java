@@ -71,7 +71,7 @@ public class Zauberberg extends Game {
          * Eventnamen für Spielsteuerung abfangen
          */
 
-        if (this.gState == GameState.CLOSED || gState != GameState.RUNNING) {
+        if (this.gState == GameState.CLOSED) {
             return;
         }
 
@@ -90,6 +90,10 @@ public class Zauberberg extends Game {
             }
             sendGameDataToClients("STARTGAME");
             sendGameDataToClients("UPDATEKARTEN");
+            return;
+        }
+
+        if (gState != GameState.RUNNING) {
             return;
         }
 
@@ -337,7 +341,7 @@ public class Zauberberg extends Game {
             if (playerTurn == null) {
                 playerTurn = spieler;
             }
-            sendGameDataToClients("START");
+            sendGameDataToUser(user, "START");
         }
     }
 
