@@ -90,6 +90,7 @@ public class Zauberberg extends Game {
             }
             sendGameDataToClients("STARTGAME");
             sendGameDataToClients("UPDATEKARTEN");
+            sendGameDataToClients("UPDATESPIELZUSTAND");
             return;
         }
 
@@ -394,10 +395,10 @@ public class Zauberberg extends Game {
         if (eventName.equals("UPDATESPIELZUSTAND")) {
             HashMap<String, String> output = new HashMap<>();
             for (Spieler sp : spielerList) {
-                output.put(sp.getSpielerName() + "-Aktiv", "1"); // todo immer Aktiv wegen KI ?
-                output.put(sp.getSpielerName() + "-Fokus", sp.equals(this.playerTurn) ? "1" : "0");
-                output.put(sp.getSpielerName() + "-BistDu", sp.equals(spieler) ? "1" : "0");
-                output.put(sp.getSpielerName() + "-Steine", "" + sp.getAnzahlZaubersteine());
+                output.put(sp.getFarbName() + "Aktiv", "1"); // todo immer Aktiv wegen KI ?
+                output.put(sp.getFarbName() + "Fokus", sp.equals(this.playerTurn) ? "1" : "0");
+                output.put(sp.getFarbName() + "BistDu", sp.equals(spieler) ? "1" : "0");
+                output.put(sp.getFarbName() + "Steine", "" + sp.getAnzahlZaubersteine());
             }
             return gson.toJson(output, HashMap.class);
         }
