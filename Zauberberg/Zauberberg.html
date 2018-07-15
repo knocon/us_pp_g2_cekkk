@@ -16724,6 +16724,7 @@
         </div>
     </div>
     <script>    /** Javascript für die Aktionsfläche (Zauberberg.js wird durch Serverfehler nicht geladen!) */
+    var disableAllInput = true;
     Sortable.create(document.getElementById("karten-Hand"), {
         group: {name: "karten", put: true, pull: true},
         draggable: 'div',
@@ -16831,7 +16832,7 @@
     }
 
     function disableKartenLegen(disable) {
-        if (disable) {
+        if (disable || disableAllInput) {
             document.getElementById("kartenLegenBtn").classList.add("buttondisabled");
         } else {
             document.getElementById("kartenLegenBtn").classList.remove("buttondisabled");
@@ -16839,7 +16840,7 @@
     }
 
     function disableKartenTauschen(disable) {
-        if (disable) {
+        if (disable || disableAllInput) {
             document.getElementById("kartenTauschenBtn").classList.add("buttondisabled");
         } else {
             document.getElementById("kartenTauschenBtn").classList.remove("buttondisabled");
@@ -16919,8 +16920,9 @@
                 if (data[colour + "BistDu"] === "1") {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "bold";
                     if (data[colour + "Fokus"] === "0") { //Man ist nicht dran
-                        disableKartenLegen(true);
-                        disableKartenTauschen(true);
+                        disableAllInput = true;
+                    } else{
+                        disableAllInput = false;
                     }
                 } else {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "inherit";
