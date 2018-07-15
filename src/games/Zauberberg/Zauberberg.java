@@ -28,7 +28,7 @@ public class Zauberberg extends Game {
     /**
      * gridStatus contains the gameData
      */
-    private Spiel spiel = new Spiel();
+    private Spiel spiel = new Spiel(this);
     private Kobold aktuellerKobold;
     private Spieler playerTurn = null;
     private ArrayList<User> playerList = new ArrayList<User>();
