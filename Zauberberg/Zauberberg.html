@@ -494,7 +494,10 @@
             addListener('UPDATESPIELFELD', function (event) {
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
-                for (var pos in data) {
+                for (var key of data) {
+					var pos = key.split("#")[0];
+					var info = key.split("#")[1];
+					
 					// base unsichtbar
                     document.getElementById("base_" + pos).style.visibility = "hidden";
                     document.getElementById("baseOffen_" + pos).style.visibility = "hidden";
@@ -559,20 +562,32 @@
 					document.getElementById("koboldGelb4k_" + pos).style.visibility = "hidden";
 					document.getElementById("koboldGelb5k_" + pos).style.visibility = "hidden";
 
-
-                    if (data[pos]["EreigniskarteSteinOffen"] == "1") {
-                        document.getElementById("baseOffen_" + pos).style.visibility = "visible";
-                    } else {
-                        document.getElementById("base_" + pos).style.visibility = "visible";
-                    }
-                    if (data[pos]["Kobold-Farbe"] != "Null") {
-                        document.getElementById("kobold" + data[pos]["Kobold-Farbe"] + data[pos]["Kobold-Nummer"] + "_" + pos).style.visibility = "visible";
-                    }
-                    if (data[pos]["Kobold2-Farbe"] != "Null") {
-                        document.getElementById("kobold" + data[pos]["Kobold2-Farbe"] + "k" + data[pos]["Kobold2-Nummer"] + "_" + pos).style.visibility = "visible";
-                    }
+					switch(info){
+						case"EreigniskarteSteinOffen":
+							if (data[key] == "1") {
+                        		document.getElementById("baseOffen_" + pos).style.visibility = "visible";
+                    		}else {
+								document.getElementById("base_" + pos).style.visibility = "visible";
+                    		}
+							break;
+						case"Kobold1-Farbe":
+							if (data[key] != "Null") {
+								document.getElementById("kobold" + data[key] + data[pos + "#Kobold1-Nummer"] + "_" + pos).style.visibility = "visible";
+							}
+							break;
+						case"Kobold2-Farbe":
+							if (data[key] != "Null") {
+								document.getElementById("kobold" + data[key] + "k" + data[pos + "#Kobold2-Nummer"] + "_" + pos).style.visibility = "visible";
+							}
+							break;
+					}
                 }
             });
+			
+			addListener('FELDERANBIETEN', function (event) {
+                var stringFromServer = event.data;
+                var data = JSON.parse(stringFromServer);
+                for (var key of data) {
 
 
         </script>
@@ -12583,6 +12598,7 @@
                     <td>
                         <div class="StyleContainer">
                             <!-- Base Layouts -->
+							
                             <img id="base_0_18" src="layout_images/layoutnew_100.png" class="feldImg" alt="">
                             <!-- Base Layout-->
                             <img id="baseOffen_0_18" src="layout_images/layoutnew_100.png" class="feldImg" alt="">
