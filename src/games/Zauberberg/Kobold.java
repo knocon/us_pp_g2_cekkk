@@ -209,6 +209,8 @@ public class Kobold {
         }
         if (this.kartenWerte.size() != 0) {
             this.karteSpielen();
+        } else { // Zug ist beendet
+            zauberberg.zugBeenden();
         }
     }
 
