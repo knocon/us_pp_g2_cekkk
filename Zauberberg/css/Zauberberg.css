@@ -65,6 +65,13 @@ body {
 	height: 50px;
 	visibility: visible;
 }
+.glowImg{
+	position: absolute;
+	top: -13px;
+	width: 77px;
+    height: 77px;
+	visibility: visible;
+}
 
 #villages {
     width: 100px;

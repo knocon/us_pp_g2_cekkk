@@ -141,3 +141,5 @@
 [2018-07-15 20:18:52.447] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
 [2018-07-15 20:30:20.568] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
 [2018-07-15 20:30:22.979] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
+[2018-07-15 21:41:56.817] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-15 21:43:39.319] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "kno" succeeded
