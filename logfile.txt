@@ -120,3 +120,7 @@
 [2018-07-15 14:10:14.75] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
 [2018-07-15 14:10:22.962] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
 [2018-07-15 15:48:27.936] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-15 19:23:25.176] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
+[2018-07-15 19:24:09.401] [IP: /192.168.2.106] [LOGIN] Logging in user "1" succeeded
+[2018-07-15 19:24:11.919] [IP: /192.168.2.106] [LOGOUT] Logging out user "1" succeeded; Session length: < 1  Minutes
+[2018-07-15 19:24:16.529] [IP: /192.168.2.106] [LOGIN] Logging in user "Test" succeeded

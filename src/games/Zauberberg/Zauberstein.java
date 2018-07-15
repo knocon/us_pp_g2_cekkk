@@ -6,19 +6,21 @@ import java.util.ArrayList;
 
 public class Zauberstein extends Feld {
     private Boolean aufFeld;
-	
+
     public Zauberstein(int layer, int feldNr, Zauberberg zauberberg) {
-	super(layer,feldNr,null, zauberberg);
-	aufFeld = true; 
+        super(layer, feldNr, null, zauberberg);
+        aufFeld = true;
     }
-	
+
     public Boolean getAufFeld() {
-	return aufFeld;
+        return aufFeld;
     }
+
     public void setAufFeld(Boolean aufFeld) {
-	this.aufFeld = aufFeld;
+        this.aufFeld = aufFeld;
     }
+
     public String getClassName() {
-	return "Zauberstein"; 
+        return "Zauberstein";
     }
 }
