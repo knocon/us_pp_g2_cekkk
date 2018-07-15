@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Zauberstein extends Feld {
     private Boolean aufFeld;
 	
-    public Zauberstein(int layer, int feldNr) {
-	super(layer,feldNr,null); 
+    public Zauberstein(int layer, int feldNr, Zauberberg zauberberg) {
+	super(layer,feldNr,null, zauberberg);
 	aufFeld = true; 
     }
 	
