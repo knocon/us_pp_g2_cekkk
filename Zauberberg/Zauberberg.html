@@ -16886,7 +16886,7 @@
         var data = JSON.parse(stringFromServer);
         console.log(data);
         var colours = ["ROT", "GRUEN", "GELB", "BLAU", "GRAU"];
-        for (var colour of colours) {
+        for (var colour of colours) { // todo is of supported
             if (data[colour + "Aktiv"] === "1") {
                 document.getElementById("Spieler" + colour).style.visibility = "visible";
 

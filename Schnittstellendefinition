@@ -5,11 +5,11 @@ Java -> JavaScript:
      UPDATEKARTEN: JSON Array mit den Karten, die der entsprechende Spieler auf der Hand hat (String Zahlenwerte und "Joker" für Joker)
 
      UPDATESPIELFELD: JSON Map<String, Map<String, String>>
-     	{"1_0#EreigniskarteSteinOffen": "1",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe mitspielt
-         "1_0#Kobold1-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
-         "1_0#Kobold1-Nummer": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
-         "1_0#Kobold2-Farbe": "0",       Flag ist 0 oder 1 und kennzeichnet, ob diese Farbe gerade an der Reihe ist
-         "1_0#Kobold2-Nummer": "0",      Flag ist 0 oder 1 und kennzeichnet, ob man diese Farbe ist
+     	{"1_0#EreigniskarteSteinOffen": "1",       Flag ist 0 oder 1
+         "1_0#Kobold1-Farbe": "0",
+         "1_0#Kobold1-Nummer": "0",
+         "1_0#Kobold2-Farbe": "0",
+         "1_0#Kobold2-Nummer": "0",
          ......
          "d0_0#Kobold1-Farbe": "ROT";
          "d0_0#Kobold1-Nummer": "3";

@@ -400,7 +400,33 @@ public class Zauberberg extends Game {
             return gson.toJson(output, ArrayList.class);
         }
         if (eventName.equals("UPDATESPIELFELD")) {
-            return ""; //todo Logik
+            HashMap<String, String> output = new HashMap<>();
+            for (Feld feld : this.spiel.getFelder()) {
+                if (feld.getLayer() == -1) { //Feld ist ein Dorf
+                    int counter = 0;
+                    for (Kobold kobold : feld.getKobolde()) {
+                        output.put("d" + feld.getFeldNr() + "_" + counter + "#Kobold1-Farbe", String.valueOf(kobold.getFarbe()));
+                        output.put("d" + feld.getFeldNr() + "_" + counter + "#Kobold1-Nummer", String.valueOf(kobold.getNummer()));
+                        counter++;
+                    }
+                } else { //Feld ist ein Feld des Spielfeldes
+                    output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#EreigniskarteSteinOffen",
+                            (!feld.getClassName().equals("Feld") && ((feld.getClassName().equals("Zauberstein") && ((Zauberstein) feld).getAufFeld()) || feld.isKarteAufgedeckt()) ? "1" : "0"));
+                    output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold1-Farbe", "Null");
+                    output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold1-Nummer", "Null");
+                    output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold2-Farbe", "Null");
+                    output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold2-Nummer", "Null");
+                    if (feld.getKobolde().size() > 0) {
+                        output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold1-Farbe", String.valueOf(feld.getKobolde().get(0).getFarbe()));
+                        output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold1-Nummer", String.valueOf(feld.getKobolde().get(0).getNummer()));
+                    }
+                    if (feld.getKobolde().size() > 1) {
+                        output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold2-Farbe", String.valueOf(feld.getKobolde().get(1).getFarbe()));
+                        output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold2-Nummer", String.valueOf(feld.getKobolde().get(1).getNummer()));
+                    }
+                }
+            }
+            return gson.toJson(output, ArrayList.class);
         }
         if (eventName.equals("UPDATESPIELZUSTAND")) {
             HashMap<String, String> output = new HashMap<>();
