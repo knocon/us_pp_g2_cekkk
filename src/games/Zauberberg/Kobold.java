@@ -174,17 +174,18 @@ public class Kobold {
                         Rabe rabe = (Rabe) f;
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Rabe gekommen. Waehle 1 Spieler, dem der Zauberstein entfernt wird.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        rabe.execute(this.getSpieler()); // todo hier muss die Ereignisanfrage stattfinden, so ist das ja falsch, dass der Rabe auf den aktuellen Spieler andgewendet wird
+                        rabe.execute(this.getSpieler()); // TODO hier muss die Ereignisanfrage stattfinden, so ist das ja falsch, dass der Rabe auf den aktuellen Spieler andgewendet wird
                         break;
                     case "Fliegende Karte":
+                    	FliegendeKarte fliegendeKarte = (FliegendeKarte) f;
                     	zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fliegende Karte gekommen. Du erhaelst 1 Karte und hast die Moeglichkeit, eine Karte auszuspielen.");
                     	zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        // todo Ereignisanfrage
+                    	fliegendeKarte.execute(this.getSpieler(), zauberberg.getSpiel().getKartenstapel());
                         break;
                     case "Kristallkugel":
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Kristallkugel gekommen. Du darfst 3 Karten deiner Wahl aufdecken.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        // todo Kristallkugel Karte aus dem Spiel nehmen
+                        // TODO Kristallkugel Karte aus dem Spiel nehmen
                         break;
                     case "Unwetter":
                         // manuelles umdrehen aller Karten
