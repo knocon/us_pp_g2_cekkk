@@ -141,31 +141,49 @@ public class Kobold {
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == layer && f.getFeldNr() == feldNr) {
                 switch (f.getClassName()) {
-                    case "Fallgrube":
+                	case "Zauberstein":
+                		if(f.getClass().equals("Zauberstein") && ((Zauberstein) f).getAufFeld() == false){
+                			zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf keinen Zauberstein gestossen.");
+                			zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                		}else {
+                			zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du erhaelst 1 Zauberstein.");
+                			zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                			this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
+                			((Zauberstein) f).setAufFeld(false);
+                		}
+                		break;   
+                	case "Fallgrube":
                         Fallgrube fallgrube = (Fallgrube) f;
+                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Du faellst hinab.");
+                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         fallgrube.execute(this);
                         break;
                     case "Geheimgang":
                         Geheimgang geheimgang = (Geheimgang) f;
+                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Geheimgang gekommen. Du steigst auf.");
+                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         geheimgang.execute(this);
                         break;
                     case "Schreckgespenst":
                         Schreckgespenst schreckgespenst = (Schreckgespenst) f;
+                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Zurueck ins Dorf.");
+                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         schreckgespenst.execute(this);
-                        break;
-                    case "Zauberstein":
-                        this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
-                        //todo Zauberstein entfernen
                         break;
                     case "Rabe":
                         Rabe rabe = (Rabe) f;
+                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Rabe gekommen. Waehle 1 Spieler, dem der Zauberstein entfernt wird.");
+                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         rabe.execute(this.getSpieler()); // todo hier muss die Ereignisanfrage stattfinden, so ist das ja falsch, dass der Rabe auf den aktuellen Spieler andgewendet wird
                         break;
                     case "Fliegende Karte":
+                    	zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fliegende Karte gekommen. Du erhaelst 1 Karte und hast die Moeglichkeit, eine Karte auszuspielen.");
+                    	zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         // todo Ereignisanfrage
                         break;
                     case "Kristallkugel":
-                        zauberberg.sendGameDataToClientsPublic(this.spieler.getFarbName() + " ist auf das Ereignis Kristallkugel gekommen. Er darf 3 Karten seiner Wahl aufdecken.");
+                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Kristallkugel gekommen. Du darfst 3 Karten deiner Wahl aufdecken.");
+                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         // todo Kristallkugel Karte aus dem Spiel nehmen
                         break;
                     case "Unwetter":
@@ -174,7 +192,7 @@ public class Kobold {
                         unwetter.execute();
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Unwetter gekommen.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        zauberberg.setRecentInfoText("Alle Ereigniskarten müssen zugedeckt werden. Das Spielfeld wird im Uhrzeigersinn gedreht.");
+                        zauberberg.setRecentInfoText("Alle Ereigniskarten muessen zugedeckt werden. Das Spielfeld wird im Uhrzeigersinn gedreht.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         zauberberg.sendGameDataToClientsPublic("FELDDREHEN");
                         break;
