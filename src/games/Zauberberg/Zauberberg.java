@@ -298,6 +298,9 @@ public class Zauberberg extends Game {
             case "FELDAUSWAEHLEN":
                 aktuellerKobold.bewegen(Integer.parseInt(dataMap.get("layer")), Integer.parseInt(dataMap.get("position")));
                 break;
+            case "EREIGNISKARTEFLIP":
+                //todo Logik
+                break;
             default:
                 // Fehler!
         }
