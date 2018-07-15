@@ -148,6 +148,13 @@ public class Kobold {
 		case "Schreckgespenst": 
 		    Schreckgespenst.execute(this);
 		    break; 
+		case "Zauberstein": 
+		    this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine()+1);
+		    break; 
+		case "Rabe": 
+		    Rabe.execute(this.getSpieler());
+		    break; 
+		//case Fliegende Karte & Kristallkugel & Unwetter fehlen hier noch  
 		}
 		//an Liste auf neuer Pos einfügen
 		for(Feld feld : zauberberg.getSpiel().getFelder()) {
