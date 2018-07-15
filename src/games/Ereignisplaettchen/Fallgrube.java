@@ -9,15 +9,12 @@ public class Fallgrube extends Feld {
     
     public Fallgrube(int layer, int feldNr, ArrayList<Kobold> list) {
 	super(layer,feldNr,list); 
-    }
-	
+    }    
     public static void execute (Kobold kobold) { 
 	switch(kobold.getLayer()) {
 	case 0: 
-	    int random = (int )(Math.random() * 4 + 0);
-	    kobold.setLayer(-1);
-	    kobold.setPos(random);
-	    break;
+	   kobold.setLayer(-1);
+	   kobold.setDorf(kobold.getDorf());
 	case 1: 
 	    if(kobold.getFeldNr()>0 && kobold.getFeldNr()<7) {
 		kobold.setLayer(0);
@@ -73,8 +70,8 @@ public class Fallgrube extends Feld {
 	    }
 	    break; 
 	}
-	
-	
-	
+    }
+    public String getClassName() {
+	return "Fallgrube"; 
     }
 }

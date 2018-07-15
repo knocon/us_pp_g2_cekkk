@@ -14,7 +14,10 @@ public class Schreckgespenst extends Feld{
     	//Verteilung auf Doerfer random, da einfacher
     	int random = (int )(Math.random() * 4 + 0);
     	kobold.setLayer(-1);
-	    kobold.setPos(random);
-	
+	    kobold.setPos(random);	
+    }
+    
+    public String getClassName() {
+	return "Schreckgespenst"; 
     }
 }
