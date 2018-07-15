@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import games.Ereignisplaettchen.*;
+
 
 
 public class Kobold {
@@ -123,12 +125,44 @@ public class Kobold {
 	}
     }
     public void bewegen(int layer, int feldNr) {
-	//prüfe ob Zauberstein oder so ein Kram
+	//vom alten Feld entfernen
+	for(Feld f : zauberberg.getSpiel().getFelder()) {
+	    if(f.getLayer()==this.getLayer() && f.getFeldNr()==this.getFeldNr()) {
+		f.getKobolde().remove(this);
+		break; 
+	    }
+	}
+	//auf neues Feld setzen
 	this.setFeldNr(feldNr);
 	this.setLayer(layer);
+		
 	for(Feld f : zauberberg.getSpiel().getFelder()) {
 	    if(f.getLayer()==layer && f.getFeldNr()==feldNr) {
-		f.getKobolde().add(this);
+		switch(f.getClassName()) {
+		case "Fallgrube": 
+		    Fallgrube.execute(this);
+		    break; 
+		case "Geheimgang": 
+		    Geheimgang.execute(this);
+		    break; 
+		case "Schreckgespenst": 
+		    Schreckgespenst.execute(this);
+		    break; 
+		case "Zauberstein": 
+		    this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine()+1);
+		    break; 
+		case "Rabe": 
+		    Rabe.execute(this.getSpieler());
+		    break; 
+		//case Fliegende Karte & Kristallkugel & Unwetter fehlen hier noch  
+		}
+		//an Liste auf neuer Pos einfügen
+		for(Feld feld : zauberberg.getSpiel().getFelder()) {
+		    if(feld.getLayer()==this.getLayer() && feld.getFeldNr()==this.getFeldNr()) {
+			feld.getKobolde().add(this); 
+			break; 
+		    }
+		}
 		break;
 	    }
 	}

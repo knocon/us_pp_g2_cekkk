@@ -5,23 +5,20 @@ import java.util.ArrayList;
 //import games.Zauberberg.Kobold.Farbe;
 
 public class Zauberstein extends Feld {
-    		
-	private Boolean aufFeld;
+    private Boolean aufFeld;
 	
-	public Zauberstein(int layer, int feldNr) {
-		super(layer,feldNr,null); 
-		aufFeld = true; 
-	}
+    public Zauberstein(int layer, int feldNr) {
+	super(layer,feldNr,null); 
+	aufFeld = true; 
+    }
 	
-	public Boolean getAufFeld() {
-	    return aufFeld;
-	}
-	public void setAufFeld(Boolean aufFeld) {
-	    this.aufFeld = aufFeld;
-	}
-
-
-
-	
-	
+    public Boolean getAufFeld() {
+	return aufFeld;
+    }
+    public void setAufFeld(Boolean aufFeld) {
+	this.aufFeld = aufFeld;
+    }
+    public String getClassName() {
+	return "Zauberstein"; 
+    }
 }

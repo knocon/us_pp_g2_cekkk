@@ -18,9 +18,12 @@ public class Feld {
     }    
     
     
-    //TODO Ereignisplättchen 
-    public void ereignis() {
-  
+    //TODO Ereignisplï¿½ttchen 
+    public void ereignis() {  
+    }
+    
+    public String getClassName() {
+	return "Feld"; 
     }
     
     
