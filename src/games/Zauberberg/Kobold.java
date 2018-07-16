@@ -135,17 +135,21 @@ public class Kobold {
     public void bewegen(int layer, int feldNr) {
 	int layerVorBewegen = this.getLayer();
 	int feldNrVorBewegen = this.getFeldNr();
+	int tempDifferenz1;
+	int tempDifferenz2;
+	int modulo = 1;
 	Kobold temp;
 
         //vom alten Feld entfernen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
                 f.getKobolde().remove(this);
+                feldNrVorBewegen = f.getFeldNr();
                 break;
             }
         }
 
-        //auf neues Feld setzen + Koboldliste einfügen für den Fall, dass da (k)ein Kobold sitzt 
+        //auf neues Feld setzen + Koboldliste einfuegen fuer den Fall, dass da (k)ein Kobold sitzt 
         if(getCorrectFeld(layer, feldNr).getKobolde().size()<2) {
             this.setFeldNr(feldNr);
             this.setLayer(layer);
@@ -155,7 +159,28 @@ public class Kobold {
         if(getCorrectFeld(layer, feldNr).getKobolde().size()==2) {
             temp = getCorrectFeld(layer,feldNr).getKobolde().get(1);
             getCorrectFeld(layer,feldNr).getKobolde().remove(1);
-            temp.bewegen(temp.getLayer(), temp.getFeldNr()+1); //entwerde +1/-1 "Richtung"
+            /*
+            if(layer==0) {
+            	modulo = 36;
+            }else if (layer==1) {
+            	modulo = 28;
+            }else if(layer==2) {
+            	modulo = 20;
+            } else if(layer==3) {
+            	modulo = 12;
+            }
+            tempDifferenz1 = ((0 + (feldNrVorBewegen - feldNr) % modulo) +modulo ) %modulo;
+            tempDifferenz2 = ((0+(feldNr-feldNrVorBewegen)%modulo)+modulo)%modulo;    		
+    		if(tempDifferenz1 < tempDifferenz2) {
+    			//tempdifferenz1 kleiner -> feldNrVorBewegen < FeldNr -> negative Bewegungsrichtung
+    			feldNr--;
+    		}else if (tempDifferenz1 > tempDifferenz2){
+    			//tempdifferenz2 kleiner -> feldNr < feldNrVorBewegen -> positive Bewegungsrichtung
+    			feldNr++;
+    		}
+            */
+            temp.bewegen(temp.getLayer(),temp.getFeldNr()+1 ); //entwerde +1/-1 "Richtung" 
+            //temp.getFeldNr()+1 durch feldNr ersetzen, wenn vorheriger Teil wieder implementiert wird
             this.setFeldNr(feldNr);
             this.setLayer(layer);
             getCorrectFeld(layer,feldNr).getKobolde().add(this);

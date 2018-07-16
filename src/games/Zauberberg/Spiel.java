@@ -8,13 +8,6 @@ import games.Zauberberg.*;
 public class Spiel {
 
     private Kartenstapel kartenstapel;
-    private Fallgrube[] fallgrube;
-    private FliegendeKarte[] fliegendeKarte;
-    private Geheimgang[] geheimgang;
-    private Kristallkugel[] kristallkugel;
-    private Rabe[] rabe;
-    private Schreckgespenst[] schreckgespenst;
-    private Unwetter[] unwetter;
     private ArrayList<Feld> felder = new ArrayList<Feld>();
     private Zauberberg zauberberg;
 
@@ -118,63 +111,6 @@ public class Spiel {
     public void setFelder(ArrayList<Feld> felder) {
         this.felder = felder;
     }
-
-    public Fallgrube[] getFallgrube() {
-        return fallgrube;
-    }
-
-    public void setFallgrube(Fallgrube[] fallgrube) {
-        this.fallgrube = fallgrube;
-    }
-
-    public FliegendeKarte[] getFliegendeKarte() {
-        return fliegendeKarte;
-    }
-
-    public void setFliegendeKarte(FliegendeKarte[] fliegendeKarte) {
-        this.fliegendeKarte = fliegendeKarte;
-    }
-
-    public Geheimgang[] getGeheimgang() {
-        return geheimgang;
-    }
-
-    public void setGeheimgang(Geheimgang[] geheimgang) {
-        this.geheimgang = geheimgang;
-    }
-
-    public Kristallkugel[] getKristallkugel() {
-        return kristallkugel;
-    }
-
-    public void setKristallkugel(Kristallkugel[] kristallkugel) {
-        this.kristallkugel = kristallkugel;
-    }
-
-    public Rabe[] getRabe() {
-        return rabe;
-    }
-
-    public void setRabe(Rabe[] rabe) {
-        this.rabe = rabe;
-    }
-
-    public Schreckgespenst[] getSchreckgespenst() {
-        return schreckgespenst;
-    }
-
-    public void setSchreckgespenst(Schreckgespenst[] schreckgespenst) {
-        this.schreckgespenst = schreckgespenst;
-    }
-
-    public Unwetter[] getUnwetter() {
-        return unwetter;
-    }
-
-    public void setUnwetter(Unwetter[] unwetter) {
-        this.unwetter = unwetter;
-    }
-
 }
 
 
