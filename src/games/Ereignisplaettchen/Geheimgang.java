@@ -13,12 +13,18 @@ public class Geheimgang extends Feld {
     }
 
 
-    public void execute(Kobold kobold) {
+    public void execute(Kobold kobold, ArrayList<Feld> felder) {
+	for(Feld f : felder) {
+	    if(f.getLayer() == kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {
+		f.getKobolde().remove(this);
+		break; 
+	    }	    
+	}
         switch (kobold.getLayer()) {
             case 0:
                 if (kobold.getFeldNr() > 0 && kobold.getFeldNr() < 9) {
                     kobold.setLayer(1);
-                    kobold.setFeldNr(kobold.getFeldNr() - 1);
+                    kobold.setFeldNr(kobold.getFeldNr() - 1);                    
                 }
                 if (kobold.getFeldNr() > 9 && kobold.getFeldNr() < 18) {
                     kobold.setLayer(1);

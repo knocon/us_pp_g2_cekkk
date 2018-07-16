@@ -132,6 +132,10 @@ public class Kobold {
     }
 
     public void bewegen(int layer, int feldNr) {
+	int layerVorBewegen = this.getLayer(); 
+	int feldNrVorBewegen = this.getFeldNr(); 	
+	Kobold temp; 
+	
         //vom alten Feld entfernen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
@@ -139,10 +143,24 @@ public class Kobold {
                 break;
             }
         }
-        //auf neues Feld setzen
-        this.setFeldNr(feldNr);
-        this.setLayer(layer);
-
+        
+        //auf neues Feld setzen + Koboldliste einfügen für den Fall, dass da (k)ein Kobold sitzt 
+        if(getCorrectFeld(layer, feldNr).getKobolde().size()<2) {
+            this.setFeldNr(feldNr);
+            this.setLayer(layer); 
+            getCorrectFeld(layer,feldNr).getKobolde().add(this); 
+        }
+        
+        if(getCorrectFeld(layer, feldNr).getKobolde().size()==2) {
+            temp = getCorrectFeld(layer,feldNr).getKobolde().get(1); 
+            getCorrectFeld(layer,feldNr).getKobolde().remove(1); 
+            temp.bewegen(temp.getLayer(), temp.getFeldNr()+1); //entwerde +1/-1 "Richtung"
+            this.setFeldNr(feldNr);
+            this.setLayer(layer); 
+            getCorrectFeld(layer,feldNr).getKobolde().add(this); 
+        }
+        
+        //Feld auf Ereignisse prüfen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == layer && f.getFeldNr() == feldNr) {
                 switch (f.getClassName()) {
@@ -156,18 +174,18 @@ public class Kobold {
                 			this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
                 			((Zauberstein) f).setAufFeld(false);
                 		}
-                		break;   
+                		break; 
                 	case "Fallgrube":
                         Fallgrube fallgrube = (Fallgrube) f;
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Du faellst hinab.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        fallgrube.execute(this);
+                        fallgrube.execute(this, this.zauberberg.getSpiel().getFelder());
                         break;
                     case "Geheimgang":
                         Geheimgang geheimgang = (Geheimgang) f;
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Geheimgang gekommen. Du steigst auf.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        geheimgang.execute(this);
+                        geheimgang.execute(this, this.zauberberg.getSpiel().getFelder());
                         break;
                     case "Schreckgespenst":
                         Schreckgespenst schreckgespenst = (Schreckgespenst) f;
@@ -202,14 +220,7 @@ public class Kobold {
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         zauberberg.sendGameDataToClientsPublic("FELDDREHEN");
                         break;
-                }
-                //an Liste auf neuer Pos einfügen
-                for (Feld feld : zauberberg.getSpiel().getFelder()) {
-                    if (feld.getLayer() == this.getLayer() && feld.getFeldNr() == this.getFeldNr()) {
-                        feld.getKobolde().add(this);
-                        break;
-                    }
-                }
+                }               
                 break;
             }
         }
