@@ -27,8 +27,20 @@ public class Geheimgang extends Feld {
                     kobold.setFeldNr(kobold.getFeldNr() - 1);                    
                 }
                 if (kobold.getFeldNr() > 9 && kobold.getFeldNr() < 18) {
-                    kobold.setLayer(1);
-                    kobold.setFeldNr(kobold.getFeldNr() - 3);
+                    for(Feld f : felder) {
+                	if(f.getLayer()==1 && f.getFeldNr()==kobold.getFeldNr()-3) { //obere 
+                	    if(f.getKobolde().size()==0) {
+                		for(Feld feld : felder) {
+                		    if(feld.getLayer() == kobold.getLayer() && feld.getFeldNr() == kobold.getFeldNr()) {
+                			feld.getKobolde().remove(kobold);        
+                			kobold.setLayer(1);
+                			kobold.setFeldNr(kobold.getFeldNr()-3);
+                			break;
+                		    }                		    
+                		}
+                	    }
+                	}
+                    }                    
                 }
                 if (kobold.getFeldNr() > 18 && kobold.getFeldNr() < 27) {
                     kobold.setLayer(1);
@@ -41,8 +53,20 @@ public class Geheimgang extends Feld {
                 break;
             case 1:
                 if (kobold.getFeldNr() > 0 && kobold.getFeldNr() < 7) {
-                    kobold.setLayer(2);
-                    kobold.setFeldNr(kobold.getFeldNr() - 1);
+                    for(Feld f : felder) {
+                	if(f.getLayer()==2 && f.getFeldNr()==kobold.getFeldNr()-1) { //obere 
+                	    if(f.getKobolde().size()==0) {
+                		for(Feld feld : felder) {
+                		    if(feld.getLayer() == kobold.getLayer() && feld.getFeldNr() == kobold.getFeldNr()) {
+                			feld.getKobolde().remove(kobold);        
+                			kobold.setLayer(2);
+                			kobold.setFeldNr(kobold.getFeldNr()-1);
+                			break;
+                		    }                		    
+                		}
+                	    }
+                	}
+                    }                    
                 }
                 if (kobold.getFeldNr() > 7 && kobold.getFeldNr() < 14) {
                     kobold.setLayer(2);
@@ -53,6 +77,20 @@ public class Geheimgang extends Feld {
                     kobold.setFeldNr(kobold.getFeldNr() - 5);
                 }
                 if (kobold.getFeldNr() > 21 && kobold.getFeldNr() < 28) {
+                    for(Feld f : felder) {
+                	if(f.getLayer()==2 && f.getFeldNr()==kobold.getFeldNr()-7) { //obere 
+                	    if(f.getKobolde().size()==0) {
+                		for(Feld feld : felder) {
+                		    if(feld.getLayer() == kobold.getLayer() && feld.getFeldNr() == kobold.getFeldNr()) {
+                			feld.getKobolde().remove(kobold);        
+                			kobold.setLayer(2);
+                			kobold.setFeldNr(kobold.getFeldNr()-7);
+                			break;
+                		    }                		    
+                		}
+                	    }
+                	}
+                    }            
                     kobold.setLayer(2);
                     kobold.setFeldNr(kobold.getFeldNr() - 7);
                 }
@@ -89,8 +127,20 @@ public class Geheimgang extends Feld {
                     kobold.setFeldNr(kobold.getFeldNr() - 5);
                 }
                 if (kobold.getFeldNr() > 9 && kobold.getFeldNr() < 12) {
-                    kobold.setLayer(4);
-                    kobold.setFeldNr(kobold.getFeldNr() - 7);
+                    for(Feld f : felder) {
+                	if(f.getLayer()==4 && f.getFeldNr()==kobold.getFeldNr()-7) { //obere 
+                	    if(f.getKobolde().size()==0) {
+                		for(Feld feld : felder) {
+                		    if(feld.getLayer() == kobold.getLayer() && feld.getFeldNr() == kobold.getFeldNr()) {
+                			feld.getKobolde().remove(kobold);        
+                			kobold.setLayer(4);
+                			kobold.setFeldNr(kobold.getFeldNr()-7);
+                			break;
+                		    }                		    
+                		}
+                	    }
+                	}
+                    }                 
                 }
                 break;
         }

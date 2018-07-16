@@ -12,13 +12,7 @@ public class Fallgrube extends Feld {
         this.karteAufgedeckt = false;
     }
 
-    public void execute(Kobold kobold, ArrayList<Feld> felder) {
-	for(Feld f : felder) {
-	    if(f.getLayer() == kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {
-		f.getKobolde().remove(this);
-		break; 
-	    }	    
-	}
+    public void execute(Kobold kobold, ArrayList<Feld> felder) {	
         switch (kobold.getLayer()) {
             case 0:
                 kobold.setLayer(-1);
@@ -55,8 +49,22 @@ public class Fallgrube extends Feld {
                     kobold.setFeldNr(kobold.getFeldNr() + 5);
                 }
                 if (kobold.getFeldNr() > 15 && kobold.getFeldNr() < 20) {
-                    kobold.setLayer(1);
-                    kobold.setFeldNr(kobold.getFeldNr() + 7);
+                    //Fallgrube auf layer 2, feldnr 19
+                    for(Feld feld: felder) {
+                	if(feld.getLayer() == 1 && feld.getFeldNr()== kobold.getFeldNr()+7) {
+                	    if(feld.getKobolde().size()==0) {
+                		for(Feld f : felder) {
+                            		if(f.getLayer() == kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {
+                            		    f.getKobolde().remove(kobold);
+                            		    break; 
+                            		}                            		
+                                }                		
+                                kobold.setLayer(1);
+                                kobold.setFeldNr(kobold.getFeldNr() + 7);
+                                break;
+                	    }
+                	}
+                    }                    
                 }
                 break;
             case 3:
@@ -69,8 +77,22 @@ public class Fallgrube extends Feld {
                     kobold.setFeldNr(kobold.getFeldNr() + 3);
                 }
                 if (kobold.getFeldNr() > 6 && kobold.getFeldNr() < 9) {
-                    kobold.setLayer(2);
-                    kobold.setFeldNr(kobold.getFeldNr() + 5);
+                    //Fallgrube auf layer 3, nr 7
+                    for(Feld feld: felder) {
+                	if(feld.getLayer() == 2 && feld.getFeldNr()== kobold.getFeldNr()+5) {
+                	    if(feld.getKobolde().size()==0) {
+                		for(Feld f : felder) {
+                            		if(f.getLayer() == kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {
+                            		    f.getKobolde().remove(kobold);
+                            		    break; 
+                            		}                            		
+                                }                		
+                                kobold.setLayer(2);
+                                kobold.setFeldNr(kobold.getFeldNr() + 5);
+                                break;
+                	    }
+                	}
+                    }
                 }
                 if (kobold.getFeldNr() > 9 && kobold.getFeldNr() < 12) {
                     kobold.setLayer(2);
