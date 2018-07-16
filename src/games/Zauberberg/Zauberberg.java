@@ -298,7 +298,13 @@ public class Zauberberg extends Game {
                         //todo Logik
                         break;
                     case "Rabe":
-                        //ausgew�hlter Spieler.setAnzahlZaubersteine(ausgewählterspielr.getAnzahlZaubersteine()-1);  
+                	for(Spieler sp : spielerList) {
+                	    if(sp.getFarbName().toString().equals(dataMap.get("Spieler").toUpperCase())) {
+                		sp.setAnzahlZaubersteine(sp.getAnzahlZaubersteine()-1);
+                	    }
+                	    break;
+                	}
+                	sendGameDataToClients("UPDATESPIELZUSTAND"); 
                         break;
                 }
                 break;
