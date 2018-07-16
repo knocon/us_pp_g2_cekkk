@@ -172,7 +172,9 @@ public class Kobold {
                 		}else {
                 			zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du erhaelst 1 Zauberstein.");
                 			zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                			this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
+                			if(this.getSpieler().getAnzahlZaubersteine()<2) {
+                			    this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
+                			}                			
                 			((Zauberstein) f).setAufFeld(false);
                 		}
                 		break; 

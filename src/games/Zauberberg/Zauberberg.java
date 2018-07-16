@@ -288,7 +288,7 @@ public class Zauberberg extends Game {
                     }
                 }
                 //neue Karten ziehen bei KARTENTAUSCH
-                spieler.getHand().addAll(getRandomCards(sizeOfHand2 - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
+                spieler.getHand().addAll(getRandomCards((spieler.getAnzahlZaubersteine()>=0 ? spieler.getAnzahlZaubersteine()+3-spieler.getHand().size() : 3-spieler.getHand().size()), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user, "UPDATEKARTEN");
                 //Zug beenden
                 this.zugBeenden();
