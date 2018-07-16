@@ -168,3 +168,6 @@
 [2018-07-16 20:32:26.048] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
 [2018-07-16 21:54:27.069] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
 [2018-07-16 21:54:35.256] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-16 22:23:49.344] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-16 22:32:26.357] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-16 22:59:29.313] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
