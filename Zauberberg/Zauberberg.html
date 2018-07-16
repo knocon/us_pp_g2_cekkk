@@ -584,16 +584,18 @@
                 }
             });
 
-			//addListener('FELDERANBIETEN', function (event) {
-            //    var stringFromServer = event.data;
-            //    var data = JSON.parse(stringFromServer);
-            //    for (var key of data) {
+			addListener('FELDERANBIETEN', function (event) {
+                var stringFromServer = event.data;
+                var data = JSON.parse(stringFromServer);
+                for (var key of data) {}
 			
-			
+			add Listener('FELDERAUSWAEHLEN', function(event){
+                var StringFromServer = event.data;
+                var data = JSON.parse(stringFromServer);
+            }
 			function glowOnClick(pos){
-				//TODO js
+				console.log(pos);
 			}
-
 
         </script>
 
@@ -3078,7 +3080,7 @@
                             <!-- Kobold 5 Klein-->
 							
 							<!-- Glow Effekt-->
-							<img id ="glow_1_10" src="layout_images/glow.png" class="glowImg" alt="" onClick="glowOnClick('1_10')">
+							<img id ="glow_0_10" src="layout_images/glow.png" class="glowImg" alt="" onClick="glowOnClick('1_10')">
 
                         </div>
 
