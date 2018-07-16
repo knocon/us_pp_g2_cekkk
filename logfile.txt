@@ -171,3 +171,5 @@
 [2018-07-16 22:23:49.344] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
 [2018-07-16 22:32:26.357] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
 [2018-07-16 22:59:29.313] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-16 23:14:11.9] [IP: /192.168.178.60] [LOGOUT] Logging out user "kno" succeeded; Session length: 14  Minutes
+[2018-07-16 23:14:15.094] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
