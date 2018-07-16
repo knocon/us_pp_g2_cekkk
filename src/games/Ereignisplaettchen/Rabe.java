@@ -8,8 +8,8 @@ import games.Zauberberg.*;
 public class Rabe extends Feld {
     private boolean karteAufgedeckt;
 
-    public Rabe(int layer, int feldNr, ArrayList<Kobold> list, Zauberberg zauberberg) {
-        super(layer, feldNr, list, zauberberg);
+    public Rabe(int layer, int feldNr, Zauberberg zauberberg) {
+        super(layer, feldNr, zauberberg);
         this.karteAufgedeckt = false;
     }
 

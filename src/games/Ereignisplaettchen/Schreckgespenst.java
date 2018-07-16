@@ -7,8 +7,8 @@ import games.Zauberberg.*;
 public class Schreckgespenst extends Feld {
     private boolean karteAufgedeckt;
 
-    public Schreckgespenst(int layer, int feldNr, ArrayList<Kobold> list, Zauberberg zauberberg) {
-        super(layer, feldNr, list, zauberberg);
+    public Schreckgespenst(int layer, int feldNr, Zauberberg zauberberg) {
+        super(layer, feldNr, zauberberg);
         this.karteAufgedeckt = false;
     }
 

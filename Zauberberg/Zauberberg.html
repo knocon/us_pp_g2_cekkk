@@ -494,6 +494,7 @@
             addListener('UPDATESPIELFELD', function (event) {
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
+                console.log(data);
                 for (var key of data) {
 					var pos = key.split("#")[0];
 					var info = key.split("#")[1];
@@ -564,19 +565,19 @@
 
 					switch(info){
 						case"EreigniskarteSteinOffen":
-							if (data[key] == "1") {
+							if (data[key] === "1") {
                         		document.getElementById("baseOffen_" + pos).style.visibility = "visible";
                     		}else {
 								document.getElementById("base_" + pos).style.visibility = "visible";
                     		}
 							break;
 						case"Kobold1-Farbe":
-							if (data[key] != "Null") {
+							if (data[key] !== "Null") {
 								document.getElementById("kobold" + data[key] + data[pos + "#Kobold1-Nummer"] + "_" + pos).style.visibility = "visible";
 							}
 							break;
 						case"Kobold2-Farbe":
-							if (data[key] != "Null") {
+							if (data[key] !== "Null") {
 								document.getElementById("kobold" + data[key] + "k" + data[pos + "#Kobold2-Nummer"] + "_" + pos).style.visibility = "visible";
 							}
 							break;

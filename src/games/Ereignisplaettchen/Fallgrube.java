@@ -7,8 +7,8 @@ import games.Zauberberg.*;
 public class Fallgrube extends Feld {
     private boolean karteAufgedeckt;
 
-    public Fallgrube(int layer, int feldNr, ArrayList<Kobold> list, Zauberberg zauberberg) {
-        super(layer, feldNr, list, zauberberg);
+    public Fallgrube(int layer, int feldNr, Zauberberg zauberberg) {
+        super(layer, feldNr, zauberberg);
         this.karteAufgedeckt = false;
     }
 

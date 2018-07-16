@@ -7,15 +7,11 @@ public class Feld {
     private int feldNr;
     private ArrayList<Kobold> kobolde;
     protected Zauberberg zauberberg;
-    //private boolean zauberstein;
-    //private boolean ereignisplaettchen;
 
-
-    public Feld(int layer, int feldNr, ArrayList<Kobold> kobolde, Zauberberg zauberberg) {
+    public Feld(int layer, int feldNr, Zauberberg zauberberg) {
+        this.kobolde = new ArrayList<>();
         this.layer = layer;
         this.feldNr = feldNr;
-        this.kobolde = kobolde;
-        //this.zauberstein = zauberstein;
         this.zauberberg = zauberberg;
     }
 

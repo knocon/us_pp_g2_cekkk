@@ -44,7 +44,7 @@ public class Kobold {
 
     public void karteSpielen() {
         int laufweg = this.kartenWerte.get(0);
-        ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();        
+        ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
         if (this.getLayer() == -1) {            //Schritt raus aus dem Dorf
             if (this.getFeldNr() == 0) {
         	arrayLayerFeld.add(0); //layer
@@ -72,44 +72,44 @@ public class Kobold {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
         	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
         	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(0, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(1); 
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr())); 
+        		arrayLayerFeld.add(1);
+        		arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr()));
         	    }
-        	}        	
-            }          
+        	}
+            }
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 36) + 36) % 36);  //vorw�rts
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 36) + 36) % 36); // r�ckw�rts
         } else if (this.getLayer() == 1) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
         	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
         	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(1, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(2); 
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(1, this.getFeldNr())); 
+        		arrayLayerFeld.add(2);
+        		arrayLayerFeld.add(this.getFeldNrNextLayer(1, this.getFeldNr()));
         	    }
-        	}        	
-            }            
+        	}
+            }
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 28) + 28) % 28); //vorw�rts
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 28) + 28) % 28);  // r�ckw�rts
         } else if (this.getLayer() == 2) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
         	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
         	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(2, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(3); 
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(2, this.getFeldNr())); 
+        		arrayLayerFeld.add(3);
+        		arrayLayerFeld.add(this.getFeldNrNextLayer(2, this.getFeldNr()));
         	    }
-        	}        	
-            }           
+        	}
+            }
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 20) + 20) % 20);  //vorw�rts
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 20) + 20) % 20); // r�ckw�rts
         } else if (this.getLayer() == 3) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
         	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
         	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(3, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(4); 
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(3, this.getFeldNr())); 
+        		arrayLayerFeld.add(4);
+        		arrayLayerFeld.add(this.getFeldNrNextLayer(3, this.getFeldNr()));
         	    }
-        	}        	
-            } 
+        	}
+            }
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 12) + 12) % 12);  //vorw�rts
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 12) + 12) % 12);  // r�ckw�rts
         }
@@ -125,7 +125,7 @@ public class Kobold {
     public Feld getCorrectFeld(int layer, int feldNr) {
 	for(Feld f : zauberberg.getSpiel().getFelder()) {
 	    if(f.getLayer() == layer && f.getFeldNr() == feldNr) {
-		return f; 
+		return f;
 	    }
 	    break;
 	}
@@ -133,10 +133,10 @@ public class Kobold {
     }
 
     public void bewegen(int layer, int feldNr) {
-	int layerVorBewegen = this.getLayer(); 
-	int feldNrVorBewegen = this.getFeldNr(); 	
-	Kobold temp; 
-	
+	int layerVorBewegen = this.getLayer();
+	int feldNrVorBewegen = this.getFeldNr();
+	Kobold temp;
+
         //vom alten Feld entfernen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
@@ -144,23 +144,23 @@ public class Kobold {
                 break;
             }
         }
-        
+
         //auf neues Feld setzen + Koboldliste einfügen für den Fall, dass da (k)ein Kobold sitzt 
         if(getCorrectFeld(layer, feldNr).getKobolde().size()<2) {
             this.setFeldNr(feldNr);
-            this.setLayer(layer); 
-            getCorrectFeld(layer,feldNr).getKobolde().add(this); 
+            this.setLayer(layer);
+            getCorrectFeld(layer,feldNr).getKobolde().add(this);
         }
-        
+
         if(getCorrectFeld(layer, feldNr).getKobolde().size()==2) {
-            temp = getCorrectFeld(layer,feldNr).getKobolde().get(1); 
-            getCorrectFeld(layer,feldNr).getKobolde().remove(1); 
+            temp = getCorrectFeld(layer,feldNr).getKobolde().get(1);
+            getCorrectFeld(layer,feldNr).getKobolde().remove(1);
             temp.bewegen(temp.getLayer(), temp.getFeldNr()+1); //entwerde +1/-1 "Richtung"
             this.setFeldNr(feldNr);
-            this.setLayer(layer); 
-            getCorrectFeld(layer,feldNr).getKobolde().add(this); 
+            this.setLayer(layer);
+            getCorrectFeld(layer,feldNr).getKobolde().add(this);
         }
-        
+
         //Feld auf Ereignisse prüfen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == layer && f.getFeldNr() == feldNr) {
@@ -177,7 +177,7 @@ public class Kobold {
                 			}                			
                 			((Zauberstein) f).setAufFeld(false);
                 		}
-                		break; 
+                		break;
                 	case "Fallgrube":
                         Fallgrube fallgrube = (Fallgrube) f;
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Du faellst hinab.");
@@ -200,10 +200,10 @@ public class Kobold {
                         Rabe rabe = (Rabe) f;
                         HashMap<String, String> output = new HashMap<>();
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Rabe gekommen. Waehle 1 Spieler, dem der Zauberstein entfernt wird.");
-                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");    
-                        output.put("Ereignis", "Rabe"); 
+                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                        output.put("Ereignis", "Rabe");
                         zauberberg.setEreignisAnfrage(gson.toJson(output, HashMap.class));
-                        zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");                        
+                        zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");
                         break;
                     case "Fliegende Karte":
                     	FliegendeKarte fliegendeKarte = (FliegendeKarte) f;
@@ -226,7 +226,7 @@ public class Kobold {
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         zauberberg.sendGameDataToClientsPublic("FELDDREHEN");
                         break;
-                }               
+                }
                 break;
             }
         }
@@ -314,6 +314,7 @@ public class Kobold {
 
     public void setLayer(int layer) {
         this.layer = layer;
+        this.zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
     }
 
     public int getPos() {
@@ -330,6 +331,7 @@ public class Kobold {
 
     public void setFeldNr(int feldNr) {
         this.feldNr = feldNr;
+        this.zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
     }
 
     public Spieler getSpieler() {
