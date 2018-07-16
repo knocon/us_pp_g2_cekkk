@@ -26,13 +26,14 @@ public class Kobold {
 
     //Methoden bewegen
     //TODO Position im Grid
-    public Kobold(int nummer, Spieler spieler) {
+    public Kobold(int nummer, Spieler spieler, Zauberberg zauberberg) {
         this.dorf = anz % 4; //gleichmäßiges Verteilen der Kobolde (im Uhrzeigersinn)
         this.layer = -1;
         this.feldNr = this.dorf;
         this.spieler = spieler;
         this.nummer = nummer;
         this.farbe = spieler.getFarbName();
+        this.zauberberg = zauberberg;
         anz++;
     }
 
@@ -373,14 +374,6 @@ public class Kobold {
 
     public void setDorf(int dorf) {
         this.dorf = dorf;
-    }
-
-    public Zauberberg getZauberberg() {
-        return zauberberg;
-    }
-
-    public void setZauberberg(Zauberberg zauberberg) {
-        this.zauberberg = zauberberg;
     }
 
     public Spieler.Name getFarbe() {

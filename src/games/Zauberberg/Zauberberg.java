@@ -28,7 +28,7 @@ public class Zauberberg extends Game {
     /**
      * gridStatus contains the gameData
      */
-    private Spiel spiel = new Spiel(this);
+    private Spiel spiel;
     private Kobold aktuellerKobold;
     private Spieler playerTurn = null;
     private ArrayList<User> playerList = new ArrayList<User>();
@@ -84,6 +84,7 @@ public class Zauberberg extends Game {
 
         if (gsonString.equals("START")) { // Start Button wurde vom Host gedrückt
             this.gState = GameState.RUNNING;
+            spiel = new Spiel(this);
             //jeder Spieler bekommnt 3 zuf�llige Karten vom Stapel
             for (Spieler s : spielerList) {
                 s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
@@ -354,10 +355,7 @@ public class Zauberberg extends Game {
             spielerList.add(spieler);
 
             for (int i = 1; i <= 5; i++) {
-                spieler.getKoboldList().add(new Kobold(i, spieler));
-            }
-            for (Kobold k : spieler.getKoboldList()) {
-                k.setZauberberg(this);
+                spieler.getKoboldList().add(new Kobold(i, spieler, this));
             }
             if (playerTurn == null) {
                 playerTurn = spieler;
@@ -494,10 +492,6 @@ public class Zauberberg extends Game {
         return spiel;
     }
 
-    public void setSpiel(Spiel spiel) {
-        this.spiel = spiel;
-    }
-
     public void setFelderWaehlen(String felderWaehlen) {
         this.felderWaehlen = felderWaehlen;
     }
@@ -512,10 +506,6 @@ public class Zauberberg extends Game {
 
     public void setRecentInfoText(String recentInfoText) {
         this.recentInfoText = recentInfoText;
-    }
-    
-    public String getEreignisAnfrage() {
-        return ereignisAnfrage;
     }
 
     public void setEreignisAnfrage(String ereignisAnfrage) {
