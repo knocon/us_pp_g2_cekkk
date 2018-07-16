@@ -185,3 +185,5 @@
 [2018-07-17 00:10:37.787] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
 [2018-07-17 00:29:02.709] [IP: /192.168.2.112] [LOGIN] Logging in user "1" succeeded
 [2018-07-17 00:29:09.796] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-17 00:44:03.134] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-17 00:44:14.142] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "kno" succeeded
