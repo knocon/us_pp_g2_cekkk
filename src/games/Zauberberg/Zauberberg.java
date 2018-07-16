@@ -37,7 +37,7 @@ public class Zauberberg extends Game {
     ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
     private String recentInfoText = "";
     private String felderWaehlen = "";
-    private String ereignisAnfrage=""; 
+    private String ereignisAnfrage = "";
     private String closeMsg = "Spiel wurde vom Host beendet!";
     private User tempUser;
 
@@ -290,7 +290,7 @@ public class Zauberberg extends Game {
                     }
                 }
                 //neue Karten ziehen bei KARTENTAUSCH
-                spieler.getHand().addAll(getRandomCards((spieler.getAnzahlZaubersteine()>=0 ? spieler.getAnzahlZaubersteine()+3-spieler.getHand().size() : 3-spieler.getHand().size()), spiel.getKartenstapel().getStapel()));
+                spieler.getHand().addAll(getRandomCards((spieler.getAnzahlZaubersteine() >= 0 ? spieler.getAnzahlZaubersteine() + 3 - spieler.getHand().size() : 3 - spieler.getHand().size()), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user, "UPDATEKARTEN");
                 //Zug beenden
                 this.zugBeenden();
@@ -301,13 +301,13 @@ public class Zauberberg extends Game {
                         //todo Logik
                         break;
                     case "Rabe":
-                	for(Spieler sp : spielerList) {
-                	    if(sp.getFarbName().toString().equals(dataMap.get("Spieler").toUpperCase())) {
-                		sp.setAnzahlZaubersteine(sp.getAnzahlZaubersteine()-1);
-                	    }
-                	    break;
-                	}
-                	sendGameDataToClients("UPDATESPIELZUSTAND"); 
+                        for (Spieler sp : spielerList) {
+                            if (sp.getFarbName().toString().equals(dataMap.get("Spieler").toUpperCase())) {
+                                sp.setAnzahlZaubersteine(sp.getAnzahlZaubersteine() - 1);
+                            }
+                            break;
+                        }
+                        sendGameDataToClients("UPDATESPIELZUSTAND");
                         break;
                 }
                 break;
@@ -412,6 +412,10 @@ public class Zauberberg extends Game {
             for (Feld feld : this.spiel.getFelder()) {
                 if (feld.getLayer() == -1) { //Feld ist ein Dorf
                     int counter = 0;
+                    for (int i = 0; i < 8; i++) {
+                        output.put("d" + feld.getFeldNr() + "_" + i + "#Kobold1-Farbe", "Null");
+                        output.put("d" + feld.getFeldNr() + "_" + i + "#Kobold1-Nummer", "Null");
+                    }
                     for (Kobold kobold : feld.getKobolde()) {
                         output.put("d" + feld.getFeldNr() + "_" + counter + "#Kobold1-Farbe", String.valueOf(kobold.getFarbe()));
                         output.put("d" + feld.getFeldNr() + "_" + counter + "#Kobold1-Nummer", String.valueOf(kobold.getNummer()));
