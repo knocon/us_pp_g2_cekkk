@@ -587,6 +587,8 @@
                 }
             });
 
+            // FELD ANBIETEN
+            
             addListener('FELDERANBIETEN', function (event) {
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
@@ -597,6 +599,8 @@
                 }
             });
 
+            // FELD AUSWAEHLEN
+            
             function glowOnClick(pos) {
 
                 var res = pos.split("_");
@@ -610,6 +614,22 @@
                 };
 
 
+            }
+            
+                        
+            // EREIGNISKARTEFLIP
+            
+            function eventFlip(pos){
+                
+                var res = pos.split("_");
+                
+                var output = {
+                    "Eventname" : "EREIGNISKARTEFLIP",
+                    "layer": res[0],
+                    "position": res[1]
+                };
+                }
+                
             }
 
 
