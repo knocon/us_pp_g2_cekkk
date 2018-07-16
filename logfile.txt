@@ -187,3 +187,6 @@
 [2018-07-17 00:29:09.796] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
 [2018-07-17 00:44:03.134] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
 [2018-07-17 00:44:14.142] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "kno" succeeded
+[2018-07-17 00:51:21.083] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-17 00:52:02.9] [IP: /192.168.178.60] [LOGOUT] Logging out user "kno" succeeded; Session length: < 1  Minutes
+[2018-07-17 00:52:06.126] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
