@@ -25,11 +25,15 @@ public class Kobold {
     private static int anz;
 
     //Methoden bewegen
-    //TODO Position im Grid
     public Kobold(int nummer, Spieler spieler, Zauberberg zauberberg) {
         this.dorf = anz % 4; //gleichmäßiges Verteilen der Kobolde (im Uhrzeigersinn)
         this.layer = -1;
         this.feldNr = this.dorf;
+        for(Feld feld : zauberberg.getSpiel().getFelder()) {
+    		if(feld.getFeldNr() == this.feldNr && feld.getLayer()==this.layer) {
+    			feld.getKobolde().add(this);
+    		}
+    	}
         this.spieler = spieler;
         this.nummer = nummer;
         this.farbe = spieler.getFarbName();
