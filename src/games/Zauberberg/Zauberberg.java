@@ -37,6 +37,7 @@ public class Zauberberg extends Game {
     ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
     private String recentInfoText = "";
     private String felderWaehlen = "";
+    private String ereignisAnfrage=""; 
     private String closeMsg = "Spiel wurde vom Host beendet!";
     private User tempUser;
 
@@ -450,7 +451,7 @@ public class Zauberberg extends Game {
             return recentInfoText;
         }
         if (eventName.equals("EREIGNISANFRAGE")) {
-            return ""; //todo Logik
+            return ereignisAnfrage;
         }
         if (eventName.equals("FELDERANBIETEN")) {
             return this.felderWaehlen;
@@ -500,7 +501,6 @@ public class Zauberberg extends Game {
         this.felderWaehlen = felderWaehlen;
     }
 
-    //Emre
     public void sendGameDataToUserPublic(String event) {
         sendGameDataToUser(tempUser, event);
     }
@@ -511,6 +511,14 @@ public class Zauberberg extends Game {
 
     public void setRecentInfoText(String recentInfoText) {
         this.recentInfoText = recentInfoText;
+    }
+    
+    public String getEreignisAnfrage() {
+        return ereignisAnfrage;
+    }
+
+    public void setEreignisAnfrage(String ereignisAnfrage) {
+        this.ereignisAnfrage = ereignisAnfrage;
     }
 
     public void setPlayerTurn(Spieler playerTurn) {

@@ -1,6 +1,7 @@
 package games.Zauberberg;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -195,9 +196,12 @@ public class Kobold {
                         break;
                     case "Rabe":
                         Rabe rabe = (Rabe) f;
+                        HashMap<String, String> output = new HashMap<>();
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Rabe gekommen. Waehle 1 Spieler, dem der Zauberstein entfernt wird.");
-                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        rabe.execute(this.getSpieler()); // TODO hier muss die Ereignisanfrage stattfinden, so ist das ja falsch, dass der Rabe auf den aktuellen Spieler andgewendet wird
+                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");    
+                        output.put("Ereignis", "Rabe"); 
+                        zauberberg.setEreignisAnfrage(gson.toJson(output, HashMap.class));
+                        zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");                        
                         break;
                     case "Fliegende Karte":
                     	FliegendeKarte fliegendeKarte = (FliegendeKarte) f;
