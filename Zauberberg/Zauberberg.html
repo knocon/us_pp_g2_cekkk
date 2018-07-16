@@ -584,18 +584,29 @@
                 }
             });
 
-			//addListener('FELDERANBIETEN', function (event) {
-            //    var stringFromServer = event.data;
-            //   var data = JSON.parse(stringFromServer);
-            //    for (var key of data) {}
+            addListener('FELDERANBIETEN', function (event) {
+                var stringFromServer = event.data;
+                var data = JSON.parse(stringFromServer);
+                for (var i = 0; i < data.length() ; i += 2) {
+                    
+                    document.getElementById("glow_"+data[i]+"_"+data[i+1]).style.visibility = "visible";
+                    
+                }});
 			
-			//add Listener('FELDERAUSWAEHLEN', function(event){
-            //    var StringFromServer = event.data;
-            //    var data = JSON.parse(stringFromServer);
-            //}
-			//function glowOnClick(pos){
-			//	console.log(pos);
-			//}
+			function glowOnClick(pos){
+				
+                var res = pos.split("_");
+                
+                var output = {
+                    "Eventname": "FELDAUSWAEHLEN",
+                    "layer": res[0],
+                    "position": res[1]
+                        };
+                
+                    }
+                
+                
+			
 
         </script>
 
