@@ -495,7 +495,7 @@
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
                 console.log(data);
-                for (var key of data) {
+                for (var key in data) {
 					var pos = key.split("#")[0];
 					var info = key.split("#")[1];
 

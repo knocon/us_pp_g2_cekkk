@@ -415,7 +415,7 @@ public class Zauberberg extends Game {
                 if (feld.getLayer() == -1) { //Feld ist ein Dorf
                     int counter = 0;
                     for (Kobold kobold : feld.getKobolde()) {
-                        //output.put("d" + feld.getFeldNr() + "_" + counter + "#Kobold1-Farbe", String.valueOf(kobold.getFarbe()));
+                        output.put("d" + feld.getFeldNr() + "_" + counter + "#Kobold1-Farbe", String.valueOf(kobold.getFarbe()));
                         output.put("d" + feld.getFeldNr() + "_" + counter + "#Kobold1-Nummer", String.valueOf(kobold.getNummer()));
                         counter++;
                     }
@@ -436,7 +436,7 @@ public class Zauberberg extends Game {
                     }
                 }
             }
-            return gson.toJson(output, ArrayList.class);
+            return gson.toJson(output, HashMap.class);
         }
         if (eventName.equals("UPDATESPIELZUSTAND")) {
             HashMap<String, String> output = new HashMap<>();
