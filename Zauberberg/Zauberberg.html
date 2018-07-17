@@ -629,12 +629,12 @@
                 var res = pos.split("_");
 
                 var output = {
-                    "Eventname": "EREIGNISKARTEFLIP",
-                    "layer": res[0],
-                    "position": res[1]
+                    Eventname: "EREIGNISKARTEFLIP",
+                    layer: res[0],
+                    position: res[1]
                 };
-
-
+                console.log(output);
+                sendDataToServer(JSON.stringify(output));
             }
             
             addListener('SPIELFELDDREHEN', function (event) {
