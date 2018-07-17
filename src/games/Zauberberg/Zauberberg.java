@@ -89,6 +89,15 @@ public class Zauberberg extends Game {
             for (Spieler s : spielerList) {
                 s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
                 spiel.getKartenstapel().getStapel().remove(s.getHand());
+
+                for (Kobold kobold : s.getKoboldList()) {
+                    for (Feld feld : spiel.getFelder()) {
+                        if (feld.getFeldNr() == kobold.getFeldNr() && feld.getLayer() == kobold.getLayer()) {
+                            feld.getKobolde().add(kobold);
+                            break;
+                        }
+                    }
+                }
             }
             sendGameDataToClients("STARTGAME");
             sendGameDataToClients("UPDATEKARTEN");

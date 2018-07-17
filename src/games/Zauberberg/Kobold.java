@@ -29,11 +29,11 @@ public class Kobold {
         this.dorf = anz % 4; //gleichmäßiges Verteilen der Kobolde (im Uhrzeigersinn)
         this.layer = -1;
         this.feldNr = this.dorf;
-        for(Feld feld : zauberberg.getSpiel().getFelder()) {
-    		if(feld.getFeldNr() == this.feldNr && feld.getLayer()==this.layer) {
-    			feld.getKobolde().add(this);
-    		}
-    	}
+        //for(Feld feld : zauberberg.getSpiel().getFelder()) { todo Das geht hier nicht, da das Spiel Objekt erst beim start initialisiert wird -> verschoben nach Zauberberg.java
+    	//	if(feld.getFeldNr() == this.feldNr && feld.getLayer()==this.layer) {
+    	//		feld.getKobolde().add(this);
+    	//	}
+    	//}
         this.spieler = spieler;
         this.nummer = nummer;
         this.farbe = spieler.getFarbName();
