@@ -311,7 +311,6 @@ public class Kobold {
                 break;
             }
         }
-        //zauberberg.sendGameDataToUserPublic("UPDATESPIELFELD");
     }
 
     public void bewegenBeenden(){
