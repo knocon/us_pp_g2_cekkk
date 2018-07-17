@@ -588,7 +588,7 @@
             });
 
             // FELD ANBIETEN
-            
+
             addListener('FELDERANBIETEN', function (event) {
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
@@ -600,7 +600,7 @@
             });
 
             // FELD AUSWAEHLEN
-            
+
             function glowOnClick(pos) {
 
                 var res = pos.split("_");
@@ -615,21 +615,21 @@
 
 
             }
-            
-                        
+
+
             // EREIGNISKARTEFLIP
-            
-            function eventFlip(pos){
-                
+
+            function eventFlip(pos) {
+
                 var res = pos.split("_");
-                
+
                 var output = {
-                    "Eventname" : "EREIGNISKARTEFLIP",
+                    "Eventname": "EREIGNISKARTEFLIP",
                     "layer": res[0],
                     "position": res[1]
                 };
-                }
-                
+
+
             }
 
             //TODO GUI
@@ -638,8 +638,8 @@
             // 3. Felder anbieten | DONE
             // 4. Felder auswaehlen | DONE
             // 5. Code Reformat Uppercase | 0%
-            
-            
+
+
         </script>
 
         <div id="grid">
