@@ -61,67 +61,68 @@ public class Zauberberg extends Game {
 
     @Override
     public void execute(User user, String gsonString) {
-        Spieler spieler = spielerList.get(playerList.indexOf(user));
-        //Vorverarbeitung
-        System.out.println("Empfangen: " + gsonString);
-        gsonString = gsonString.replaceAll("\u00a7", "{");
-        gsonString = gsonString.replaceAll("~", "}");
-        System.out.println("JSON Daten: " + gsonString);
+        try {
+            Spieler spieler = spielerList.get(playerList.indexOf(user));
+            //Vorverarbeitung
+            System.out.println("Empfangen: " + gsonString);
+            gsonString = gsonString.replaceAll("\u00a7", "{");
+            gsonString = gsonString.replaceAll("~", "}");
+            System.out.println("JSON Daten: " + gsonString);
 
-        /**
-         * Eventnamen für Spielsteuerung abfangen
-         */
+            /**
+             * Eventnamen für Spielsteuerung abfangen
+             */
 
-        if (this.gState == GameState.CLOSED) {
-            return;
-        }
+            if (this.gState == GameState.CLOSED) {
+                return;
+            }
 
-        if (gsonString.equals("CLOSE")) {
-            sendGameDataToClients("CLOSE");
-            closeGame();
-            return;
-        }
+            if (gsonString.equals("CLOSE")) {
+                sendGameDataToClients("CLOSE");
+                closeGame();
+                return;
+            }
 
-        if (gsonString.equals("START")) { // Start Button wurde vom Host gedrückt
-            this.gState = GameState.RUNNING;
-            spiel = new Spiel(this);
-            //jeder Spieler bekommnt 3 zuf�llige Karten vom Stapel
-            for (Spieler s : spielerList) {
-                s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
-                spiel.getKartenstapel().getStapel().remove(s.getHand());
+            if (gsonString.equals("START")) { // Start Button wurde vom Host gedrückt
+                this.gState = GameState.RUNNING;
+                spiel = new Spiel(this);
+                //jeder Spieler bekommnt 3 zuf�llige Karten vom Stapel
+                for (Spieler s : spielerList) {
+                    s.setHand(getRandomCards(3, spiel.getKartenstapel().getStapel()));
+                    spiel.getKartenstapel().getStapel().remove(s.getHand());
 
-                for (Kobold kobold : s.getKoboldList()) {
-                    for (Feld feld : spiel.getFelder()) {
-                        if (feld.getFeldNr() == kobold.getFeldNr() && feld.getLayer() == kobold.getLayer()) {
-                            feld.getKobolde().add(kobold);
-                            break;
+                    for (Kobold kobold : s.getKoboldList()) {
+                        for (Feld feld : spiel.getFelder()) {
+                            if (feld.getFeldNr() == kobold.getFeldNr() && feld.getLayer() == kobold.getLayer()) {
+                                feld.getKobolde().add(kobold);
+                                break;
+                            }
                         }
                     }
                 }
+                sendGameDataToClients("STARTGAME");
+                sendGameDataToClients("UPDATEKARTEN");
+                sendGameDataToClients("UPDATESPIELZUSTAND");
+                sendGameDataToClients("UPDATESPIELFELD");
+                return;
             }
-            sendGameDataToClients("STARTGAME");
-            sendGameDataToClients("UPDATEKARTEN");
-            sendGameDataToClients("UPDATESPIELZUSTAND");
-            sendGameDataToClients("UPDATESPIELFELD");
-            return;
-        }
 
-        if (gState != GameState.RUNNING) {
-            return;
-        }
+            if (gState != GameState.RUNNING) {
+                return;
+            }
 
-        if (!spieler.equals(playerTurn)) {
-            return; //nur wenn der Spieler dran ist, darf er auch Daten schicken
-        }
+            if (!spieler.equals(playerTurn)) {
+                return; //nur wenn der Spieler dran ist, darf er auch Daten schicken
+            }
 
-        /**
-         * Eventnamen für das eigentliche Spiel
-         */
-        Gson gson = new GsonBuilder().create();
-        HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
-        switch (dataMap.get("Eventname")) {
-            case "KARTENLEGEN":
-                try {
+            /**
+             * Eventnamen für das eigentliche Spiel
+             */
+            Gson gson = new GsonBuilder().create();
+            HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
+            switch (dataMap.get("Eventname")) {
+                case "KARTENLEGEN":
+
                     Bewegungskarte instanceKoboldKarte = null;
                     Bewegungskarte instance2Karte = null;
                     Bewegungskarte instance3Karte = null;
@@ -184,171 +185,171 @@ public class Zauberberg extends Game {
                     //Karten verarbeiten
                     tempUser = user;
                     aktuellerKobold.kartenLegen(instanceKoboldKarte, instance2Karte, instance3Karte, value2Karte, value3Karte);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
+                    break;
 
-            //dieser case läuft!
-            case "KARTENTAUSCHEN":
-                int sizeOfHand2 = spieler.getHand().size();
-                if (!dataMap.get("karte1").equals("Null")) {
-                    if (!dataMap.get("karte1").equals("Joker")) {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    }
-                }
-                //karte2
-                if (!dataMap.get("karte2").equals("Null")) {
-                    if (!dataMap.get("karte2").equals("Joker")) {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    }
-                }
-                //karte 3
-                if (!dataMap.get("karte3").equals("Null")) {
-                    if (!dataMap.get("karte3").equals("Joker")) {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    }
-                }
-                //karte 4
-                if (!dataMap.get("karte4").equals("Null")) {
-                    if (!dataMap.get("karte4").equals("Joker")) {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte4"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    }
-                }
-                //karte 5
-                if (!dataMap.get("karte5").equals("Null")) {
-                    if (!dataMap.get("karte5").equals("Joker")) {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte5"))) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < spieler.getHand().size(); i++) {
-                            if (spieler.getHand().get(i).getJoker() == true) {
-                                spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                                spieler.getHand().remove(i);
-                                break;
-                            }
-                        }
-                    }
-                }
-                //neue Karten ziehen bei KARTENTAUSCH
-                spieler.getHand().addAll(getRandomCards((spieler.getAnzahlZaubersteine() >= 0 ? spieler.getAnzahlZaubersteine() + 3 - spieler.getHand().size() : 3 - spieler.getHand().size()), spiel.getKartenstapel().getStapel()));
-                sendGameDataToUser(user, "UPDATEKARTEN");
-                //Zug beenden
-                this.zugBeenden();
-                break;
-            case "EREIGNISANTWORT":
-                switch (dataMap.get("Ereignis")) {
-                    case "Fliegende Karte":
-                        if (dataMap.get("karte1Typ").equals("Normal")) {
+                //dieser case läuft!
+                case "KARTENTAUSCHEN":
+                    int sizeOfHand2 = spieler.getHand().size();
+                    if (!dataMap.get("karte1").equals("Null")) {
+                        if (!dataMap.get("karte1").equals("Joker")) {
                             for (int i = 0; i < spieler.getHand().size(); i++) {
-                                if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Typ"))) {
-                                    aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
-                                    aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte2Wert")));
+                                if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1"))) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
                                     break;
                                 }
                             }
-                        } else if (dataMap.get("karte1Typ").equals("Joker")) {
+                        } else {
                             for (int i = 0; i < spieler.getHand().size(); i++) {
-                                if (spieler.getHand().get(i).getJoker()) {
-                                    aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
-                                    aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte2Wert")));
+                                if (spieler.getHand().get(i).getJoker() == true) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
                                     break;
                                 }
                             }
                         }
-                        aktuellerKobold.bewegenBeenden();
-                        break;
-                    case "Rabe":
-                        for (Spieler sp : spielerList) {
-                            if (sp.getFarbName().toString().equals(dataMap.get("Spieler").toUpperCase())) {
-                                sp.setAnzahlZaubersteine(sp.getAnzahlZaubersteine() - 1);
+                    }
+                    //karte2
+                    if (!dataMap.get("karte2").equals("Null")) {
+                        if (!dataMap.get("karte2").equals("Joker")) {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2"))) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getJoker() == true) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    //karte 3
+                    if (!dataMap.get("karte3").equals("Null")) {
+                        if (!dataMap.get("karte3").equals("Joker")) {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3"))) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getJoker() == true) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    //karte 4
+                    if (!dataMap.get("karte4").equals("Null")) {
+                        if (!dataMap.get("karte4").equals("Joker")) {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte4"))) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getJoker() == true) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    //karte 5
+                    if (!dataMap.get("karte5").equals("Null")) {
+                        if (!dataMap.get("karte5").equals("Joker")) {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte5"))) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getJoker() == true) {
+                                    spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
+                                    spieler.getHand().remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    //neue Karten ziehen bei KARTENTAUSCH
+                    spieler.getHand().addAll(getRandomCards((spieler.getAnzahlZaubersteine() >= 0 ? spieler.getAnzahlZaubersteine() + 3 - spieler.getHand().size() : 3 - spieler.getHand().size()), spiel.getKartenstapel().getStapel()));
+                    sendGameDataToUser(user, "UPDATEKARTEN");
+                    //Zug beenden
+                    this.zugBeenden();
+                    break;
+                case "EREIGNISANTWORT":
+                    switch (dataMap.get("Ereignis")) {
+                        case "Fliegende Karte":
+                            if (dataMap.get("karte1Typ").equals("Normal")) {
+                                for (int i = 0; i < spieler.getHand().size(); i++) {
+                                    if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Typ"))) {
+                                        aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
+                                        aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte2Wert")));
+                                        break;
+                                    }
+                                }
+                            } else if (dataMap.get("karte1Typ").equals("Joker")) {
+                                for (int i = 0; i < spieler.getHand().size(); i++) {
+                                    if (spieler.getHand().get(i).getJoker()) {
+                                        aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
+                                        aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte2Wert")));
+                                        break;
+                                    }
+                                }
+                            }
+                            aktuellerKobold.bewegenBeenden();
+                            break;
+                        case "Rabe":
+                            for (Spieler sp : spielerList) {
+                                if (sp.getFarbName().toString().equals(dataMap.get("Spieler").toUpperCase())) {
+                                    sp.setAnzahlZaubersteine(sp.getAnzahlZaubersteine() - 1);
+                                }
+                                break;
+                            }
+                            aktuellerKobold.bewegenBeenden();
+                            sendGameDataToClients("UPDATESPIELZUSTAND");
+                            break;
+                    }
+                    break;
+                case "FELDAUSWAEHLEN":
+                    aktuellerKobold.bewegen(Integer.parseInt(dataMap.get("layer")), Integer.parseInt(dataMap.get("position")));
+                    break;
+                case "EREIGNISKARTEFLIP":
+                    for (Feld feld : this.spiel.getFelder()) {
+                        if (feld.getLayer() == Integer.parseInt(dataMap.get("layer")) && feld.getFeldNr() == Integer.parseInt(dataMap.get("position"))) {
+                            if (!feld.getClassName().equals("Feld")) {
+                                feld.setKarteAufgedeckt(!feld.isKarteAufgedeckt());
+                            } else {
+                                this.recentInfoText = "Du kannst nur Ereigniskarten umdrehen.";
+                                sendGameDataToUser(user, "PUSHINFOTXT");
                             }
                             break;
                         }
-                        aktuellerKobold.bewegenBeenden();
-                        sendGameDataToClients("UPDATESPIELZUSTAND");
-                        break;
-                }
-                break;
-            case "FELDAUSWAEHLEN":
-                aktuellerKobold.bewegen(Integer.parseInt(dataMap.get("layer")), Integer.parseInt(dataMap.get("position")));
-                break;
-            case "EREIGNISKARTEFLIP":
-                for (Feld feld : this.spiel.getFelder()) {
-                    if (feld.getLayer() == Integer.parseInt(dataMap.get("layer")) && feld.getFeldNr() == Integer.parseInt(dataMap.get("position"))) {
-                        if (!feld.getClassName().equals("Feld")) {
-                            feld.setKarteAufgedeckt(!feld.isKarteAufgedeckt());
-                        } else {
-                            this.recentInfoText = "Du kannst nur Ereigniskarten umdrehen.";
-                            sendGameDataToUser(user, "PUSHINFOTXT");
-                        }
-                        break;
                     }
-                }
-                break;
-            default:
-                // Fehler!
+                    break;
+                default:
+                    // Fehler!
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
     }
