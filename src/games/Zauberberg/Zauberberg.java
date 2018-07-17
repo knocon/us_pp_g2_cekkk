@@ -367,9 +367,15 @@ public class Zauberberg extends Game {
     			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
     				f.getKobolde().get(0).setLayer(1);
     				f.getKobolde().get(0).setFeldNr(12);
+    				aktuellerKobold = f.getKobolde().get(0);
+    				f.getKobolde().remove(0);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
     				f.getKobolde().get(1).setLayer(1);
     				f.getKobolde().get(1).setFeldNr(12);
+    				aktuellerKobold = f.getKobolde().get(1);
+    				f.getKobolde().remove(1);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}
     		}else if(f.getLayer() == 1 && f.getFeldNr() == 3) {
     			for(Feld g : spiel.getFelder()) {
@@ -380,9 +386,15 @@ public class Zauberberg extends Game {
     			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
     				f.getKobolde().get(0).setLayer(2);
     				f.getKobolde().get(0).setFeldNr(2);
+    				aktuellerKobold = f.getKobolde().get(0);
+    				f.getKobolde().remove(0);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
     				f.getKobolde().get(1).setLayer(2);
     				f.getKobolde().get(1).setFeldNr(2);
+    				aktuellerKobold = f.getKobolde().get(1);
+    				f.getKobolde().remove(1);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}
     		} else if(f.getLayer() == 1 && f.getFeldNr() == 22) {
     			for(Feld g : spiel.getFelder()) {
@@ -393,6 +405,9 @@ public class Zauberberg extends Game {
     			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
     				f.getKobolde().get(0).setLayer(2);
     				f.getKobolde().get(0).setFeldNr(15);
+    				aktuellerKobold = f.getKobolde().get(0);
+    				f.getKobolde().remove(0);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
     				f.getKobolde().get(1).setLayer(2);
     				f.getKobolde().get(1).setFeldNr(15);
@@ -407,9 +422,15 @@ public class Zauberberg extends Game {
     			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
     				f.getKobolde().get(0).setLayer(1);
     				f.getKobolde().get(0).setFeldNr(26);
+    				aktuellerKobold = f.getKobolde().get(0);
+    				f.getKobolde().remove(0);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
     				f.getKobolde().get(1).setLayer(1);
     				f.getKobolde().get(1).setFeldNr(26);
+    				aktuellerKobold = f.getKobolde().get(1);
+    				f.getKobolde().remove(1);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}
     		} else if(f.getLayer() == 3 && f.getFeldNr() == 7) {
     			for(Feld g : spiel.getFelder()) {
@@ -420,9 +441,15 @@ public class Zauberberg extends Game {
     			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
     				f.getKobolde().get(0).setLayer(2);
     				f.getKobolde().get(0).setFeldNr(12);
+    				aktuellerKobold = f.getKobolde().get(0);
+    				f.getKobolde().remove(0);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
     				f.getKobolde().get(1).setLayer(2);
     				f.getKobolde().get(1).setFeldNr(12);
+    				aktuellerKobold = f.getKobolde().get(0);
+    				f.getKobolde().remove(0);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}
     		}
     		
