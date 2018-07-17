@@ -496,9 +496,10 @@
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
                 console.log(data);
-                for (var key in data) {
-                    var pos = key.split("#")[0];
-                    var info = key.split("#")[1];
+
+                // Alle Elemente unsichtbar machen
+                for (key in data) {
+                    pos = key.split("#")[0];
 
                     if (pos[0] !== "d") {
                         // base unsichtbar
@@ -506,7 +507,6 @@
                     }
 
                     //Kobolde Rot unsichtbar
-                    console.log("koboldROT1_" + pos);
                     document.getElementById("koboldROT1_" + pos).style.visibility = "hidden";
                     document.getElementById("koboldROT2_" + pos).style.visibility = "hidden";
                     document.getElementById("koboldROT3_" + pos).style.visibility = "hidden";
@@ -565,6 +565,12 @@
                     document.getElementById("koboldGELB3k_" + pos).style.visibility = "hidden";
                     document.getElementById("koboldGELB4k_" + pos).style.visibility = "hidden";
                     document.getElementById("koboldGELB5k_" + pos).style.visibility = "hidden";
+                }
+
+                // Ausgewählte Elemente sichtbar machen
+                for (key in data) {
+                    pos = key.split("#")[0];
+                    info = key.split("#")[1];
 
                     switch (info) {
                         case"EreigniskarteSteinOffen":
