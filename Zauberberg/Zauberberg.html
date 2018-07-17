@@ -637,19 +637,43 @@
                 sendDataToServer(JSON.stringify(output));
             }
             
+            //aktuelle rotation wird hier drin gespeichert
+            var arot = 0;
             addListener('SPIELFELDDREHEN', function (event) {
-                var stringFromServer = event.data;
-                var data = JSON.parse(stringFromServer);
-                
-                
+
+                var deg = 0;
+                        switch(arot){
+                            case 0 : 
+                                deg = -90;
+                                document.getElementById("grid").style.transform = "rotate(-270deg)";
+                                break;
+                            case 1 : 
+                                deg = -180;
+                                document.getElementById("grid").style.transform = "rotate(-180deg)";
+                                break;
+                            case 2 :
+                                deg = -270;
+                                document.getElementById("grid").style.transform = "rotate(-90deg)";
+                                break;
+                            case 3 : 
+                                document.getElementById("grid").style.transform = "rotate(0deg)";
+                                break;
+                       
+                }
+                for (var i = 0; i < document.getElementsByClassName("feldImg").length; i++) {
+                    document.getElementsByClassName("feldImg")[i].style.transform = "rotate(" + deg + "deg)";
+                }
+                arot+=1;
+                arot %=4;
             });
 
             //TODO GUI
-            // 1. Feld drehen | 1%
+            // 1. Feld drehen | DONE
             // 2. Ereigniskarteflip | DONE
             // 3. Felder anbieten | DONE
             // 4. Felder auswaehlen | DONE
             // 5. Code Reformat Uppercase | DONE
+            // 6. Kartennummern alle vertikal stellen. | 0%
 
 
         </script>
