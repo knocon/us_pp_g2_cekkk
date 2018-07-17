@@ -636,13 +636,20 @@
 
 
             }
+            
+            addListener('SPIELFELDDREHEN', function (event) {
+                var stringFromServer = event.data;
+                var data = JSON.parse(stringFromServer);
+                
+                
+            });
 
             //TODO GUI
-            // 1. Feld drehen | 0%
+            // 1. Feld drehen | 1%
             // 2. Ereigniskarteflip | DONE
             // 3. Felder anbieten | DONE
             // 4. Felder auswaehlen | DONE
-            // 5. Code Reformat Uppercase | 0%
+            // 5. Code Reformat Uppercase | DONE
 
 
         </script>
