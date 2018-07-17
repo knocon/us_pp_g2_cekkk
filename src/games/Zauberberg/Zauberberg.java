@@ -121,68 +121,72 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
-                Bewegungskarte instanceKoboldKarte = null;
-                Bewegungskarte instance2Karte = null;
-                Bewegungskarte instance3Karte = null;
-                int value2Karte = 0;
-                int value3Karte = 0;
+                try {
+                    Bewegungskarte instanceKoboldKarte = null;
+                    Bewegungskarte instance2Karte = null;
+                    Bewegungskarte instance3Karte = null;
+                    int value2Karte = 0;
+                    int value3Karte = 0;
 
-                if (dataMap.get("karte1Typ").equals("Normal")) {
-                    for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
-                            instanceKoboldKarte = spieler.getHand().get(i);
-                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
-                            break;
+                    if (dataMap.get("karte1Typ").equals("Normal")) {
+                        for (int i = 0; i < spieler.getHand().size(); i++) {
+                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
+                                instanceKoboldKarte = spieler.getHand().get(i);
+                                aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
+                                break;
+                            }
+                        }
+                    } else if (dataMap.get("karte1Typ").equals("Joker")) {
+                        for (int i = 0; i < spieler.getHand().size(); i++) {
+                            if (spieler.getHand().get(i).getJoker()) {
+                                instanceKoboldKarte = spieler.getHand().get(i);
+                                aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
+                                break;
+                            }
                         }
                     }
-                }else if (dataMap.get("karte1Typ").equals("Joker")) {
-                    for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getJoker()) {
-                            instanceKoboldKarte = spieler.getHand().get(i);
-                            aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
-                            break;
+                    if (dataMap.get("karte2Typ").equals("Normal")) {
+                        for (int i = 0; i < spieler.getHand().size(); i++) {
+                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
+                                instance2Karte = spieler.getHand().get(i);
+                                value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
+                                break;
+                            }
+                        }
+                    } else if (dataMap.get("karte2Typ").equals("Joker")) {
+                        for (int i = 0; i < spieler.getHand().size(); i++) {
+                            if (spieler.getHand().get(i).getJoker()) {
+                                instance2Karte = spieler.getHand().get(i);
+                                value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
+                                break;
+                            }
                         }
                     }
-                }
-                if (dataMap.get("karte2Typ").equals("Normal")) {
-                    for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
-                            instance2Karte = spieler.getHand().get(i);
-                            value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
-                            break;
-                        }
-                    }
-                }else if (dataMap.get("karte2Typ").equals("Joker")) {
-                    for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getJoker()) {
-                            instance2Karte = spieler.getHand().get(i);
-                            value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
-                            break;
-                        }
-                    }
-                }
 
 
-                if (dataMap.get("karte3Typ").equals("Normal")) {
-                    for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
-                            instance3Karte = spieler.getHand().get(i);
-                            value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
-                            break;
+                    if (dataMap.get("karte3Typ").equals("Normal")) {
+                        for (int i = 0; i < spieler.getHand().size(); i++) {
+                            if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
+                                instance3Karte = spieler.getHand().get(i);
+                                value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
+                                break;
+                            }
+                        }
+                    } else if (dataMap.get("karte3Typ").equals("Joker")) {
+                        for (int i = 0; i < spieler.getHand().size(); i++) {
+                            if (spieler.getHand().get(i).getJoker()) {
+                                instance3Karte = spieler.getHand().get(i);
+                                value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
+                                break;
+                            }
                         }
                     }
-                }else if (dataMap.get("karte3Typ").equals("Joker")) {
-                    for (int i = 0; i < spieler.getHand().size(); i++) {
-                        if (spieler.getHand().get(i).getJoker()) {
-                            instance3Karte = spieler.getHand().get(i);
-                            value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
-                            break;
-                        }
-                    }
+                    //Karten verarbeiten
+                    tempUser = user;
+                    aktuellerKobold.kartenLegen(instanceKoboldKarte, instance2Karte, instance3Karte, value2Karte, value3Karte);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                //Karten verarbeiten
-                tempUser = user;
-                aktuellerKobold.kartenLegen(instanceKoboldKarte, instance2Karte, instance3Karte, value2Karte, value3Karte);
                 break;
 
             //dieser case läuft!
@@ -350,112 +354,112 @@ public class Zauberberg extends Game {
     }
 
     public void aufstAbstCheck() {
-    	Feld tempFeld = null;
-    	for(Feld f : spiel.getFelder()) {
-    		//Zuerst die Geheimgaenge
-    		//Nur 3 Geheimgaenge checken, da der vierte zum Sieg fuehrt
-    		if(f.getLayer() == 0 && f.getFeldNr() == 15) {
-    			for(Feld g : spiel.getFelder()) {
-    				if(g.getLayer()==1 && g.getFeldNr()==12) {
-    					tempFeld = g;
-    				}
-    			}
-    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
-    				f.getKobolde().get(0).setLayer(1);
-    				f.getKobolde().get(0).setFeldNr(12);
-    				aktuellerKobold = f.getKobolde().get(0);
-    				f.getKobolde().remove(0);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
-    				f.getKobolde().get(1).setLayer(1);
-    				f.getKobolde().get(1).setFeldNr(12);
-    				aktuellerKobold = f.getKobolde().get(1);
-    				f.getKobolde().remove(1);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}
-    		}else if(f.getLayer() == 1 && f.getFeldNr() == 3) {
-    			for(Feld g : spiel.getFelder()) {
-    				if(g.getLayer()==2 && g.getFeldNr()==2) {
-    					tempFeld = g;
-    				}
-    			}
-    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
-    				f.getKobolde().get(0).setLayer(2);
-    				f.getKobolde().get(0).setFeldNr(2);
-    				aktuellerKobold = f.getKobolde().get(0);
-    				f.getKobolde().remove(0);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
-    				f.getKobolde().get(1).setLayer(2);
-    				f.getKobolde().get(1).setFeldNr(2);
-    				aktuellerKobold = f.getKobolde().get(1);
-    				f.getKobolde().remove(1);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}
-    		} else if(f.getLayer() == 1 && f.getFeldNr() == 22) {
-    			for(Feld g : spiel.getFelder()) {
-    				if(g.getLayer()==2 && g.getFeldNr()==15) {
-    					tempFeld = g;
-    				}
-    			}
-    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
-    				f.getKobolde().get(0).setLayer(2);
-    				f.getKobolde().get(0).setFeldNr(15);
-    				aktuellerKobold = f.getKobolde().get(0);
-    				f.getKobolde().remove(0);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
-    				f.getKobolde().get(1).setLayer(2);
-    				f.getKobolde().get(1).setFeldNr(15);
-    				aktuellerKobold = f.getKobolde().get(1);
-    				f.getKobolde().remove(1);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}
-    		}//hier beginnen die Fallgruben
-    		else if(f.getLayer() == 2 && f.getFeldNr() == 19) {
-    			for(Feld g : spiel.getFelder()) {
-    				if(g.getLayer()==1 && g.getFeldNr()==26) {
-    					tempFeld = g;
-    				}
-    			}
-    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
-    				f.getKobolde().get(0).setLayer(1);
-    				f.getKobolde().get(0).setFeldNr(26);
-    				aktuellerKobold = f.getKobolde().get(0);
-    				f.getKobolde().remove(0);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
-    				f.getKobolde().get(1).setLayer(1);
-    				f.getKobolde().get(1).setFeldNr(26);
-    				aktuellerKobold = f.getKobolde().get(1);
-    				f.getKobolde().remove(1);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}
-    		} else if(f.getLayer() == 3 && f.getFeldNr() == 7) {
-    			for(Feld g : spiel.getFelder()) {
-    				if(g.getLayer()==2 && g.getFeldNr()==12) {
-    					tempFeld = g;
-    				}
-    			}
-    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
-    				f.getKobolde().get(0).setLayer(2);
-    				f.getKobolde().get(0).setFeldNr(12);
-    				aktuellerKobold = f.getKobolde().get(0);
-    				f.getKobolde().remove(0);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
-    				f.getKobolde().get(1).setLayer(2);
-    				f.getKobolde().get(1).setFeldNr(12);
-    				aktuellerKobold = f.getKobolde().get(0);
-    				f.getKobolde().remove(0);
-    				tempFeld.getKobolde().add(aktuellerKobold);
-    			}
-    		}
-    		
-    	}
+        Feld tempFeld = null;
+        for (Feld f : spiel.getFelder()) {
+            //Zuerst die Geheimgaenge
+            //Nur 3 Geheimgaenge checken, da der vierte zum Sieg fuehrt
+            if (f.getLayer() == 0 && f.getFeldNr() == 15) {
+                for (Feld g : spiel.getFelder()) {
+                    if (g.getLayer() == 1 && g.getFeldNr() == 12) {
+                        tempFeld = g;
+                    }
+                }
+                if (f.getKobolde().size() == 1 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(0).setLayer(1);
+                    f.getKobolde().get(0).setFeldNr(12);
+                    aktuellerKobold = f.getKobolde().get(0);
+                    f.getKobolde().remove(0);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                } else if (f.getKobolde().size() == 2 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(1).setLayer(1);
+                    f.getKobolde().get(1).setFeldNr(12);
+                    aktuellerKobold = f.getKobolde().get(1);
+                    f.getKobolde().remove(1);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                }
+            } else if (f.getLayer() == 1 && f.getFeldNr() == 3) {
+                for (Feld g : spiel.getFelder()) {
+                    if (g.getLayer() == 2 && g.getFeldNr() == 2) {
+                        tempFeld = g;
+                    }
+                }
+                if (f.getKobolde().size() == 1 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(0).setLayer(2);
+                    f.getKobolde().get(0).setFeldNr(2);
+                    aktuellerKobold = f.getKobolde().get(0);
+                    f.getKobolde().remove(0);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                } else if (f.getKobolde().size() == 2 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(1).setLayer(2);
+                    f.getKobolde().get(1).setFeldNr(2);
+                    aktuellerKobold = f.getKobolde().get(1);
+                    f.getKobolde().remove(1);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                }
+            } else if (f.getLayer() == 1 && f.getFeldNr() == 22) {
+                for (Feld g : spiel.getFelder()) {
+                    if (g.getLayer() == 2 && g.getFeldNr() == 15) {
+                        tempFeld = g;
+                    }
+                }
+                if (f.getKobolde().size() == 1 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(0).setLayer(2);
+                    f.getKobolde().get(0).setFeldNr(15);
+                    aktuellerKobold = f.getKobolde().get(0);
+                    f.getKobolde().remove(0);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                } else if (f.getKobolde().size() == 2 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(1).setLayer(2);
+                    f.getKobolde().get(1).setFeldNr(15);
+                    aktuellerKobold = f.getKobolde().get(1);
+                    f.getKobolde().remove(1);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                }
+            }//hier beginnen die Fallgruben
+            else if (f.getLayer() == 2 && f.getFeldNr() == 19) {
+                for (Feld g : spiel.getFelder()) {
+                    if (g.getLayer() == 1 && g.getFeldNr() == 26) {
+                        tempFeld = g;
+                    }
+                }
+                if (f.getKobolde().size() == 1 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(0).setLayer(1);
+                    f.getKobolde().get(0).setFeldNr(26);
+                    aktuellerKobold = f.getKobolde().get(0);
+                    f.getKobolde().remove(0);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                } else if (f.getKobolde().size() == 2 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(1).setLayer(1);
+                    f.getKobolde().get(1).setFeldNr(26);
+                    aktuellerKobold = f.getKobolde().get(1);
+                    f.getKobolde().remove(1);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                }
+            } else if (f.getLayer() == 3 && f.getFeldNr() == 7) {
+                for (Feld g : spiel.getFelder()) {
+                    if (g.getLayer() == 2 && g.getFeldNr() == 12) {
+                        tempFeld = g;
+                    }
+                }
+                if (f.getKobolde().size() == 1 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(0).setLayer(2);
+                    f.getKobolde().get(0).setFeldNr(12);
+                    aktuellerKobold = f.getKobolde().get(0);
+                    f.getKobolde().remove(0);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                } else if (f.getKobolde().size() == 2 && tempFeld.getKobolde().size() == 0) {
+                    f.getKobolde().get(1).setLayer(2);
+                    f.getKobolde().get(1).setFeldNr(12);
+                    aktuellerKobold = f.getKobolde().get(0);
+                    f.getKobolde().remove(0);
+                    tempFeld.getKobolde().add(aktuellerKobold);
+                }
+            }
+
+        }
     }
-        
-    
+
+
     public ArrayList<Bewegungskarte> getRandomCards(int anzahlKarten, ArrayList<Bewegungskarte> stapel) {
         Random r = new Random();
         ArrayList<Bewegungskarte> returnList = new ArrayList<Bewegungskarte>();
@@ -589,8 +593,8 @@ public class Zauberberg extends Game {
     public boolean isJoinable() {
         return (playerList.size() < 5) && this.gState != GameState.RUNNING;
     }
-   
-    
+
+
     public GameState getGameState() {
         return this.gState;
     }
