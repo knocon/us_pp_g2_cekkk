@@ -50,6 +50,16 @@ public class Kobold {
     public void karteSpielen() {
         int laufweg = this.kartenWerte.get(0);
         ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
+        for(Feld f : zauberberg.getSpiel().getFelder()){
+        	if(f.getFeldNr() == zauberberg.getAktuellerKobold().getFeldNr() && f.getLayer() == zauberberg.getAktuellerKobold().getLayer()){
+        		if(f.getKobolde().size()==2 && f.getKobolde().get(0)==zauberberg.getAktuellerKobold()){
+        			zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
+                    zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
+                    zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
+                    return;
+        		}
+        	}
+        }
         if (this.getLayer() == -1) {            //Schritt raus aus dem Dorf
             if (this.getFeldNr() == 0) {
         	arrayLayerFeld.add(0); //layer
@@ -75,10 +85,10 @@ public class Kobold {
         } else if (this.getLayer() == 0) {
             //prüft ob Kobold auf einem Kobold sitzt, wenn ja nächste Ebene möglich
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
-        	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
-        	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(0, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(1);
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr()));
+            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
+            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(0, this.getFeldNr())).getKobolde().size()==0) {
+            			arrayLayerFeld.add(1);
+            			arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr()));
         	    }
         	}
             }
@@ -86,10 +96,10 @@ public class Kobold {
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 36) + 36) % 36); // r�ckw�rts
         } else if (this.getLayer() == 1) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
-        	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
-        	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(1, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(2);
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(1, this.getFeldNr()));
+            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
+            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(1, this.getFeldNr())).getKobolde().size()==0) {
+            			arrayLayerFeld.add(2);
+            			arrayLayerFeld.add(this.getFeldNrNextLayer(1, this.getFeldNr()));
         	    }
         	}
             }
