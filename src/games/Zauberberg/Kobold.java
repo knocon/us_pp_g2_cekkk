@@ -102,7 +102,9 @@ public class Kobold {
         	    }
         	}
             }
+            arrayLayerFeld.add(0); 
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 36) + 36) % 36);  //vorw�rts
+            arrayLayerFeld.add(0); 
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 36) + 36) % 36); // r�ckw�rts
         } else if (this.getLayer() == 1) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
@@ -115,7 +117,9 @@ public class Kobold {
             	    }
         	}
             }
+            arrayLayerFeld.add(1); 
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 28) + 28) % 28); //vorw�rts
+            arrayLayerFeld.add(1); 
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 28) + 28) % 28);  // r�ckw�rts
         } else if (this.getLayer() == 2) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
@@ -128,7 +132,9 @@ public class Kobold {
         	    }
         	}
             }
+            arrayLayerFeld.add(2); 
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 20) + 20) % 20);  //vorw�rts
+            arrayLayerFeld.add(2); 
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 20) + 20) % 20); // r�ckw�rts
         } else if (this.getLayer() == 3) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
@@ -141,7 +147,9 @@ public class Kobold {
         	    }
         	}
             }
+            arrayLayerFeld.add(3); 
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 12) + 12) % 12);  //vorw�rts
+            arrayLayerFeld.add(3); 
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 12) + 12) % 12);  // r�ckw�rts
         }
         if (arrayLayerFeld.size() == 0) {
@@ -156,8 +164,7 @@ public class Kobold {
 	for(Feld f : zauberberg.getSpiel().getFelder()) {
 	    if(f.getLayer() == layer && f.getFeldNr() == feldNr) {
 		return f;
-	    }
-	    
+	    }	    
 	}
 	return null;
     }
@@ -214,10 +221,7 @@ public class Kobold {
         	    getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr()+vorZurueck).getKobolde().add(1, koboldOnTop );
         	    koboldOnTop = getCorrectFeld(koboldOnTop.getLayer(),koboldOnTop.getFeldNr()+vorZurueck).getKobolde().get(2); // das ist der obere vom nächsten feld
         	}
-
             }
-
-
         }
 
         //Karte zurück in den Stapel
@@ -307,6 +311,7 @@ public class Kobold {
                 break;
             }
         }
+        //zauberberg.sendGameDataToUserPublic("UPDATESPIELFELD"); 
     }
 
     public void bewegenBeenden(){
@@ -397,7 +402,7 @@ public class Kobold {
 
     public void setLayer(int layer) {
         this.layer = layer;
-        this.zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
+        zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
     }
 
     public int getPos() {
@@ -414,7 +419,7 @@ public class Kobold {
 
     public void setFeldNr(int feldNr) {
         this.feldNr = feldNr;
-        this.zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
+        zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
     }
 
     public Spieler getSpieler() {
