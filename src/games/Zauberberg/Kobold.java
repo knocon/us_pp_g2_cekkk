@@ -147,7 +147,7 @@ public class Kobold {
         	    }
         	}
             }
-            arrayLayerFeld.add(3); 
+            arrayLayerFeld.add(3);
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 12) + 12) % 12);  //vorw�rts
             arrayLayerFeld.add(3); 
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 12) + 12) % 12);  // r�ckw�rts
