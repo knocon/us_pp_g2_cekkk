@@ -12,7 +12,6 @@ public class Schreckgespenst extends Feld {
         this.karteAufgedeckt = false;
     }
 
-    //TODO Logik des Ereignisses
     public void execute(Kobold kobold) {
     	for(Feld f : this.zauberberg.getSpiel().getFelder()) {
     		if(f.getLayer()==kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {

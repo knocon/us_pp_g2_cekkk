@@ -311,7 +311,7 @@ public class Kobold {
                 break;
             }
         }
-        //zauberberg.sendGameDataToUserPublic("UPDATESPIELFELD"); 
+        //zauberberg.sendGameDataToUserPublic("UPDATESPIELFELD");
     }
 
     public void bewegenBeenden(){
@@ -402,7 +402,6 @@ public class Kobold {
 
     public void setLayer(int layer) {
         this.layer = layer;
-        zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
     }
 
     public int getPos() {
@@ -419,7 +418,6 @@ public class Kobold {
 
     public void setFeldNr(int feldNr) {
         this.feldNr = feldNr;
-        zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
     }
 
     public Spieler getSpieler() {

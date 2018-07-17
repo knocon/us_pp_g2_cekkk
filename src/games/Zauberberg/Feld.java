@@ -1,15 +1,20 @@
 package games.Zauberberg;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Feld {
     private int layer;
     private int feldNr;
-    private ArrayList<Kobold> kobolde;
+    private ObservableList<Kobold> kobolde;
     protected Zauberberg zauberberg;
 
     public Feld(int layer, int feldNr, Zauberberg zauberberg) {
-        this.kobolde = new ArrayList<>();
+        this.kobolde = FXCollections.observableArrayList();
+        kobolde.addListener((ListChangeListener<Kobold>) c -> zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD"));
         this.layer = layer;
         this.feldNr = feldNr;
         this.zauberberg = zauberberg;
@@ -25,11 +30,11 @@ public class Feld {
     }
 
 
-    public ArrayList<Kobold> getKobolde() {
+    public ObservableList<Kobold> getKobolde() {
         return kobolde;
     }
 
-    public void setKobolde(ArrayList<Kobold> kobolde) {
+    public void setKobolde(ObservableList<Kobold> kobolde) {
         this.kobolde = kobolde;
     }
 

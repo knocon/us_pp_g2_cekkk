@@ -56,7 +56,7 @@ public class Spiel {
             } else if (i == 8) {
                 felder.add(new Zauberstein(1, i, this.zauberberg));
             } else if (i == 4) {
-                felder.add(new Schreckgespenst(1, i, this.zauberberg));                
+                felder.add(new Schreckgespenst(1, i, this.zauberberg));
             } else if (i == 10) {
                 felder.add(new Kristallkugel(1, i, this.zauberberg));
             } else if (i == 17) {

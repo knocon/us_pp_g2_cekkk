@@ -12,7 +12,7 @@ public class Fallgrube extends Feld {
         this.karteAufgedeckt = false;
     }
 
-    public void execute(Kobold kobold, ArrayList<Feld> felder) {	
+    public void execute(Kobold kobold, ArrayList<Feld> felder) {
         switch (kobold.getLayer()) {
             case 2:
                 if (kobold.getFeldNr()==19) {
