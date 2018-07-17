@@ -599,10 +599,9 @@
             addListener('FELDERANBIETEN', function (event) {
                 var stringFromServer = event.data;
                 var data = JSON.parse(stringFromServer);
-                for (var i = 0; i < data.length(); i += 2) {
-
+                console.log(data);
+                for (var i = 0; i < data.length; i += 2) {
                     document.getElementById("glow_" + data[i] + "_" + data[i + 1]).style.visibility = "visible";
-
                 }
             });
 
