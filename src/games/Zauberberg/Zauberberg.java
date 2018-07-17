@@ -135,8 +135,7 @@ public class Zauberberg extends Game {
                             break;
                         }
                     }
-                }
-                if (dataMap.get("karte1Typ").equals("Joker")) {
+                }else if (dataMap.get("karte1Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
                             instanceKoboldKarte = spieler.getHand().get(i);
@@ -153,8 +152,7 @@ public class Zauberberg extends Game {
                             break;
                         }
                     }
-                }
-                if (dataMap.get("karte2Typ").equals("Joker")) {
+                }else if (dataMap.get("karte2Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
                             instance2Karte = spieler.getHand().get(i);
@@ -173,8 +171,7 @@ public class Zauberberg extends Game {
                             break;
                         }
                     }
-                }
-                if (dataMap.get("karte3Typ").equals("Joker")) {
+                }else if (dataMap.get("karte3Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
                             instance3Karte = spieler.getHand().get(i);
@@ -186,7 +183,6 @@ public class Zauberberg extends Game {
                 //Karten verarbeiten
                 tempUser = user;
                 aktuellerKobold.kartenLegen(instanceKoboldKarte, instance2Karte, instance3Karte, value2Karte, value3Karte);
-                System.out.println(felderWaehlen);
                 break;
 
             //dieser case läuft!
@@ -477,6 +473,7 @@ public class Zauberberg extends Game {
             return ereignisAnfrage;
         }
         if (eventName.equals("FELDERANBIETEN")) {
+            System.out.println("Felderanbieten: " + this.felderWaehlen);
             return this.felderWaehlen;
         }
         return "";
