@@ -411,6 +411,9 @@ public class Zauberberg extends Game {
     			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
     				f.getKobolde().get(1).setLayer(2);
     				f.getKobolde().get(1).setFeldNr(15);
+    				aktuellerKobold = f.getKobolde().get(1);
+    				f.getKobolde().remove(1);
+    				tempFeld.getKobolde().add(aktuellerKobold);
     			}
     		}//hier beginnen die Fallgruben
     		else if(f.getLayer() == 2 && f.getFeldNr() == 19) {
