@@ -538,4 +538,12 @@ public class Zauberberg extends Game {
         }
     }
 
+	public Kobold getAktuellerKobold() {
+		return aktuellerKobold;
+	}
+
+	public void setAktuellerKobold(Kobold aktuellerKobold) {
+		this.aktuellerKobold = aktuellerKobold;
+	}
+
 }
