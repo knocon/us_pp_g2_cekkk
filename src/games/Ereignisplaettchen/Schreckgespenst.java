@@ -20,7 +20,7 @@ public class Schreckgespenst extends Feld {
     	        kobold.setFeldNr(kobold.getDorf());
     	        f.getKobolde().remove(kobold);
     		}
-    		if(f.getLayer() == -1 && f.getLayer() == kobold.getDorf()) {
+    		if(f.getLayer() == -1 && f.getFeldNr() == kobold.getDorf()) {
     			f.getKobolde().add(kobold);
     		}
     	}
