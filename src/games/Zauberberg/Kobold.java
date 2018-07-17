@@ -19,7 +19,8 @@ public class Kobold {
     private int dorf;
     private Spieler spieler;
     private Zauberberg zauberberg;
-    private ArrayList<Integer> kartenWerte = new ArrayList<Integer>();
+    private ArrayList<Bewegungskarte> kartenInstances = new ArrayList<>();
+    private ArrayList<Integer> kartenWerte = new ArrayList<>();
     Feld tempFeld;
     Gson gson = new GsonBuilder().create();
     private static int anz;
@@ -36,25 +37,37 @@ public class Kobold {
         anz++;
     }
 
-    public void kartenLegen(int kartenWert1, int kartenWert2) {
-        this.kartenWerte.add(kartenWert1);
-        this.kartenWerte.add(kartenWert2);
+    public void kartenLegen(Bewegungskarte instanceKoboldKarte, Bewegungskarte instanceKarte1, Bewegungskarte instanceKarte2, int kartenWert1, int kartenWert2) {
+        // Darf der Kobold bewegt werden? Check
+        for (Feld f : zauberberg.getSpiel().getFelder()) {
+            if (f.getFeldNr() == zauberberg.getAktuellerKobold().getFeldNr() && f.getLayer() == zauberberg.getAktuellerKobold().getLayer()) {
+                if (f.getKobolde().size() == 2 && f.getKobolde().get(0) == zauberberg.getAktuellerKobold()) {
+                    zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
+                    zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
+                    zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
+                    return;
+                }
+            }
+        }
+        // Hier gehts weiter wenn der Kobold bewegt werden darf
+        // Koboldkarte aus der Hand in den Stapel legen.
+        spieler.getHand().remove(instanceKoboldKarte);
+        zauberberg.getSpiel().getKartenstapel().getStapel().add(instanceKoboldKarte);
+        // Bewegungskarten uebernehmen
+        if (instanceKarte1 != null) {
+            this.kartenInstances.add(instanceKarte1);
+            this.kartenWerte.add(kartenWert1);
+        }
+        if (instanceKarte1 != null) {
+            this.kartenInstances.add(instanceKarte2);
+            this.kartenWerte.add(kartenWert2);
+        }
         this.karteSpielen();
     }
 
     public void karteSpielen() {
         int laufweg = this.kartenWerte.get(0);
         ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
-        for(Feld f : zauberberg.getSpiel().getFelder()){
-        	if(f.getFeldNr() == zauberberg.getAktuellerKobold().getFeldNr() && f.getLayer() == zauberberg.getAktuellerKobold().getLayer()){
-        		if(f.getKobolde().size()==2 && f.getKobolde().get(0)==zauberberg.getAktuellerKobold()){
-        			zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
-        			zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
-        			zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
-        			return;
-        		}
-        	}
-        }
         if (this.getLayer() == -1) {            //Schritt raus aus dem Dorf
             if (this.getFeldNr() == 0) {
         	arrayLayerFeld.add(0); //layer
@@ -80,11 +93,11 @@ public class Kobold {
         } else if (this.getLayer() == 0) {
             //prüft ob Kobold auf einem Kobold sitzt, wenn ja nächste Ebene möglich
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
-            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { //zu bewegender Kobold ist der obere 
+            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { //zu bewegender Kobold ist der obere
             	    if(this.getFeldNr()!= 0 && this.getFeldNr()!= 9 && this.getFeldNr()!= 18 && this.getFeldNr()!= 27) { //nicht auf einem Eckpunkt
-            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(0, this.getFeldNr())).getKobolde().size()==0) { //nächste Ebene ist frei 
+            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(0, this.getFeldNr())).getKobolde().size()==0) { //nächste Ebene ist frei
             			arrayLayerFeld.add(1);
-            			arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr()));   
+            			arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr()));
             		}
         	    }
         	}
@@ -93,7 +106,7 @@ public class Kobold {
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 36) + 36) % 36); // r�ckw�rts
         } else if (this.getLayer() == 1) {
             if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
-            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere 
+            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere
             	    if(this.getFeldNr() != 0 && this.getFeldNr() != 7 && this.getFeldNr() != 14 && this.getFeldNr() != 21) { //kein Eckpunkt
             		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(1, this.getFeldNr())).getKobolde().size()==0) { //nächste Ebene frei
             			arrayLayerFeld.add(2);
@@ -137,7 +150,6 @@ public class Kobold {
         } else {
             this.zauberberg.setFelderWaehlen(gson.toJson(arrayLayerFeld, ArrayList.class));
             this.zauberberg.sendGameDataToUserPublic("FELDERANBIETEN");
-            kartenWerte.remove(0);
         }
     }
     public Feld getCorrectFeld(int layer, int feldNr) {
@@ -154,13 +166,13 @@ public class Kobold {
 	//int layerVorBewegen = this.getLayer();
 	//int feldNrVorBewegen = this.getFeldNr();
 	int modulo=0;
-	int vorZurueck =0; 	
+	int vorZurueck =0;
 	Kobold koboldOnTop;
 
         //zu bewegender Kobold vom alten Feld entfernen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
-                f.getKobolde().remove(this);               
+                f.getKobolde().remove(this);
                 break;
             }
         }
@@ -174,25 +186,25 @@ public class Kobold {
         if(getCorrectFeld(layer, feldNr).getKobolde().size()==2) {
             koboldOnTop = getCorrectFeld(layer,feldNr).getKobolde().get(1);
             switch(koboldOnTop.getLayer()) {
-            case 0: modulo = 36; 
-            	break; 
-            case 1 : modulo = 28; 
-            	break; 
-            case 2:  modulo = 20; 
-            	break; 
-            case 3:  modulo = 12; 
+            case 0: modulo = 36;
+            	break;
+            case 1 : modulo = 28;
+            	break;
+            case 2:  modulo = 20;
+            	break;
+            case 3:  modulo = 12;
             }
             if (((((feldNr - this.getFeldNr())%modulo)+modulo)%modulo) < ((((this.getFeldNr() - feldNr)%modulo)+modulo)%modulo )){
-        	vorZurueck = 1;        	
+        	vorZurueck = 1;
             } else {
-        	vorZurueck = -1; 
+        	vorZurueck = -1;
             }
             getCorrectFeld(layer,feldNr).getKobolde().remove(1); //remove den oberen, das ist KoboldOnTop
             this.setFeldNr(feldNr); //ursprünglichen Kobold setzen und bei feld.getKobold() einfügen
             this.setLayer(layer);
             getCorrectFeld(layer,feldNr).getKobolde().add(this);
-            
-            boolean check = false; 
+
+            boolean check = false;
             while(!check) {
         	if(getCorrectFeld(koboldOnTop.getLayer(),koboldOnTop.getFeldNr()+vorZurueck).getKobolde().size()<2) {
         	    koboldOnTop.setFeldNr(koboldOnTop.getFeldNr() + vorZurueck);
@@ -202,11 +214,17 @@ public class Kobold {
         	    getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr()+vorZurueck).getKobolde().add(1, koboldOnTop );
         	    koboldOnTop = getCorrectFeld(koboldOnTop.getLayer(),koboldOnTop.getFeldNr()+vorZurueck).getKobolde().get(2); // das ist der obere vom nächsten feld
         	}
-        	
+
             }
-             
-                  
+
+
         }
+
+        //Karte zurück in den Stapel
+        kartenWerte.remove(0);
+        spieler.getHand().remove(kartenInstances.get(0));
+        zauberberg.getSpiel().getKartenstapel().getStapel().add(kartenInstances.get(0));
+        kartenInstances.remove(0);
 
         //Feld auf Ereignisse prüfen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
@@ -221,27 +239,31 @@ public class Kobold {
                 			zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                 			if(this.getSpieler().getAnzahlZaubersteine()<2) {
                 			    this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
-                			}                			
+                			}
                 			((Zauberstein) f).setAufFeld(false);
                 		}
+                		this.bewegenBeenden();
                 		break;
                 	case "Fallgrube":
                         Fallgrube fallgrube = (Fallgrube) f;
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Du faellst hinab.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         fallgrube.execute(this, this.zauberberg.getSpiel().getFelder());
+                        this.bewegenBeenden();
                         break;
                     case "Geheimgang":
                         Geheimgang geheimgang = (Geheimgang) f;
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Geheimgang gekommen. Du steigst auf.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         geheimgang.execute(this, this.zauberberg.getSpiel().getFelder());
+                        this.bewegenBeenden();
                         break;
                     case "Schreckgespenst":
                         Schreckgespenst schreckgespenst = (Schreckgespenst) f;
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Zurueck ins Dorf.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         schreckgespenst.execute(this);
+                        this.bewegenBeenden();
                         break;
                     case "Rabe":
                         Rabe rabe = (Rabe) f;
@@ -254,14 +276,19 @@ public class Kobold {
                         break;
                     case "Fliegende Karte":
                     	FliegendeKarte fliegendeKarte = (FliegendeKarte) f;
+                        HashMap<String, String> output2 = new HashMap<>();
                     	zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fliegende Karte gekommen. Du erhaelst 1 Karte und hast die Moeglichkeit, eine Karte auszuspielen.");
                     	zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                     	fliegendeKarte.execute(this.getSpieler(), zauberberg.getSpiel().getKartenstapel());
+                        output2.put("Ereignis", "Fliegende Karte");
+                        zauberberg.setEreignisAnfrage(gson.toJson(output2, HashMap.class));
+                        zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");
                         break;
                     case "Kristallkugel":
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Kristallkugel gekommen. Du darfst 3 Karten deiner Wahl aufdecken.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         // TODO Kristallkugel Karte aus dem Spiel nehmen
+                        this.bewegenBeenden();
                         break;
                     case "Unwetter":
                         // manuelles umdrehen aller Karten
@@ -272,15 +299,22 @@ public class Kobold {
                         zauberberg.setRecentInfoText("Alle Ereigniskarten muessen zugedeckt werden. Das Spielfeld wird im Uhrzeigersinn gedreht.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         zauberberg.sendGameDataToClientsPublic("FELDDREHEN");
+                        this.bewegenBeenden();
                         break;
                 }
                 break;
             }
         }
+    }
+
+    public void bewegenBeenden(){
         if (this.kartenWerte.size() != 0) {
             this.karteSpielen();
         } else { // Zug ist beendet
             zauberberg.zugBeenden();
+            // Neue Karten ziehen
+            spieler.getHand().addAll(zauberberg.getRandomCards(3 + (spieler.getAnzahlZaubersteine() < 0 ? 0 : spieler.getAnzahlZaubersteine()) - spieler.getHand().size(), zauberberg.getSpiel().getKartenstapel().getStapel()));
+            zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
         }
     }
 
@@ -421,4 +455,11 @@ public class Kobold {
         this.kartenWerte = karten;
     }
 
+    public ArrayList<Bewegungskarte> getKartenInstances() {
+        return kartenInstances;
+    }
+
+    public ArrayList<Integer> getKartenWerte() {
+        return kartenWerte;
+    }
 }

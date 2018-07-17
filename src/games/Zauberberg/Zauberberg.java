@@ -121,15 +121,16 @@ public class Zauberberg extends Game {
         HashMap<String, String> dataMap = gson.fromJson(gsonString, HashMap.class);
         switch (dataMap.get("Eventname")) {
             case "KARTENLEGEN":
+                Bewegungskarte instanceKoboldKarte = null;
+                Bewegungskarte instance2Karte = null;
+                Bewegungskarte instance3Karte = null;
                 int value2Karte = 0;
                 int value3Karte = 0;
-                int sizeOfHand = spieler.getHand().size();
 
                 if (dataMap.get("karte1Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                            spieler.getHand().remove(i);
+                            instanceKoboldKarte = spieler.getHand().get(i);
                             aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
                             break;
                         }
@@ -138,8 +139,7 @@ public class Zauberberg extends Game {
                 if (dataMap.get("karte1Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                            spieler.getHand().remove(i);
+                            instanceKoboldKarte = spieler.getHand().get(i);
                             aktuellerKobold = spieler.getKoboldList().get(Integer.parseInt(dataMap.get("karte1Wert")) - 1);
                             break;
                         }
@@ -148,8 +148,7 @@ public class Zauberberg extends Game {
                 if (dataMap.get("karte2Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                            spieler.getHand().remove(i);
+                            instance2Karte = spieler.getHand().get(i);
                             value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
                             break;
                         }
@@ -158,8 +157,7 @@ public class Zauberberg extends Game {
                 if (dataMap.get("karte2Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                            spieler.getHand().remove(i);
+                            instance2Karte = spieler.getHand().get(i);
                             value2Karte = Integer.parseInt(dataMap.get("karte2Wert"));
                             break;
                         }
@@ -170,8 +168,7 @@ public class Zauberberg extends Game {
                 if (dataMap.get("karte3Typ").equals("Normal")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte3Wert"))) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                            spieler.getHand().remove(i);
+                            instance3Karte = spieler.getHand().get(i);
                             value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
                             break;
                         }
@@ -180,8 +177,7 @@ public class Zauberberg extends Game {
                 if (dataMap.get("karte3Typ").equals("Joker")) {
                     for (int i = 0; i < spieler.getHand().size(); i++) {
                         if (spieler.getHand().get(i).getJoker()) {
-                            spiel.getKartenstapel().getStapel().add(spieler.getHand().get(i));
-                            spieler.getHand().remove(i);
+                            instance3Karte = spieler.getHand().get(i);
                             value3Karte = Integer.parseInt(dataMap.get("karte3Wert"));
                             break;
                         }
@@ -189,10 +185,8 @@ public class Zauberberg extends Game {
                 }
                 //Karten verarbeiten
                 tempUser = user;
-                aktuellerKobold.kartenLegen(value2Karte, value3Karte);
+                aktuellerKobold.kartenLegen(instanceKoboldKarte, instance2Karte, instance3Karte, value2Karte, value3Karte);
                 System.out.println(felderWaehlen);
-                //neue Karten ziehen
-                spieler.getHand().addAll(getRandomCards(sizeOfHand - spieler.getHand().size(), spiel.getKartenstapel().getStapel()));
                 sendGameDataToUser(user, "UPDATEKARTEN");
                 break;
 
@@ -307,7 +301,24 @@ public class Zauberberg extends Game {
             case "EREIGNISANTWORT":
                 switch (dataMap.get("Ereignis")) {
                     case "Fliegende Karte":
-                        //todo Logik
+                        if (dataMap.get("karte1Typ").equals("Normal")) {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Typ"))) {
+                                    aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
+                                    aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte2Wert")));
+                                    break;
+                                }
+                            }
+                        } else if (dataMap.get("karte1Typ").equals("Joker")) {
+                            for (int i = 0; i < spieler.getHand().size(); i++) {
+                                if (spieler.getHand().get(i).getJoker()) {
+                                    aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
+                                    aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte2Wert")));
+                                    break;
+                                }
+                            }
+                        }
+                        aktuellerKobold.bewegenBeenden();
                         break;
                     case "Rabe":
                         for (Spieler sp : spielerList) {
@@ -316,6 +327,7 @@ public class Zauberberg extends Game {
                             }
                             break;
                         }
+                        aktuellerKobold.bewegenBeenden();
                         sendGameDataToClients("UPDATESPIELZUSTAND");
                         break;
                 }
@@ -343,7 +355,7 @@ public class Zauberberg extends Game {
     }
 
 
-    private ArrayList<Bewegungskarte> getRandomCards(int anzahlKarten, ArrayList<Bewegungskarte> stapel) {
+    public ArrayList<Bewegungskarte> getRandomCards(int anzahlKarten, ArrayList<Bewegungskarte> stapel) {
         Random r = new Random();
         ArrayList<Bewegungskarte> returnList = new ArrayList<Bewegungskarte>();
 
@@ -538,12 +550,12 @@ public class Zauberberg extends Game {
         }
     }
 
-	public Kobold getAktuellerKobold() {
-		return aktuellerKobold;
-	}
+    public Kobold getAktuellerKobold() {
+        return aktuellerKobold;
+    }
 
-	public void setAktuellerKobold(Kobold aktuellerKobold) {
-		this.aktuellerKobold = aktuellerKobold;
-	}
+    public void setAktuellerKobold(Kobold aktuellerKobold) {
+        this.aktuellerKobold = aktuellerKobold;
+    }
 
 }
