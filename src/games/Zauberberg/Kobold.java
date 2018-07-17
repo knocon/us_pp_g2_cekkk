@@ -301,6 +301,8 @@ public class Kobold {
                         zauberberg.sendGameDataToClientsPublic("FELDDREHEN");
                         this.bewegenBeenden();
                         break;
+                    default:
+                        this.bewegenBeenden();
                 }
                 break;
             }
