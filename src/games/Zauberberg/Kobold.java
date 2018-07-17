@@ -29,11 +29,6 @@ public class Kobold {
         this.dorf = anz % 4; //gleichmäßiges Verteilen der Kobolde (im Uhrzeigersinn)
         this.layer = -1;
         this.feldNr = this.dorf;
-        //for(Feld feld : zauberberg.getSpiel().getFelder()) { todo Das geht hier nicht, da das Spiel Objekt erst beim start initialisiert wird -> verschoben nach Zauberberg.java
-    	//	if(feld.getFeldNr() == this.feldNr && feld.getLayer()==this.layer) {
-    	//		feld.getKobolde().add(this);
-    	//	}
-    	//}
         this.spieler = spieler;
         this.nummer = nummer;
         this.farbe = spieler.getFarbName();
@@ -54,9 +49,9 @@ public class Kobold {
         	if(f.getFeldNr() == zauberberg.getAktuellerKobold().getFeldNr() && f.getLayer() == zauberberg.getAktuellerKobold().getLayer()){
         		if(f.getKobolde().size()==2 && f.getKobolde().get(0)==zauberberg.getAktuellerKobold()){
         			zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
-                    zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
-                    zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
-                    return;
+        			zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
+        			zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
+        			return;
         		}
         	}
         }
@@ -148,57 +143,47 @@ public class Kobold {
     }
 
     public void bewegen(int layer, int feldNr) {
-	int layerVorBewegen = this.getLayer();
-	int feldNrVorBewegen = this.getFeldNr();
-	int tempDifferenz1;
-	int tempDifferenz2;
-	int modulo = 1;
-	Kobold temp;
+	//int layerVorBewegen = this.getLayer();
+	//int feldNrVorBewegen = this.getFeldNr();
+	int modulo=0;
+	int vorZurueck =0; 	
+	Kobold koboldOnTop;
 
         //vom alten Feld entfernen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
-                f.getKobolde().remove(this);
-                feldNrVorBewegen = f.getFeldNr();
+                f.getKobolde().remove(this);               
                 break;
             }
         }
-
         //auf neues Feld setzen + Koboldliste einfuegen fuer den Fall, dass da (k)ein Kobold sitzt 
         if(getCorrectFeld(layer, feldNr).getKobolde().size()<2) {
             this.setFeldNr(feldNr);
             this.setLayer(layer);
             getCorrectFeld(layer,feldNr).getKobolde().add(this);
         }
-
+        //auf neuem Feld sitzen schon 2 Kobolde --> Weiterschieben 
         if(getCorrectFeld(layer, feldNr).getKobolde().size()==2) {
-            temp = getCorrectFeld(layer,feldNr).getKobolde().get(1);
-            getCorrectFeld(layer,feldNr).getKobolde().remove(1);
-            /*
-            if(layer==0) {
-            	modulo = 36;
-            }else if (layer==1) {
-            	modulo = 28;
-            }else if(layer==2) {
-            	modulo = 20;
-            } else if(layer==3) {
-            	modulo = 12;
+            koboldOnTop = getCorrectFeld(layer,feldNr).getKobolde().get(1);
+            switch(koboldOnTop.getLayer()) {
+            case 0: modulo = 36; 
+            	break; 
+            case 1 : modulo = 28; 
+            	break; 
+            case 2:  modulo = 20; 
+            	break; 
+            case 3:  modulo = 12; 
             }
-            tempDifferenz1 = ((0 + (feldNrVorBewegen - feldNr) % modulo) +modulo ) %modulo;
-            tempDifferenz2 = ((0+(feldNr-feldNrVorBewegen)%modulo)+modulo)%modulo;    		
-    		if(tempDifferenz1 < tempDifferenz2) {
-    			//tempdifferenz1 kleiner -> feldNrVorBewegen < FeldNr -> negative Bewegungsrichtung
-    			feldNr--;
-    		}else if (tempDifferenz1 > tempDifferenz2){
-    			//tempdifferenz2 kleiner -> feldNr < feldNrVorBewegen -> positive Bewegungsrichtung
-    			feldNr++;
-    		}
-            */
-            temp.bewegen(temp.getLayer(),temp.getFeldNr()+1 ); //entwerde +1/-1 "Richtung" 
-            //temp.getFeldNr()+1 durch feldNr ersetzen, wenn vorheriger Teil wieder implementiert wird
+            if (((((feldNr - this.getFeldNr())%modulo)+modulo)%modulo) < ((((this.getFeldNr() - feldNr)%modulo)+modulo)%modulo )){
+        	vorZurueck = 1;        	
+            } else {
+        	vorZurueck = -1; 
+            }
+            getCorrectFeld(layer,feldNr).getKobolde().remove(1); //remove den oberen 
+            koboldOnTop.setFeldNr(koboldOnTop.getFeldNr() + vorZurueck); 
             this.setFeldNr(feldNr);
             this.setLayer(layer);
-            getCorrectFeld(layer,feldNr).getKobolde().add(this);
+            getCorrectFeld(layer,feldNr).getKobolde().add(this);      
         }
 
         //Feld auf Ereignisse prüfen
