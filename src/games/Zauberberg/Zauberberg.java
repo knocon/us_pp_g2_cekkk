@@ -353,7 +353,83 @@ public class Zauberberg extends Game {
         //todo Wenn jemand gewonnen hat, sende CLOSE an alle und verändere davor closeMsg in die entsprechende Nachricht!
     }
 
-
+    public void aufstAbstCheck() {
+    	Feld tempFeld = null;
+    	for(Feld f : spiel.getFelder()) {
+    		//Zuerst die Geheimgaenge
+    		//Nur 3 Geheimgaenge checken, da der vierte zum Sieg fuehrt
+    		if(f.getLayer() == 0 && f.getFeldNr() == 15) {
+    			for(Feld g : spiel.getFelder()) {
+    				if(g.getLayer()==1 && g.getFeldNr()==12) {
+    					tempFeld = g;
+    				}
+    			}
+    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
+    				f.getKobolde().get(0).setLayer(1);
+    				f.getKobolde().get(0).setFeldNr(12);
+    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
+    				f.getKobolde().get(1).setLayer(1);
+    				f.getKobolde().get(1).setFeldNr(12);
+    			}
+    		}else if(f.getLayer() == 1 && f.getFeldNr() == 3) {
+    			for(Feld g : spiel.getFelder()) {
+    				if(g.getLayer()==2 && g.getFeldNr()==2) {
+    					tempFeld = g;
+    				}
+    			}
+    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
+    				f.getKobolde().get(0).setLayer(2);
+    				f.getKobolde().get(0).setFeldNr(2);
+    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
+    				f.getKobolde().get(1).setLayer(2);
+    				f.getKobolde().get(1).setFeldNr(2);
+    			}
+    		} else if(f.getLayer() == 1 && f.getFeldNr() == 22) {
+    			for(Feld g : spiel.getFelder()) {
+    				if(g.getLayer()==2 && g.getFeldNr()==15) {
+    					tempFeld = g;
+    				}
+    			}
+    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
+    				f.getKobolde().get(0).setLayer(2);
+    				f.getKobolde().get(0).setFeldNr(15);
+    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
+    				f.getKobolde().get(1).setLayer(2);
+    				f.getKobolde().get(1).setFeldNr(15);
+    			}
+    		}//hier beginnen die Fallgruben
+    		else if(f.getLayer() == 2 && f.getFeldNr() == 19) {
+    			for(Feld g : spiel.getFelder()) {
+    				if(g.getLayer()==1 && g.getFeldNr()==26) {
+    					tempFeld = g;
+    				}
+    			}
+    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
+    				f.getKobolde().get(0).setLayer(1);
+    				f.getKobolde().get(0).setFeldNr(26);
+    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
+    				f.getKobolde().get(1).setLayer(1);
+    				f.getKobolde().get(1).setFeldNr(26);
+    			}
+    		} else if(f.getLayer() == 3 && f.getFeldNr() == 7) {
+    			for(Feld g : spiel.getFelder()) {
+    				if(g.getLayer()==2 && g.getFeldNr()==12) {
+    					tempFeld = g;
+    				}
+    			}
+    			if(f.getKobolde().size()==1 && tempFeld.getKobolde().size()==0 ) {
+    				f.getKobolde().get(0).setLayer(2);
+    				f.getKobolde().get(0).setFeldNr(12);
+    			}else if (f.getKobolde().size()==2 && tempFeld.getKobolde().size()==0) {
+    				f.getKobolde().get(1).setLayer(2);
+    				f.getKobolde().get(1).setFeldNr(12);
+    			}
+    		}
+    		
+    	}
+    }
+        
+    
     public ArrayList<Bewegungskarte> getRandomCards(int anzahlKarten, ArrayList<Bewegungskarte> stapel) {
         Random r = new Random();
         ArrayList<Bewegungskarte> returnList = new ArrayList<Bewegungskarte>();
@@ -486,7 +562,8 @@ public class Zauberberg extends Game {
     public boolean isJoinable() {
         return (playerList.size() < 5) && this.gState != GameState.RUNNING;
     }
-
+   
+    
     public GameState getGameState() {
         return this.gState;
     }
@@ -547,6 +624,8 @@ public class Zauberberg extends Game {
         } else {
             this.setPlayerTurn(this.spielerList.get(this.spielerList.indexOf(this.playerTurn) + 1));
         }
+        //Methode die Ereignisfelder Geheimgang / Fallgrube checkt und ggf. Kobolde hoch / runter schmeisst
+        aufstAbstCheck();
     }
 
     public Kobold getAktuellerKobold() {
