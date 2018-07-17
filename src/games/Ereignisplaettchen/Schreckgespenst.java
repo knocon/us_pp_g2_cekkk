@@ -14,8 +14,16 @@ public class Schreckgespenst extends Feld {
 
     //TODO Logik des Ereignisses
     public void execute(Kobold kobold) {
-        kobold.setLayer(-1);
-        kobold.setFeldNr(kobold.getDorf());
+    	for(Feld f : this.zauberberg.getSpiel().getFelder()) {
+    		if(f.getLayer()==kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {
+    			kobold.setLayer(-1);
+    	        kobold.setFeldNr(kobold.getDorf());
+    	        f.getKobolde().remove(kobold);
+    		}
+    		if(f.getLayer() == -1 && f.getLayer() == kobold.getDorf()) {
+    			f.getKobolde().add(kobold);
+    		}
+    	}
         setKarteAufgedeckt(false);
     }
 
