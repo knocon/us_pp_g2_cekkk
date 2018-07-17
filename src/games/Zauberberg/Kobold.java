@@ -79,44 +79,52 @@ public class Kobold {
             }
         } else if (this.getLayer() == 0) {
             //prüft ob Kobold auf einem Kobold sitzt, wenn ja nächste Ebene möglich
-            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
-            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
-            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(0, this.getFeldNr())).getKobolde().size()==0) {
+            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
+            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { //zu bewegender Kobold ist der obere 
+            	    if(this.getFeldNr()!= 0 && this.getFeldNr()!= 9 && this.getFeldNr()!= 18 && this.getFeldNr()!= 27) { //nicht auf einem Eckpunkt
+            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(0, this.getFeldNr())).getKobolde().size()==0) { //nächste Ebene ist frei 
             			arrayLayerFeld.add(1);
-            			arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr()));
+            			arrayLayerFeld.add(this.getFeldNrNextLayer(0, this.getFeldNr()));   
+            		}
         	    }
         	}
             }
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 36) + 36) % 36);  //vorw�rts
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 36) + 36) % 36); // r�ckw�rts
         } else if (this.getLayer() == 1) {
-            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
-            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
-            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(1, this.getFeldNr())).getKobolde().size()==0) {
+            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
+            	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere 
+            	    if(this.getFeldNr() != 0 && this.getFeldNr() != 7 && this.getFeldNr() != 14 && this.getFeldNr() != 21) { //kein Eckpunkt
+            		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(1, this.getFeldNr())).getKobolde().size()==0) { //nächste Ebene frei
             			arrayLayerFeld.add(2);
             			arrayLayerFeld.add(this.getFeldNrNextLayer(1, this.getFeldNr()));
-        	    }
+            		}
+            	    }
         	}
             }
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 28) + 28) % 28); //vorw�rts
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 28) + 28) % 28);  // r�ckw�rts
         } else if (this.getLayer() == 2) {
-            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
-        	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
-        	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(2, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(3);
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(2, this.getFeldNr()));
+            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
+        	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {// zu bewegender Kobold ist der obere
+        	    if(this.feldNr!= 0 && this.feldNr!= 5 && this.feldNr!= 10 && this.feldNr!= 15) { //kein Eckpunkt
+        		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(2, this.getFeldNr())).getKobolde().size()==0) { //nächstene Ebene frei
+        		    arrayLayerFeld.add(3);
+        		    arrayLayerFeld.add(this.getFeldNrNextLayer(2, this.getFeldNr()));
+        		}
         	    }
         	}
             }
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 20) + 20) % 20);  //vorw�rts
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 20) + 20) % 20); // r�ckw�rts
         } else if (this.getLayer() == 3) {
-            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) {
-        	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {
-        	    if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(3, this.getFeldNr())).getKobolde().size()==0) {
-        		arrayLayerFeld.add(4);
-        		arrayLayerFeld.add(this.getFeldNrNextLayer(3, this.getFeldNr()));
+            if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size()==2) { //auf aktuellem Feld 2 Kobolde
+        	if(this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere
+        	    if(this.getFeldNr() !=0 && this.getFeldNr() !=3 && this.getFeldNr() !=6  && this.getFeldNr() !=9 ) { //kein Eckpunkt
+        		if(this.getCorrectFeld(this.getLayer()+1, this.getFeldNrNextLayer(3, this.getFeldNr())).getKobolde().size()==0) { //nächste Ebene frei
+        		    arrayLayerFeld.add(4);
+        		    arrayLayerFeld.add(this.getFeldNrNextLayer(3, this.getFeldNr()));
+        		}
         	    }
         	}
             }
