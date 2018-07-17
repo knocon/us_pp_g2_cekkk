@@ -157,7 +157,7 @@ public class Kobold {
 	    if(f.getLayer() == layer && f.getFeldNr() == feldNr) {
 		return f;
 	    }
-	    break;
+	    
 	}
 	return null;
     }
