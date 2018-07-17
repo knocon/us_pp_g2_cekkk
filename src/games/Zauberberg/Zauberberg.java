@@ -187,7 +187,6 @@ public class Zauberberg extends Game {
                 tempUser = user;
                 aktuellerKobold.kartenLegen(instanceKoboldKarte, instance2Karte, instance3Karte, value2Karte, value3Karte);
                 System.out.println(felderWaehlen);
-                sendGameDataToUser(user, "UPDATEKARTEN");
                 break;
 
             //dieser case läuft!
