@@ -636,35 +636,35 @@
                 console.log(output);
                 sendDataToServer(JSON.stringify(output));
             }
-            
+
             //aktuelle rotation wird hier drin gespeichert
             var arot = 0;
             addListener('FELDDREHEN', function (event) {
 
                 var deg = 0;
-                        switch(arot){
-                            case 0 : 
-                                deg = -90;
-                                document.getElementById("grid").style.transform = "rotate(-270deg)";
-                                break;
-                            case 1 : 
-                                deg = -180;
-                                document.getElementById("grid").style.transform = "rotate(-180deg)";
-                                break;
-                            case 2 :
-                                deg = -270;
-                                document.getElementById("grid").style.transform = "rotate(-90deg)";
-                                break;
-                            case 3 : 
-                                document.getElementById("grid").style.transform = "rotate(0deg)";
-                                break;
-                       
+                switch (arot) {
+                    case 0 :
+                        deg = -90;
+                        document.getElementById("grid").style.transform = "rotate(-270deg)";
+                        break;
+                    case 1 :
+                        deg = -180;
+                        document.getElementById("grid").style.transform = "rotate(-180deg)";
+                        break;
+                    case 2 :
+                        deg = -270;
+                        document.getElementById("grid").style.transform = "rotate(-90deg)";
+                        break;
+                    case 3 :
+                        document.getElementById("grid").style.transform = "rotate(0deg)";
+                        break;
+
                 }
                 for (var i = 0; i < document.getElementsByClassName("feldImg").length; i++) {
                     document.getElementsByClassName("feldImg")[i].style.transform = "rotate(" + deg + "deg)";
                 }
-                arot+=1;
-                arot %=4;
+                arot += 1;
+                arot %= 4;
             });
 
             //TODO GUI
@@ -677,7 +677,7 @@
 
 
         </script>
-<div id="grid">
+        <div id="grid">
             <table id="gridTable" width="770" height="770" border="0" cellpadding="0" cellspacing="0">
                 <!-- id Format = erste Ziffer steht für die Ebene, nach dem Untersrich die Feldzahl.
                         Beispiel : Ebene 0 Feld 5 = 0_5 -->
@@ -929,9 +929,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_1" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_1')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_1" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_1')">
+                            <img id="flip_0_1" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_1')">
 
                         </div>
 
@@ -1681,9 +1682,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_7" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_7')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_7" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_7')">
+                            <img id="flip_0_7" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_7')">
 
                         </div>
 
@@ -2560,9 +2562,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_1_3" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('1_3')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_1_3" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('1_3')">
+                            <img id="flip_1_3" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('1_3')">
 
                         </div>
 
@@ -2688,9 +2691,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_1_4" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('1_4')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_1_4" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('1_4')">
+                            <img id="flip_1_4" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('1_4')">
 
                         </div>
 
@@ -4069,9 +4073,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_2_4" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('2_4')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_2_4" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('2_4')">
+                            <img id="flip_2_4" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('2_4')">
 
                         </div>
 
@@ -4824,9 +4829,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_2_19" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('2_19')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_2_19" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('2_19')">
+                            <img id="flip_2_19" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('2_19')">
 
                         </div>
 
@@ -5077,9 +5083,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_3_1" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('3_1')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_3_1" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('3_1')">
+                            <img id="flip_3_1" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('3_1')">
 
                         </div>
 
@@ -5705,9 +5712,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_12" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_12')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_12" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_12')">
+                            <img id="flip_0_12" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_12')">
 
                         </div>
 
@@ -5835,9 +5843,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_32" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_32')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_32" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_32')">
+                            <img id="flip_0_32" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_32')">
 
                         </div>
 
@@ -6240,7 +6249,6 @@
                             <img id="baseOffen_4_U" src="layout_images/layoutnew_46.gif" class="feldImg" alt="">
                             <!-- Geflippt Layout-->
 
-                        
 
                             <!-- Glow Effekt-->
                             <img id="glow_4_U" src="layout_images/glow.png" class="glowImg" alt=""
@@ -6621,9 +6629,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_1_10" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('1_10')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_1_10" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('1_10')">
+                            <img id="flip_1_10" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('1_10')">
 
                         </div>
 
@@ -7251,9 +7260,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_3_10" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('3_10')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_3_10" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('3_10')">
+                            <img id="flip_3_10" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('3_10')">
 
                         </div>
 
@@ -7282,7 +7292,6 @@
                             <img id="baseOffen_4_M" src="layout_images/layoutnew_56.gif" class="feldImg" alt="">
                             <!-- Geflippt Layout-->
 
-    
 
                             <!-- Glow Effekt-->
                             <img id="glow_4_M" src="layout_images/glow.png" class="glowImg" alt=""
@@ -7537,9 +7546,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_2_8" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('2_8')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_2_8" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('2_8')">
+                            <img id="flip_2_8" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('2_8')">
 
                         </div>
 
@@ -7917,9 +7927,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_30" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_30')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_30" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_30')">
+                            <img id="flip_0_30" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_30')">
 
                         </div>
 
@@ -8545,9 +8556,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_3_7" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('3_7')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_3_7" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('3_7')">
+                            <img id="flip_3_7" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('3_7')">
 
                         </div>
 
@@ -9048,9 +9060,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_15" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_15')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_15" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_15')">
+                            <img id="flip_0_15" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_15')">
 
                         </div>
 
@@ -9303,9 +9316,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_1_22" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('1_22')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_1_22" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('1_22')">
+                            <img id="flip_1_22" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('1_22')">
 
                         </div>
 
@@ -9556,9 +9570,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_2_14" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('2_14')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_2_14" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('2_14')">
+                            <img id="flip_2_14" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('2_14')">
 
                         </div>
 
@@ -11061,9 +11076,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_1_17" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('1_17')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_1_17" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('1_17')">
+                            <img id="flip_1_17" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('1_17')">
 
                         </div>
 
@@ -11941,9 +11957,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_25" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_25')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_25" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_25')">
+                            <img id="flip_0_25" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_25')">
 
                         </div>
 
@@ -12694,9 +12711,10 @@
                             <!-- Glow Effekt-->
                             <img id="glow_0_19" src="layout_images/glow.png" class="glowImg" alt=""
                                  onClick="glowOnClick('0_19')">
-                            
+
                             <!-- Flip Icon-->
-                            <img id="flip_0_19" src="ereignisfelder_images/flip.png" class="flipImg" alt="" onClick="eventFlip('0_19')">
+                            <img id="flip_0_19" src="ereignisfelder_images/flip.png" class="flipImg" alt=""
+                                 onClick="eventFlip('0_19')">
 
                         </div>
 
@@ -12830,7 +12848,7 @@
                 </tr>
             </table>
         </div>
-        
+
 
     </div>
 
@@ -16852,6 +16870,7 @@
     </div>
     <script>    /** Javascript für die Aktionsfläche (Zauberberg.js wird durch Serverfehler nicht geladen!) */
     var disableAllInput = false;
+    var kartenLegenAlreadyDone = false;
     Sortable.create(document.getElementById("karten-Hand"), {
         group: {name: "karten", put: true, pull: true},
         draggable: 'div',
@@ -16861,11 +16880,24 @@
         group: {
             name: "karten",
             put: function () {
-                if (!ereignisFliegendeKarte && document.getElementById("karten-Legen").childElementCount === 1) {
+                if (ereignisFliegendeKarte) {
                     disableKartenLegen(false);
+                } else {
+                    if (!kartenLegenAlreadyDone) {
+                        if (document.getElementById("karten-Legen").childElementCount >= 1)
+                            disableKartenLegen(false);
+                    } else {
+                        disableKartenLegen(true);
+                    }
                 }
-                return (!ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < 3)) ||
-                    (ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount === 0));
+
+                if (ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount === 0)) {
+                    return true;
+                }
+                if (!ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < 3)) {
+                    return true;
+                }
+                return false;
             },
             pull: function () {
                 if (!ereignisFliegendeKarte && document.getElementById("karten-Legen").childElementCount === 2) {
@@ -16884,8 +16916,6 @@
     });
 
     function kartenLegenBtnAction() {
-        disableKartenLegen(true);
-        disableKartenTauschen(true);
         var output = {};
         if (ereignisFliegendeKarte) {
             output = {
@@ -16929,6 +16959,9 @@
                 return;
             }
         }
+        kartenLegenAlreadyDone = true;
+        disableKartenLegen(true);
+        disableKartenTauschen(true);
         console.log(output);
         sendDataToServer(JSON.stringify(output));
     }
@@ -16983,13 +17016,6 @@
         document.getElementById("joker" + jokerID + "_" + value).style.opacity = "1";
 
         document.getElementById("joker" + jokerID).setAttribute("data-jokervalue", value.toString());
-
-        // document.getElementById("joker" + jokerID + "_" + 1).classList.remove("chosenJoker");
-        // document.getElementById("joker" + jokerID + "_" + 3).classList.remove("chosenJoker"); todo remove old when alternative works
-        // document.getElementById("joker" + jokerID + "_" + 2).classList.remove("chosenJoker");
-        // document.getElementById("joker" + jokerID + "_" + 4).classList.remove("chosenJoker");
-        // document.getElementById("joker" + jokerID + "_" + 5).classList.remove("chosenJoker");
-        // document.getElementById("joker" + jokerID + "_" + value).classList.add("chosenJoker");
     }
 
     addListener('UPDATESPIELZUSTAND', function (event) {
@@ -17057,6 +17083,7 @@
                     }
                 } else {
                     document.getElementById("Spieler" + colour).children[0].style.fontWeight = "inherit";
+                    kartenLegenAlreadyDone = false;
                 }
             } else {
                 console.log("Spieler" + colour);

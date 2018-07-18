@@ -290,6 +290,7 @@ public class Kobold {
                         output2.put("Ereignis", "Fliegende Karte");
                         zauberberg.setEreignisAnfrage(gson.toJson(output2, HashMap.class));
                         zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");
+                        zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
                         break;
                     case "Kristallkugel":
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Kristallkugel gekommen. Du darfst 3 Karten deiner Wahl aufdecken.");

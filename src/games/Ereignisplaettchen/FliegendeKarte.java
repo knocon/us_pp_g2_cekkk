@@ -21,7 +21,7 @@ public class FliegendeKarte extends Feld {
     }
 
     public String getClassName() {
-        return "FliegendeKarte";
+        return "Fliegende Karte";
     }
 
     public boolean isKarteAufgedeckt() {
