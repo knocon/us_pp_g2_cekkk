@@ -300,13 +300,30 @@ public class Zauberberg extends Game {
                         case "Fliegende Karte":
                             if (dataMap.get("karte1Typ").equals("Normal")) {
                                 for (int i = 0; i < spieler.getHand().size(); i++) {
-                                    if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Typ"))) {
+                                    if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte1Wert"))) {
+                                        aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
+                                        aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte1Wert")));
+                                        break;
+                                    }
+                                }
+                            } else if (dataMap.get("karte1Typ").equals("Joker")) {
+                                for (int i = 0; i < spieler.getHand().size(); i++) {
+                                    if (spieler.getHand().get(i).getJoker()) {
+                                        aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
+                                        aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte1Wert")));
+                                        break;
+                                    }
+                                }
+                            }
+                            if (dataMap.get("karte2Typ").equals("Normal")) {
+                                for (int i = 0; i < spieler.getHand().size(); i++) {
+                                    if (spieler.getHand().get(i).getBewegungsZahl() == Integer.parseInt(dataMap.get("karte2Wert"))) {
                                         aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));
                                         aktuellerKobold.getKartenWerte().add(Integer.parseInt(dataMap.get("karte2Wert")));
                                         break;
                                     }
                                 }
-                            } else if (dataMap.get("karte1Typ").equals("Joker")) {
+                            } else if (dataMap.get("karte2Typ").equals("Joker")) {
                                 for (int i = 0; i < spieler.getHand().size(); i++) {
                                     if (spieler.getHand().get(i).getJoker()) {
                                         aktuellerKobold.getKartenInstances().add(spieler.getHand().get(i));

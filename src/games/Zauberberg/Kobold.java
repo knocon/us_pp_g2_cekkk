@@ -21,9 +21,9 @@ public class Kobold {
     private Zauberberg zauberberg;
     private ArrayList<Bewegungskarte> kartenInstances = new ArrayList<>();
     private ArrayList<Integer> kartenWerte = new ArrayList<>();
-    Feld tempFeld;
     Gson gson = new GsonBuilder().create();
     private static int anz;
+    private int gelegteKartenFuerBewegen = 0; //tempvariable für die Fliegende Karte
 
     //Methoden bewegen
     public Kobold(int nummer, Spieler spieler, Zauberberg zauberberg) {
@@ -64,6 +64,7 @@ public class Kobold {
             this.kartenInstances.add(instanceKarte2);
             this.kartenWerte.add(kartenWert2);
         }
+        this.gelegteKartenFuerBewegen = this.kartenInstances.size();
         this.karteSpielen();
     }
 
@@ -305,11 +306,18 @@ public class Kobold {
                     case "Fliegende Karte":
                         FliegendeKarte fliegendeKarte = (FliegendeKarte) f;
                         HashMap<String, String> output2 = new HashMap<>();
-                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fliegende Karte gekommen. Du erhaelst 1 Karte und hast die Moeglichkeit, eine Karte auszuspielen.");
+                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fliegende Karte gekommen.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         fliegendeKarte.execute(this.getSpieler(), zauberberg.getSpiel().getKartenstapel());
+                        int ausstehendeKartenanzahl = this.kartenInstances.size() + 1;
+                        if (this.gelegteKartenFuerBewegen == 1) ausstehendeKartenanzahl++;
                         output2.put("Ereignis", "Fliegende Karte");
+                        output2.put("RestlicheZuege", String.valueOf(ausstehendeKartenanzahl));
+                        zauberberg.setRecentInfoText("Du erhaelst 1 zusätzliche Karte und hast die Moeglichkeit, " + ausstehendeKartenanzahl + " Karte(n) auszuspielen.");
+                        zauberberg.sendGameDataToUserPublic("PUSHINFOTXT");
                         zauberberg.setEreignisAnfrage(gson.toJson(output2, HashMap.class));
+                        this.kartenInstances.clear();
+                        this.kartenWerte.clear();
                         zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");
                         zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
                         break;

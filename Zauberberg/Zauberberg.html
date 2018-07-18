@@ -16891,7 +16891,7 @@
                     }
                 }
 
-                if (ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount === 0)) {
+                if (ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < ereignisFliegendeKarteRestlicheZuege)) {
                     return true;
                 }
                 if (!ereignisFliegendeKarte && (document.getElementById("karten-Legen").childElementCount < 3)) {
@@ -16922,9 +16922,10 @@
                 "Eventname": "EREIGNISANTWORT",
                 "Ereignis": "Fliegende Karte",
                 "karte1Typ": "Null",
-                "karte1Wert": "Null"
+                "karte1Wert": "Null",
+                "karte2Typ": "Null",
+                "karte2Wert": "Null"
             };
-            ereignisFliegendeKarte = false;
         } else {
             output = {
                 "Eventname": "KARTENLEGEN",
@@ -16949,10 +16950,11 @@
             }
         }
         if (ereignisFliegendeKarte) {
-            if (i !== 1) {
-                pushInfoTxt("Ereignis Fliegende Karte: Du muss genau eine Karte legen!");
+            if (i > ereignisFliegendeKarteRestlicheZuege) {
+                pushInfoTxt("Ereignis Fliegende Karte: Du darfst nicht mehr als " + ereignisFliegendeKarteRestlicheZuege + " Karte(n) legen!");
                 return;
             }
+            ereignisFliegendeKarte = false;
         } else {
             if (i < 2) {
                 pushInfoTxt("Karten legen: Du musst mindestens 2 Karten legen, maximal 3");
@@ -17141,12 +17143,14 @@
     }
 
     var ereignisFliegendeKarte = false;
+    var ereignisFliegendeKarteRestlicheZuege = 1;
 
     addListener("EREIGNISANFRAGE", function (event) {
         var stringFromServer = event.data;
         var data = JSON.parse(stringFromServer);
         if (data["Ereignis"] === "Fliegende Karte") {
             ereignisFliegendeKarte = true;
+            ereignisFliegendeKarteRestlicheZuege = parseInt(data["RestlicheZuege"]);
         } else if (data["Ereignis"] === "Rabe") {
             var btns = document.getElementsByClassName("rabeBtn");
             for (var i = 0; i < btns.length; i++) {

@@ -6,6 +6,7 @@ import games.Zauberberg.*;
 
 public class FliegendeKarte extends Feld {
     private boolean karteAufgedeckt;
+    private Bewegungskarte fliegendekarte;
 
     public FliegendeKarte(int layer, int feldNr, Zauberberg zauberberg) {
         super(layer, feldNr, zauberberg);
@@ -15,7 +16,8 @@ public class FliegendeKarte extends Feld {
     public void execute(Spieler s, Kartenstapel kartenstapel) {
         int stapelSize = kartenstapel.getStapel().size() - 1;
         int random = (int) (Math.random() * stapelSize + 0);
-        s.getHand().add(kartenstapel.getStapel().get(random));
+        fliegendekarte = kartenstapel.getStapel().get(random);
+        s.getHand().add(fliegendekarte);
         kartenstapel.getStapel().remove(random);
         setKarteAufgedeckt(false);
     }
@@ -31,5 +33,9 @@ public class FliegendeKarte extends Feld {
     public void setKarteAufgedeckt(boolean karteAufgedeckt) {
         this.karteAufgedeckt = karteAufgedeckt;
         this.zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
+    }
+
+    public Bewegungskarte getFliegendekarte() {
+        return fliegendekarte;
     }
 }
