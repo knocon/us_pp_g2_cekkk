@@ -12,29 +12,35 @@ public class Spieler {
     private ArrayList<Kobold> koboldList = new ArrayList<Kobold>();
     private int anzahlZaubersteine;
     private ArrayList<Bewegungskarte> hand;
-    private static int anz =0;
+    private static int anz = 0;
     private Zauberberg zauberberg;
 
     public Spieler(Zauberberg zauberberg) {
         this.zauberberg = zauberberg;
-	switch(anz) {
-	case 0: this.farbName = Name.ROT;
-		break;
-	case 1: this.farbName = Name.BLAU; 
-		break; 
-	case 2: this.farbName = Name.GRUEN; 
-		break; 
-	case 3: this.farbName = Name.GELB; 
-		break; 
-	case 4: this.farbName = Name.PINK;
-		break; 
-	}        
+        switch (anz) {
+            case 0:
+                this.farbName = Name.ROT;
+                break;
+            case 1:
+                this.farbName = Name.BLAU;
+                break;
+            case 2:
+                this.farbName = Name.GRUEN;
+                break;
+            case 3:
+                this.farbName = Name.GELB;
+                break;
+            case 4:
+                this.farbName = Name.PINK;
+                break;
+        }
         this.anzahlZaubersteine = 0;
         this.hand = new ArrayList<>();
-        this.anz++; 
+        this.anz++;
     }
+
     public enum Name {
-	ROT, BLAU, GRUEN, GELB, PINK; 
+        ROT, BLAU, GRUEN, GELB, PINK;
     }
 
     public int getAnzahlZaubersteine() {
@@ -53,42 +59,42 @@ public class Spieler {
     public void setHand(ArrayList<Bewegungskarte> hand) {
         this.hand = hand;
     }
-    
+
     public Name getName() {
         return farbName;
     }
 
-	public Name getFarbName() {
-		return farbName;
-	}
+    public Name getFarbName() {
+        return farbName;
+    }
 
-	public void setFarbName(Name farbName) {
-		this.farbName = farbName;
-	}
+    public void setFarbName(Name farbName) {
+        this.farbName = farbName;
+    }
 
-	public static int getAnz() {
-		return anz;
-	}
+    public static int getAnz() {
+        return anz;
+    }
 
-	public static void setAnz(int anz) {
-		Spieler.anz = anz;
-	}
+    public static void setAnz(int anz) {
+        Spieler.anz = anz;
+    }
 
-	public ArrayList<Kobold> getKoboldList() {
-		return koboldList;
-	}
+    public ArrayList<Kobold> getKoboldList() {
+        return koboldList;
+    }
 
-	public void setKoboldList(ArrayList<Kobold> koboldList) {
-		this.koboldList = koboldList;
-	}
+    public void setKoboldList(ArrayList<Kobold> koboldList) {
+        this.koboldList = koboldList;
+    }
 
-	public String getSpielerName() {
-		return spielerName;
-	}
+    public String getSpielerName() {
+        return spielerName;
+    }
 
-	public void setSpielerName(String spielerName) {
-		this.spielerName = spielerName;
-	}
+    public void setSpielerName(String spielerName) {
+        this.spielerName = spielerName;
+    }
     
     /*
     public void karteZiehen() {
@@ -107,5 +113,5 @@ public class Spieler {
         //k.getStapel().add(bk);
     }
 	*/
-    
+
 }

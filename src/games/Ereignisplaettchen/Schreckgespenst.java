@@ -13,16 +13,16 @@ public class Schreckgespenst extends Feld {
     }
 
     public void execute(Kobold kobold) {
-    	for(Feld f : this.zauberberg.getSpiel().getFelder()) {
-    		if(f.getLayer()==kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {
-    			kobold.setLayer(-1);
-    	        kobold.setFeldNr(kobold.getDorf());
-    	        f.getKobolde().remove(kobold);
-    		}
-    		if(f.getLayer() == -1 && f.getFeldNr() == kobold.getDorf()) {
-    			f.getKobolde().add(kobold);
-    		}
-    	}
+        for (Feld f : this.zauberberg.getSpiel().getFelder()) {
+            if (f.getLayer() == kobold.getLayer() && f.getFeldNr() == kobold.getFeldNr()) {
+                kobold.setLayer(-1);
+                kobold.setFeldNr(kobold.getDorf());
+                f.getKobolde().remove(kobold);
+            }
+            if (f.getLayer() == -1 && f.getFeldNr() == kobold.getDorf()) {
+                f.getKobolde().add(kobold);
+            }
+        }
         setKarteAufgedeckt(false);
     }
 
