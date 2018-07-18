@@ -58,7 +58,7 @@ public class Kobold {
             this.kartenInstances.add(instanceKarte1);
             this.kartenWerte.add(kartenWert1);
         }
-        if (instanceKarte1 != null) {
+        if (instanceKarte2 != null) {
             this.kartenInstances.add(instanceKarte2);
             this.kartenWerte.add(kartenWert2);
         }
