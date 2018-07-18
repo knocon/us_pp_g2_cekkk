@@ -40,12 +40,14 @@ public class Kobold {
     public void kartenLegen(Bewegungskarte instanceKoboldKarte, Bewegungskarte instanceKarte1, Bewegungskarte instanceKarte2, int kartenWert1, int kartenWert2) {
         // Darf der Kobold bewegt werden? Check
         for (Feld f : zauberberg.getSpiel().getFelder()) {
-            if (f.getFeldNr() == zauberberg.getAktuellerKobold().getFeldNr() && f.getLayer() == zauberberg.getAktuellerKobold().getLayer()) {
-                if (f.getKobolde().size() == 2 && f.getKobolde().get(0) == zauberberg.getAktuellerKobold()) {
-                    zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
-                    zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
-                    zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
-                    return;
+            if (f.getLayer() != -1) {
+                if (f.getFeldNr() == zauberberg.getAktuellerKobold().getFeldNr() && f.getLayer() == zauberberg.getAktuellerKobold().getLayer()) {
+                    if (f.getKobolde().size() == 2 && f.getKobolde().get(0) == zauberberg.getAktuellerKobold()) {
+                        zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
+                        zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
+                        zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
+                        return;
+                    }
                 }
             }
         }
