@@ -266,7 +266,7 @@ public class Kobold {
                         break;
                     case "Schreckgespenst":
                         Schreckgespenst schreckgespenst = (Schreckgespenst) f;
-                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Zurueck ins Dorf.");
+                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Schreckgespenst gekommen. Zurueck ins Dorf.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         schreckgespenst.execute(this);
                         kartenWerte.clear();
