@@ -269,6 +269,7 @@ public class Kobold {
                         zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Fallgrube gekommen. Zurueck ins Dorf.");
                         zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         schreckgespenst.execute(this);
+                        kartenWerte.clear();
                         this.bewegenBeenden();
                         break;
                     case "Rabe":
