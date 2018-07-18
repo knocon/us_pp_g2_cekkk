@@ -566,8 +566,31 @@ public class Zauberberg extends Game {
                         counter++;
                     }
                 } else { //Feld ist ein Feld des Spielfeldes
-                    output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#EreigniskarteSteinOffen",
-                            (!feld.getClassName().equals("Feld") && ((feld.getClassName().equals("Zauberstein") && ((Zauberstein) feld).getAufFeld()) || feld.isKarteAufgedeckt()) ? "1" : "0"));
+                    String offenGeschlossen = "0";
+                    if (!feld.getClassName().equals("Feld")) {
+                        if (feld.getClassName().equals("Zauberstein")) {
+                            if (((Zauberstein) feld).getAufFeld()) {
+                                offenGeschlossen = "1";
+                            }
+                        } else if (feld.getClassName().equals("Kristallkugel")) {
+                            if (((Kristallkugel) feld).isKarteImSpiel()) {
+                                if (feld.isKarteAufgedeckt()) {
+                                    offenGeschlossen = "1";
+                                }
+                            }
+                        } else if (feld.getClassName().equals("Rabe")) {
+                            if (((Rabe) feld).isKarteImSpiel()) {
+                                if (feld.isKarteAufgedeckt()) {
+                                    offenGeschlossen = "1";
+                                }
+                            }
+                        } else {
+                            if (feld.isKarteAufgedeckt()) {
+                                offenGeschlossen = "1";
+                            }
+                        }
+                    }
+                    output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#EreigniskarteSteinOffen", offenGeschlossen);
                     output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold1-Farbe", "Null");
                     output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold1-Nummer", "Null");
                     output.put(feld.getLayer() + "_" + feld.getFeldNr() + "#Kobold2-Farbe", "Null");
@@ -692,6 +715,6 @@ public class Zauberberg extends Game {
     public void setCloseMsg(String closeMsg) {
         this.closeMsg = closeMsg;
     }
-    
+
 
 }

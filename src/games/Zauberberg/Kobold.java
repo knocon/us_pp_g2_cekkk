@@ -74,38 +74,38 @@ public class Kobold {
         ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
         if (this.getLayer() == -1) {            //Schritt raus aus dem Dorf
             if (this.getFeldNr() == 0) {
-        	if(getCorrectFeld(0,((0 + (laufweg - 1) % 36) + 36) % 36).getKobolde().size()==0) {        	    
-        	    arrayLayerFeld.add(0); //layer
+                if (getCorrectFeld(0, ((0 + (laufweg - 1) % 36) + 36) % 36).getKobolde().size() == 0) {
+                    arrayLayerFeld.add(0); //layer
                     arrayLayerFeld.add(((0 + (laufweg - 1) % 36) + 36) % 36); //schritte nach "vorne"
-        	}
-        	if(getCorrectFeld(0,((0 - (laufweg - 1) % 36) + 36) % 36).getKobolde().size()==0) {        	    
-        	    arrayLayerFeld.add(0); //layer
+                }
+                if (getCorrectFeld(0, ((0 - (laufweg - 1) % 36) + 36) % 36).getKobolde().size() == 0) {
+                    arrayLayerFeld.add(0); //layer
                     arrayLayerFeld.add(((0 - (laufweg - 1) % 36) + 36) % 36); // schritte nach "hinten"                    
-        	}               
+                }
             } else if (this.getFeldNr() == 1) {
-        	if(getCorrectFeld(0,(((9 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
-        	    arrayLayerFeld.add(0); //layer
+                if (getCorrectFeld(0, (((9 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size() == 0) {
+                    arrayLayerFeld.add(0); //layer
                     arrayLayerFeld.add((((9 + (laufweg - 1)) % 36) + 36) % 36);
-        	}
-        	if(getCorrectFeld(0,(((9 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
-        	    arrayLayerFeld.add(0); //layer
+                }
+                if (getCorrectFeld(0, (((9 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size() == 0) {
+                    arrayLayerFeld.add(0); //layer
                     arrayLayerFeld.add((((9 - (laufweg - 1)) % 36) + 36) % 36);
-        	}                
+                }
             } else if (this.getFeldNr() == 2) {
-        	if(getCorrectFeld(0,(((18 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
-        	    arrayLayerFeld.add(0); //layer
+                if (getCorrectFeld(0, (((18 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size() == 0) {
+                    arrayLayerFeld.add(0); //layer
                     arrayLayerFeld.add((((18 + (laufweg - 1)) % 36) + 36) % 36);
-        	}
-        	if(getCorrectFeld(0,(((18 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
-        	    arrayLayerFeld.add(0); //layer
-                    arrayLayerFeld.add((((18 - (laufweg - 1)) % 36) + 36) % 36); 
-        	}                
+                }
+                if (getCorrectFeld(0, (((18 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size() == 0) {
+                    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add((((18 - (laufweg - 1)) % 36) + 36) % 36);
+                }
             } else if (this.getFeldNr() == 3) {
-        	if(getCorrectFeld(0,(((27 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
-        	    arrayLayerFeld.add(0); //layer
+                if (getCorrectFeld(0, (((27 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size() == 0) {
+                    arrayLayerFeld.add(0); //layer
                     arrayLayerFeld.add((((27 + (laufweg - 1)) % 36) + 36) % 36);
-        	}
-                if(getCorrectFeld(0,(((27 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
+                }
+                if (getCorrectFeld(0, (((27 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size() == 0) {
                     arrayLayerFeld.add(0); //layer
                     arrayLayerFeld.add((((27 - (laufweg - 1)) % 36) + 36) % 36);
                 }
@@ -172,8 +172,8 @@ public class Kobold {
             if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size() == 2) { //auf aktuellem Feld 2 Kobolde
                 if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere
                     if (this.getFeldNr() != 0 && this.getFeldNr() != 3 && this.getFeldNr() != 6 && this.getFeldNr() != 9) { //kein Eckpunkt
-                	this.zauberberg.setCloseMsg(this.getSpieler().getFarbName() + " hat gewonnen");
-                	this.zauberberg.sendGameDataToClientsPublic("CLOSE");
+                        this.zauberberg.setCloseMsg(this.getSpieler().getFarbName() + " hat gewonnen");
+                        this.zauberberg.sendGameDataToClientsPublic("CLOSE");
                     }
                 }
             }
@@ -181,7 +181,7 @@ public class Kobold {
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 12) + 12) % 12);  //vorw�rts
             arrayLayerFeld.add(3);
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 12) + 12) % 12);  // r�ckw�rts
-        } 
+        }
         if (arrayLayerFeld.size() == 0) {
             this.zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen. Denk nach bevor du Karten legst");
             this.zauberberg.sendGameDataToUserPublic("PUSHINFOTXT");
@@ -309,12 +309,18 @@ public class Kobold {
                         break;
                     case "Rabe":
                         Rabe rabe = (Rabe) f;
-                        HashMap<String, String> output = new HashMap<>();
-                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Rabe gekommen. Waehle 1 Spieler, dem der Zauberstein entfernt wird.");
-                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        output.put("Ereignis", "Rabe");
-                        zauberberg.setEreignisAnfrage(gson.toJson(output, HashMap.class));
-                        zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");
+                        if (rabe.isKarteImSpiel()) {
+                            HashMap<String, String> output = new HashMap<>();
+                            zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Rabe gekommen. Waehle 1 Spieler, dem der Zauberstein entfernt wird.");
+                            zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                            output.put("Ereignis", "Rabe");
+                            zauberberg.setEreignisAnfrage(gson.toJson(output, HashMap.class));
+                            zauberberg.sendGameDataToUserPublic("EREIGNISANFRAGE");
+                            rabe.karteAusDemSpielNehmen();
+                        } else {
+                            zauberberg.setRecentInfoText("Ereigniskarte ist nicht mehr im Spiel");
+                            zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                        }
                         break;
                     case "Fliegende Karte":
                         FliegendeKarte fliegendeKarte = (FliegendeKarte) f;
@@ -335,9 +341,15 @@ public class Kobold {
                         zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
                         break;
                     case "Kristallkugel":
-                        zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Kristallkugel gekommen. Du darfst 3 Karten deiner Wahl aufdecken.");
-                        zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                        // TODO Kristallkugel Karte aus dem Spiel nehmen
+                        Kristallkugel kristallkugel = (Kristallkugel) f;
+                        if (kristallkugel.isKarteImSpiel()) {
+                            zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf das Ereignis Kristallkugel gekommen. Du darfst 3 Karten deiner Wahl aufdecken.");
+                            zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                            kristallkugel.karteAusDemSpielNehmen();
+                        } else {
+                            zauberberg.setRecentInfoText("Ereigniskarte ist nicht mehr im Spiel");
+                            zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                        }
                         this.bewegenBeenden();
                         break;
                     case "Unwetter":
@@ -413,7 +425,7 @@ public class Kobold {
                 if (feldNr > 15 && feldNr < 20) {
                     return feldNr - 7;
                 }
-                break;            
+                break;
         }
         return 0;
     }
