@@ -299,3 +299,9 @@
 [2018-07-18 15:45:14.027] [IP: /192.168.178.60] [LOGOUT] Logging out user "2" succeeded; Session length: 181  Minutes
 [2018-07-18 15:45:31.916] [IP: /192.168.178.60] [LOGIN] Logging in user "2" succeeded
 [2018-07-18 15:46:20.56] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-18 16:35:33.276] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-18 16:35:44.221] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
+[2018-07-18 16:49:08.931] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-18 16:49:18.319] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
+[2018-07-18 16:55:12.345] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
+[2018-07-18 16:55:18.222] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded

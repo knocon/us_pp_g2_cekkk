@@ -111,9 +111,9 @@ public class Zauberberg extends Game {
                 return;
             }
 
-            if (!spieler.equals(playerTurn)) {
-                return; //nur wenn der Spieler dran ist, darf er auch Daten schicken
-            }
+            //if (!spieler.equals(playerTurn)) {
+            //    return; //nur wenn der Spieler dran ist, darf er auch Daten schicken
+            //}
 
             /**
              * Eventnamen für das eigentliche Spiel
