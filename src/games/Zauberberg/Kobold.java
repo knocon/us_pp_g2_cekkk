@@ -46,6 +46,7 @@ public class Kobold {
                         zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
                         zauberberg.sendGameDataToUserPublic("PUSHINFOTXT");
                         zauberberg.sendGameDataToUserPublic("UPDATEKARTEN");
+                        zauberberg.zugBeenden();
                         return;
                     }
                 }
