@@ -72,25 +72,41 @@ public class Kobold {
         ArrayList<Integer> arrayLayerFeld = new ArrayList<Integer>();
         if (this.getLayer() == -1) {            //Schritt raus aus dem Dorf
             if (this.getFeldNr() == 0) {
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add(((0 + (laufweg - 1) % 36) + 36) % 36); //schritte nach "vorne"
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add(((0 - (laufweg - 1) % 36) + 36) % 36); // schritte nach "hinten"
+        	if(getCorrectFeld(0,((0 + (laufweg - 1) % 36) + 36) % 36).getKobolde().size()==0) {        	    
+        	    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add(((0 + (laufweg - 1) % 36) + 36) % 36); //schritte nach "vorne"
+        	}
+        	if(getCorrectFeld(0,((0 - (laufweg - 1) % 36) + 36) % 36).getKobolde().size()==0) {        	    
+        	    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add(((0 - (laufweg - 1) % 36) + 36) % 36); // schritte nach "hinten"                    
+        	}               
             } else if (this.getFeldNr() == 1) {
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add((((9 + (laufweg - 1)) % 36) + 36) % 36);
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add((((9 - (laufweg - 1)) % 36) + 36) % 36);
+        	if(getCorrectFeld(0,(((9 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
+        	    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add((((9 + (laufweg - 1)) % 36) + 36) % 36);
+        	}
+        	if(getCorrectFeld(0,(((9 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
+        	    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add((((9 - (laufweg - 1)) % 36) + 36) % 36);
+        	}                
             } else if (this.getFeldNr() == 2) {
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add((((18 + (laufweg - 1)) % 36) + 36) % 36);
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add((((18 - (laufweg - 1)) % 36) + 36) % 36);
+        	if(getCorrectFeld(0,(((18 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
+        	    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add((((18 + (laufweg - 1)) % 36) + 36) % 36);
+        	}
+        	if(getCorrectFeld(0,(((18 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
+        	    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add((((18 - (laufweg - 1)) % 36) + 36) % 36); 
+        	}                
             } else if (this.getFeldNr() == 3) {
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add((((27 + (laufweg - 1)) % 36) + 36) % 36);
-                arrayLayerFeld.add(0); //layer
-                arrayLayerFeld.add((((27 - (laufweg - 1)) % 36) + 36) % 36);
+        	if(getCorrectFeld(0,(((27 + (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
+        	    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add((((27 + (laufweg - 1)) % 36) + 36) % 36);
+        	}
+                if(getCorrectFeld(0,(((27 - (laufweg - 1)) % 36) + 36) % 36).getKobolde().size()==0) {
+                    arrayLayerFeld.add(0); //layer
+                    arrayLayerFeld.add((((27 - (laufweg - 1)) % 36) + 36) % 36);
+                }
             }
         } else if (this.getLayer() == 0) {
             //prüft ob Kobold auf einem Kobold sitzt, wenn ja nächste Ebene möglich
