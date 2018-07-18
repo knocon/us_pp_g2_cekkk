@@ -172,8 +172,10 @@ public class Kobold {
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 12) + 12) % 12);  // r�ckw�rts
         }
         if (arrayLayerFeld.size() == 0) {
-            this.zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen.");
-            this.zauberberg.sendGameDataToUserPublic("PUSHINFOTEXT");
+            this.zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen. Denk nach bevor du Karten legst");
+            this.zauberberg.sendGameDataToUserPublic("PUSHINFOTXT");
+            this.kartenWerte.clear();
+            this.bewegenBeenden();
         } else {
             this.zauberberg.setFelderWaehlen(gson.toJson(arrayLayerFeld, ArrayList.class));
             this.zauberberg.sendGameDataToUserPublic("FELDERANBIETEN");
