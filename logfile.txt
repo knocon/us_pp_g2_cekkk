@@ -288,3 +288,14 @@
 [2018-07-18 09:58:02.417] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
 [2018-07-18 10:13:48.306] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
 [2018-07-18 10:21:38.941] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
+[2018-07-18 12:27:03.476] [IP: /192.168.178.60] [LOGIN] Logging in user "2" succeeded
+[2018-07-18 12:33:55.426] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" failed
+[2018-07-18 12:34:02.931] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-18 12:34:12.452] [IP: /192.168.178.60] [LOGOUT] Logging out user "2" succeeded; Session length: 7  Minutes
+[2018-07-18 12:34:45.234] [IP: /192.168.178.60] [LOGIN] Logging in user "2" succeeded
+[2018-07-18 12:34:49.218] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
+[2018-07-18 12:42:28.317] [IP: /192.168.178.60] [LOGIN] Logging in user "2" succeeded
+[2018-07-18 12:43:21.791] [IP: /192.168.178.60] [LOGIN] Logging in user "2" succeeded
+[2018-07-18 15:45:14.027] [IP: /192.168.178.60] [LOGOUT] Logging out user "2" succeeded; Session length: 181  Minutes
+[2018-07-18 15:45:31.916] [IP: /192.168.178.60] [LOGIN] Logging in user "2" succeeded
+[2018-07-18 15:46:20.56] [IP: /192.168.178.60] [LOGIN] Logging in user "kno" succeeded
