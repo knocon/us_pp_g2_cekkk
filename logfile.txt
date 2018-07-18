@@ -305,3 +305,11 @@
 [2018-07-18 16:49:18.319] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
 [2018-07-18 16:55:12.345] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
 [2018-07-18 16:55:18.222] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-18 17:02:34.231] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
+[2018-07-18 17:03:13.7] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-18 17:11:25.228] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
+[2018-07-18 17:11:35.638] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-18 17:11:36.784] [IP: /192.168.2.100] [LOGOUT] Logging out user "Test" succeeded; Session length: < 1  Minutes
+[2018-07-18 17:11:43.472] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-18 17:11:44.665] [IP: /192.168.2.100] [LOGOUT] Logging out user "Test" succeeded; Session length: < 1  Minutes
+[2018-07-18 17:11:47.832] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded

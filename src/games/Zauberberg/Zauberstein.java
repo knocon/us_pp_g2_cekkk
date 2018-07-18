@@ -18,6 +18,7 @@ public class Zauberstein extends Feld {
 
     public void setAufFeld(Boolean aufFeld) {
         this.aufFeld = aufFeld;
+        zauberberg.sendGameDataToClientsPublic("UPDATESPIELFELD");
     }
 
     public String getClassName() {
