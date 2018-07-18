@@ -336,10 +336,10 @@ public class Zauberberg extends Game {
                             break;
                         case "Rabe":
                             for (Spieler sp : spielerList) {
-                                if (sp.getFarbName().toString().equals(dataMap.get("Spieler").toUpperCase())) {
+                                if (String.valueOf(sp.getFarbName()).equals(dataMap.get("Spieler").toUpperCase())) {
                                     sp.setAnzahlZaubersteine(sp.getAnzahlZaubersteine() - 1);
+                                    break;
                                 }
-                                break;
                             }
                             aktuellerKobold.bewegenBeenden();
                             sendGameDataToClients("UPDATESPIELZUSTAND");
