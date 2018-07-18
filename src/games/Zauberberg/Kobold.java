@@ -159,10 +159,8 @@ public class Kobold {
             if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size() == 2) { //auf aktuellem Feld 2 Kobolde
                 if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere
                     if (this.getFeldNr() != 0 && this.getFeldNr() != 3 && this.getFeldNr() != 6 && this.getFeldNr() != 9) { //kein Eckpunkt
-                        if (this.getCorrectFeld(this.getLayer() + 1, this.getFeldNrNextLayer(3, this.getFeldNr())).getKobolde().size() == 0) { //nächste Ebene frei
-                            arrayLayerFeld.add(4);
-                            arrayLayerFeld.add(this.getFeldNrNextLayer(3, this.getFeldNr()));
-                        }
+                	this.zauberberg.setCloseMsg(this.getSpieler().getFarbName() + " hat gewonnen");
+                	this.zauberberg.sendGameDataToClientsPublic("CLOSE");
                     }
                 }
             }
@@ -170,7 +168,7 @@ public class Kobold {
             arrayLayerFeld.add((((this.getFeldNr() + laufweg) % 12) + 12) % 12);  //vorw�rts
             arrayLayerFeld.add(3);
             arrayLayerFeld.add((((this.getFeldNr() - laufweg) % 12) + 12) % 12);  // r�ckw�rts
-        }
+        } 
         if (arrayLayerFeld.size() == 0) {
             this.zauberberg.setRecentInfoText("Du kannst den Kobold mit der Nummer " + this.getNummer() + " nicht bewegen. Denk nach bevor du Karten legst");
             this.zauberberg.sendGameDataToUserPublic("PUSHINFOTXT");
@@ -402,21 +400,7 @@ public class Kobold {
                 if (feldNr > 15 && feldNr < 20) {
                     return feldNr - 7;
                 }
-                break;
-            case 3:
-                if (feldNr > 0 && feldNr < 3) {
-                    return feldNr - 1;
-                }
-                if (feldNr > 3 && feldNr < 6) {
-                    return feldNr - 3;
-                }
-                if (feldNr > 6 && feldNr < 9) {
-                    return feldNr - 5;
-                }
-                if (feldNr > 9 && feldNr < 12) {
-                    return feldNr - 7;
-                }
-                break;
+                break;            
         }
         return 0;
     }

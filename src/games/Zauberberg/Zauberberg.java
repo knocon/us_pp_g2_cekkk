@@ -685,4 +685,13 @@ public class Zauberberg extends Game {
         this.aktuellerKobold = aktuellerKobold;
     }
 
+    public String getCloseMsg() {
+        return closeMsg;
+    }
+
+    public void setCloseMsg(String closeMsg) {
+        this.closeMsg = closeMsg;
+    }
+    
+
 }
