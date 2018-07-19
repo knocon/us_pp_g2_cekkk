@@ -370,3 +370,4 @@
 [2018-07-19 19:40:10.979] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
 [2018-07-19 19:45:34.309] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
 [2018-07-19 19:46:07.215] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-19 20:16:00.193] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "Kevin" succeeded
