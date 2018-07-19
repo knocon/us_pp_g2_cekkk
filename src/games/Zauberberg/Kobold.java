@@ -25,7 +25,7 @@ public class Kobold {
     private static int anz;
     private int gelegteKartenFuerBewegen = 0; //tempvariable für die Fliegende Karte
 
-    //Methoden bewegen
+ 
     public Kobold(int nummer, Spieler spieler, Zauberberg zauberberg) {
         this.dorf = anz % 4; //gleichmäßiges Verteilen der Kobolde (im Uhrzeigersinn)
         this.layer = -1;
@@ -210,9 +210,9 @@ public class Kobold {
         Kobold koboldOnTop;
 
         //auf neuem Feld sitzen schon 2 Kobolde --> Weiterschieben
-        if (getCorrectFeld(layer, feldNr).getKobolde().size() == 2) {
-            koboldOnTop = getCorrectFeld(layer, feldNr).getKobolde().get(1);
-            switch (koboldOnTop.getLayer()) {
+        if (getCorrectFeld(layer, feldNr).getKobolde().size() == 2) {  //auf neuem Feld sitzen bereits zwei 
+            koboldOnTop = getCorrectFeld(layer, feldNr).getKobolde().get(1); //koboldOnTop ist von neuem Feld der obere 
+            switch (koboldOnTop.getLayer()) { 
                 case 0:
                     modulo = 36;
                     break;
@@ -231,7 +231,8 @@ public class Kobold {
                 vorZurueck = -1;
             }
             getCorrectFeld(layer, feldNr).getKobolde().remove(1); //remove den oberen, das ist KoboldOnTop
-            this.setFeldNr(feldNr); //ursprünglichen Kobold setzen und bei feld.getKobold() einfügen
+            getCorrectFeld(this.layer,this.feldNr).getKobolde().remove(this); //vom alten feld löschen 
+            this.setFeldNr(feldNr); //ursprünglichen Kobold auf neues feld setzen und bei feld.getKobold() einfügen
             this.setLayer(layer);
             getCorrectFeld(layer, feldNr).getKobolde().add(this);
 
