@@ -338,6 +338,7 @@ public class Zauberberg extends Game {
                             for (Spieler sp : spielerList) {
                                 if (String.valueOf(sp.getFarbName()).equals(dataMap.get("Spieler").toUpperCase())) {
                                     sp.setAnzahlZaubersteine(sp.getAnzahlZaubersteine() - 1);
+                                    //todo Karten aktualisieren, Karte löschen wenn nicht schon 3
                                     break;
                                 }
                             }

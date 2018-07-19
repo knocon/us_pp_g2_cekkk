@@ -72,6 +72,7 @@ body {
 	width: 77px;
     height: 77px;
 	visibility: hidden;
+    z-index: 2000;
 }
 .flipImg{
 	position: absolute;
@@ -79,6 +80,7 @@ body {
 	height: 20px;
 	visibility: visible;
 	background-color: white;
+    z-index: 3000;
 }
 
 #villages {
