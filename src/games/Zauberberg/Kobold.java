@@ -322,6 +322,7 @@ public class Kobold {
                         } else {
                             zauberberg.setRecentInfoText("Ereigniskarte ist nicht mehr im Spiel");
                             zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                            this.bewegenBeenden();
                         }
                         break;
                     case "Fliegende Karte":

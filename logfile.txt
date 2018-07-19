@@ -360,3 +360,5 @@
 [2018-07-19 10:54:40.072] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
 [2018-07-19 10:55:29.745] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
 [2018-07-19 10:55:34.955] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
+[2018-07-19 12:01:32.519] [IP: /192.168.2.111] [LOGIN] Logging in user "1" succeeded
+[2018-07-19 12:01:45.134] [IP: /192.168.2.100] [LOGIN] Logging in user "Test" succeeded
