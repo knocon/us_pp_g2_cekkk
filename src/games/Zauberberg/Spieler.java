@@ -31,7 +31,7 @@ public class Spieler {
                 this.farbName = Name.GELB;
                 break;
             case 4:
-                this.farbName = Name.PINK;
+                this.farbName = Name.GRAU;
                 break;
         }
         this.anzahlZaubersteine = 0;
@@ -40,7 +40,7 @@ public class Spieler {
     }
 
     public enum Name {
-        ROT, BLAU, GRUEN, GELB, PINK;
+        ROT, BLAU, GRUEN, GELB, GRAU;
     }
 
     public int getAnzahlZaubersteine() {
