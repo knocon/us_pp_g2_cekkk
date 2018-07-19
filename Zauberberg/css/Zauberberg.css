@@ -13,7 +13,7 @@ body {
     vertical-align: top;
 }
 
-#Aktionsfläche {
+#Aktionsflaeche {
     display: inline-block;
     vertical-align: top;
     margin: 10px;
@@ -57,29 +57,33 @@ body {
     height: 77px;
     visibility: visible;
 }
-.k{/*Um kleine Kobolde hoch zu schieben*/
+
+.k { /*Um kleine Kobolde hoch zu schieben*/
     z-index: 1000;
 }
+
 .dorfImg {
-	left : -10px;
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	visibility: visible;
+    left: -10px;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    visibility: visible;
 }
-.glowImg{
-	position: absolute;
-	width: 77px;
+
+.glowImg {
+    position: absolute;
+    width: 77px;
     height: 77px;
-	visibility: hidden;
+    visibility: hidden;
     z-index: 2000;
 }
-.flipImg{
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	visibility: visible;
-	background-color: white;
+
+.flipImg {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    visibility: visible;
+    background-color: white;
     z-index: 3000;
 }
 
@@ -103,7 +107,7 @@ body {
 }
 
 .spielername {
-    margin: 10px 10px 10px 0px;
+    margin: 10px 10px 10px 0;
     font-size: 20px;
 }
 

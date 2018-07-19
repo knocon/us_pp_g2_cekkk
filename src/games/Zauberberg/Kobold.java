@@ -25,7 +25,7 @@ public class Kobold {
     private static int anz;
     private int gelegteKartenFuerBewegen = 0; //tempvariable für die Fliegende Karte
 
- 
+
     public Kobold(int nummer, Spieler spieler, Zauberberg zauberberg) {
         this.dorf = anz % 4; //gleichmäßiges Verteilen der Kobolde (im Uhrzeigersinn)
         this.layer = -1;
@@ -115,14 +115,14 @@ public class Kobold {
             if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size() == 2) { //auf aktuellem Feld 2 Kobolde
                 if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { //zu bewegender Kobold ist der obere
                     if (this.getFeldNr() != 0 && this.getFeldNr() != 9 && this.getFeldNr() != 18 && this.getFeldNr() != 27) { //nicht auf einem Eckpunkt
-                	if (this.getCorrectFeld(this.getLayer() + 1,(((this.getFeldNrNextLayer(0, this.getFeldNr())+(laufweg-1))%28)+28)%28).getKobolde().size()==0) { //nächste Ebene ist frei
-                	    arrayLayerFeld.add(1);
-                            arrayLayerFeld.add((((this.getFeldNrNextLayer(0, this.getFeldNr()))+(laufweg-1)%28)+28)%28);
+                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(0, this.getFeldNr()) + (laufweg - 1)) % 28) + 28) % 28).getKobolde().size() == 0) { //nächste Ebene ist frei
+                            arrayLayerFeld.add(1);
+                            arrayLayerFeld.add((((this.getFeldNrNextLayer(0, this.getFeldNr())) + (laufweg - 1) % 28) + 28) % 28);
                         }
-                	if (this.getCorrectFeld(this.getLayer() + 1,(((this.getFeldNrNextLayer(0, this.getFeldNr())-(laufweg-1))%28)+28)%28).getKobolde().size()==0) {
-                	    arrayLayerFeld.add(1);
-                	    arrayLayerFeld.add((((this.getFeldNrNextLayer(0, this.getFeldNr()))-(laufweg-1)%28)+28)%28);
-                	}
+                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(0, this.getFeldNr()) - (laufweg - 1)) % 28) + 28) % 28).getKobolde().size() == 0) {
+                            arrayLayerFeld.add(1);
+                            arrayLayerFeld.add((((this.getFeldNrNextLayer(0, this.getFeldNr())) - (laufweg - 1) % 28) + 28) % 28);
+                        }
                     }
                 }
             }
@@ -134,14 +134,14 @@ public class Kobold {
             if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size() == 2) { //auf aktuellem Feld 2 Kobolde
                 if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere
                     if (this.getFeldNr() != 0 && this.getFeldNr() != 7 && this.getFeldNr() != 14 && this.getFeldNr() != 21) { //kein Eckpunkt
-                	if (this.getCorrectFeld(this.getLayer() + 1,(((this.getFeldNrNextLayer(1, this.getFeldNr())+(laufweg-1))%20)+20)%20).getKobolde().size()==0) { //nächste Ebene ist frei
-                	    arrayLayerFeld.add(2);
-                            arrayLayerFeld.add((((this.getFeldNrNextLayer(1, this.getFeldNr()))+(laufweg-1)%20)+20)%20);
+                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(1, this.getFeldNr()) + (laufweg - 1)) % 20) + 20) % 20).getKobolde().size() == 0) { //nächste Ebene ist frei
+                            arrayLayerFeld.add(2);
+                            arrayLayerFeld.add((((this.getFeldNrNextLayer(1, this.getFeldNr())) + (laufweg - 1) % 20) + 20) % 20);
                         }
-                	if (this.getCorrectFeld(this.getLayer() + 1,(((this.getFeldNrNextLayer(1, this.getFeldNr())-(laufweg-1))%20)+20)%20).getKobolde().size()==0) { //nächste Ebene ist frei
-                	    arrayLayerFeld.add(2);
-                            arrayLayerFeld.add((((this.getFeldNrNextLayer(1, this.getFeldNr()))-(laufweg-1)%20)+20)%20);
-                        }                	
+                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(1, this.getFeldNr()) - (laufweg - 1)) % 20) + 20) % 20).getKobolde().size() == 0) { //nächste Ebene ist frei
+                            arrayLayerFeld.add(2);
+                            arrayLayerFeld.add((((this.getFeldNrNextLayer(1, this.getFeldNr())) - (laufweg - 1) % 20) + 20) % 20);
+                        }
                     }
                 }
             }
@@ -153,14 +153,14 @@ public class Kobold {
             if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size() == 2) { //auf aktuellem Feld 2 Kobolde
                 if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {// zu bewegender Kobold ist der obere
                     if (this.feldNr != 0 && this.feldNr != 5 && this.feldNr != 10 && this.feldNr != 15) { //kein Eckpunkt
-                	if (this.getCorrectFeld(this.getLayer() + 1,(((this.getFeldNrNextLayer(2, this.getFeldNr())+(laufweg-1))%20)+20)%20).getKobolde().size()==0) { //nächste Ebene ist frei
-                	    arrayLayerFeld.add(3);
-                            arrayLayerFeld.add((((this.getFeldNrNextLayer(2, this.getFeldNr()))+(laufweg-1)%12)+12)%12);
+                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(2, this.getFeldNr()) + (laufweg - 1)) % 20) + 20) % 20).getKobolde().size() == 0) { //nächste Ebene ist frei
+                            arrayLayerFeld.add(3);
+                            arrayLayerFeld.add((((this.getFeldNrNextLayer(2, this.getFeldNr())) + (laufweg - 1) % 12) + 12) % 12);
                         }
-                	if (this.getCorrectFeld(this.getLayer() + 1,(((this.getFeldNrNextLayer(2, this.getFeldNr())-(laufweg-1))%12)+12)%12).getKobolde().size()==0) { //nächste Ebene ist frei
-                	    arrayLayerFeld.add(3);
-                            arrayLayerFeld.add((((this.getFeldNrNextLayer(2, this.getFeldNr()))-(laufweg-1)%12)+12)%12);
-                        }  
+                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(2, this.getFeldNr()) - (laufweg - 1)) % 12) + 12) % 12).getKobolde().size() == 0) { //nächste Ebene ist frei
+                            arrayLayerFeld.add(3);
+                            arrayLayerFeld.add((((this.getFeldNrNextLayer(2, this.getFeldNr())) - (laufweg - 1) % 12) + 12) % 12);
+                        }
                     }
                 }
             }
@@ -202,6 +202,15 @@ public class Kobold {
         return null;
     }
 
+    public void weiterschieben(int vorZurueck) {
+        if (getCorrectFeld(this.getLayer(), this.getFeldNr() + vorZurueck).getKobolde().size() == 2) {
+            getCorrectFeld(this.getLayer(), this.getFeldNr() + vorZurueck).getKobolde().get(1).weiterschieben(vorZurueck);
+        }
+        getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().remove(this); //vom alten feld löschen
+        this.setFeldNr(this.getFeldNr() + vorZurueck);// neu setzen
+        getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().add(this); //an neue stelle einfügen
+    }
+
     public void bewegen(int layer, int feldNr) {
         //int layerVorBewegen = this.getLayer();
         //int feldNrVorBewegen = this.getFeldNr();
@@ -212,7 +221,8 @@ public class Kobold {
         //auf neuem Feld sitzen schon 2 Kobolde --> Weiterschieben
         if (getCorrectFeld(layer, feldNr).getKobolde().size() == 2) {  //auf neuem Feld sitzen bereits zwei 
             koboldOnTop = getCorrectFeld(layer, feldNr).getKobolde().get(1); //koboldOnTop ist von neuem Feld der obere 
-            switch (koboldOnTop.getLayer()) { 
+            // berechnen in welche Richtung geschoben werden muss
+            switch (koboldOnTop.getLayer()) {
                 case 0:
                     modulo = 36;
                     break;
@@ -230,39 +240,12 @@ public class Kobold {
             } else {
                 vorZurueck = -1;
             }
-            //ab hier 
-            boolean check = false;
-            while(!check) {
-        	//läääuft
-        	if(getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr()+vorZurueck).getKobolde().size()<2) {
-        	    getCorrectFeld(this.getLayer(),this.getFeldNr()).getKobolde().remove(this); //vom alten feld löschen 
-        	    this.setLayer(layer); // neu setzen
-        	    this.setFeldNr(feldNr);
-        	    getCorrectFeld(layer, feldNr).getKobolde().add(1,this); //an neue stelle einfügen 
-        	    getCorrectFeld(layer, feldNr).getKobolde().get(2).setFeldNr(feldNr+vorZurueck); // den oberen ein feld weiter 
-        	    getCorrectFeld(layer, feldNr+vorZurueck).getKobolde().add(getCorrectFeld(layer,feldNr).getKobolde().get(2)); 
-        	    getCorrectFeld(layer, feldNr).getKobolde().remove(2); // den oberen vom alten feld löschen 
-        	    check = true; 
-        	} else {
-        	    //läuft nicht 
-        	    getCorrectFeld(this.getLayer(),this.getFeldNr()).getKobolde().remove(this); //vom alten feld löschen 
-        	    this.setLayer(layer); // neu setzen
-        	    this.setFeldNr(feldNr);
-        	    getCorrectFeld(layer, feldNr).getKobolde().add(1,this); //an neue stelle einfügen
-        	    getCorrectFeld(layer, feldNr+ vorZurueck + vorZurueck).getKobolde().add(1,getCorrectFeld(layer, feldNr).getKobolde().get(2) ); 
-        	    getCorrectFeld(layer, feldNr).getKobolde().remove(2); 
-        	    koboldOnTop = getCorrectFeld(layer, feldNr +vorZurueck + vorZurueck).getKobolde().get(2);
-        	}       	
-            }
+            //bewegungen mit verschiebungen
+            koboldOnTop.weiterschieben(vorZurueck);
         }
         //zu bewegender Kobold vom alten Feld entfernen
-        for (Feld f : zauberberg.getSpiel().getFelder()) {
-            if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
-                f.getKobolde().remove(this);
-                break;
-            }
-        }
-        //auf neues Feld setzen + Koboldliste einfuegen fuer den Fall, dass da (k)ein Kobold sitzt 
+        getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().remove(this);
+        //auf neues Feld setzen + Koboldliste einfuegen fuer den Fall, dass da (k)ein Kobold sitzt
         if (getCorrectFeld(layer, feldNr).getKobolde().size() < 2) {
             this.setFeldNr(feldNr);
             this.setLayer(layer);
@@ -285,14 +268,14 @@ public class Kobold {
                             zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf keinen Zauberstein gestossen.");
                             zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         } else {
-                            if(this.getSpieler().getAnzahlZaubersteine()<2 ) {
-                        	zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du erhaelst 1 Zauberstein.");
+                            if (this.getSpieler().getAnzahlZaubersteine() < 2) {
+                                zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du erhaelst 1 Zauberstein.");
                                 zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                                 this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
                             } else {
-                        	zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du hast schon 2 Zaubersteine.");
-                                zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");                       	
-                            }                            
+                                zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du hast schon 2 Zaubersteine.");
+                                zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
+                            }
                             zauberstein.setAufFeld(false);
                         }
                         this.bewegenBeenden();
