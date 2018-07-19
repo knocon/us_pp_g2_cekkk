@@ -268,11 +268,14 @@ public class Kobold {
                             zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf keinen Zauberstein gestossen.");
                             zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         } else {
-                            zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du erhaelst 1 Zauberstein.");
-                            zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
-                            if (this.getSpieler().getAnzahlZaubersteine() < 2) {
+                            if(this.getSpieler().getAnzahlZaubersteine()<2 ) {
+                        	zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du erhaelst 1 Zauberstein.");
+                                zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                                 this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
-                            }
+                            } else {
+                        	zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf einen Zauberstein gestossen. Du hast schon 2 Zaubersteine.");
+                                zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");                       	
+                            }                            
                             zauberstein.setAufFeld(false);
                         }
                         this.bewegenBeenden();
