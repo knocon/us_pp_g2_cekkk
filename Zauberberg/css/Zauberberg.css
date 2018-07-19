@@ -57,6 +57,9 @@ body {
     height: 77px;
     visibility: visible;
 }
+.k{/*Um kleine Kobolde hoch zu schieben*/
+    z-index: 1000;
+}
 .dorfImg {
 	left : -10px;
 	position: absolute;
