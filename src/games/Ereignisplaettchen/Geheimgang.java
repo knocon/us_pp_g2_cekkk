@@ -79,6 +79,8 @@ public class Geheimgang extends Feld {
                 break;
             case 3:
                 if (kobold.getFeldNr() == 10) {
+                    zauberberg.setCloseMsg(kobold.getSpieler().getFarbName() + " hat gewonnen!");
+                    zauberberg.sendGameDataToClientsPublic("CLOSE");
                     for(Feld f : felder) {
                     	if(f.getLayer()==4 && f.getFeldNr()==3) { //obere 
                     		if(f.getKobolde().size()==0) {

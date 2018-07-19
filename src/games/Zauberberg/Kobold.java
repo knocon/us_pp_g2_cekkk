@@ -172,7 +172,7 @@ public class Kobold {
             if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size() == 2) { //auf aktuellem Feld 2 Kobolde
                 if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) { // zu bewegender Kobold ist der obere
                     if (this.getFeldNr() != 0 && this.getFeldNr() != 3 && this.getFeldNr() != 6 && this.getFeldNr() != 9) { //kein Eckpunkt
-                        this.zauberberg.setCloseMsg(this.getSpieler().getFarbName() + " hat gewonnen");
+                        this.zauberberg.setCloseMsg(this.getSpieler().getFarbName() + " hat gewonnen!");
                         this.zauberberg.sendGameDataToClientsPublic("CLOSE");
                     }
                 }
