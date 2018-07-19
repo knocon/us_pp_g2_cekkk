@@ -273,7 +273,8 @@ public class Kobold {
             if (f.getLayer() == layer && f.getFeldNr() == feldNr) {
                 switch (f.getClassName()) {
                     case "Zauberstein":
-                        if (f.getClass().equals("Zauberstein") && ((Zauberstein) f).getAufFeld() == false) {
+                        Zauberstein zauberstein = (Zauberstein) f;
+                        if (!zauberstein.getAufFeld()) {
                             zauberberg.setRecentInfoText(this.spieler.getFarbName() + " ist auf keinen Zauberstein gestossen.");
                             zauberberg.sendGameDataToClientsPublic("PUSHINFOTXT");
                         } else {
@@ -282,7 +283,7 @@ public class Kobold {
                             if (this.getSpieler().getAnzahlZaubersteine() < 2) {
                                 this.getSpieler().setAnzahlZaubersteine(this.getSpieler().getAnzahlZaubersteine() + 1);
                             }
-                            ((Zauberstein) f).setAufFeld(false);
+                            zauberstein.setAufFeld(false);
                         }
                         this.bewegenBeenden();
                         break;
