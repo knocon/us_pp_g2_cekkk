@@ -231,7 +231,7 @@ public class Kobold {
                 vorZurueck = -1;
             }
             //ab hier 
-            boolean check = false; 
+            boolean check = false;
             while(!check) {
         	//läääuft
         	if(getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr()+vorZurueck).getKobolde().size()<2) {
@@ -244,6 +244,7 @@ public class Kobold {
         	    getCorrectFeld(layer, feldNr).getKobolde().remove(2); // den oberen vom alten feld löschen 
         	    check = true; 
         	} else {
+        	    //läuft nicht 
         	    getCorrectFeld(this.getLayer(),this.getFeldNr()).getKobolde().remove(this); //vom alten feld löschen 
         	    this.setLayer(layer); // neu setzen
         	    this.setFeldNr(feldNr);
@@ -404,7 +405,7 @@ public class Kobold {
                     return feldNr - 5;
                 }
                 if (feldNr > 27 && feldNr < 36) {
-                    return feldNr - 1;
+                    return feldNr - 7;
                 }
                 break;
             case 1:
