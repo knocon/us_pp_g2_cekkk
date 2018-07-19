@@ -230,25 +230,30 @@ public class Kobold {
             } else {
                 vorZurueck = -1;
             }
-            getCorrectFeld(layer, feldNr).getKobolde().remove(1); //remove den oberen, das ist KoboldOnTop
-            getCorrectFeld(this.layer,this.feldNr).getKobolde().remove(this); //vom alten feld löschen 
-            this.setFeldNr(feldNr); //ursprünglichen Kobold auf neues feld setzen und bei feld.getKobold() einfügen
-            this.setLayer(layer);
-            getCorrectFeld(layer, feldNr).getKobolde().add(this);
-
-            boolean check = false;
-            while (!check) {
-                if (getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr() + vorZurueck).getKobolde().size() < 2) {
-                    koboldOnTop.setFeldNr(koboldOnTop.getFeldNr() + vorZurueck);
-                    getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr() + vorZurueck).getKobolde().add(koboldOnTop);
-                    check = true;
-                } else {
-                    getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr() + vorZurueck).getKobolde().add(1, koboldOnTop);
-                    koboldOnTop = getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr() + vorZurueck).getKobolde().get(2); // das ist der obere vom nächsten feld
-                }
+            //ab hier 
+            boolean check = false; 
+            while(!check) {
+        	//läääuft
+        	if(getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr()+vorZurueck).getKobolde().size()<2) {
+        	    getCorrectFeld(this.getLayer(),this.getFeldNr()).getKobolde().remove(this); //vom alten feld löschen 
+        	    this.setLayer(layer); // neu setzen
+        	    this.setFeldNr(feldNr);
+        	    getCorrectFeld(layer, feldNr).getKobolde().add(1,this); //an neue stelle einfügen 
+        	    getCorrectFeld(layer, feldNr).getKobolde().get(2).setFeldNr(feldNr+vorZurueck); // den oberen ein feld weiter 
+        	    getCorrectFeld(layer, feldNr+vorZurueck).getKobolde().add(getCorrectFeld(layer,feldNr).getKobolde().get(2)); 
+        	    getCorrectFeld(layer, feldNr).getKobolde().remove(2); // den oberen vom alten feld löschen 
+        	    check = true; 
+        	} else {
+        	    getCorrectFeld(this.getLayer(),this.getFeldNr()).getKobolde().remove(this); //vom alten feld löschen 
+        	    this.setLayer(layer); // neu setzen
+        	    this.setFeldNr(feldNr);
+        	    getCorrectFeld(layer, feldNr).getKobolde().add(1,this); //an neue stelle einfügen
+        	    getCorrectFeld(layer, feldNr+ vorZurueck + vorZurueck).getKobolde().add(1,getCorrectFeld(layer, feldNr).getKobolde().get(2) ); 
+        	    getCorrectFeld(layer, feldNr).getKobolde().remove(2); 
+        	    koboldOnTop = getCorrectFeld(layer, feldNr +vorZurueck + vorZurueck).getKobolde().get(2);
+        	}       	
             }
         }
-
         //zu bewegender Kobold vom alten Feld entfernen
         for (Feld f : zauberberg.getSpiel().getFelder()) {
             if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
