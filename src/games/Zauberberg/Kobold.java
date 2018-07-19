@@ -209,20 +209,7 @@ public class Kobold {
         int vorZurueck = 0;
         Kobold koboldOnTop;
 
-        //zu bewegender Kobold vom alten Feld entfernen
-        for (Feld f : zauberberg.getSpiel().getFelder()) {
-            if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
-                f.getKobolde().remove(this);
-                break;
-            }
-        }
-        //auf neues Feld setzen + Koboldliste einfuegen fuer den Fall, dass da (k)ein Kobold sitzt 
-        if (getCorrectFeld(layer, feldNr).getKobolde().size() < 2) {
-            this.setFeldNr(feldNr);
-            this.setLayer(layer);
-            getCorrectFeld(layer, feldNr).getKobolde().add(this);
-        }
-        //auf neuem Feld sitzen schon 2 Kobolde --> Weiterschieben 
+        //auf neuem Feld sitzen schon 2 Kobolde --> Weiterschieben
         if (getCorrectFeld(layer, feldNr).getKobolde().size() == 2) {
             koboldOnTop = getCorrectFeld(layer, feldNr).getKobolde().get(1);
             switch (koboldOnTop.getLayer()) {
@@ -259,6 +246,20 @@ public class Kobold {
                     koboldOnTop = getCorrectFeld(koboldOnTop.getLayer(), koboldOnTop.getFeldNr() + vorZurueck).getKobolde().get(2); // das ist der obere vom nächsten feld
                 }
             }
+        }
+
+        //zu bewegender Kobold vom alten Feld entfernen
+        for (Feld f : zauberberg.getSpiel().getFelder()) {
+            if (f.getLayer() == this.getLayer() && f.getFeldNr() == this.getFeldNr()) {
+                f.getKobolde().remove(this);
+                break;
+            }
+        }
+        //auf neues Feld setzen + Koboldliste einfuegen fuer den Fall, dass da (k)ein Kobold sitzt 
+        if (getCorrectFeld(layer, feldNr).getKobolde().size() < 2) {
+            this.setFeldNr(feldNr);
+            this.setLayer(layer);
+            getCorrectFeld(layer, feldNr).getKobolde().add(this);
         }
 
         //Karte zurück in den Stapel
