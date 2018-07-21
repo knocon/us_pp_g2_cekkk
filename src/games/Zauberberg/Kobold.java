@@ -153,7 +153,7 @@ public class Kobold {
             if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().size() == 2) { //auf aktuellem Feld 2 Kobolde
                 if (this.getCorrectFeld(this.getLayer(), this.getFeldNr()).getKobolde().get(1).equals(this)) {// zu bewegender Kobold ist der obere
                     if (this.feldNr != 0 && this.feldNr != 5 && this.feldNr != 10 && this.feldNr != 15) { //kein Eckpunkt
-                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(2, this.getFeldNr()) + (laufweg - 1)) % 20) + 20) % 20).getKobolde().size() == 0) { //nächste Ebene ist frei
+                        if (this.getCorrectFeld(this.getLayer() + 1, (((this.getFeldNrNextLayer(2, this.getFeldNr()) + (laufweg - 1)) % 12) + 12) % 12).getKobolde().size() == 0) { //nächste Ebene ist frei
                             arrayLayerFeld.add(3);
                             arrayLayerFeld.add((((this.getFeldNrNextLayer(2, this.getFeldNr())) + (laufweg - 1) % 12) + 12) % 12);
                         }
